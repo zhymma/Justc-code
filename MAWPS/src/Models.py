@@ -508,10 +508,10 @@ class MwpBertModel_CLS(torch.nn.Module):
     def save(self, save_dir):
         self.bert.save_pretrained(save_dir)
         self.tokenizer.save_pretrained(save_dir)
-        torch.save(self.fc.state_dict(), os.path.join(save_dir, 'fc_weight.bin'))
-        torch.save(self.code_emb.state_dict(), os.path.join(save_dir, 'code_emb.bin'))
-        torch.save(self.code_check.state_dict(), os.path.join(save_dir, 'code_check.bin'))
-        torch.save(self.dec_self_attn.state_dict(), os.path.join(save_dir, 'dec_self_attn.bin'))
+        torch.save(self.fc.module.state_dict(), os.path.join(save_dir, 'fc_weight.bin'))
+        torch.save(self.code_emb.module.state_dict(), os.path.join(save_dir, 'code_emb.bin'))
+        torch.save(self.code_check.module.state_dict(), os.path.join(save_dir, 'code_check.bin'))
+        torch.save(self.dec_self_attn.module.state_dict(), os.path.join(save_dir, 'dec_self_attn.bin'))
     
     def load(self,fc_path):
         self.fc.load_state_dict(torch.load(fc_path+'/fc_weight.bin'))
