@@ -4,6 +4,7 @@ import os
 
 from src.Train import train
 
+
 parser = argparse.ArgumentParser()
 parser.add_argument("--log_file", default="output.log", type=str)
 
