@@ -255,6 +255,11 @@ class Batch_Net_CLS(nn.Module):
         self.layer2 = nn.Sequential(nn.Linear(n_hidden_1, n_hidden_2), nn.LeakyReLU(True))
         self.layer3 = nn.Sequential(nn.Linear(n_hidden_2, out_dim))
 
+        # 对网络的参数进行Xavier初始化
+        nn.init.xavier_uniform_(self.layer1[0].weight)
+        nn.init.xavier_uniform_(self.layer2[0].weight)
+        nn.init.xavier_uniform_(self.layer3[0].weight)
+
     def forward(self, x):
         x = self.layer1(x)
         x = self.layer2(x)
@@ -299,10 +304,7 @@ class MwpBertModel_CLS(torch.nn.Module):
         else:
             self.loss_func = torch.nn.SmoothL1Loss()
         if fc_path:
-            self.fc.load_state_dict(torch.load(fc_path+'/fc_weight.bin'))
-            self.code_emb.load_state_dict(torch.load(fc_path+'/code_emb.bin'))
-            self.code_check.load_state_dict(torch.load(fc_path+'/code_check.bin'))
-            self.dec_self_attn.load_state_dict(torch.load(fc_path+'/dec_self_attn.bin'))
+            self.load(fc_path)
 
     def forward(self, input_ids, attention_mask, token_type_ids, num_positions, num_codes_labels):
         
@@ -422,6 +424,11 @@ class MwpBertModel_CLS(torch.nn.Module):
             decoder_inputs = self.dropout(p_hidden)
             outputs = self.fc(decoder_inputs)
             all_loss = self.loss_func(labels[pad_mask],outputs[pad_mask])
+            outputs_round = torch.round(outputs)
+            code_emb = self.code_emb(outputs_round.float())
+            code_emb = self.dropout(code_emb)
+            code_check_pred = self.code_check(code_emb)
+
             return all_loss
 
         
@@ -505,4 +512,9 @@ class MwpBertModel_CLS(torch.nn.Module):
         torch.save(self.code_emb.state_dict(), os.path.join(save_dir, 'code_emb.bin'))
         torch.save(self.code_check.state_dict(), os.path.join(save_dir, 'code_check.bin'))
         torch.save(self.dec_self_attn.state_dict(), os.path.join(save_dir, 'dec_self_attn.bin'))
-        
+    
+    def load(self,fc_path):
+        self.fc.load_state_dict(torch.load(fc_path+'/fc_weight.bin'))
+        self.code_emb.load_state_dict(torch.load(fc_path+'/code_emb.bin'))
+        self.code_check.load_state_dict(torch.load(fc_path+'/code_check.bin'))
+        self.dec_self_attn.load_state_dict(torch.load(fc_path+'/dec_self_attn.bin'))

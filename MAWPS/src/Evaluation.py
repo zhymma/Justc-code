@@ -234,7 +234,6 @@ def eval_multi_clf1(model, test_mwps, device, num_labels, test_dev_max_len,label
         logger.info('wrong_be_tree_count:{}\twrong_total:{}\t wrong be tree ACC: {}'.format(wrong_be_tree, wrong_ans_count, wrong_be_tree/wrong_ans_count))
         logger.info('code_check_1: {}\tcode_check_total: {}\t code check 1:{}'.format(code_check_1, code_check_total, code_check_1/code_check_total))
         
-
     model.train()
     return ans_acc
 

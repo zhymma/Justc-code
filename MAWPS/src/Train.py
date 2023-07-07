@@ -209,3 +209,22 @@ def train(args):
 
 
         train_data_loader.reset(doshuffle=True)
+
+
+    #测试最终结果
+    logger.info("\n\n")
+    logger.info("final_test")
+    model.load(best_model_dir)
+    acc = eval_multi_clf(
+            logger=logger,
+            model=model,
+            test_mwps=test_mwps,
+            device=args.device,
+            num_labels = num_labels,
+            test_dev_max_len = args.test_dev_max_len,
+            label2id_or_value = label2id_or_value,
+            id2label_or_value = id2label_or_value,
+            tokenizer = tokenizer
+            )
+    
+    
