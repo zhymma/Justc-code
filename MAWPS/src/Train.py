@@ -1,0 +1,211 @@
+# -*- coding: utf-8 -*-
+"""
+@Time : 2021/12/30 18:38
+@Author : WangBin
+@File : Train.py 
+@Software: PyCharm 
+"""
+import json
+import logging
+import math
+import os
+import sys
+import torch
+import random
+import numpy as np
+from torch.utils.data import DataLoader, RandomSampler, SequentialSampler
+from transformers import BertTokenizer
+from transformers.optimization import AdamW, get_linear_schedule_with_warmup,get_cosine_schedule_with_warmup
+
+# from src.MwpDataset import MwpDataSet
+from src.Utils import process_dataset, MWPDatasetLoader
+from src.Models import MwpBertModel, MwpBertModel_CLS
+from src.Evaluation import eval_multi_clf,eval_multi_clf0
+
+#! 设置随机数种子
+torch.cuda.manual_seed(0)  # 为GPU设置种子
+np.random.seed(0)  # 为Numpy设置随机种子
+random.seed(0) 
+
+
+def train(args):
+    # devices setting
+    os.environ['CUDA_VISIBLE_DEVICES'] = args.gpu_device
+    args.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+
+    # directory
+    args.output_dir = os.path.join(args.output_dir, args.model_name)
+    os.makedirs(args.output_dir, exist_ok=True)
+    best_model_dir = os.path.join(args.output_dir, "best_model")
+    os.makedirs(best_model_dir, exist_ok=True)
+    latest_model_dir = os.path.join(args.output_dir, "latest_model")
+    os.makedirs(latest_model_dir, exist_ok=True)
+    log_dir = os.path.join(args.output_dir, "logs")
+    os.makedirs(log_dir, exist_ok=True)
+
+    # logging setting to file and screen
+    logger = logging.getLogger(__name__)
+    logger.setLevel(level=logging.INFO)
+    handler = logging.FileHandler(os.path.join(log_dir, args.log_file))
+    handler.setLevel(logging.INFO)
+    formatter = logging.Formatter('%(asctime)s - %(message)s')
+    handler.setFormatter(formatter)
+    console = logging.StreamHandler()
+    console.setLevel(logging.INFO)
+    logger.addHandler(handler)
+    logger.addHandler(console)
+
+    # start training
+    with open(args.label2id_path, 'r', encoding='utf-8') as f:
+        label2id = json.load(f)
+    num_labels = len(label2id)
+    print(">>>>>loading label2id file...")
+    label2id_or_value = {}
+    id2label_or_value = {}
+    with open(args.label2id_path, 'r', encoding='utf-8')as ff:
+        label2id_list = json.load(ff)
+    for inde, label in enumerate(label2id_list):
+        label2id_or_value[label] = inde
+        id2label_or_value[str(inde)] = label
+    tokenizer = BertTokenizer.from_pretrained(args.pretrain_model_path)
+
+    if args.train_type != 'together':
+        # train data...
+        logger.info("get train data loader...")
+        examplesss_train = process_dataset(file=args.train_data_path, label2id_data_path=args.label2id_path,
+                                           max_len=args.train_max_len, lower=True)
+
+        if args.train_type == 'one-by-one-in-same-batch':
+            # one by one 的话 shuffle 洗牌 和 按长度降序排序 都要为 False
+            train_data_loader = MWPDatasetLoader(data=examplesss_train, batch_size=args.batch_size, shuffle=False,
+                                                 tokenizer=tokenizer, seed=72, sort=False)
+        elif args.train_type == 'one-by-one-random':
+            train_data_loader = MWPDatasetLoader(data=examplesss_train, batch_size=args.batch_size, shuffle=True,
+                                                 tokenizer=tokenizer, seed=72, sort=False)
+        else:
+            print('args.train_type wrong!!!')
+            sys.exit()
+
+        # dev data...
+        logger.info("get dev data loader...")
+        examplesss_test = process_dataset(file=args.dev_data_path, label2id_data_path=args.label2id_path,
+                                          max_len=args.test_dev_max_len, lower=True)
+
+        dev_data_loader = MWPDatasetLoader(data=examplesss_test, batch_size=1, shuffle=False,
+                                           tokenizer=tokenizer, seed=72, sort=False)
+        with open(args.dev_data_path, 'r', encoding='utf-8')as ffs:
+            test_mwps = json.load(ffs)
+    else:
+        print('args.train_type == together not yet!!!')
+        sys.exit()
+
+    
+
+    # model
+    logger.info("define model...")
+    if not args.use_cls:
+        model = MwpBertModel(bert_path_or_config=args.pretrain_model_path, num_labels=num_labels,
+                             fc_path=args.fc_path, multi_fc=args.multi_fc, train_loss=args.train_loss,
+                             fc_hidden_size=args.fc_hidden_size)
+    else:
+        model = MwpBertModel_CLS(bert_path_or_config=args.pretrain_model_path, num_labels=num_labels,
+                                 fc_path=args.fc_path, multi_fc=args.multi_fc, train_loss=args.train_loss,
+                                 fc_hidden_size=args.fc_hidden_size)
+    if args.use_multi_gpu:
+        # TODO 出错代码不对
+        print('*********************************************************')
+        print('********************使用多卡训练**************************')
+        print(torch.cuda.device_count())
+        print('*********************************************************')
+        model.to(args.device)
+        model = torch.nn.DataParallel(model)
+
+    model.to(args.device)
+    model.zero_grad()
+    model.train()
+
+    # optimizer
+    logger.info("define optimizer...")
+    no_decay = ["bias", "LayerNorm.weight"]
+    paras = dict(model.named_parameters())
+    logger.info("===========================train setting parameters=========================")
+    for n, p in paras.items():
+        logger.info("{}-{}".format(n, str(p.shape)))
+    optimizer_grouped_parameters = [
+        {
+            "params": [p for n, p in paras.items() if not any(nd in n for nd in no_decay)],
+            "weight_decay": 0.01,
+        }, {
+            "params": [p for n, p in paras.items() if any(nd in n for nd in no_decay)],
+            "weight_decay": 0.0
+        }
+    ]
+
+    total_steps = int(len(train_data_loader) * args.num_epochs)
+    steps_per_epoch = len(train_data_loader)
+
+    if args.warmup < 1:
+        warmup_steps = int(total_steps * args.warmup)
+    else:
+        warmup_steps = int(args.warmup)
+    optimizer = AdamW(optimizer_grouped_parameters, lr=args.lr,no_deprecation_warning=True)
+    # scheduler = get_linear_schedule_with_warmup(optimizer, num_warmup_steps=warmup_steps,num_training_steps=total_steps)
+    # scheduler = torch.optim.lr_scheduler.StepLR(optimizer, step_size=30, gamma=0.5)
+    def lr_lambda(step):
+        if step < warmup_steps:
+            return (step + 1) / warmup_steps
+        else:
+            return 0.5 * (1 + math.cos((step - warmup_steps) / (total_steps-warmup_steps) * math.pi))
+    scheduler = torch.optim.lr_scheduler.LambdaLR(optimizer, lr_lambda=lr_lambda)
+    # scheduler = get_cosine_schedule_with_warmup(optimizer, num_warmup_steps=warmup_steps,num_training_steps=total_steps)
+    # train
+    best_acc = -1
+    logger.info("\n>>>>>>>>>>>>>>>>>>>start train......")
+
+    global_steps = 0
+    for epoch in range(args.num_epochs):
+        all_loss = 0
+        for step, batch in enumerate(train_data_loader, start=1):
+            global_steps += 1
+            batch_data = [i.to(args.device) for i in batch]
+            # (input_ids, input_mask, token_type_ids, problem_id, num_positions, num_codes_labels)
+            input_ids, input_mask, token_type_ids, problem_id, num_positions, num_codes_labels = batch_data
+            
+            loss = model(input_ids=input_ids, attention_mask=input_mask, token_type_ids=token_type_ids, num_positions=num_positions, num_codes_labels=num_codes_labels)
+
+            loss.backward()
+            torch.nn.utils.clip_grad_norm_([v for k, v in paras.items()], max_norm=1)
+            optimizer.step()
+            scheduler.step()
+            model.zero_grad()
+            # optimizer.zero_grad() = model.zero_grad()
+            all_loss += loss.item()
+
+        # print loss...
+        logger.info("\n\n")
+
+        logger.info("epoch:{},\tloss:{}".format(epoch, all_loss))
+
+        acc = eval_multi_clf(
+            logger=logger,
+            model=model,
+            test_mwps=test_mwps,
+            device=args.device,
+            num_labels = num_labels,
+            test_dev_max_len = args.test_dev_max_len,
+            label2id_or_value = label2id_or_value,
+            id2label_or_value = id2label_or_value,
+            tokenizer = tokenizer
+            )
+
+
+        if acc > best_acc:
+            logger.info('save best model to {}'.format(best_model_dir))
+            best_acc = acc
+            model.save(save_dir=best_model_dir)
+
+        model.save(save_dir=latest_model_dir)
+
+
+
+        train_data_loader.reset(doshuffle=True)
