@@ -7,6 +7,7 @@ from src.Train import train
 
 parser = argparse.ArgumentParser()
 parser.add_argument("--log_file", default="output.log", type=str)
+parser.add_argument("--mode", default="train", type=str)
 
 
 

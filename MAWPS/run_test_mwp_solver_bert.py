@@ -3,6 +3,10 @@ import argparse
 from src.Test_new import test_for_mwp_BERT_slover
 
 parser = argparse.ArgumentParser()
+parser.add_argument("--log_file", default="output.log", type=str)
+
+
+
 parser.add_argument("--batch_size", default=1, type=int)
 parser.add_argument("--multi_fc", default=True, type=bool)
 
@@ -16,10 +20,10 @@ parser.add_argument("--test_data_path",
 parser.add_argument("--num_labels", default=28, type=int)
 
 parser.add_argument("--pretrain_model_path_for_test",
-                    default="output/fold_0_model/best_model",
+                    default="output/test/best_model",
                     type=str)
 
-parser.add_argument("--label2id_path", default='../../dataset/codes_mawps.json',
+parser.add_argument("--label2id_path", default='mawps/codes_mawps.json',
                     type=str)
 
 parser.add_argument("--gpu_device", default="3", type=str)

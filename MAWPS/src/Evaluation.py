@@ -142,7 +142,7 @@ def eval_multi_clf(model, test_mwps, device, num_labels, test_dev_max_len,label2
     #     logger.info('right_count:{}\ttotal:{}\t Answer ACC: {}'.format(right_ans_count, len(test_mwps), ans_acc))
     #     logger.info('right_codes_count:{}\ttotal:{}\t Code ACC: {}'.format(right_codes_count, len(test_mwps), code_acc))
     #     logger.info('wrong_be_tree_count:{}\twrong_total:{}\t wrong be tree ACC: {}'.format(wrong_be_tree, wrong_ans_count, wrong_be_tree/wrong_ans_count))
-        
+    
     model.train()
     return ans_acc
 
@@ -279,3 +279,84 @@ def eval_multi_clf0(model, dev_data_loader, device, num_labels, logger=None):
 
     model.train()
     return count / total_len
+
+def eval_multi_clf_for_test_new(model, test_mwps, device, num_labels, test_dev_max_len,label2id_or_value,id2label_or_value,tokenizer,logger=None):
+    
+    outputs_0 = []
+    num_codes_labels_list = []
+    num_positions_list = []
+    for idd, raw_mwp in enumerate(test_mwps):
+        processed_mwp = process_one_mawps_for_test_no_None(raw_mwp, label2id_or_value, test_dev_max_len, True,
+                                                       tokenizer)
+        if processed_mwp is not None:
+                (sen_tokens, attention_mask, token_type_id, problem_id,num_positions,num_codes_labels) = list(zip(*processed_mwp))
+                batch = [torch.tensor(sen_tokens).long(), torch.tensor(attention_mask).long(), torch.tensor(token_type_id).long(),
+                         torch.tensor(num_positions).long(),torch.tensor(num_codes_labels).long()]
+
+                model.eval()
+                with torch.no_grad():
+                    batch_data = [i.to(device) for i in batch]
+
+                    alloutputs = model(input_ids=batch_data[0], attention_mask=batch_data[1],
+                                                   token_type_ids=batch_data[2], num_positions = batch_data[3],num_codes_labels=batch_data[4])
+                    outputs = alloutputs[0].squeeze(0)
+                    outputs = outputs.to("cpu").numpy()
+                    outputs_0.append(outputs)
+                    
+                    num_codes_labels = batch_data[4].reshape(-1,28)
+                    num_codes_labels_list.append(num_codes_labels)
+                    num_positions = batch_data[3].reshape(-1,1).clone()
+                    num_positions[:,0] -= 1
+                    num_positions_list.append(num_positions)
+                      
+    right_codes_count = 0
+    right_ans_count = 0
+    wrong_ans_count = 0
+    wrong_be_tree = 0
+    for i,raw_mwp in enumerate(test_mwps):
+        labels, all_logits = [], []
+        labels_pos = []
+        outputs = outputs_0[i]
+        num_codes_labels = num_codes_labels_list[i]
+        num_positions = num_positions_list[i]
+        new_label_pos = torch.cat((num_positions,num_codes_labels),dim =1)
+        labels.append(num_codes_labels.to("cpu").numpy())
+        labels_pos.append(new_label_pos.to("cpu").numpy())
+        all_logits.append(outputs)
+        labels = np.vstack(labels)
+        all_logits = np.vstack(all_logits)
+        labels_pos = np.vstack(labels_pos)
+        num_codes_labels = num_codes_labels.to("cpu").numpy()
+        # if check_codes_acc(raw_mwp, labels, all_logits):
+        #     right_codes_count += 1
+        #! answer acc
+        if check_answer_acc(raw_mwp, labels_pos, all_logits, id2label_or_value):
+            right_ans_count += 1
+        else:
+            # false_mwp.append(raw_mwp)
+            wrong_ans_count += 1
+            if raw_mwp['pre_final_expression'] == 'Failed':
+                wrong_be_tree +=1
+        #! 计算code acc code check acc
+        right = True
+        for i in range(outputs.shape[0]):
+            A = outputs[i,:]
+            B = num_codes_labels[i,:]
+            dd_pred = np.array([round(i) for i in A]).astype(np.int32)
+            dd_label = np.array([round(i) for i in B]).astype(np.int32)
+
+            if not (dd_pred == dd_label).all() :
+                right = False
+        if right:
+            right_codes_count += 1
+
+    ans_acc = right_ans_count / len(test_mwps)
+    code_acc = right_codes_count/len(test_mwps)
+    if logger is not None:
+        logger.info('right_count:{}\ttotal:{}\t Answer ACC: {}'.format(right_ans_count, len(test_mwps), ans_acc))
+        logger.info('right_codes_count:{}\ttotal:{}\t Code ACC: {}'.format(right_codes_count, len(test_mwps), code_acc))
+        logger.info('wrong_be_tree_count:{}\twrong_total:{}\t wrong be tree ACC: {}'.format(wrong_be_tree, wrong_ans_count, wrong_be_tree/wrong_ans_count))
+        
+    model.train()
+    return ans_acc
+

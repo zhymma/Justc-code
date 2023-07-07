@@ -255,10 +255,10 @@ class Batch_Net_CLS(nn.Module):
         self.layer2 = nn.Sequential(nn.Linear(n_hidden_1, n_hidden_2), nn.LeakyReLU(True))
         self.layer3 = nn.Sequential(nn.Linear(n_hidden_2, out_dim))
 
-        # 对网络的参数进行Xavier初始化
-        nn.init.xavier_uniform_(self.layer1[0].weight)
-        nn.init.xavier_uniform_(self.layer2[0].weight)
-        nn.init.xavier_uniform_(self.layer3[0].weight)
+        # # 对网络的参数进行Xavier初始化
+        # nn.init.xavier_uniform_(self.layer1[0].weight)
+        # nn.init.xavier_uniform_(self.layer2[0].weight)
+        # nn.init.xavier_uniform_(self.layer3[0].weight)
 
     def forward(self, x):
         x = self.layer1(x)
@@ -508,12 +508,13 @@ class MwpBertModel_CLS(torch.nn.Module):
     def save(self, save_dir):
         self.bert.save_pretrained(save_dir)
         self.tokenizer.save_pretrained(save_dir)
-        torch.save(self.fc.module.state_dict(), os.path.join(save_dir, 'fc_weight.bin'))
-        torch.save(self.code_emb.module.state_dict(), os.path.join(save_dir, 'code_emb.bin'))
-        torch.save(self.code_check.module.state_dict(), os.path.join(save_dir, 'code_check.bin'))
-        torch.save(self.dec_self_attn.module.state_dict(), os.path.join(save_dir, 'dec_self_attn.bin'))
+        torch.save(self.fc.state_dict(), os.path.join(save_dir, 'fc_weight.bin'))
+        torch.save(self.code_emb.state_dict(), os.path.join(save_dir, 'code_emb.bin'))
+        torch.save(self.code_check.state_dict(), os.path.join(save_dir, 'code_check.bin'))
+        torch.save(self.dec_self_attn.state_dict(), os.path.join(save_dir, 'dec_self_attn.bin'))
     
     def load(self,fc_path):
+        self.bert = BertModel.from_pretrained(fc_path)
         self.fc.load_state_dict(torch.load(fc_path+'/fc_weight.bin'))
         self.code_emb.load_state_dict(torch.load(fc_path+'/code_emb.bin'))
         self.code_check.load_state_dict(torch.load(fc_path+'/code_check.bin'))
