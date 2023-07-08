@@ -23,9 +23,9 @@ from src.Models import *
 from src.Evaluation import *
 
 #! 设置随机数种子
-torch.cuda.manual_seed(0)  # 为GPU设置种子
-np.random.seed(0)  # 为Numpy设置随机种子
-random.seed(0) 
+torch.cuda.manual_seed(42)  # 为GPU设置种子
+np.random.seed(42)  # 为Numpy设置随机种子
+random.seed(42) 
 
 
 def train(args):
@@ -59,7 +59,7 @@ def train(args):
     with open(args.label2id_path, 'r', encoding='utf-8') as f:
         label2id = json.load(f)
     num_labels = len(label2id)
-    print(">>>>>loading label2id file...")
+  
     label2id_or_value = {}
     id2label_or_value = {}
     with open(args.label2id_path, 'r', encoding='utf-8')as ff:
@@ -117,12 +117,11 @@ def train(args):
     model.train()
 
     # optimizer
-    logger.info("define optimizer...")
     no_decay = ["bias", "LayerNorm.weight"]
     paras = dict(model.named_parameters())
-    logger.info("===========================train setting parameters=========================")
-    for n, p in paras.items():
-        logger.info("{}-{}".format(n, str(p.shape)))
+    # logger.info("===========================train setting parameters=========================")
+    # for n, p in paras.items():
+    #     logger.info("{}-{}".format(n, str(p.shape)))
     optimizer_grouped_parameters = [
         {
             "params": [p for n, p in paras.items() if not any(nd in n for nd in no_decay)],
@@ -179,7 +178,7 @@ def train(args):
                 all_loss += loss.item()
 
             # print loss...
-            logger.info("\n\n")
+            logger.info("\n")
 
             logger.info("epoch:{},\tloss:{}".format(epoch, all_loss))
 
@@ -222,9 +221,6 @@ def train(args):
                 )
     else:
         #测试最终结果
-        model = MwpBertModel_CLS(bert_path_or_config=args.pretrain_model_path, num_labels=num_labels,
-                                 fc_path=best_model_dir, multi_fc=args.multi_fc, train_loss=args.train_loss,
-                                 fc_hidden_size=args.fc_hidden_size)
 
         model.load(best_model_dir)
         model.to(args.device)

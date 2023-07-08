@@ -50,7 +50,7 @@ parser.add_argument("--label2id_path", default='./mawps/codes_mawps.json',
 
 parser.add_argument("--gpu_device", default="1", type=str)
 parser.add_argument("--output_dir", default="./output/", type=str)
-parser.add_argument("--model_name", default="test",
+parser.add_argument("--model_name", default="model_save_name_1",
                     type=str)
 
 

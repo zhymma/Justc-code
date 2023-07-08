@@ -399,24 +399,30 @@ def eval_multi_clf_for_classfier(model, test_mwps, device, num_labels, test_dev_
         num_codes_labels = num_codes_labels_list[i]
         num_positions = num_positions_list[i]
         new_label_pos = torch.cat((num_positions,num_codes_labels),dim =1)
-        labels.append(num_codes_labels.to("cpu").numpy())
-        labels_pos.append(new_label_pos.to("cpu").numpy())
-        all_logits.append(outputs)
-        labels = np.vstack(labels)
-        all_logits = np.vstack(all_logits)
-        labels_pos = np.vstack(labels_pos)
         num_codes_labels = num_codes_labels.to("cpu").numpy()
 
         #! 修改>1部分的值
         # 找出num_codes_labels中大于1的位置
         greater_than_one = num_codes_labels > 1
         # 找出outputs中大于0.5的位置
-        greater_than_half = outputs > 0.5
+        greater_than_half = outputs > 0
         # 找出同时满足两个条件的位置
         both_conditions = np.logical_and(greater_than_one, greater_than_half)
         # 打印结果
         indices = np.where(both_conditions)
         outputs[indices]=num_codes_labels[indices]
+
+        
+        
+        labels.append(num_codes_labels)
+        labels_pos.append(new_label_pos.to("cpu").numpy())
+        all_logits.append(outputs)
+        labels = np.vstack(labels)
+        all_logits = np.vstack(all_logits)
+        labels_pos = np.vstack(labels_pos)
+
+
+        
         #! answer acc
         if check_answer_acc(raw_mwp, labels_pos, all_logits, id2label_or_value):
             right_ans_count += 1
