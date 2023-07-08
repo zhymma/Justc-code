@@ -50,10 +50,10 @@ def train(args):
     handler.setLevel(logging.INFO)
     formatter = logging.Formatter('%(asctime)s - %(message)s')
     handler.setFormatter(formatter)
-    console = logging.StreamHandler()
-    console.setLevel(logging.INFO)
+    # console = logging.StreamHandler()
+    # console.setLevel(logging.INFO)
     logger.addHandler(handler)
-    logger.addHandler(console)
+    # logger.addHandler(console)
 
     
     with open(args.label2id_path, 'r', encoding='utf-8') as f:
@@ -148,8 +148,8 @@ def train(args):
             return (step + 1) / warmup_steps
         else:
             return 0.5 * (1 + math.cos((step - warmup_steps) / (total_steps-warmup_steps) * math.pi))
-    scheduler = torch.optim.lr_scheduler.LambdaLR(optimizer, lr_lambda=lr_lambda)
-    # scheduler = get_cosine_schedule_with_warmup(optimizer, num_warmup_steps=warmup_steps,num_training_steps=total_steps)
+    # scheduler = torch.optim.lr_scheduler.LambdaLR(optimizer, lr_lambda=lr_lambda)
+    scheduler = get_cosine_schedule_with_warmup(optimizer, num_warmup_steps=warmup_steps,num_training_steps=total_steps)
     
     
     
@@ -226,7 +226,7 @@ def train(args):
                                  fc_path=best_model_dir, multi_fc=args.multi_fc, train_loss=args.train_loss,
                                  fc_hidden_size=args.fc_hidden_size)
 
-
+        model.load(best_model_dir)
         model.to(args.device)
 
         logger1 = logging.getLogger()
@@ -235,9 +235,20 @@ def train(args):
         console_handler.setLevel(logging.INFO)
         logger1.addHandler(console_handler)
 
-        logger1.info("final_test")
+        logger1.info("Test!")
 
         acc = eval_multi_clf_for_test_new(
+                logger=logger1,
+                model=model,
+                test_mwps=test_mwps,
+                device=args.device,
+                num_labels = num_labels,
+                test_dev_max_len = args.test_dev_max_len,
+                label2id_or_value = label2id_or_value,
+                id2label_or_value = id2label_or_value,
+                tokenizer = tokenizer
+                )
+        acc = eval_multi_clf_for_classfier(
                 logger=logger1,
                 model=model,
                 test_mwps=test_mwps,

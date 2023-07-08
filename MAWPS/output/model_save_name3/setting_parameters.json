@@ -23,7 +23,7 @@
   "pretrain_model_path": "bert-base-uncased",
   "train_data_path": "./mawps/Fold_3/train_mawps_new_mwpss_fold_3.json",
   "dev_data_path": "./mawps/Fold_3/test_mawps_new_mwpss_fold_3.json",
-  "gpu_device": "2",
+  "gpu_device": "0",
   "output_dir": "./output/",
   "model_name": "model_save_name3"
 }
