@@ -5,7 +5,10 @@ import os
 from src.Train import train
 
 parser = argparse.ArgumentParser()
-
+parser.add_argument("--log_file", default="output.log", type=str)
+parser.add_argument("--mode", default="train", type=str)
+parser.add_argument("--label2id_path", default='./mawps/codes_mawps.json',
+                    type=str)
 parser.add_argument("--num_labels", default=28, type=int)
 
 parser.add_argument("--train_type", default='one-by-one-random', type=str,
@@ -37,19 +40,16 @@ parser.add_argument("--pretrain_model_path",
                     type=str)
 
 parser.add_argument("--train_data_path",
-                    default="./mawps/Fold_1/train_mawps_new_mwpss_fold_1.json",
+                    default="./mawps/Fold_4/train_mawps_new_mwpss_fold_4.json",
                     type=str)
 
 parser.add_argument("--dev_data_path",
-                    default="./mawps/Fold_1/test_mawps_new_mwpss_fold_1.json",
-                    type=str)
-
-parser.add_argument("--label2id_path", default='../../dataset/codes_mawps.json',
+                    default="./mawps/Fold_4/test_mawps_new_mwpss_fold_4.json",
                     type=str)
 
 parser.add_argument("--gpu_device", default="2", type=str)
 parser.add_argument("--output_dir", default="./output/", type=str)
-parser.add_argument("--model_name", default="model_save_name1",
+parser.add_argument("--model_name", default="model_save_name4",
                     type=str)
 
 if __name__ == "__main__":

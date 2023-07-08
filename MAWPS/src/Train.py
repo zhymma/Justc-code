@@ -19,8 +19,8 @@ from transformers.optimization import AdamW, get_linear_schedule_with_warmup,get
 
 # from src.MwpDataset import MwpDataSet
 from src.Utils import process_dataset, MWPDatasetLoader
-from src.Models import MwpBertModel, MwpBertModel_CLS
-from src.Evaluation import eval_multi_clf,eval_multi_clf0,eval_multi_clf_for_test_new
+from src.Models import *
+from src.Evaluation import *
 
 #! 设置随机数种子
 torch.cuda.manual_seed(0)  # 为GPU设置种子
@@ -103,12 +103,11 @@ def train(args):
 
     # model
     logger.info("define model...")
-    if not args.use_cls:
-        model = MwpBertModel(bert_path_or_config=args.pretrain_model_path, num_labels=num_labels,
-                             fc_path=args.fc_path, multi_fc=args.multi_fc, train_loss=args.train_loss,
-                             fc_hidden_size=args.fc_hidden_size)
-    else:
-        model = MwpBertModel_CLS(bert_path_or_config=args.pretrain_model_path, num_labels=num_labels,
+
+    # model = MwpBertModel_CLS(bert_path_or_config=args.pretrain_model_path, num_labels=num_labels,
+    #                              fc_path=args.fc_path, multi_fc=args.multi_fc, train_loss=args.train_loss,
+    #                              fc_hidden_size=args.fc_hidden_size)
+    model = MwpBertModel_CLS_classfier(bert_path_or_config=args.pretrain_model_path, num_labels=num_labels,
                                  fc_path=args.fc_path, multi_fc=args.multi_fc, train_loss=args.train_loss,
                                  fc_hidden_size=args.fc_hidden_size)
 
@@ -203,16 +202,14 @@ def train(args):
                 model.save(save_dir=best_model_dir)
 
             model.save(save_dir=latest_model_dir)
-
-
-
             train_data_loader.reset(doshuffle=True)
 
         #测试最终结果
         logger.info("\n\n")
         logger.info("final_test")
         model.load(best_model_dir)
-        acc = eval_multi_clf(
+        model.to(args.device)
+        acc = eval_multi_clf_for_classfier(
                 logger=logger,
                 model=model,
                 test_mwps=test_mwps,

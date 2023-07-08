@@ -205,47 +205,6 @@ class MwpBertModel(torch.nn.Module):
         self.tokenizer.save_pretrained(save_dir)
         torch.save(self.fc.state_dict(), os.path.join(save_dir, 'fc_weight.bin'))
 
-    def get_sens_vec(self, sens: list):
-        self.bert.eval()
-        res = self.tokenizer.batch_encode_plus(batch_text_or_text_pairs=sens, pad_to_max_length=True,
-                                               return_tensors="pt", max_length=self.max_length)
-        input_ids = res["input_ids"]
-        attention_mask = res["attention_mask"]
-        token_type_ids = res["token_type_ids"]
-
-        logger.info("input ids shape: {},{}".format(input_ids.shape[0], input_ids.shape[1]))
-        tensor_dataset = TensorDataset(input_ids, attention_mask, token_type_ids)
-        sampler = SequentialSampler(tensor_dataset)
-        data_loader = DataLoader(tensor_dataset, sampler=sampler, batch_size=self.batch_size)
-
-        all_sen_vec = []
-        with torch.no_grad():
-            for idx, batch_data in enumerate(data_loader):
-                logger.info("get sentences vector: {}/{}".format(idx + 1, len(data_loader)))
-                batch_data = [i.to(self.device) for i in batch_data]
-                token_embeddings, pooler_output = self.bert(input_ids=batch_data[0], attention_mask=batch_data[1],
-                                                            token_type_ids=batch_data[2])
-                sen_vecs = []
-                for pooling_mode in self.pooling_modes:
-                    if pooling_mode == "cls":
-                        sen_vec = pooler_output
-                    elif pooling_mode == "mean":
-
-                        input_mask_expanded = attention_mask.unsqueeze(-1).expand(token_embeddings.size()).float()
-                        sum_embeddings = torch.sum(token_embeddings * input_mask_expanded, 1)
-                        sum_mask = input_mask_expanded.sum(1)
-                        sum_mask = torch.clamp(sum_mask, min=1e-9)
-                        sen_vec = sum_embeddings / sum_mask
-                    elif pooling_mode == "max":
-                        input_mask_expanded = attention_mask.unsqueeze(-1).expand(token_embeddings.size()).float()
-                        token_embeddings[input_mask_expanded == 0] = -1e9
-                        sen_vec = torch.max(token_embeddings, 1)[0]
-                    sen_vecs.append(sen_vec)
-                sen_vec = torch.cat(sen_vecs, 1)
-
-                all_sen_vec.append(sen_vec.to("cpu").numpy())
-        self.bert.train()
-        return np.vstack(all_sen_vec)
 
 
 class Batch_Net_CLS(nn.Module):
@@ -429,9 +388,7 @@ class MwpBertModel_CLS(torch.nn.Module):
             code_emb = self.dropout(code_emb)
             code_check_pred = self.code_check(code_emb)
 
-            return all_loss
-
-        
+            return all_loss 
         else:
             #! 如果是测试
             outputs_list = []
@@ -503,6 +460,100 @@ class MwpBertModel_CLS(torch.nn.Module):
             decoder_inputs = self.dropout(p_hidden)
             outputs = self.fc(decoder_inputs)
             outputs_list.append(outputs)
+            return outputs_list
+
+    def save(self, save_dir):
+        self.bert.save_pretrained(save_dir)
+        self.tokenizer.save_pretrained(save_dir)
+        torch.save(self.fc.state_dict(), os.path.join(save_dir, 'fc_weight.bin'))
+        torch.save(self.code_emb.state_dict(), os.path.join(save_dir, 'code_emb.bin'))
+        torch.save(self.code_check.state_dict(), os.path.join(save_dir, 'code_check.bin'))
+        torch.save(self.dec_self_attn.state_dict(), os.path.join(save_dir, 'dec_self_attn.bin'))
+    
+    def load(self,fc_path):
+        self.bert = BertModel.from_pretrained(fc_path)
+        self.fc.load_state_dict(torch.load(fc_path+'/fc_weight.bin'))
+        self.code_emb.load_state_dict(torch.load(fc_path+'/code_emb.bin'))
+        self.code_check.load_state_dict(torch.load(fc_path+'/code_check.bin'))
+        self.dec_self_attn.load_state_dict(torch.load(fc_path+'/dec_self_attn.bin'))
+
+class MwpBertModel_CLS_classfier(torch.nn.Module):
+    def __init__(self, bert_path_or_config, num_labels, train_loss='MSE', fc_path=None, multi_fc=False,
+                 fc_hidden_size: int = 1024):
+        super(MwpBertModel_CLS_classfier, self).__init__()
+        self.num_labels = num_labels
+        self.all_iter_num = 5
+        if isinstance(bert_path_or_config, str):
+            self.bert = BertModel.from_pretrained(pretrained_model_name_or_path=bert_path_or_config)
+        elif isinstance(bert_path_or_config, BertConfig):
+            self.bert = BertModel(bert_path_or_config)
+        self.dropout = torch.nn.Dropout(0.1)
+        self.d_model = 768
+        if multi_fc:
+            #! 768*2 -> 2048 -> 1024 -> 28
+            self.fc = Batch_Net_CLS(self.bert.config.hidden_size * 2, fc_hidden_size, int(fc_hidden_size / 2),
+                                    num_labels)
+        else:
+            self.fc = torch.nn.Linear(in_features=self.bert.config.hidden_size * 2, out_features=num_labels, bias=True)
+
+
+        self.tokenizer = BertTokenizer.from_pretrained(bert_path_or_config)
+        #! 28 -> 768/2 -> 768 -> 768*2
+        # self.code_emb = torch.nn.Linear(in_features=self.num_labels, out_features=self.d_model*2, bias=True)
+        self.code_emb = Batch_Net_CLS(self.num_labels,int(self.d_model/2),self.d_model,self.d_model*2)
+        #! 768*2
+        # self.code_check = torch.nn.Linear(in_features=self.d_model*2, out_features=2,bias=True)
+        self.code_check = Batch_Net_CLS(self.d_model*2,self.d_model,int(self.d_model/2),2)
+        #! Transformer decoder self-attention
+        self.dec_self_attn = MultiHeadAttention()
+        assert train_loss in ['MSE', 'L1', 'Huber']
+        self.loss_func = nn.BCEWithLogitsLoss()
+        if fc_path:
+            self.load(fc_path)
+
+    def forward(self, input_ids, attention_mask, token_type_ids, num_positions, num_codes_labels):
+        
+        bertout = self.bert(input_ids=input_ids, attention_mask=attention_mask, token_type_ids=token_type_ids)
+        token_embeddings = bertout[0]
+        pooler_output = bertout[1]
+        #! (batch_size, seq_len, d)
+        p_hidden = torch.gather(token_embeddings, 1, num_positions.unsqueeze(-1).expand(-1,-1,self.d_model))
+        problem_out = pooler_output.unsqueeze(1).expand(p_hidden.shape)
+        #! (batch_size, seq_len, 2*d)
+        p_hidden = torch.cat((p_hidden,problem_out),dim=-1)
+        batch_size = len(num_positions)
+        #! (batch_size, output_len, num_labels)
+        labels = num_codes_labels.reshape(batch_size,-1, self.num_labels)
+        labels[labels > 1] = 1 #必需为0或1
+        labels = labels.float()
+        pad_vector = torch.Tensor([-1]*self.num_labels).cuda()
+        seq_len = labels.shape[1] #!这里指output_len
+        ce = nn.CrossEntropyLoss(reduction='mean',ignore_index=-1)#! 忽略pad -1
+        pad_mask = torch.any(labels != pad_vector, dim =-1)#! 需要关注的部分code label
+        pad_mask = pad_mask.unsqueeze(-1).expand_as(labels)
+        
+        #! Transformers decoder self-attention
+        dec_self_attn_pad_mask = get_attn_pad_mask(num_positions, num_positions)
+        
+        if self.training:
+        
+            #! 只训练一个单纯的decoder
+            decoder_inputs = self.dropout(p_hidden)
+            outputs = self.fc(decoder_inputs)
+            all_loss = self.loss_func(outputs[pad_mask],labels[pad_mask])
+
+
+            return all_loss 
+        else:
+            #! 如果是测试
+            outputs_list = []
+
+   
+
+            #! 只训练一个单纯的解码器
+            decoder_inputs = self.dropout(p_hidden)
+            outputs = self.fc(decoder_inputs)
+            outputs_list.append(torch.sigmoid(outputs))
             return outputs_list
 
     def save(self, save_dir):

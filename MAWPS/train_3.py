@@ -5,7 +5,10 @@ import os
 from src.Train import train
 
 parser = argparse.ArgumentParser()
-
+parser.add_argument("--log_file", default="output.log", type=str)
+parser.add_argument("--mode", default="train", type=str)
+parser.add_argument("--label2id_path", default='./mawps/codes_mawps.json',
+                    type=str)
 parser.add_argument("--num_labels", default=28, type=int)
 
 parser.add_argument("--train_type", default='one-by-one-random', type=str,
@@ -44,8 +47,6 @@ parser.add_argument("--dev_data_path",
                     default="./mawps/Fold_3/test_mawps_new_mwpss_fold_3.json",
                     type=str)
 
-parser.add_argument("--label2id_path", default='../../dataset/codes_mawps.json',
-                    type=str)
 
 parser.add_argument("--gpu_device", default="1", type=str)
 parser.add_argument("--output_dir", default="./output/", type=str)
