@@ -1,10 +1,4 @@
-# -*- coding: utf-8 -*-
-"""
-@Time : 2021/12/30 18:38
-@Author : WangBin
-@File : Train.py 
-@Software: PyCharm 
-"""
+
 import json
 import logging
 import math
@@ -16,16 +10,14 @@ import numpy as np
 from torch.utils.data import DataLoader, RandomSampler, SequentialSampler
 from transformers import BertTokenizer
 from transformers.optimization import AdamW, get_linear_schedule_with_warmup,get_cosine_schedule_with_warmup
-
-# from src.MwpDataset import MwpDataSet
 from src.Utils import process_dataset, MWPDatasetLoader
 from src.Models import *
 from src.Evaluation import *
 
 #! 设置随机数种子
-torch.cuda.manual_seed(42)  # 为GPU设置种子
-np.random.seed(42)  # 为Numpy设置随机种子
-random.seed(42) 
+torch.cuda.manual_seed(0)  # 为GPU设置种子
+np.random.seed(0)  # 为Numpy设置随机种子
+random.seed(0) 
 
 
 def train(args):
@@ -55,11 +47,12 @@ def train(args):
     logger.addHandler(handler)
     # logger.addHandler(console)
 
+    logger.info("\n\n")
+
     
     with open(args.label2id_path, 'r', encoding='utf-8') as f:
         label2id = json.load(f)
     num_labels = len(label2id)
-  
     label2id_or_value = {}
     id2label_or_value = {}
     with open(args.label2id_path, 'r', encoding='utf-8')as ff:
@@ -233,17 +226,17 @@ def train(args):
 
         logger1.info("Test!")
 
-        acc = eval_multi_clf_for_test_new(
-                logger=logger1,
-                model=model,
-                test_mwps=test_mwps,
-                device=args.device,
-                num_labels = num_labels,
-                test_dev_max_len = args.test_dev_max_len,
-                label2id_or_value = label2id_or_value,
-                id2label_or_value = id2label_or_value,
-                tokenizer = tokenizer
-                )
+        # acc = eval_multi_clf_for_test_new(
+        #         logger=logger1,
+        #         model=model,
+        #         test_mwps=test_mwps,
+        #         device=args.device,
+        #         num_labels = num_labels,
+        #         test_dev_max_len = args.test_dev_max_len,
+        #         label2id_or_value = label2id_or_value,
+        #         id2label_or_value = id2label_or_value,
+        #         tokenizer = tokenizer
+        #         )
         acc = eval_multi_clf_for_classfier(
                 logger=logger1,
                 model=model,

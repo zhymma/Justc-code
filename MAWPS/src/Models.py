@@ -523,7 +523,8 @@ class MwpBertModel_CLS_classfier(torch.nn.Module):
         p_hidden = torch.cat((p_hidden,problem_out),dim=-1)
         batch_size = len(num_positions)
         #! (batch_size, output_len, num_labels)
-        labels = num_codes_labels.reshape(batch_size,-1, self.num_labels).clone()
+        # labels = num_codes_labels.reshape(batch_size,-1, self.num_labels).clone()
+        labels = num_codes_labels.reshape(batch_size,-1, self.num_labels)
         
         #! 必需为0或1
         labels[labels > 1] = 1 

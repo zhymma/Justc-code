@@ -88,8 +88,7 @@ def eval_multi_clf(model, test_mwps, device, num_labels, test_dev_max_len,label2
     code_acc = right_codes_count/len(test_mwps)
     if logger is not None:
         logger.info('right_count:{}\ttotal:{}\t Answer ACC: {}'.format(right_ans_count, len(test_mwps), ans_acc))
-        logger.info('right_codes_count:{}\ttotal:{}\t Code ACC: {}'.format(right_codes_count, len(test_mwps), code_acc))
-        logger.info('wrong_be_tree_count:{}\twrong_total:{}\t wrong be tree ACC: {}'.format(wrong_be_tree, wrong_ans_count, wrong_be_tree/wrong_ans_count))
+        logger.info('right_codes_count:{}\ttotal:{}\tCode ACC: {}\twrong_be_tree_count:{}\twrong_total:{}\t wrong be tree ACC: {}'.format(right_codes_count, len(test_mwps), code_acc,wrong_be_tree, wrong_ans_count, wrong_be_tree/wrong_ans_count))
         
     #! 第二次迭代结果输出
     # logger.info('\n')
@@ -392,6 +391,8 @@ def eval_multi_clf_for_classfier(model, test_mwps, device, num_labels, test_dev_
     right_ans_count = 0
     wrong_ans_count = 0
     wrong_be_tree = 0
+    temp = 0
+    temp1 = 0
     for i,raw_mwp in enumerate(test_mwps):
         labels, all_logits = [], []
         labels_pos = []
@@ -402,15 +403,15 @@ def eval_multi_clf_for_classfier(model, test_mwps, device, num_labels, test_dev_
         num_codes_labels = num_codes_labels.to("cpu").numpy()
 
         #! 修改>1部分的值
-        # 找出num_codes_labels中大于1的位置
-        greater_than_one = num_codes_labels > 1
-        # 找出outputs中大于0.5的位置
-        greater_than_half = outputs > 0
-        # 找出同时满足两个条件的位置
-        both_conditions = np.logical_and(greater_than_one, greater_than_half)
-        # 打印结果
-        indices = np.where(both_conditions)
-        outputs[indices]=num_codes_labels[indices]
+        # # 找出num_codes_labels中大于1的位置
+        # greater_than_one = num_codes_labels > 1
+        # # 找出outputs中大于0.5的位置
+        # greater_than_half = outputs > 0.5
+        # # 找出同时满足两个条件的位置
+        # both_conditions = np.logical_and(greater_than_one, greater_than_half)
+        # # 打印结果
+        # indices = np.where(both_conditions)
+        # outputs[indices]=num_codes_labels[indices]
 
         
         
@@ -432,6 +433,17 @@ def eval_multi_clf_for_classfier(model, test_mwps, device, num_labels, test_dev_
             if raw_mwp['pre_final_expression'] == 'Failed':
                 wrong_be_tree +=1
         #! 计算code acc code check acc
+
+        #! temp 找到最小的大于0.5的值，判断它是不是错误的
+        
+        min_value = np.min(outputs[outputs > 0.5])
+        indices = np.where(outputs == min_value)# 希望没有两个一样的最小值
+        if(num_codes_labels[indices] == np.array([0])):
+            temp += 1
+        max_value = np.max(outputs[outputs < 0.5])
+        indices = np.where(outputs == max_value)
+        if(num_codes_labels[indices] != np.array([0])):
+            temp1 += 1
         right = True
         for i in range(outputs.shape[0]):
             A = outputs[i,:]
@@ -448,8 +460,8 @@ def eval_multi_clf_for_classfier(model, test_mwps, device, num_labels, test_dev_
     code_acc = right_codes_count/len(test_mwps)
     if logger is not None:
         logger.info('right_count:{}\ttotal:{}\t Answer ACC: {}'.format(right_ans_count, len(test_mwps), ans_acc))
-        logger.info('right_codes_count:{}\ttotal:{}\t Code ACC: {}'.format(right_codes_count, len(test_mwps), code_acc))
-        logger.info('wrong_be_tree_count:{}\twrong_total:{}\t wrong be tree ACC: {}'.format(wrong_be_tree, wrong_ans_count, wrong_be_tree/wrong_ans_count))
+        logger.info('right_codes_count:{}\ttotal:{}\tCode ACC: {}\twrong_be_tree_count:{}\twrong_total:{}\t wrong be tree ACC: {}'.format(right_codes_count, len(test_mwps), code_acc,wrong_be_tree, wrong_ans_count, wrong_be_tree/wrong_ans_count))
+        logger.info('temp:{}\ttemp1:{}\twrong_total:{}\t'.format(temp,temp1,len(test_mwps)-right_ans_count ))
         
     model.train()
     return ans_acc
