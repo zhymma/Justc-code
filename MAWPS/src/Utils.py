@@ -8,11 +8,10 @@ from tqdm import tqdm
 
 
 class MWPDatasetLoader(object):
-    def __init__(self, data, batch_size, shuffle, tokenizer: BertTokenizer, seed, sort=False):
+    def __init__(self, data, batch_size, shuffle, tokenizer: BertTokenizer, sort=False):
         self.data = data
         self.shuffle = shuffle
         self.batch_size = batch_size
-        self.seed = seed
         self.sort = sort
         self.tokenizer = tokenizer
 
@@ -256,6 +255,8 @@ def process_one_mawps_no_None(raw_mwp: dict, label2id_or_value: dict, max_len: i
                 noneid = label2id_or_value["None"]
                 num_positions.append(position+1)
                 label_vector = [0] * len(label2id_or_value)
+                #! 设置label最大值为1
+                # label_vector[noneid] += 1
                 label_vector[noneid] += 1
                 num_codes_labels = num_codes_labels + label_vector
         

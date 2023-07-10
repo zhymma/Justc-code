@@ -14,14 +14,18 @@ from src.Utils import process_dataset, MWPDatasetLoader
 from src.Models import *
 from src.Evaluation import *
 
-#! 设置随机数种子
-torch.cuda.manual_seed(0)  # 为GPU设置种子
-np.random.seed(0)  # 为Numpy设置随机种子
-random.seed(0) 
 
+def setup_seed(seed):
+     torch.manual_seed(seed)
+     torch.cuda.manual_seed_all(seed)
+     np.random.seed(seed)
+     random.seed(seed)
+     torch.backends.cudnn.deterministic = True
 
 def train(args):
     # devices setting
+    #! 设置随机数种子
+    setup_seed(args.seed)
     os.environ['CUDA_VISIBLE_DEVICES'] = args.gpu_device
     args.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
@@ -71,10 +75,10 @@ def train(args):
         if args.train_type == 'one-by-one-in-same-batch':
             # one by one 的话 shuffle 洗牌 和 按长度降序排序 都要为 False
             train_data_loader = MWPDatasetLoader(data=examplesss_train, batch_size=args.batch_size, shuffle=False,
-                                                 tokenizer=tokenizer, seed=72, sort=False)
+                                                 tokenizer=tokenizer, sort=False)
         elif args.train_type == 'one-by-one-random':
             train_data_loader = MWPDatasetLoader(data=examplesss_train, batch_size=args.batch_size, shuffle=True,
-                                                 tokenizer=tokenizer, seed=72, sort=False)
+                                                 tokenizer=tokenizer, sort=False)
         else:
             print('args.train_type wrong!!!')
             sys.exit()
@@ -85,7 +89,7 @@ def train(args):
                                           max_len=args.test_dev_max_len, lower=True)
 
         dev_data_loader = MWPDatasetLoader(data=examplesss_test, batch_size=1, shuffle=False,
-                                           tokenizer=tokenizer, seed=72, sort=False)
+                                           tokenizer=tokenizer, sort=False)
         with open(args.dev_data_path, 'r', encoding='utf-8')as ffs:
             test_mwps = json.load(ffs)
     else:
@@ -97,9 +101,7 @@ def train(args):
     # model
     logger.info("define model...")
 
-    # model = MwpBertModel_CLS(bert_path_or_config=args.pretrain_model_path, num_labels=num_labels,
-    #                              fc_path=args.fc_path, multi_fc=args.multi_fc, train_loss=args.train_loss,
-    #                              fc_hidden_size=args.fc_hidden_size)
+
     model = MwpBertModel_CLS_classfier(bert_path_or_config=args.pretrain_model_path, num_labels=num_labels,
                                  fc_path=args.fc_path, multi_fc=args.multi_fc, train_loss=args.train_loss,
                                  fc_hidden_size=args.fc_hidden_size)
@@ -143,7 +145,12 @@ def train(args):
     # scheduler = torch.optim.lr_scheduler.LambdaLR(optimizer, lr_lambda=lr_lambda)
     scheduler = get_cosine_schedule_with_warmup(optimizer, num_warmup_steps=warmup_steps,num_training_steps=total_steps)
     
-    
+    refiner = Refiner(num_labels = num_labels,check_hidden_size = 280)
+    refiner.to(args.device)
+    refiner.zero_grad()
+    refiner.train()
+    refiner_optimizer = AdamW(refiner.parameters(), lr=0.001,no_deprecation_warning=True)
+    refiner_scheduler = get_cosine_schedule_with_warmup(refiner_optimizer, num_warmup_steps=warmup_steps,num_training_steps=total_steps)
     
     best_acc = -1
     if args.mode == "train":
@@ -151,50 +158,99 @@ def train(args):
         
         logger.info("\n>>>>>>>>>>>>>>>>>>>start train......")
 
-        global_steps = 0
-        for epoch in range(args.num_epochs):
+        # for epoch in range(args.num_epochs):
+        #     all_loss = 0
+        #     for step, batch in enumerate(train_data_loader, start=1):
+        #         batch_data = [i.to(args.device) for i in batch]
+        #         # (input_ids, input_mask, token_type_ids, problem_id, num_positions, num_codes_labels)
+        #         input_ids, input_mask, token_type_ids, problem_id, num_positions, num_codes_labels = batch_data
+                
+        #         loss = model(input_ids=input_ids, attention_mask=input_mask, token_type_ids=token_type_ids, num_positions=num_positions, num_codes_labels=num_codes_labels)
+
+        #         loss.backward()
+        #         torch.nn.utils.clip_grad_norm_([v for k, v in paras.items()], max_norm=1)
+        #         optimizer.step()
+        #         scheduler.step()
+        #         model.zero_grad()
+        #         # optimizer.zero_grad() = model.zero_grad()
+        #         all_loss += loss.item()
+
+        #     # print loss...
+        #     logger.info("\n")
+
+        #     logger.info("epoch:{},\tloss:{}".format(epoch, all_loss))
+
+        #     acc = eval_multi_clf(
+        #         logger=logger,
+        #         model=model,
+        #         test_mwps=test_mwps,
+        #         device=args.device,
+        #         num_labels = num_labels,
+        #         test_dev_max_len = args.test_dev_max_len,
+        #         label2id_or_value = label2id_or_value,
+        #         id2label_or_value = id2label_or_value,
+        #         tokenizer = tokenizer
+        #         )
+
+
+        #     if acc > best_acc:
+        #         logger.info('save best model to {}'.format(best_model_dir))
+        #         best_acc = acc
+        #         model.save(save_dir=best_model_dir)
+
+        #     model.save(save_dir=latest_model_dir)
+        #     train_data_loader.reset(doshuffle=True)
+        
+        #! 训练refiner
+        model.load(best_model_dir)
+        model.to(args.device)
+        model.eval()
+        check_acc = -1
+        for epoch in range(75):
             all_loss = 0
             for step, batch in enumerate(train_data_loader, start=1):
-                global_steps += 1
+                refiner.train()
                 batch_data = [i.to(args.device) for i in batch]
-                # (input_ids, input_mask, token_type_ids, problem_id, num_positions, num_codes_labels)
                 input_ids, input_mask, token_type_ids, problem_id, num_positions, num_codes_labels = batch_data
                 
-                loss = model(input_ids=input_ids, attention_mask=input_mask, token_type_ids=token_type_ids, num_positions=num_positions, num_codes_labels=num_codes_labels)
+                alloutputs = model(input_ids=input_ids, attention_mask=input_mask, token_type_ids=token_type_ids, num_positions=num_positions, num_codes_labels=num_codes_labels)
+                outputs = alloutputs[0].squeeze(0)
+                # torch.nn.utils.clip_grad_norm_([v for k, v in paras.items()], max_norm=1)
+                loss, _ ,_ =refiner(outputs, num_codes_labels) 
 
                 loss.backward()
-                torch.nn.utils.clip_grad_norm_([v for k, v in paras.items()], max_norm=1)
-                optimizer.step()
-                scheduler.step()
-                model.zero_grad()
+                refiner_optimizer.step()
+                refiner_scheduler.step()
+                refiner.zero_grad()
                 # optimizer.zero_grad() = model.zero_grad()
                 all_loss += loss.item()
+            refiner.eval()
+            acc = eval_multi_clf_for_classfier_check(
+            logger=logger,
+            model=model,
+            test_mwps=test_mwps,
+            device=args.device,
+            num_labels = num_labels,
+            test_dev_max_len = args.test_dev_max_len,
+            label2id_or_value = label2id_or_value,
+            id2label_or_value = id2label_or_value,
+            tokenizer = tokenizer,
+            refiner = refiner
+            )
 
+            if acc > check_acc:
+                logger.info('save best refiner model to {}'.format(best_model_dir))
+                check_acc = acc
+                # model.save(save_dir=best_model_dir)
+            if acc > 0.99 :
+                break
+                
+            # model.save(save_dir=latest_model_dir)
+            train_data_loader.reset(doshuffle=True)
             # print loss...
-            logger.info("\n")
 
             logger.info("epoch:{},\tloss:{}".format(epoch, all_loss))
-
-            acc = eval_multi_clf(
-                logger=logger,
-                model=model,
-                test_mwps=test_mwps,
-                device=args.device,
-                num_labels = num_labels,
-                test_dev_max_len = args.test_dev_max_len,
-                label2id_or_value = label2id_or_value,
-                id2label_or_value = id2label_or_value,
-                tokenizer = tokenizer
-                )
-
-
-            if acc > best_acc:
-                logger.info('save best model to {}'.format(best_model_dir))
-                best_acc = acc
-                model.save(save_dir=best_model_dir)
-
-            model.save(save_dir=latest_model_dir)
-            train_data_loader.reset(doshuffle=True)
+        logger.info("\n>>>>>>>>>>>>>>>>>>>start train......")
 
         #测试最终结果
         logger.info("\n\n")
@@ -212,6 +268,11 @@ def train(args):
                 id2label_or_value = id2label_or_value,
                 tokenizer = tokenizer
                 )
+        print("final_test")
+        print(f"Answer acc:{acc}")
+        print("\n")
+
+
     else:
         #测试最终结果
 
@@ -226,17 +287,6 @@ def train(args):
 
         logger1.info("Test!")
 
-        # acc = eval_multi_clf_for_test_new(
-        #         logger=logger1,
-        #         model=model,
-        #         test_mwps=test_mwps,
-        #         device=args.device,
-        #         num_labels = num_labels,
-        #         test_dev_max_len = args.test_dev_max_len,
-        #         label2id_or_value = label2id_or_value,
-        #         id2label_or_value = id2label_or_value,
-        #         tokenizer = tokenizer
-        #         )
         acc = eval_multi_clf_for_classfier(
                 logger=logger1,
                 model=model,
@@ -248,5 +298,6 @@ def train(args):
                 id2label_or_value = id2label_or_value,
                 tokenizer = tokenizer
                 )
+        
     
     

@@ -9,6 +9,9 @@ parser.add_argument("--log_file", default="output.log", type=str)
 parser.add_argument("--mode", default="test", type=str)
 parser.add_argument("--label2id_path", default='./mawps/codes_mawps.json',
                     type=str)
+parser.add_argument("--seed", default=0, type=int)
+
+
 
 parser.add_argument("--num_labels", default=28, type=int)
 

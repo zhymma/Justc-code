@@ -482,7 +482,7 @@ class MwpBertModel_CLS_classfier(torch.nn.Module):
                  fc_hidden_size: int = 1024):
         super(MwpBertModel_CLS_classfier, self).__init__()
         self.num_labels = num_labels
-        self.all_iter_num = 5
+
         if isinstance(bert_path_or_config, str):
             self.bert = BertModel.from_pretrained(pretrained_model_name_or_path=bert_path_or_config)
         elif isinstance(bert_path_or_config, BertConfig):
@@ -496,17 +496,9 @@ class MwpBertModel_CLS_classfier(torch.nn.Module):
         else:
             self.fc = torch.nn.Linear(in_features=self.bert.config.hidden_size * 2, out_features=num_labels, bias=True)
 
-
+        
         self.tokenizer = BertTokenizer.from_pretrained(bert_path_or_config)
-        #! 28 -> 768/2 -> 768 -> 768*2
-        # self.code_emb = torch.nn.Linear(in_features=self.num_labels, out_features=self.d_model*2, bias=True)
-        self.code_emb = Batch_Net_CLS(self.num_labels,int(self.d_model/2),self.d_model,self.d_model*2)
-        #! 768*2
-        # self.code_check = torch.nn.Linear(in_features=self.d_model*2, out_features=2,bias=True)
-        self.code_check = Batch_Net_CLS(self.d_model*2,self.d_model,int(self.d_model/2),2)
-        #! Transformer decoder self-attention
-        self.dec_self_attn = MultiHeadAttention()
-        assert train_loss in ['MSE', 'L1', 'Huber']
+
         self.loss_func = nn.BCEWithLogitsLoss()
         if fc_path:
             self.load(fc_path)
@@ -523,11 +515,10 @@ class MwpBertModel_CLS_classfier(torch.nn.Module):
         p_hidden = torch.cat((p_hidden,problem_out),dim=-1)
         batch_size = len(num_positions)
         #! (batch_size, output_len, num_labels)
-        # labels = num_codes_labels.reshape(batch_size,-1, self.num_labels).clone()
-        labels = num_codes_labels.reshape(batch_size,-1, self.num_labels)
+        labels = num_codes_labels.reshape(batch_size,-1, self.num_labels).clone()
         
         #! 必需为0或1
-        labels[labels > 1] = 1 
+        # labels[labels > 1] = 1 
         labels = labels.float()
         pad_vector = torch.Tensor([-1]*self.num_labels).cuda()
         seq_len = labels.shape[1] #!这里指output_len
@@ -535,8 +526,6 @@ class MwpBertModel_CLS_classfier(torch.nn.Module):
         pad_mask = torch.any(labels != pad_vector, dim =-1)#! 需要关注的部分code label
         pad_mask = pad_mask.unsqueeze(-1).expand_as(labels)
         
-        #! Transformers decoder self-attention
-        dec_self_attn_pad_mask = get_attn_pad_mask(num_positions, num_positions)
         
         if self.training:
         
@@ -551,8 +540,6 @@ class MwpBertModel_CLS_classfier(torch.nn.Module):
             #! 如果是测试
             outputs_list = []
 
-   
-
             #! 只训练一个单纯的解码器
             decoder_inputs = self.dropout(p_hidden)
             outputs = self.fc(decoder_inputs)
@@ -563,13 +550,38 @@ class MwpBertModel_CLS_classfier(torch.nn.Module):
         self.bert.save_pretrained(save_dir)
         self.tokenizer.save_pretrained(save_dir)
         torch.save(self.fc.state_dict(), os.path.join(save_dir, 'fc_weight.bin'))
-        torch.save(self.code_emb.state_dict(), os.path.join(save_dir, 'code_emb.bin'))
-        torch.save(self.code_check.state_dict(), os.path.join(save_dir, 'code_check.bin'))
-        torch.save(self.dec_self_attn.state_dict(), os.path.join(save_dir, 'dec_self_attn.bin'))
+
     
     def load(self,fc_path):
         self.bert = BertModel.from_pretrained(fc_path)
         self.fc.load_state_dict(torch.load(fc_path+'/fc_weight.bin'))
-        self.code_emb.load_state_dict(torch.load(fc_path+'/code_emb.bin'))
-        self.code_check.load_state_dict(torch.load(fc_path+'/code_check.bin'))
-        self.dec_self_attn.load_state_dict(torch.load(fc_path+'/dec_self_attn.bin'))
+
+class Refiner(nn.Module):
+    def __init__(self, num_labels,check_hidden_size):
+        super(Refiner, self).__init__()
+        self.num_labels = num_labels
+        # self.checker = Batch_Net_CLS(self.num_labels, check_hidden_size, int(check_hidden_size / 2), 1)
+        self.checker =  nn.Sequential(
+                        nn.Linear(self.num_labels, 200),
+                        nn.ReLU(),
+                        nn.Linear(200, 50),
+                        nn.ReLU(),
+                        nn.Linear(50, 1)
+                    )
+        self.loss_func = nn.BCEWithLogitsLoss(weight=torch.tensor([7/3]))
+    def forward(self, outputs, num_codes_labels):
+        outpus_processed = 1 - 2 * torch.abs(0.5 - outputs)
+        logits = self.checker(outpus_processed)
+        # Round the outputs and compare with num_codes_labels
+        outputs_rounded = torch.round(outputs)
+        
+        labels = num_codes_labels.reshape(outputs.shape[0],-1, self.num_labels).clone()
+        
+        pad_vector = torch.Tensor([-1]*self.num_labels).cuda()
+        pad_mask = torch.any(labels != pad_vector, dim =-1)#! 需要关注的部分code label
+
+        check_labels = torch.eq(outputs_rounded, labels)
+        check_labels = torch.all(check_labels, dim=-1, keepdim=True)
+        check_labels = check_labels.to(torch.float)
+        all_loss = self.loss_func(logits[pad_mask],check_labels[pad_mask])
+        return all_loss,logits,check_labels

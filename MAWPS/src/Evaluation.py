@@ -7,7 +7,6 @@ from .verification_labels_plus import re_construct_expression_from_codes, build_
 from .Utils import process_one_mawps_for_test, process_one_mawps_for_test_no_None
 from .Test_new import check_codes_acc, check_answer_acc
 
-
 def eval_multi_clf(model, test_mwps, device, num_labels, test_dev_max_len,label2id_or_value,id2label_or_value,tokenizer,logger=None):
     
     outputs_0 = []
@@ -88,7 +87,8 @@ def eval_multi_clf(model, test_mwps, device, num_labels, test_dev_max_len,label2
     code_acc = right_codes_count/len(test_mwps)
     if logger is not None:
         logger.info('right_count:{}\ttotal:{}\t Answer ACC: {}'.format(right_ans_count, len(test_mwps), ans_acc))
-        logger.info('right_codes_count:{}\ttotal:{}\tCode ACC: {}\twrong_be_tree_count:{}\twrong_total:{}\t wrong be tree ACC: {}'.format(right_codes_count, len(test_mwps), code_acc,wrong_be_tree, wrong_ans_count, wrong_be_tree/wrong_ans_count))
+        logger.info('right_codes_count:{}\ttotal:{}\t Code ACC: {}'.format(right_codes_count, len(test_mwps), code_acc))
+        logger.info('wrong_be_tree_count:{}\twrong_total:{}\t wrong be tree ACC: {}'.format(wrong_be_tree, wrong_ans_count, wrong_be_tree/wrong_ans_count))
         
     #! 第二次迭代结果输出
     # logger.info('\n')
@@ -143,7 +143,6 @@ def eval_multi_clf(model, test_mwps, device, num_labels, test_dev_max_len,label2
     
     model.train()
     return ans_acc
-
 
 def eval_multi_clf1(model, test_mwps, device, num_labels, test_dev_max_len,label2id_or_value,id2label_or_value,tokenizer,logger=None):
     
@@ -403,7 +402,7 @@ def eval_multi_clf_for_classfier(model, test_mwps, device, num_labels, test_dev_
         num_codes_labels = num_codes_labels.to("cpu").numpy()
 
         #! 修改>1部分的值
-        # # 找出num_codes_labels中大于1的位置
+        # 找出num_codes_labels中大于1的位置
         # greater_than_one = num_codes_labels > 1
         # # 找出outputs中大于0.5的位置
         # greater_than_half = outputs > 0.5
@@ -421,8 +420,6 @@ def eval_multi_clf_for_classfier(model, test_mwps, device, num_labels, test_dev_
         labels = np.vstack(labels)
         all_logits = np.vstack(all_logits)
         labels_pos = np.vstack(labels_pos)
-
-
         
         #! answer acc
         if check_answer_acc(raw_mwp, labels_pos, all_logits, id2label_or_value):
@@ -465,3 +462,115 @@ def eval_multi_clf_for_classfier(model, test_mwps, device, num_labels, test_dev_
         
     model.train()
     return ans_acc
+
+
+def eval_multi_clf_for_classfier_check(model, test_mwps, device, num_labels, test_dev_max_len,label2id_or_value,id2label_or_value,tokenizer,refiner,logger=None):
+    
+    outputs_0 = []
+    num_codes_labels_list = []
+    num_positions_list = []
+
+
+    right_checker = 0
+
+
+    for idd, raw_mwp in enumerate(test_mwps):
+        processed_mwp = process_one_mawps_for_test_no_None(raw_mwp, label2id_or_value, test_dev_max_len, True,
+                                                       tokenizer)
+        if processed_mwp is not None:
+                (sen_tokens, attention_mask, token_type_id, problem_id,num_positions,num_codes_labels) = list(zip(*processed_mwp))
+                batch = [torch.tensor(sen_tokens).long(), torch.tensor(attention_mask).long(), torch.tensor(token_type_id).long(),
+                         torch.tensor(num_positions).long(),torch.tensor(num_codes_labels).long()]
+                model.eval()
+                with torch.no_grad():
+                    batch_data = [i.to(device) for i in batch]
+
+                    alloutputs = model(input_ids=batch_data[0], attention_mask=batch_data[1],
+                                                   token_type_ids=batch_data[2], num_positions = batch_data[3],num_codes_labels=batch_data[4])
+                    
+                    outputs = alloutputs[0]
+                    labels = batch_data[4].reshape(1,-1,num_labels)
+
+                    _, refiner_outputs ,check_labels=refiner(outputs, batch_data[4].clone())
+
+                    #! 统计checker的准确率
+                    equality = torch.eq(torch.round(torch.sigmoid(refiner_outputs)),check_labels)
+                    if(equality.all()):
+                        right_checker += 1
+
+
+                    outputs = outputs.to("cpu").numpy()
+                    outputs_0.append(outputs)
+
+                    num_codes_labels = batch_data[4].reshape(-1,28)
+                    num_codes_labels_list.append(num_codes_labels)
+                    num_positions = batch_data[3].reshape(-1,1).clone()
+                    num_positions[:,0] -= 1
+                    num_positions_list.append(num_positions)
+                    
+
+                      
+    # right_codes_count = 0
+    # right_ans_count = 0
+    # wrong_ans_count = 0
+    # wrong_be_tree = 0
+    # temp = 0
+    # temp1 = 0
+    # for i,raw_mwp in enumerate(test_mwps):
+    #     labels, all_logits = [], []
+    #     labels_pos = []
+    #     outputs = outputs_0[i]
+    #     num_codes_labels = num_codes_labels_list[i]
+    #     num_positions = num_positions_list[i]
+    #     new_label_pos = torch.cat((num_positions,num_codes_labels),dim =1)
+    #     num_codes_labels = num_codes_labels.to("cpu").numpy()
+
+
+            
+    #     labels.append(num_codes_labels)
+    #     labels_pos.append(new_label_pos.to("cpu").numpy())
+    #     all_logits.append(outputs)
+    #     labels = np.vstack(labels)
+    #     all_logits = np.vstack(all_logits)
+    #     labels_pos = np.vstack(labels_pos)
+        
+    #     #! answer acc
+    #     if check_answer_acc(raw_mwp, labels_pos, all_logits, id2label_or_value):
+    #         right_ans_count += 1
+    #     else:
+    #         # false_mwp.append(raw_mwp)
+    #         wrong_ans_count += 1
+    #         if raw_mwp['pre_final_expression'] == 'Failed':
+    #             wrong_be_tree +=1
+    #     #! 计算code acc code check acc
+
+    #     #! temp 找到最小的大于0.5的值，判断它是不是错误的
+        
+    #     min_value = np.min(outputs[outputs > 0.5])
+    #     indices = np.where(outputs == min_value)# 希望没有两个一样的最小值
+    #     if(num_codes_labels[indices] == np.array([0])):
+    #         temp += 1
+    #     max_value = np.max(outputs[outputs < 0.5])
+    #     indices = np.where(outputs == max_value)
+    #     if(num_codes_labels[indices] != np.array([0])):
+    #         temp1 += 1
+    #     right = True
+    #     for i in range(outputs.shape[0]):
+    #         A = outputs[i,:]
+    #         B = num_codes_labels[i,:]
+    #         dd_pred = np.array([round(i) for i in A]).astype(np.int32)
+    #         dd_label = np.array([round(i) for i in B]).astype(np.int32)
+
+    #         if not (dd_pred == dd_label).all() :
+    #             right = False
+    #     if right:
+    #         right_codes_count += 1
+
+    # ans_acc = right_ans_count / len(test_mwps)
+    # code_acc = right_codes_count/len(test_mwps)
+    # if logger is not None:
+    #     logger.info('right_count:{}\ttotal:{}\t Answer ACC: {}'.format(right_ans_count, len(test_mwps), ans_acc))
+    #     logger.info('right_codes_count:{}\ttotal:{}\tCode ACC: {}\twrong_be_tree_count:{}\twrong_total:{}\t wrong be tree ACC: {}'.format(right_codes_count, len(test_mwps), code_acc,wrong_be_tree, wrong_ans_count, wrong_be_tree/wrong_ans_count))
+    #     logger.info('temp:{}\ttemp1:{}\twrong_total:{}\t'.format(temp,temp1,len(test_mwps)-right_ans_count ))
+    print(right_checker,len(test_mwps),right_checker/len(test_mwps))
+    return right_checker/len(test_mwps)

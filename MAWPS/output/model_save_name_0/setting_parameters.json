@@ -1,6 +1,7 @@
 {
   "log_file": "output.log",
   "mode": "train",
+  "seed": 0,
   "num_labels": 27,
   "train_type": "one-by-one-random",
   "re_process_train_data": false,
