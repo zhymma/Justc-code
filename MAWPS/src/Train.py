@@ -145,11 +145,22 @@ def train(args):
     # scheduler = torch.optim.lr_scheduler.LambdaLR(optimizer, lr_lambda=lr_lambda)
     scheduler = get_cosine_schedule_with_warmup(optimizer, num_warmup_steps=warmup_steps,num_training_steps=total_steps)
     
-    refiner = Refiner(num_labels = num_labels,check_hidden_size = 280)
+    refiner = Refiner(num_labels = num_labels,hidden_size = args.fc_hidden_size)
     refiner.to(args.device)
     refiner.zero_grad()
     refiner.train()
-    refiner_optimizer = AdamW(refiner.parameters(), lr=0.001,no_deprecation_warning=True)
+    refiner_paras = dict(refiner.named_parameters())
+    optimizer_grouped_parameters = [
+        {
+            "params": [p for n, p in refiner_paras.items() if not any(nd in n for nd in no_decay)],
+            "weight_decay": 0.01,
+        }, 
+        {
+            "params": [p for n, p in refiner_paras.items() if any(nd in n for nd in no_decay)],
+            "weight_decay": 0.0
+        }
+    ]
+    refiner_optimizer = AdamW(optimizer_grouped_parameters, lr=args.lr,no_deprecation_warning=True)
     refiner_scheduler = get_cosine_schedule_with_warmup(refiner_optimizer, num_warmup_steps=warmup_steps,num_training_steps=total_steps)
     
     best_acc = -1
@@ -206,17 +217,17 @@ def train(args):
         model.to(args.device)
         model.eval()
         check_acc = -1
-        for epoch in range(75):
+        for epoch in range(args.num_epochs):
             all_loss = 0
             for step, batch in enumerate(train_data_loader, start=1):
                 refiner.train()
                 batch_data = [i.to(args.device) for i in batch]
                 input_ids, input_mask, token_type_ids, problem_id, num_positions, num_codes_labels = batch_data
                 
-                alloutputs = model(input_ids=input_ids, attention_mask=input_mask, token_type_ids=token_type_ids, num_positions=num_positions, num_codes_labels=num_codes_labels)
-                outputs = alloutputs[0].squeeze(0)
-                # torch.nn.utils.clip_grad_norm_([v for k, v in paras.items()], max_norm=1)
-                loss, _ ,_ =refiner(outputs, num_codes_labels) 
+                outputs,p_hidden = model(input_ids=input_ids, attention_mask=input_mask, token_type_ids=token_type_ids, num_positions=num_positions, num_codes_labels=num_codes_labels)
+                # outputs = alloutputs[0].squeeze(0)
+                torch.nn.utils.clip_grad_norm_([v for k, v in refiner_paras.items()], max_norm=1)
+                loss, _ ,_ =refiner(outputs, num_codes_labels,p_hidden) 
 
                 loss.backward()
                 refiner_optimizer.step()
@@ -225,6 +236,9 @@ def train(args):
                 # optimizer.zero_grad() = model.zero_grad()
                 all_loss += loss.item()
             refiner.eval()
+            
+            logger.info("epoch:{},\tloss:{}".format(epoch, all_loss))
+
             acc = eval_multi_clf_for_classfier_check(
             logger=logger,
             model=model,
@@ -249,8 +263,7 @@ def train(args):
             train_data_loader.reset(doshuffle=True)
             # print loss...
 
-            logger.info("epoch:{},\tloss:{}".format(epoch, all_loss))
-        logger.info("\n>>>>>>>>>>>>>>>>>>>start train......")
+            
 
         #测试最终结果
         logger.info("\n\n")
@@ -287,7 +300,18 @@ def train(args):
 
         logger1.info("Test!")
 
-        acc = eval_multi_clf_for_classfier(
+        # acc = eval_multi_clf_for_classfier(
+        #         logger=logger1,
+        #         model=model,
+        #         test_mwps=test_mwps,
+        #         device=args.device,
+        #         num_labels = num_labels,
+        #         test_dev_max_len = args.test_dev_max_len,
+        #         label2id_or_value = label2id_or_value,
+        #         id2label_or_value = id2label_or_value,
+        #         tokenizer = tokenizer
+        #         )
+        acc = eval_multi_clf_for_test_new(
                 logger=logger1,
                 model=model,
                 test_mwps=test_mwps,
@@ -298,6 +322,5 @@ def train(args):
                 id2label_or_value = id2label_or_value,
                 tokenizer = tokenizer
                 )
-        
     
     

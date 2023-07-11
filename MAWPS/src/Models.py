@@ -538,13 +538,12 @@ class MwpBertModel_CLS_classfier(torch.nn.Module):
             return all_loss 
         else:
             #! 如果是测试
-            outputs_list = []
 
             #! 只训练一个单纯的解码器
             decoder_inputs = self.dropout(p_hidden)
             outputs = self.fc(decoder_inputs)
-            outputs_list.append(torch.sigmoid(outputs))
-            return outputs_list
+            outputs = torch.sigmoid(outputs)
+            return outputs,p_hidden
 
     def save(self, save_dir):
         self.bert.save_pretrained(save_dir)
@@ -557,7 +556,7 @@ class MwpBertModel_CLS_classfier(torch.nn.Module):
         self.fc.load_state_dict(torch.load(fc_path+'/fc_weight.bin'))
 
 class Refiner(nn.Module):
-    def __init__(self, num_labels,check_hidden_size):
+    def __init__(self, num_labels,hidden_size):
         super(Refiner, self).__init__()
         self.num_labels = num_labels
         # self.checker = Batch_Net_CLS(self.num_labels, check_hidden_size, int(check_hidden_size / 2), 1)
@@ -568,20 +567,37 @@ class Refiner(nn.Module):
                         nn.ReLU(),
                         nn.Linear(50, 1)
                     )
-        self.loss_func = nn.BCEWithLogitsLoss(weight=torch.tensor([7/3]))
-    def forward(self, outputs, num_codes_labels):
-        outpus_processed = 1 - 2 * torch.abs(0.5 - outputs)
-        logits = self.checker(outpus_processed)
-        # Round the outputs and compare with num_codes_labels
-        outputs_rounded = torch.round(outputs)
-        
+        self.corrector = Batch_Net_CLS(768*2 + self.num_labels, hidden_size, int(hidden_size / 2), self.num_labels)
+        # self.loss_func = nn.BCEWithLogitsLoss(weight=torch.tensor([7/3]))
+        self.loss_func = nn.BCEWithLogitsLoss(reduction="sum")
+        self.dropout = torch.nn.Dropout(0.1)
+    def forward(self, outputs, num_codes_labels,p_hidden):
         labels = num_codes_labels.reshape(outputs.shape[0],-1, self.num_labels).clone()
         
         pad_vector = torch.Tensor([-1]*self.num_labels).cuda()
         pad_mask = torch.any(labels != pad_vector, dim =-1)#! 需要关注的部分code label
 
+        #! 检测错误 28 -> 1
+        # outpus_processed = 1 - 2 * torch.abs(0.5 - outputs)
+        # logits = self.checker(outpus_processed)
+        outputs_rounded = torch.round(outputs)
         check_labels = torch.eq(outputs_rounded, labels)
         check_labels = torch.all(check_labels, dim=-1, keepdim=True)
         check_labels = check_labels.to(torch.float)
-        all_loss = self.loss_func(logits[pad_mask],check_labels[pad_mask])
-        return all_loss,logits,check_labels
+        # all_loss = self.loss_func(logits[pad_mask],check_labels[pad_mask])
+
+
+        #! 纠正错误 28 -> 628*2+28 -> hidden -> 28
+        p_hidden = torch.cat((outputs, p_hidden),dim=-1)
+        logits1 = self.corrector(self.dropout(p_hidden))
+        indices = torch.logical_and((1-check_labels).squeeze(-1), pad_mask)
+        labels = labels.to(torch.float)
+        
+        #! 计算loss
+        all_loss = self.loss_func(logits1[pad_mask],labels[pad_mask])
+        all_loss += 10*self.loss_func(logits1[indices],labels[indices])
+        
+
+        logits1 = torch.sigmoid(logits1)
+        # logits1[check_labels.bool().squeeze(-1)] = outputs[check_labels.bool().squeeze(-1)]       
+        return all_loss,logits1,check_labels

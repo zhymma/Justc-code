@@ -84,8 +84,8 @@ def get_codes_from_output(labels, all_logits, T_question, id2label_or_value):
 
         if num_char not in pre_num_codes.keys():
             pre_num_codes[num_char] = []
-
-        dd_pred = np.array([round(i) for i in dd_pred])
+        dd_pred = dd_pred.round()
+        # dd_pred = np.array([round(i) for i in dd_pred])
         for idid, vvv in enumerate(dd_pred):
             if vvv > 0:
                 codeee = id2label_or_value[str(idid)]

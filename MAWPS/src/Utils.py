@@ -255,8 +255,7 @@ def process_one_mawps_no_None(raw_mwp: dict, label2id_or_value: dict, max_len: i
                 noneid = label2id_or_value["None"]
                 num_positions.append(position+1)
                 label_vector = [0] * len(label2id_or_value)
-                #! 设置label最大值为1
-                # label_vector[noneid] += 1
+                
                 label_vector[noneid] += 1
                 num_codes_labels = num_codes_labels + label_vector
         
@@ -298,7 +297,9 @@ def process_one_mawps_no_None(raw_mwp: dict, label2id_or_value: dict, max_len: i
                     num_positions.append(position+1)
                     label_vector[noneid] += 1
                     num_codes_labels = num_codes_labels + label_vector
-
+    #! 设置label最大值为1
+    num_codes_labels = [min(x, 1) for x in num_codes_labels]
+    # num_codes_labels = max(1,num_codes_labels) 
     return (problem_id, sentence_list, num_codes_labels, num_positions)
 
 
