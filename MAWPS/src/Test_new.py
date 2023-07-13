@@ -49,7 +49,20 @@ def check_answer_acc(raw_mwp, labels_pos, all_logits, id2label_or_value):
             return True
         else:
             return False
+def get_final_expression(raw_mwp, labels_pos, outputs, id2label_or_value):
+    all_logits = []
+    all_logits.append(outputs)
+    all_logits = np.vstack(all_logits)
+    true_ans = raw_mwp['new_ans']
+    T_number_map = raw_mwp['T_number_map']
+    T_question = raw_mwp['T_question_2']
 
+    pre_num_codes = get_codes_from_output(labels_pos, all_logits, T_question, id2label_or_value)
+
+    symbol2num = re_construct_expression_from_codes(pre_num_codes)
+    final_expression = build_expression_by_grous(symbol2num)
+
+    return final_expression
 
 def check_codes_acc(raw_mwp, labels, all_logits):
     count = 0

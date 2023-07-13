@@ -312,7 +312,7 @@ def train(args):
         #         tokenizer = tokenizer
         #         )
         acc = eval_multi_clf_for_test_new(
-                logger=logger1,
+                logger=logger,
                 model=model,
                 test_mwps=test_mwps,
                 device=args.device,
@@ -320,7 +320,8 @@ def train(args):
                 test_dev_max_len = args.test_dev_max_len,
                 label2id_or_value = label2id_or_value,
                 id2label_or_value = id2label_or_value,
-                tokenizer = tokenizer
+                tokenizer = tokenizer,
+                json_path = args.output_dir 
                 )
     
     

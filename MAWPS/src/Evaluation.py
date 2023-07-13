@@ -5,8 +5,9 @@ from .MwpDataset import MwpDataSet, process_mwp_V1, process_mwp_V1_plus
 from .Models import MwpBertModel, MwpBertModel_CLS
 from .verification_labels_plus import re_construct_expression_from_codes, build_expression_by_grous, verification
 from .Utils import process_one_mawps_for_test, process_one_mawps_for_test_no_None
-from .Test_new import check_codes_acc, check_answer_acc
-
+from .Test_new import *
+import json
+import os
 def eval_multi_clf(model, test_mwps, device, num_labels, test_dev_max_len,label2id_or_value,id2label_or_value,tokenizer,logger=None):
     
     outputs_0 = []
@@ -278,7 +279,7 @@ def eval_multi_clf0(model, dev_data_loader, device, num_labels, logger=None):
     model.train()
     return count / total_len
 
-def eval_multi_clf_for_test_new(model, test_mwps, device, num_labels, test_dev_max_len,label2id_or_value,id2label_or_value,tokenizer,logger=None):
+def eval_multi_clf_for_test_new(model, test_mwps, device, num_labels, test_dev_max_len,label2id_or_value,id2label_or_value,tokenizer,logger=None,json_path=None):
     
     outputs_0 = []
     num_codes_labels_list = []
@@ -306,7 +307,10 @@ def eval_multi_clf_for_test_new(model, test_mwps, device, num_labels, test_dev_m
                     num_positions = batch_data[3].reshape(-1,1).clone()
                     num_positions[:,0] -= 1
                     num_positions_list.append(num_positions)
-                      
+    if json_path is not None:
+        F = open(os.path.join(json_path,"false_test.json"), "w" ,encoding='utf-8')   
+        F1 = open(os.path.join(json_path,"refine_test.json"), "w" ,encoding='utf-8')   
+                     
     right_codes_count = 0
     all_codes_count = 0
     right_ans_count = 0
@@ -314,41 +318,102 @@ def eval_multi_clf_for_test_new(model, test_mwps, device, num_labels, test_dev_m
     wrong_be_tree = 0
     temp = 0
     temp1 = 0
+    false_mwp = []
+    refine_mwp = []
+
     for i,raw_mwp in enumerate(test_mwps):
         labels, all_logits = [], []
         labels_pos = []
         outputs = outputs_0[i]
+
         num_codes_labels = num_codes_labels_list[i]
         num_positions = num_positions_list[i]
         new_label_pos = torch.cat((num_positions,num_codes_labels),dim =1)
+        
+
+
+
+
         labels.append(num_codes_labels.to("cpu").numpy())
         labels_pos.append(new_label_pos.to("cpu").numpy())
-        all_logits.append(outputs)
-        labels = np.vstack(labels)
-        all_logits = np.vstack(all_logits)
         labels_pos = np.vstack(labels_pos)
         num_codes_labels = num_codes_labels.to("cpu").numpy()
-        # if check_codes_acc(raw_mwp, labels, all_logits):
-        #     right_codes_count += 1
-        #! answer acc
-        if check_answer_acc(raw_mwp, labels_pos, all_logits, id2label_or_value):
-            right_ans_count += 1
-        else:
-            # false_mwp.append(raw_mwp)
-            wrong_ans_count += 1
-            if raw_mwp['pre_final_expression'] == 'Failed':
-                wrong_be_tree +=1
-        #! 计算code acc code check acc
         
+        raw_mwp["outputs"] = ' '.join(map(str, outputs.flatten()))
+        raw_mwp["outputs_round"] = ' '.join(map(str, outputs.round().astype(int).flatten()))
+        raw_mwp["outputs_exp"] = get_final_expression(raw_mwp, labels_pos, outputs, id2label_or_value)
+
         #! temp 找到最小的大于0.5的值，判断它是不是错误的
         min_value = np.min(outputs[outputs > 0.5])
         indices = np.where(outputs == min_value)# 希望没有两个一样的最小值
         if(num_codes_labels[indices] == np.array([0])):
             temp += 1
+            outputs[indices] = 0
+            raw_mwp["wrong_values_0"] = f"min_value: {min_value}"
+            raw_mwp["refine_0_round"] = ' '.join(map(str, outputs.round().astype(int).flatten()))
+            raw_mwp["refine_0_exp"] = get_final_expression(raw_mwp, labels_pos, outputs, id2label_or_value)
+
+            #!找出最大的<0.5的值
+            outputs_row = outputs[indices[0]]
+            max_value_temp = np.max(outputs_row[outputs_row<0.5])
+            indices_temp = np.where(outputs_row == max_value_temp)
+            if(num_codes_labels[indices[0],indices_temp[1]] == np.array([1])):
+                outputs[indices[0],indices_temp[1]] = 1
+                raw_mwp["wrong_values_1"] = f"min_value: {min_value}, max_value_temp: {max_value_temp}"
+                raw_mwp["refine_1"] = ' '.join(map(str, outputs.flatten()))
+                raw_mwp["refine_1_round"] = ' '.join(map(str, outputs.round().astype(int).flatten()))
+                raw_mwp["refine_1_exp"] = get_final_expression(raw_mwp, labels_pos, outputs, id2label_or_value)
+
+        
         max_value = np.max(outputs[outputs < 0.5])
         indices = np.where(outputs == max_value)
         if(num_codes_labels[indices] != np.array([0])):
             temp1 += 1
+            outputs[indices] = 1
+            raw_mwp["wrong_values_0"] = f"max_value: {max_value}"
+            raw_mwp["refine_0"] = ' '.join(map(str, outputs.flatten()))
+            raw_mwp["refine_0_round"] = ' '.join(map(str, outputs.round().astype(int).flatten()))
+            raw_mwp["refine_0_exp"] = get_final_expression(raw_mwp, labels_pos, outputs, id2label_or_value)
+
+            #!找出最小的>0.5的值
+            outputs_row = outputs[indices[0]]
+            min_value_temp = np.max(outputs_row[outputs_row>0.5])
+            indices_temp = np.where(outputs_row == min_value_temp)
+            if(num_codes_labels[indices[0],indices_temp[1]] == np.array([0])):
+                outputs[indices[0],indices_temp[1]] = 0
+                raw_mwp["wrong_values_2"] = f"max_value: {max_value}, min_value_temp: {min_value_temp}"
+                raw_mwp["refine_2"] = ' '.join(map(str, outputs.flatten()))
+                raw_mwp["refine_2_round"] = ' '.join(map(str, outputs.round().astype(int).flatten()))
+                raw_mwp["refine_2_exp"] = get_final_expression(raw_mwp, labels_pos, outputs, id2label_or_value)
+
+
+
+
+        raw_mwp["label"] = ' '.join(map(str, num_codes_labels.flatten())) 
+        all_logits.append(outputs)
+        labels = np.vstack(labels)
+        all_logits = np.vstack(all_logits)
+        
+        # if check_codes_acc(raw_mwp, labels, all_logits):
+        #     right_codes_count += 1
+        #! answer acc
+        if check_answer_acc(raw_mwp, labels_pos, all_logits, id2label_or_value):
+            right_ans_count += 1
+            if "refine_1" in raw_mwp.keys() or "refine_2" in raw_mwp.keys() or "refine_0" in raw_mwp.keys():
+                refine_mwp.append(raw_mwp)
+
+        else:
+            raw_mwp["outputs"] = ' '.join(map(str, outputs.flatten()))
+            raw_mwp["rounde"] = ' '.join(map(str, outputs.round().astype(int).flatten())) 
+            raw_mwp["labels"] = ' '.join(map(str, num_codes_labels.flatten()))
+            false_mwp.append(raw_mwp)
+            
+            wrong_ans_count += 1
+            if raw_mwp['pre_final_expression'] == 'Failed':
+                wrong_be_tree +=1
+            
+        #! 计算code acc code check acc
+        
         
         for i in range(outputs.shape[0]):
             A = outputs[i,:]
@@ -358,14 +423,16 @@ def eval_multi_clf_for_test_new(model, test_mwps, device, num_labels, test_dev_m
 
             if  (dd_pred == dd_label).all() :
                 right_codes_count += 1
-            else:
-                logger.info(A)
-                logger.info(dd_pred)
-                logger.info(dd_label)
-                logger.info("\n")
+            # else:
+            #     logger.info(raw_mwp["id"])
+            #     logger.info(A)
+            #     logger.info(dd_pred)
+            #     logger.info(dd_label)
+            #     logger.info("\n")
             all_codes_count += 1
 
-
+    json.dump(refine_mwp,F1,ensure_ascii=False,indent=2)
+    json.dump(false_mwp, F ,ensure_ascii=False,indent=2)
     ans_acc = right_ans_count / len(test_mwps)
     code_acc = right_codes_count/all_codes_count
     if logger is not None:
@@ -373,6 +440,8 @@ def eval_multi_clf_for_test_new(model, test_mwps, device, num_labels, test_dev_m
         logger.info('right_codes_count:{}\ttotal:{}\tCode ACC: {}\twrong_be_tree_count:{}\twrong_total:{}\t wrong be tree ACC: {}'.format(right_codes_count, all_codes_count, code_acc,wrong_be_tree, wrong_ans_count, wrong_be_tree/wrong_ans_count))
         logger.info('temp:{}\ttemp1:{}\twrong_total:{}\t'.format(temp,temp1,all_codes_count-right_codes_count ))
     model.train()
+    F1.close()
+    F.close()
     return ans_acc
 
 

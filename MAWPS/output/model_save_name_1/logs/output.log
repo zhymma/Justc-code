@@ -7085,3 +7085,60 @@
 2023-07-09 13:12:40,300 - right_count:358	total:433	 Answer ACC: 0.8267898383371824
 2023-07-09 13:12:40,300 - right_codes_count:329	total:433	Code ACC: 0.7598152424942263	wrong_be_tree_count:22	wrong_total:75	 wrong be tree ACC: 0.29333333333333333
 2023-07-09 13:12:40,300 - temp:72	temp1:44	wrong_total:75	
+2023-07-11 22:29:03,311 - 
+
+
+2023-07-11 22:33:57,575 - 
+
+
+2023-07-11 22:33:58,021 - get train data loader...
+2023-07-11 22:33:58,133 - get dev data loader...
+2023-07-11 22:33:58,226 - define model...
+2023-07-11 22:34:17,342 - right_count:358	total:433	 Answer ACC: 0.8267898383371824
+2023-07-11 22:34:17,343 - right_codes_count:1767	total:1987	Code ACC: 0.8892803220936084	wrong_be_tree_count:22	wrong_total:75	 wrong be tree ACC: 0.29333333333333333
+2023-07-11 22:34:17,344 - temp:0	temp1:0	wrong_total:220	
+2023-07-11 22:36:38,289 - 
+
+
+2023-07-11 22:36:38,798 - get train data loader...
+2023-07-11 22:36:38,945 - get dev data loader...
+2023-07-11 22:36:39,513 - define model...
+2023-07-11 22:36:58,125 - right_count:363	total:433	 Answer ACC: 0.8383371824480369
+2023-07-11 22:36:58,126 - right_codes_count:1812	total:1987	Code ACC: 0.9119275289380976	wrong_be_tree_count:33	wrong_total:70	 wrong be tree ACC: 0.4714285714285714
+2023-07-11 22:36:58,126 - temp:72	temp1:44	wrong_total:175	
+2023-07-11 22:39:01,466 - 
+
+
+2023-07-11 22:39:01,904 - get train data loader...
+2023-07-11 22:39:02,013 - get dev data loader...
+2023-07-11 22:39:02,098 - define model...
+2023-07-11 22:39:20,685 - right_count:366	total:433	 Answer ACC: 0.8452655889145496
+2023-07-11 22:39:20,685 - right_codes_count:1817	total:1987	Code ACC: 0.914443885254152	wrong_be_tree_count:31	wrong_total:67	 wrong be tree ACC: 0.4626865671641791
+2023-07-11 22:39:20,685 - temp:72	temp1:22	wrong_total:170	
+2023-07-12 14:32:00,848 - 
+
+
+2023-07-12 14:32:01,708 - get train data loader...
+2023-07-12 14:32:01,826 - get dev data loader...
+2023-07-12 14:32:01,894 - define model...
+2023-07-12 14:32:37,865 - right_count:366	total:433	 Answer ACC: 0.8452655889145496
+2023-07-12 14:32:37,866 - right_codes_count:1817	total:1987	Code ACC: 0.914443885254152	wrong_be_tree_count:31	wrong_total:67	 wrong be tree ACC: 0.4626865671641791
+2023-07-12 14:32:37,866 - temp:72	temp1:22	wrong_total:170	
+2023-07-12 14:45:17,585 - 
+
+
+2023-07-12 14:45:18,051 - get train data loader...
+2023-07-12 14:45:18,168 - get dev data loader...
+2023-07-12 14:45:18,272 - define model...
+2023-07-12 14:45:37,164 - right_count:366	total:433	 Answer ACC: 0.8452655889145496
+2023-07-12 14:45:37,165 - right_codes_count:1817	total:1987	Code ACC: 0.914443885254152	wrong_be_tree_count:31	wrong_total:67	 wrong be tree ACC: 0.4626865671641791
+2023-07-12 14:45:37,165 - temp:72	temp1:22	wrong_total:170	
+2023-07-12 15:48:44,772 - 
+
+
+2023-07-12 15:48:45,234 - get train data loader...
+2023-07-12 15:48:45,346 - get dev data loader...
+2023-07-12 15:48:45,421 - define model...
+2023-07-12 15:48:56,772 - right_count:366	total:433	 Answer ACC: 0.8452655889145496
+2023-07-12 15:48:56,773 - right_codes_count:1817	total:1987	Code ACC: 0.914443885254152	wrong_be_tree_count:31	wrong_total:67	 wrong be tree ACC: 0.4626865671641791
+2023-07-12 15:48:56,773 - temp:72	temp1:22	wrong_total:170	

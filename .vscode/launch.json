@@ -13,8 +13,8 @@
             "justMyCode": true,
             "cwd": "${fileDirname}",
             "args": [
-                "--model_name","test",
-                "--mode","train"
+                "--model_name","model_save_name_4",
+                "--mode","test"
             ]
         }
     ]
