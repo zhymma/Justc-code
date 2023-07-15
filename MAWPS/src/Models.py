@@ -499,7 +499,6 @@ class MwpBertModel_CLS_classfier(torch.nn.Module):
         
         self.tokenizer = BertTokenizer.from_pretrained(bert_path_or_config)
 
-        self.loss_func = nn.BCEWithLogitsLoss()
         if fc_path:
             self.load(fc_path)
 
@@ -521,10 +520,8 @@ class MwpBertModel_CLS_classfier(torch.nn.Module):
         # labels[labels > 1] = 1 
         labels = labels.float()
         pad_vector = torch.Tensor([-1]*self.num_labels).cuda()
-        seq_len = labels.shape[1] #!这里指output_len
-        ce = nn.CrossEntropyLoss(reduction='mean',ignore_index=-1)#! 忽略pad -1
-        pad_mask = torch.any(labels != pad_vector, dim =-1)#! 需要关注的部分code label
-        pad_mask = pad_mask.unsqueeze(-1).expand_as(labels)
+        pad_mask_pre = torch.any(labels != pad_vector, dim =-1)#! 需要关注的部分code label
+        pad_mask = pad_mask_pre.unsqueeze(-1).expand_as(labels)
         
         
         if self.training:
@@ -532,10 +529,41 @@ class MwpBertModel_CLS_classfier(torch.nn.Module):
             #! 只训练一个单纯的decoder
             decoder_inputs = self.dropout(p_hidden)
             outputs = self.fc(decoder_inputs)
-            all_loss = self.loss_func(outputs[pad_mask],labels[pad_mask])
+            binary_outputs = (torch.sigmoid(outputs) > 0.5).float()
+            
+            bce_loss = nn.BCEWithLogitsLoss()(outputs[pad_mask], labels[pad_mask])
+            # 计算数量损失
+            count_outputs = torch.sum(binary_outputs, dim=-1)
+            count_labels = torch.sum(labels, dim=-1)
+            count_loss = torch.pow(count_outputs - count_labels, 2)
+            count_loss = torch.mean(count_loss * pad_mask_pre.float())
+
+            # 接下来，我们可以生成一个布尔型的掩码，用来表示预测输出和标签中1的数量是否相等，并且数量为1
+            equal_single_counts = (count_outputs == 1) & (count_labels == 1)
+            equal_single_counts_indices = (equal_single_counts == True).nonzero()
+            position_loss = torch.tensor(0.0).to(outputs.device)
+            for index in equal_single_counts_indices:
+                # 获取 outputs 和 labels 中值为1的位置
+                output_positions_i = (binary_outputs[index[0], index[1]] == 1).nonzero(as_tuple=True)[0]
+                label_positions_i = (labels[index[0], index[1]] == 1).nonzero(as_tuple=True)[0]
+                
+                # 计算 output 和 label 中 1 的位置的差值的绝对值
+                position_diff_i = torch.pow(output_positions_i - label_positions_i,2)
+                
+                # 将位置损失累加
+                position_loss += torch.sum(position_diff_i)
+
+            if len(equal_single_counts_indices) > 0:
+                position_loss /= len(equal_single_counts_indices)
 
 
-            return all_loss 
+
+           
+            
+            # 总损失为 BCE 损失、数量损失和位置损失的加权和
+            total_loss = bce_loss + 10*count_loss + 5*position_loss
+
+            return total_loss 
         else:
             #! 如果是测试
 

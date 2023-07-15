@@ -13,8 +13,9 @@
             "justMyCode": true,
             "cwd": "${fileDirname}",
             "args": [
-                "--model_name","model_save_name_4",
-                "--mode","test"
+                "--model_name","test",
+                "--mode","train",
+                "--gpu_device","0"
             ]
         }
     ]
