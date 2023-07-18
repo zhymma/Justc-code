@@ -46,10 +46,10 @@ def train(args):
     handler.setLevel(logging.INFO)
     formatter = logging.Formatter('%(asctime)s - %(message)s')
     handler.setFormatter(formatter)
-    # console = logging.StreamHandler()
-    # console.setLevel(logging.INFO)
+    console = logging.StreamHandler()
+    console.setLevel(logging.INFO)
     logger.addHandler(handler)
-    # logger.addHandler(console)
+    logger.addHandler(console)
 
     logger.info("\n\n")
 
@@ -263,8 +263,6 @@ def train(args):
         #     train_data_loader.reset(doshuffle=True)
         #     # print loss...
 
-            
-
         #测试最终结果
         logger.info("\n\n")
         logger.info("final_test")
@@ -312,7 +310,7 @@ def train(args):
         #         tokenizer = tokenizer
         #         )
         acc = eval_multi_clf_for_test_new(
-                logger=logger,
+                logger=logger1,
                 model=model,
                 test_mwps=test_mwps,
                 device=args.device,

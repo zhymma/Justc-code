@@ -346,45 +346,46 @@ def eval_multi_clf_for_test_new(model, test_mwps, device, num_labels, test_dev_m
         #! temp 找到最小的大于0.5的值，判断它是不是错误的
         min_value = np.min(outputs[outputs > 0.5])
         indices = np.where(outputs == min_value)# 希望没有两个一样的最小值
-        if(num_codes_labels[indices] == np.array([0])):
-            temp += 1
-            outputs[indices] = 0
-            raw_mwp["wrong_values_0"] = f"min_value: {min_value}"
-            raw_mwp["refine_0_round"] = ' '.join(map(str, outputs.round().astype(int).flatten()))
-            raw_mwp["refine_0_exp"] = get_final_expression(raw_mwp, labels_pos, outputs, id2label_or_value)
+        # if(num_codes_labels[indices] == np.array([0])):
+        #     temp += 1
+        #     print(outputs[indices])
+        #     outputs[indices] = 0
+        #     raw_mwp["wrong_values_0"] = f"min_value: {min_value}"
+        #     raw_mwp["refine_0_round"] = ' '.join(map(str, outputs.round().astype(int).flatten()))
+        #     raw_mwp["refine_0_exp"] = get_final_expression(raw_mwp, labels_pos, outputs, id2label_or_value)
 
-            #!找出最大的<0.5的值
-            outputs_row = outputs[indices[0]]
-            max_value_temp = np.max(outputs_row[outputs_row<0.5])
-            indices_temp = np.where(outputs_row == max_value_temp)
-            if(num_codes_labels[indices[0],indices_temp[1]] == np.array([1])):
-                outputs[indices[0],indices_temp[1]] = 1
-                raw_mwp["wrong_values_1"] = f"min_value: {min_value}, max_value_temp: {max_value_temp}"
-                raw_mwp["refine_1"] = ' '.join(map(str, outputs.flatten()))
-                raw_mwp["refine_1_round"] = ' '.join(map(str, outputs.round().astype(int).flatten()))
-                raw_mwp["refine_1_exp"] = get_final_expression(raw_mwp, labels_pos, outputs, id2label_or_value)
+        #     #!找出最大的<0.5的值
+        #     outputs_row = outputs[indices[0]]
+        #     max_value_temp = np.max(outputs_row[outputs_row<0.5])
+        #     indices_temp = np.where(outputs_row == max_value_temp)
+        #     if(num_codes_labels[indices[0],indices_temp[1]] == np.array([1])):
+        #         outputs[indices[0],indices_temp[1]] = 1
+        #         raw_mwp["wrong_values_1"] = f"min_value: {min_value}, max_value_temp: {max_value_temp}"
+        #         raw_mwp["refine_1"] = ' '.join(map(str, outputs.flatten()))
+        #         raw_mwp["refine_1_round"] = ' '.join(map(str, outputs.round().astype(int).flatten()))
+        #         raw_mwp["refine_1_exp"] = get_final_expression(raw_mwp, labels_pos, outputs, id2label_or_value)
 
         
-        max_value = np.max(outputs[outputs < 0.5])
-        indices = np.where(outputs == max_value)
-        if(num_codes_labels[indices] != np.array([0])):
-            temp1 += 1
-            outputs[indices] = 1
-            raw_mwp["wrong_values_0"] = f"max_value: {max_value}"
-            raw_mwp["refine_0"] = ' '.join(map(str, outputs.flatten()))
-            raw_mwp["refine_0_round"] = ' '.join(map(str, outputs.round().astype(int).flatten()))
-            raw_mwp["refine_0_exp"] = get_final_expression(raw_mwp, labels_pos, outputs, id2label_or_value)
+        # max_value = np.max(outputs[outputs < 0.5])
+        # indices = np.where(outputs == max_value)
+        # if(num_codes_labels[indices] != np.array([0])):
+        #     temp1 += 1
+        #     outputs[indices] = 1
+        #     raw_mwp["wrong_values_0"] = f"max_value: {max_value}"
+        #     raw_mwp["refine_0"] = ' '.join(map(str, outputs.flatten()))
+        #     raw_mwp["refine_0_round"] = ' '.join(map(str, outputs.round().astype(int).flatten()))
+        #     raw_mwp["refine_0_exp"] = get_final_expression(raw_mwp, labels_pos, outputs, id2label_or_value)
 
-            #!找出最小的>0.5的值
-            outputs_row = outputs[indices[0]]
-            min_value_temp = np.max(outputs_row[outputs_row>0.5])
-            indices_temp = np.where(outputs_row == min_value_temp)
-            if(num_codes_labels[indices[0],indices_temp[1]] == np.array([0])):
-                outputs[indices[0],indices_temp[1]] = 0
-                raw_mwp["wrong_values_2"] = f"max_value: {max_value}, min_value_temp: {min_value_temp}"
-                raw_mwp["refine_2"] = ' '.join(map(str, outputs.flatten()))
-                raw_mwp["refine_2_round"] = ' '.join(map(str, outputs.round().astype(int).flatten()))
-                raw_mwp["refine_2_exp"] = get_final_expression(raw_mwp, labels_pos, outputs, id2label_or_value)
+        #     #!找出最小的>0.5的值
+        #     outputs_row = outputs[indices[0]]
+        #     min_value_temp = np.max(outputs_row[outputs_row>0.5])
+        #     indices_temp = np.where(outputs_row == min_value_temp)
+        #     if(num_codes_labels[indices[0],indices_temp[1]] == np.array([0])):
+        #         outputs[indices[0],indices_temp[1]] = 0
+        #         raw_mwp["wrong_values_2"] = f"max_value: {max_value}, min_value_temp: {min_value_temp}"
+        #         raw_mwp["refine_2"] = ' '.join(map(str, outputs.flatten()))
+        #         raw_mwp["refine_2_round"] = ' '.join(map(str, outputs.round().astype(int).flatten()))
+        #         raw_mwp["refine_2_exp"] = get_final_expression(raw_mwp, labels_pos, outputs, id2label_or_value)
 
 
 

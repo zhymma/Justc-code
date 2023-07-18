@@ -489,6 +489,7 @@ class MwpBertModel_CLS_classfier(torch.nn.Module):
             self.bert = BertModel(bert_path_or_config)
         self.dropout = torch.nn.Dropout(0.1)
         self.d_model = 768
+
         if multi_fc:
             #! 768*2 -> 2048 -> 1024 -> 28
             self.fc = Batch_Net_CLS(self.bert.config.hidden_size * 2, fc_hidden_size, int(fc_hidden_size / 2),
@@ -529,39 +530,13 @@ class MwpBertModel_CLS_classfier(torch.nn.Module):
             #! 只训练一个单纯的decoder
             decoder_inputs = self.dropout(p_hidden)
             outputs = self.fc(decoder_inputs)
-            binary_outputs = (torch.sigmoid(outputs) > 0.5).float()
-            
-            bce_loss = nn.BCEWithLogitsLoss()(outputs[pad_mask], labels[pad_mask])
-            # 计算数量损失
-            count_outputs = torch.sum(binary_outputs, dim=-1)
-            count_labels = torch.sum(labels, dim=-1)
-            count_loss = torch.pow(count_outputs - count_labels, 2)
-            count_loss = torch.mean(count_loss * pad_mask_pre.float())
+            # binary_outputs = (torch.sigmoid(outputs) > 0.5).float()
+            binary_outputs = torch.round(torch.sigmoid(outputs))
 
-            # 接下来，我们可以生成一个布尔型的掩码，用来表示预测输出和标签中1的数量是否相等，并且数量为1
-            equal_single_counts = (count_outputs == 1) & (count_labels == 1)
-            equal_single_counts_indices = (equal_single_counts == True).nonzero()
-            position_loss = torch.tensor(0.0).to(outputs.device)
-            for index in equal_single_counts_indices:
-                # 获取 outputs 和 labels 中值为1的位置
-                output_positions_i = (binary_outputs[index[0], index[1]] == 1).nonzero(as_tuple=True)[0]
-                label_positions_i = (labels[index[0], index[1]] == 1).nonzero(as_tuple=True)[0]
-                
-                # 计算 output 和 label 中 1 的位置的差值的绝对值
-                position_diff_i = torch.pow(output_positions_i - label_positions_i,2)
-                
-                # 将位置损失累加
-                position_loss += torch.sum(position_diff_i)
-
-            if len(equal_single_counts_indices) > 0:
-                position_loss /= len(equal_single_counts_indices)
-
-
-
-           
-            
+            bce_loss = nn.BCEWithLogitsLoss()(outputs[pad_mask], labels[pad_mask])            
             # 总损失为 BCE 损失、数量损失和位置损失的加权和
-            total_loss = bce_loss + 10*count_loss + 5*position_loss
+            # total_loss = bce_loss + 10*count_loss + 5*position_loss
+            total_loss = bce_loss 
 
             return total_loss 
         else:
@@ -607,25 +582,25 @@ class Refiner(nn.Module):
 
         #! 检测错误 28 -> 1
         # outpus_processed = 1 - 2 * torch.abs(0.5 - outputs)
-        # logits = self.checker(outpus_processed)
+        logits = self.checker(outputs)
         outputs_rounded = torch.round(outputs)
         check_labels = torch.eq(outputs_rounded, labels)
         check_labels = torch.all(check_labels, dim=-1, keepdim=True)
         check_labels = check_labels.to(torch.float)
-        # all_loss = self.loss_func(logits[pad_mask],check_labels[pad_mask])
+        all_loss = self.loss_func(logits[pad_mask],check_labels[pad_mask])
 
 
-        #! 纠正错误 28 -> 628*2+28 -> hidden -> 28
-        p_hidden = torch.cat((outputs, p_hidden),dim=-1)
-        logits1 = self.corrector(self.dropout(p_hidden))
-        indices = torch.logical_and((1-check_labels).squeeze(-1), pad_mask)
-        labels = labels.to(torch.float)
+        # #! 纠正错误 28 -> 628*2+28 -> hidden -> 28
+        # p_hidden = torch.cat((outputs, p_hidden),dim=-1)
+        # logits1 = self.corrector(self.dropout(p_hidden))
+        # indices = torch.logical_and((1-check_labels).squeeze(-1), pad_mask)
+        # labels = labels.to(torch.float)
         
-        #! 计算loss
-        all_loss = self.loss_func(logits1[pad_mask],labels[pad_mask])
-        all_loss += 10*self.loss_func(logits1[indices],labels[indices])
+        # #! 计算loss
+        # all_loss = self.loss_func(logits1[pad_mask],labels[pad_mask])
+        # all_loss += 10*self.loss_func(logits1[indices],labels[indices])
         
 
-        logits1 = torch.sigmoid(logits1)
+        # logits1 = torch.sigmoid(logits1)
         # logits1[check_labels.bool().squeeze(-1)] = outputs[check_labels.bool().squeeze(-1)]       
-        return all_loss,logits1,check_labels
+        return all_loss,logits,check_labels
