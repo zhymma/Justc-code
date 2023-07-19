@@ -525,28 +525,22 @@ class MwpBertModel_CLS_classfier(torch.nn.Module):
         pad_mask = pad_mask_pre.unsqueeze(-1).expand_as(labels)
         
         
-        if self.training:
+
         
-            #! 只训练一个单纯的decoder
-            decoder_inputs = self.dropout(p_hidden)
-            outputs = self.fc(decoder_inputs)
-            # binary_outputs = (torch.sigmoid(outputs) > 0.5).float()
-            binary_outputs = torch.round(torch.sigmoid(outputs))
+        #! 只训练一个单纯的decoder
+        decoder_inputs = self.dropout(p_hidden)
+        outputs = self.fc(decoder_inputs)
+        # binary_outputs = (torch.sigmoid(outputs) > 0.5).float()
+        binary_outputs = torch.round(torch.sigmoid(outputs))
 
-            bce_loss = nn.BCEWithLogitsLoss()(outputs[pad_mask], labels[pad_mask])            
-            # 总损失为 BCE 损失、数量损失和位置损失的加权和
-            # total_loss = bce_loss + 10*count_loss + 5*position_loss
-            total_loss = bce_loss 
+        bce_loss = nn.BCEWithLogitsLoss(reduction='sum')(outputs[pad_mask], labels[pad_mask])            
+        # 总损失为 BCE 损失、数量损失和位置损失的加权和
+        # total_loss = bce_loss + 10*count_loss + 5*position_loss
+        total_loss = bce_loss 
+        
+        outputs = torch.sigmoid(outputs)
+        return total_loss,outputs,p_hidden
 
-            return total_loss 
-        else:
-            #! 如果是测试
-
-            #! 只训练一个单纯的解码器
-            decoder_inputs = self.dropout(p_hidden)
-            outputs = self.fc(decoder_inputs)
-            outputs = torch.sigmoid(outputs)
-            return outputs,p_hidden
 
     def save(self, save_dir):
         self.bert.save_pretrained(save_dir)
@@ -559,7 +553,7 @@ class MwpBertModel_CLS_classfier(torch.nn.Module):
         self.fc.load_state_dict(torch.load(fc_path+'/fc_weight.bin'))
 
 class Refiner(nn.Module):
-    def __init__(self, num_labels,hidden_size):
+    def __init__(self, num_labels,hidden_size,fc_path=None):
         super(Refiner, self).__init__()
         self.num_labels = num_labels
         # self.checker = Batch_Net_CLS(self.num_labels, check_hidden_size, int(check_hidden_size / 2), 1)
@@ -572,11 +566,13 @@ class Refiner(nn.Module):
                     )
         self.corrector = Batch_Net_CLS(768*2 + self.num_labels, hidden_size, int(hidden_size / 2), self.num_labels)
         # self.loss_func = nn.BCEWithLogitsLoss(weight=torch.tensor([7/3]))
-        self.loss_func = nn.BCEWithLogitsLoss(reduction="sum")
+        self.loss_func = nn.BCEWithLogitsLoss(reduction='sum')
         self.dropout = torch.nn.Dropout(0.1)
+        if fc_path:
+            self.load(fc_path)
     def forward(self, outputs, num_codes_labels,p_hidden):
         labels = num_codes_labels.reshape(outputs.shape[0],-1, self.num_labels).clone()
-        
+        outputs = outputs.detach()
         pad_vector = torch.Tensor([-1]*self.num_labels).cuda()
         pad_mask = torch.any(labels != pad_vector, dim =-1)#! 需要关注的部分code label
 
@@ -587,7 +583,32 @@ class Refiner(nn.Module):
         check_labels = torch.eq(outputs_rounded, labels)
         check_labels = torch.all(check_labels, dim=-1, keepdim=True)
         check_labels = check_labels.to(torch.float)
-        all_loss = self.loss_func(logits[pad_mask],check_labels[pad_mask])
+        #! 截断防止NAN
+        logits = torch.clamp(logits, min=1e-7, max=1-1e-7)
+        #! 保证正负个数相等
+        num_negatives = (check_labels[pad_mask] == 0).sum()
+        num_postives = (check_labels[pad_mask] == 1).sum()
+        if num_postives > num_negatives:
+            positives_indices = (check_labels == 1).nonzero()
+            random_indices = torch.randperm(len(positives_indices))
+            selected_indices = random_indices[:num_postives-num_negatives]
+            selected_positives = positives_indices[selected_indices]
+            new_pad_mask = torch.zeros_like(pad_mask)
+            new_pad_mask[pad_mask] = 1
+            new_pad_mask[selected_positives[:,0], selected_positives[:,1]] = 0
+
+            all_loss = self.loss_func(logits[new_pad_mask],check_labels[new_pad_mask])
+        elif num_postives < num_negatives:
+            negtives_indices = (check_labels == 0).nonzero()
+            random_indices = torch.randperm(len(negtives_indices))
+            selected_indices = random_indices[:num_negatives-num_postives]
+            selected_negtives = negtives_indices[selected_indices]
+            new_pad_mask = torch.zeros_like(pad_mask)
+            new_pad_mask[pad_mask] = 1
+            new_pad_mask[selected_negtives[:,0], selected_negtives[:,1]] = 0
+            all_loss = self.loss_func(logits[new_pad_mask],check_labels[new_pad_mask])
+        else:
+            all_loss = self.loss_func(logits[pad_mask],check_labels[pad_mask])
 
 
         # #! 纠正错误 28 -> 628*2+28 -> hidden -> 28
@@ -595,12 +616,16 @@ class Refiner(nn.Module):
         # logits1 = self.corrector(self.dropout(p_hidden))
         # indices = torch.logical_and((1-check_labels).squeeze(-1), pad_mask)
         # labels = labels.to(torch.float)
-        
         # #! 计算loss
         # all_loss = self.loss_func(logits1[pad_mask],labels[pad_mask])
         # all_loss += 10*self.loss_func(logits1[indices],labels[indices])
-        
-
         # logits1 = torch.sigmoid(logits1)
         # logits1[check_labels.bool().squeeze(-1)] = outputs[check_labels.bool().squeeze(-1)]       
+        
+
         return all_loss,logits,check_labels
+
+    def save(self, save_dir):
+        torch.save(self.checker.state_dict(), os.path.join(save_dir, 'checker.bin'))
+    def load(self,fc_path):
+        self.checker.load_state_dict(torch.load(fc_path+'/checker.bin'))

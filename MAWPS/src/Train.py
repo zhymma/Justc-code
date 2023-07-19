@@ -171,45 +171,65 @@ def train(args):
 
         for epoch in range(args.num_epochs):
             all_loss = 0
+            all_loss1 = 0
             for step, batch in enumerate(train_data_loader, start=1):
                 batch_data = [i.to(args.device) for i in batch]
                 # (input_ids, input_mask, token_type_ids, problem_id, num_positions, num_codes_labels)
                 input_ids, input_mask, token_type_ids, problem_id, num_positions, num_codes_labels = batch_data
                 
-                loss = model(input_ids=input_ids, attention_mask=input_mask, token_type_ids=token_type_ids, num_positions=num_positions, num_codes_labels=num_codes_labels)
-
+                loss,outputs,p_hidden = model(input_ids=input_ids, attention_mask=input_mask, token_type_ids=token_type_ids, num_positions=num_positions, num_codes_labels=num_codes_labels)
+                all_loss += loss.item()
+                if epoch >= 8 :
+                    loss1, _ ,_ =refiner(outputs, num_codes_labels,p_hidden) 
+                    all_loss1 += loss1.item()
+                    loss += loss1
                 loss.backward()
                 torch.nn.utils.clip_grad_norm_([v for k, v in paras.items()], max_norm=1)
                 optimizer.step()
+                refiner_optimizer.step()
                 scheduler.step()
+                refiner_scheduler.step()
                 model.zero_grad()
-                # optimizer.zero_grad() = model.zero_grad()
-                all_loss += loss.item()
+                refiner.zero_grad()
+                
+
 
             # print loss...
             logger.info("\n")
 
-            logger.info("epoch:{},\tloss:{}".format(epoch, all_loss))
+            logger.info("epoch:{},\tloss:{}\tloss1:{}".format(epoch, all_loss,all_loss1))
 
-            acc = eval_multi_clf(
-                logger=logger,
-                model=model,
-                test_mwps=test_mwps,
-                device=args.device,
-                num_labels = num_labels,
-                test_dev_max_len = args.test_dev_max_len,
-                label2id_or_value = label2id_or_value,
-                id2label_or_value = id2label_or_value,
-                tokenizer = tokenizer
-                )
+            # acc = eval_multi_clf(
+            #     logger=logger,
+            #     model=model,
+            #     test_mwps=test_mwps,
+            #     device=args.device,
+            #     num_labels = num_labels,
+            #     test_dev_max_len = args.test_dev_max_len,
+            #     label2id_or_value = label2id_or_value,
+            #     id2label_or_value = id2label_or_value,
+            #     tokenizer = tokenizer
+            #     )
+            acc = eval_multi_clf_for_classfier_check(
+            logger=logger,
+            model=model,
+            test_mwps=test_mwps,
+            device=args.device,
+            num_labels = num_labels,
+            test_dev_max_len = args.test_dev_max_len,
+            label2id_or_value = label2id_or_value,
+            id2label_or_value = id2label_or_value,
+            tokenizer = tokenizer,
+            refiner = refiner
+            )
 
-
-            if acc > best_acc:
+            if acc >= best_acc:
                 logger.info('save best model to {}'.format(best_model_dir))
                 best_acc = acc
                 model.save(save_dir=best_model_dir)
-
+                refiner.save(save_dir=best_model_dir)
             model.save(save_dir=latest_model_dir)
+            refiner.save(save_dir=latest_model_dir)
             train_data_loader.reset(doshuffle=True)
         
         #! 训练refiner
@@ -239,18 +259,18 @@ def train(args):
             
         #     logger.info("epoch:{},\tloss:{}".format(epoch, all_loss))
 
-        #     acc = eval_multi_clf_for_classfier_check(
-        #     logger=logger,
-        #     model=model,
-        #     test_mwps=test_mwps,
-        #     device=args.device,
-        #     num_labels = num_labels,
-        #     test_dev_max_len = args.test_dev_max_len,
-        #     label2id_or_value = label2id_or_value,
-        #     id2label_or_value = id2label_or_value,
-        #     tokenizer = tokenizer,
-        #     refiner = refiner
-        #     )
+            # acc = eval_multi_clf_for_classfier_check(
+            # logger=logger,
+            # model=model,
+            # test_mwps=test_mwps,
+            # device=args.device,
+            # num_labels = num_labels,
+            # test_dev_max_len = args.test_dev_max_len,
+            # label2id_or_value = label2id_or_value,
+            # id2label_or_value = id2label_or_value,
+            # tokenizer = tokenizer,
+            # refiner = refiner
+            # )
 
         #     if acc > check_acc:
         #         logger.info('save best refiner model to {}'.format(best_model_dir))
@@ -268,7 +288,9 @@ def train(args):
         logger.info("final_test")
         model.load(best_model_dir)
         model.to(args.device)
-        acc = eval_multi_clf_for_classfier(
+        refiner.load(best_model_dir)
+        refiner.to(args.device)
+        acc = eval_multi_clf_for_classfier_check(
                 logger=logger,
                 model=model,
                 test_mwps=test_mwps,
@@ -277,7 +299,8 @@ def train(args):
                 test_dev_max_len = args.test_dev_max_len,
                 label2id_or_value = label2id_or_value,
                 id2label_or_value = id2label_or_value,
-                tokenizer = tokenizer
+                tokenizer = tokenizer,
+                refiner = refiner
                 )
         print("final_test")
         print(f"Answer acc:{acc}")
@@ -287,9 +310,10 @@ def train(args):
     else:
         #测试最终结果
 
-        model.load(best_model_dir)
+        model.load(latest_model_dir)
         model.to(args.device)
-
+        refiner.load(latest_model_dir)
+        refiner.to(args.device)
         logger1 = logging.getLogger()
         logger1.setLevel(logging.INFO)
         console_handler = logging.StreamHandler()
@@ -319,7 +343,8 @@ def train(args):
                 label2id_or_value = label2id_or_value,
                 id2label_or_value = id2label_or_value,
                 tokenizer = tokenizer,
-                json_path = args.output_dir 
+                json_path = args.output_dir ,
+                refiner = refiner
                 )
     
     

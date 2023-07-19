@@ -1,6 +1,6 @@
 {
   "log_file": "output.log",
-  "mode": "test",
+  "mode": "train",
   "seed": 0,
   "num_labels": 27,
   "train_type": "one-by-one-random",
@@ -23,7 +23,7 @@
   "train_data_path": "./mawps/Fold_0/train_mawps_new_mwpss_fold_0.json",
   "dev_data_path": "./mawps/Fold_0/test_mawps_new_mwpss_fold_0.json",
   "label2id_path": "./mawps/codes_mawps.json",
-  "gpu_device": "1",
+  "gpu_device": "3",
   "output_dir": "./output/",
-  "model_name": "test"
+  "model_name": "test1"
 }

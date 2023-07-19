@@ -279,11 +279,12 @@ def eval_multi_clf0(model, dev_data_loader, device, num_labels, logger=None):
     model.train()
     return count / total_len
 
-def eval_multi_clf_for_test_new(model, test_mwps, device, num_labels, test_dev_max_len,label2id_or_value,id2label_or_value,tokenizer,logger=None,json_path=None):
+def eval_multi_clf_for_test_new(model, test_mwps, device, num_labels, test_dev_max_len,label2id_or_value,id2label_or_value,tokenizer,refiner,logger=None,json_path=None):
     
     outputs_0 = []
     num_codes_labels_list = []
     num_positions_list = []
+    right_checker = 0
     for idd, raw_mwp in enumerate(test_mwps):
         processed_mwp = process_one_mawps_for_test_no_None(raw_mwp, label2id_or_value, test_dev_max_len, True,
                                                        tokenizer)
@@ -296,8 +297,14 @@ def eval_multi_clf_for_test_new(model, test_mwps, device, num_labels, test_dev_m
                 with torch.no_grad():
                     batch_data = [i.to(device) for i in batch]
 
-                    outputs,_ = model(input_ids=batch_data[0], attention_mask=batch_data[1],
+                    _,outputs,p_hidden = model(input_ids=batch_data[0], attention_mask=batch_data[1],
                                                    token_type_ids=batch_data[2], num_positions = batch_data[3],num_codes_labels=batch_data[4])
+                   
+                    _,refiner_outputs,check_labels = refiner(outputs,batch_data[4],p_hidden)
+                    
+                    #! 统计checker的准确率
+                    equality = torch.eq(torch.round(refiner_outputs),check_labels).int()
+                    right_checker += torch.sum(equality)
                     outputs = outputs.squeeze(0)
                     outputs = outputs.to("cpu").numpy()
                     outputs_0.append(outputs)
@@ -439,7 +446,7 @@ def eval_multi_clf_for_test_new(model, test_mwps, device, num_labels, test_dev_m
     if logger is not None:
         logger.info('right_count:{}\ttotal:{}\t Answer ACC: {}'.format(right_ans_count, len(test_mwps), ans_acc))
         logger.info('right_codes_count:{}\ttotal:{}\tCode ACC: {}\twrong_be_tree_count:{}\twrong_total:{}\t wrong be tree ACC: {}'.format(right_codes_count, all_codes_count, code_acc,wrong_be_tree, wrong_ans_count, wrong_be_tree/wrong_ans_count))
-        logger.info('temp:{}\ttemp1:{}\twrong_total:{}\t'.format(temp,temp1,all_codes_count-right_codes_count ))
+        logger.info('right_checker:{}\ttotal:{}\tchecker ACC: {}\ttemp:{}\ttemp1:{}\twrong_total:{}\t'.format(right_checker,all_codes_count,right_checker/all_codes_count,temp,temp1,all_codes_count-right_codes_count))
     model.train()
     F1.close()
     F.close()
@@ -568,22 +575,21 @@ def eval_multi_clf_for_classfier_check(model, test_mwps, device, num_labels, tes
                 with torch.no_grad():
                     batch_data = [i.to(device) for i in batch]
 
-                    outputs,p_hidden = model(input_ids=batch_data[0], attention_mask=batch_data[1],
+                    _ ,outputs,p_hidden = model(input_ids=batch_data[0], attention_mask=batch_data[1],
                                                    token_type_ids=batch_data[2], num_positions = batch_data[3],num_codes_labels=batch_data[4])
 
-                    _, refiner_outputs ,check_labels=refiner(outputs, batch_data[4].clone(),p_hidden)
+                    _, refiner_outputs ,check_labels=refiner(outputs, batch_data[4],p_hidden)
 
                     #! 统计checker的准确率
-                    # equality = torch.eq(torch.round(refiner_outputs),check_labels)
-                    # if(equality.all()):
-                    #     right_checker += 1
+                    equality = torch.eq(torch.round(refiner_outputs),check_labels).float()
+                    right_checker += torch.sum(equality)
                     #! 统计corrector的准确率
-                    refiner_outputs = refiner_outputs.to("cpu").numpy()
-                    refiner_outputs  = refiner_outputs.squeeze(0)
-                    # outputs = outputs.squeeze(0)
+                    # refiner_outputs = refiner_outputs.to("cpu").numpy()
+                    # refiner_outputs  = refiner_outputs.squeeze(0)
+                    outputs = outputs.squeeze(0)
                     outputs = outputs.to("cpu").numpy()
-                    outputs_0.append(refiner_outputs)
-                    # outputs_0.append(outputs)
+                    # outputs_0.append(refiner_outputs)
+                    outputs_0.append(outputs)
 
                     num_codes_labels = batch_data[4].reshape(-1,28)
                     num_codes_labels_list.append(num_codes_labels)
@@ -629,16 +635,15 @@ def eval_multi_clf_for_classfier_check(model, test_mwps, device, num_labels, tes
         #! 计算code acc code check acc
 
         #! temp 找到最小的大于0.5的值，判断它是不是错误的
+        # min_value = np.min(outputs[outputs > 0.5])
+        # indices = np.where(outputs == min_value)# 希望没有两个一样的最小值
+        # if(num_codes_labels[indices] == np.array([0])):
+        #     temp += 1
+        # max_value = np.max(outputs[outputs < 0.5])
+        # indices = np.where(outputs == max_value)
+        # if(num_codes_labels[indices] != np.array([0])):
+        #     temp1 += 1
         
-        min_value = np.min(outputs[outputs > 0.5])
-        indices = np.where(outputs == min_value)# 希望没有两个一样的最小值
-        if(num_codes_labels[indices] == np.array([0])):
-            temp += 1
-        max_value = np.max(outputs[outputs < 0.5])
-        indices = np.where(outputs == max_value)
-        if(num_codes_labels[indices] != np.array([0])):
-            temp1 += 1
-        right = True
         for i in range(outputs.shape[0]):
             A = outputs[i,:]
             B = num_codes_labels[i,:]
@@ -651,10 +656,11 @@ def eval_multi_clf_for_classfier_check(model, test_mwps, device, num_labels, tes
 
     ans_acc = right_ans_count / len(test_mwps)
     code_acc = right_codes_count/all_codes_count
+    right_checker = right_checker.int()
     if logger is not None:
         logger.info('right_count:{}\ttotal:{}\t Answer ACC: {}'.format(right_ans_count, len(test_mwps), ans_acc))
         logger.info('right_codes_count:{}\ttotal:{}\tCode ACC: {}\twrong_be_tree_count:{}\twrong_total:{}\t wrong be tree ACC: {}'.format(right_codes_count, all_codes_count, code_acc,wrong_be_tree, wrong_ans_count, wrong_be_tree/wrong_ans_count))
-        logger.info('temp:{}\ttemp1:{}\twrong_total:{}\t'.format(temp,temp1,len(test_mwps)-right_ans_count ))
+        logger.info('right_checker:{}\ttotal:{}\tchecker ACC: {}\ttemp:{}\ttemp1:{}\twrong_total:{}\t'.format(right_checker,all_codes_count,right_checker/all_codes_count,temp,temp1,len(test_mwps)-right_ans_count ))
     
     return ans_acc
 

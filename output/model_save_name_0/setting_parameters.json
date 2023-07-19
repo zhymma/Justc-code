@@ -25,5 +25,5 @@
   "label2id_path": "./mawps/codes_mawps.json",
   "gpu_device": "1",
   "output_dir": "./output/",
-  "model_name": "test"
+  "model_name": "model_save_name_0"
 }
