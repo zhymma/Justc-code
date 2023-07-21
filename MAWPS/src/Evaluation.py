@@ -440,6 +440,7 @@ def eval_multi_clf_for_test_new(model, test_mwps, device, num_labels, test_dev_m
             #     logger.info("\n")
             all_codes_count += 1
 
+
     json.dump(refine_mwp,F1,ensure_ascii=False,indent=2)
     json.dump(false_mwp, F ,ensure_ascii=False,indent=2)
     ans_acc = right_ans_count / len(test_mwps)
