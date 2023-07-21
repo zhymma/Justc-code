@@ -310,9 +310,9 @@ def train(args):
     else:
         #测试最终结果
 
-        model.load(latest_model_dir)
+        model.load(best_model_dir)
         model.to(args.device)
-        refiner.load(latest_model_dir)
+        refiner.load(best_model_dir)
         refiner.to(args.device)
         logger1 = logging.getLogger()
         logger1.setLevel(logging.INFO)
@@ -321,8 +321,7 @@ def train(args):
         logger1.addHandler(console_handler)
 
         logger1.info("Test!")
-
-        # acc = eval_multi_clf_for_classfier(
+        # acc = eval_multi_clf_for_classfier_check(
         #         logger=logger1,
         #         model=model,
         #         test_mwps=test_mwps,
@@ -331,8 +330,10 @@ def train(args):
         #         test_dev_max_len = args.test_dev_max_len,
         #         label2id_or_value = label2id_or_value,
         #         id2label_or_value = id2label_or_value,
-        #         tokenizer = tokenizer
+        #         tokenizer = tokenizer,
+        #         refiner = refiner
         #         )
+
         acc = eval_multi_clf_for_test_new(
                 logger=logger1,
                 model=model,

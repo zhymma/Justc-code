@@ -1,6 +1,6 @@
 {
   "log_file": "output.log",
-  "mode": "test",
+  "mode": "train",
   "seed": 0,
   "num_labels": 27,
   "train_type": "one-by-one-random",
@@ -14,7 +14,7 @@
   "use_new_token_type_id": true,
   "train_loss": "MSE",
   "use_multi_gpu": false,
-  "batch_size": 40,
+  "batch_size": 80,
   "num_epochs": 130,
   "lr": 2e-05,
   "warmup": 0.1,

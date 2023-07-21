@@ -285,6 +285,9 @@ def eval_multi_clf_for_test_new(model, test_mwps, device, num_labels, test_dev_m
     num_codes_labels_list = []
     num_positions_list = []
     right_checker = 0
+    wrong_checker_0 = 0
+    wrong_checker_1 = 0
+    right_0 = 0
     for idd, raw_mwp in enumerate(test_mwps):
         processed_mwp = process_one_mawps_for_test_no_None(raw_mwp, label2id_or_value, test_dev_max_len, True,
                                                        tokenizer)
@@ -294,6 +297,7 @@ def eval_multi_clf_for_test_new(model, test_mwps, device, num_labels, test_dev_m
                          torch.tensor(num_positions).long(),torch.tensor(num_codes_labels).long()]
 
                 model.eval()
+                refiner.eval()
                 with torch.no_grad():
                     batch_data = [i.to(device) for i in batch]
 
@@ -305,6 +309,9 @@ def eval_multi_clf_for_test_new(model, test_mwps, device, num_labels, test_dev_m
                     #! 统计checker的准确率
                     equality = torch.eq(torch.round(refiner_outputs),check_labels).int()
                     right_checker += torch.sum(equality)
+                    wrong_checker_0  += torch.sum((equality == 0) & (check_labels == 0)).item()
+                    wrong_checker_1  += torch.sum((equality == 0) & (check_labels == 1)).item()
+                    right_0 += torch.sum((equality == 1) & (check_labels == 0)).item()
                     outputs = outputs.squeeze(0)
                     outputs = outputs.to("cpu").numpy()
                     outputs_0.append(outputs)
@@ -447,7 +454,11 @@ def eval_multi_clf_for_test_new(model, test_mwps, device, num_labels, test_dev_m
         logger.info('right_count:{}\ttotal:{}\t Answer ACC: {}'.format(right_ans_count, len(test_mwps), ans_acc))
         logger.info('right_codes_count:{}\ttotal:{}\tCode ACC: {}\twrong_be_tree_count:{}\twrong_total:{}\t wrong be tree ACC: {}'.format(right_codes_count, all_codes_count, code_acc,wrong_be_tree, wrong_ans_count, wrong_be_tree/wrong_ans_count))
         logger.info('right_checker:{}\ttotal:{}\tchecker ACC: {}\ttemp:{}\ttemp1:{}\twrong_total:{}\t'.format(right_checker,all_codes_count,right_checker/all_codes_count,temp,temp1,all_codes_count-right_codes_count))
+        logger.info('wrong_checker:{}\twrong_1:{}\twrong_0: {}'.format(all_codes_count-right_checker,wrong_checker_1,wrong_checker_0))
+        logger.info('all_0:{}\tright_chcker_0:{}'.format(all_codes_count-right_codes_count,right_0))
+
     model.train()
+    refiner.train()
     F1.close()
     F.close()
     return ans_acc
@@ -572,6 +583,7 @@ def eval_multi_clf_for_classfier_check(model, test_mwps, device, num_labels, tes
                 batch = [torch.tensor(sen_tokens).long(), torch.tensor(attention_mask).long(), torch.tensor(token_type_id).long(),
                          torch.tensor(num_positions).long(),torch.tensor(num_codes_labels).long()]
                 model.eval()
+                refiner.eval()
                 with torch.no_grad():
                     batch_data = [i.to(device) for i in batch]
 
@@ -662,6 +674,8 @@ def eval_multi_clf_for_classfier_check(model, test_mwps, device, num_labels, tes
         logger.info('right_codes_count:{}\ttotal:{}\tCode ACC: {}\twrong_be_tree_count:{}\twrong_total:{}\t wrong be tree ACC: {}'.format(right_codes_count, all_codes_count, code_acc,wrong_be_tree, wrong_ans_count, wrong_be_tree/wrong_ans_count))
         logger.info('right_checker:{}\ttotal:{}\tchecker ACC: {}\ttemp:{}\ttemp1:{}\twrong_total:{}\t'.format(right_checker,all_codes_count,right_checker/all_codes_count,temp,temp1,len(test_mwps)-right_ans_count ))
     
+    model.train()
+    refiner.train()
     return ans_acc
 
     # print(right_checker,len(test_mwps),right_checker/len(test_mwps))

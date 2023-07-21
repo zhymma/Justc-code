@@ -27,7 +27,7 @@ parser.add_argument("--use_new_token_type_id", default=True, type=bool)
 parser.add_argument("--train_loss", default='MSE', type=str, help='MSE or L1 or Huber')
 
 parser.add_argument("--use_multi_gpu", default=False, type=bool)
-parser.add_argument("--batch_size", default=40, type=int)
+parser.add_argument("--batch_size", default=80, type=int)
 parser.add_argument("--num_epochs", default=130, type=int)
 
 parser.add_argument("--lr", default=2e-5, type=float)#!原本为2e-5
