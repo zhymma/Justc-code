@@ -1,6 +1,6 @@
 {
   "log_file": "output.log",
-  "mode": "test",
+  "mode": "train",
   "label2id_path": "./mawps/codes_mawps.json",
   "seed": 0,
   "num_labels": 28,
@@ -24,7 +24,7 @@
   "pretrain_model_path": "bert-base-uncased",
   "train_data_path": "./mawps/Fold_3/train_mawps_new_mwpss_fold_3.json",
   "dev_data_path": "./mawps/Fold_3/test_mawps_new_mwpss_fold_3.json",
-  "gpu_device": "1",
+  "gpu_device": "2",
   "output_dir": "./output/",
   "model_name": "model_save_name_3"
 }

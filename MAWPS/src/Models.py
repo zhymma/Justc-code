@@ -539,7 +539,7 @@ class MwpBertModel_CLS_classfier(torch.nn.Module):
         total_loss = bce_loss 
         
         outputs = torch.sigmoid(outputs)
-        return total_loss,outputs,p_hidden
+        return total_loss,outputs.detach(),p_hidden.detach()
 
 
     def save(self, save_dir):
@@ -558,9 +558,9 @@ class Refiner(nn.Module):
         self.num_labels = num_labels
         # self.checker = Batch_Net_CLS(self.num_labels, check_hidden_size, int(check_hidden_size / 2), 1)
         self.checker =  nn.Sequential(
-                        nn.Linear(self.num_labels, 200),
+                        nn.Linear(768*2+self.num_labels, 256),
                         nn.ReLU(),
-                        nn.Linear(200, 50),
+                        nn.Linear(256, 50),
                         nn.ReLU(),
                         nn.Linear(50, 1)
                     )
@@ -572,13 +572,14 @@ class Refiner(nn.Module):
             self.load(fc_path)
     def forward(self, outputs, num_codes_labels,p_hidden):
         labels = num_codes_labels.reshape(outputs.shape[0],-1, self.num_labels).clone()
-        outputs = outputs.detach()
+        # outputs = outputs.detach()
         pad_vector = torch.Tensor([-1]*self.num_labels).cuda()
         pad_mask = torch.any(labels != pad_vector, dim =-1)#! 需要关注的部分code label
 
         #! 检测错误 28 -> 1
         # outpus_processed = 1 - 2 * torch.abs(0.5 - outputs)
-        logits = self.checker(outputs)
+
+        logits = self.checker(torch.cat((p_hidden,outputs),dim=-1))
         outputs_rounded = torch.round(outputs)
         check_labels = torch.eq(outputs_rounded, labels)
         check_labels = torch.all(check_labels, dim=-1, keepdim=True)
@@ -623,7 +624,7 @@ class Refiner(nn.Module):
         # logits1[check_labels.bool().squeeze(-1)] = outputs[check_labels.bool().squeeze(-1)]       
         
 
-        return all_loss,logits,check_labels
+        return all_loss,torch.sigmoid(logits),check_labels
 
     def save(self, save_dir):
         torch.save(self.checker.state_dict(), os.path.join(save_dir, 'checker.bin'))

@@ -6417,3 +6417,814 @@
 2023-07-12 15:49:18,536 - right_count:368	total:433	 Answer ACC: 0.8498845265588915
 2023-07-12 15:49:18,537 - right_codes_count:1831	total:1963	Code ACC: 0.9327559857361182	wrong_be_tree_count:28	wrong_total:65	 wrong be tree ACC: 0.4307692307692308
 2023-07-12 15:49:18,537 - temp:57	temp1:12	wrong_total:132	
+2023-07-21 18:11:17,596 - 
+
+
+2023-07-21 18:11:18,466 - get train data loader...
+2023-07-21 18:11:18,650 - get dev data loader...
+2023-07-21 18:11:18,787 - define model...
+2023-07-21 18:11:23,438 - 
+>>>>>>>>>>>>>>>>>>>start train......
+2023-07-21 18:11:34,310 - 
+
+2023-07-21 18:11:34,310 - epoch:0,	loss:152269.52502441406	loss1:0
+2023-07-21 18:11:56,084 - right_count:1	total:433	 Answer ACC: 0.0023094688221709007
+2023-07-21 18:11:56,084 - right_codes_count:0	total:1963	Code ACC: 0.0	wrong_be_tree_count:423	wrong_total:432	 wrong be tree ACC: 0.9791666666666666
+2023-07-21 18:11:56,086 - right_checker:0	total:1963	checker ACC: 0.0	temp:0	temp1:0	wrong_total:432	
+2023-07-21 18:11:56,088 - save best model to ./output/model_save_name_2/best_model
+2023-07-21 18:12:16,297 - 
+
+2023-07-21 18:12:16,297 - epoch:1,	loss:118260.02453613281	loss1:0
+2023-07-21 18:12:40,284 - right_count:0	total:433	 Answer ACC: 0.0
+2023-07-21 18:12:40,285 - right_codes_count:938	total:1963	Code ACC: 0.47784004075394804	wrong_be_tree_count:433	wrong_total:433	 wrong be tree ACC: 1.0
+2023-07-21 18:12:40,285 - right_checker:938	total:1963	checker ACC: 0.4778400659561157	temp:0	temp1:0	wrong_total:433	
+2023-07-21 18:13:09,458 - 
+
+2023-07-21 18:13:09,459 - epoch:2,	loss:63275.952239990234	loss1:0
+2023-07-21 18:13:28,918 - right_count:0	total:433	 Answer ACC: 0.0
+2023-07-21 18:13:28,918 - right_codes_count:829	total:1963	Code ACC: 0.42231278655119714	wrong_be_tree_count:433	wrong_total:433	 wrong be tree ACC: 1.0
+2023-07-21 18:13:28,919 - right_checker:829	total:1963	checker ACC: 0.42231279611587524	temp:0	temp1:0	wrong_total:433	
+2023-07-21 18:13:54,240 - 
+
+2023-07-21 18:13:54,241 - epoch:3,	loss:27314.14747619629	loss1:0
+2023-07-21 18:14:12,765 - right_count:0	total:433	 Answer ACC: 0.0
+2023-07-21 18:14:12,765 - right_codes_count:861	total:1963	Code ACC: 0.43861436576668367	wrong_be_tree_count:433	wrong_total:433	 wrong be tree ACC: 1.0
+2023-07-21 18:14:12,765 - right_checker:861	total:1963	checker ACC: 0.4386143684387207	temp:0	temp1:0	wrong_total:433	
+2023-07-21 18:14:42,682 - 
+
+2023-07-21 18:14:42,682 - epoch:4,	loss:16474.163360595703	loss1:0
+2023-07-21 18:14:58,765 - right_count:0	total:433	 Answer ACC: 0.0
+2023-07-21 18:14:58,766 - right_codes_count:861	total:1963	Code ACC: 0.43861436576668367	wrong_be_tree_count:433	wrong_total:433	 wrong be tree ACC: 1.0
+2023-07-21 18:14:58,766 - right_checker:861	total:1963	checker ACC: 0.4386143684387207	temp:0	temp1:0	wrong_total:433	
+2023-07-21 18:15:19,548 - 
+
+2023-07-21 18:15:19,548 - epoch:5,	loss:14457.792163848877	loss1:0
+2023-07-21 18:15:44,412 - right_count:66	total:433	 Answer ACC: 0.15242494226327943
+2023-07-21 18:15:44,412 - right_codes_count:1124	total:1963	Code ACC: 0.5725929699439634	wrong_be_tree_count:2	wrong_total:367	 wrong be tree ACC: 0.005449591280653951
+2023-07-21 18:15:44,427 - right_checker:1124	total:1963	checker ACC: 0.5725929737091064	temp:0	temp1:0	wrong_total:367	
+2023-07-21 18:15:44,432 - save best model to ./output/model_save_name_2/best_model
+2023-07-21 18:16:17,831 - 
+
+2023-07-21 18:16:17,831 - epoch:6,	loss:13252.550411224365	loss1:0
+2023-07-21 18:16:40,235 - right_count:131	total:433	 Answer ACC: 0.302540415704388
+2023-07-21 18:16:40,236 - right_codes_count:1330	total:1963	Code ACC: 0.6775343861436577	wrong_be_tree_count:30	wrong_total:302	 wrong be tree ACC: 0.09933774834437085
+2023-07-21 18:16:40,236 - right_checker:1330	total:1963	checker ACC: 0.6775344014167786	temp:0	temp1:0	wrong_total:302	
+2023-07-21 18:16:40,242 - save best model to ./output/model_save_name_2/best_model
+2023-07-21 18:17:00,427 - 
+
+2023-07-21 18:17:00,428 - epoch:7,	loss:11185.126457214355	loss1:0
+2023-07-21 18:17:08,650 - right_count:173	total:433	 Answer ACC: 0.3995381062355658
+2023-07-21 18:17:08,650 - right_codes_count:1462	total:1963	Code ACC: 0.7447784004075395	wrong_be_tree_count:7	wrong_total:260	 wrong be tree ACC: 0.026923076923076925
+2023-07-21 18:17:08,651 - right_checker:1462	total:1963	checker ACC: 0.7447784543037415	temp:0	temp1:0	wrong_total:260	
+2023-07-21 18:17:08,653 - save best model to ./output/model_save_name_2/best_model
+2023-07-21 18:17:40,664 - 
+
+2023-07-21 18:17:40,665 - epoch:8,	loss:9932.429042816162	loss1:3058.16539478302
+2023-07-21 18:17:53,514 - right_count:202	total:433	 Answer ACC: 0.4665127020785219
+2023-07-21 18:17:53,515 - right_codes_count:1519	total:1963	Code ACC: 0.7738155883851248	wrong_be_tree_count:19	wrong_total:231	 wrong be tree ACC: 0.08225108225108226
+2023-07-21 18:17:53,516 - right_checker:1519	total:1963	checker ACC: 0.7738156318664551	temp:0	temp1:0	wrong_total:231	
+2023-07-21 18:17:53,518 - save best model to ./output/model_save_name_2/best_model
+2023-07-21 18:18:50,285 - 
+
+2023-07-21 18:18:50,285 - epoch:9,	loss:8833.368461608887	loss1:2729.6135835647583
+2023-07-21 18:19:04,414 - right_count:222	total:433	 Answer ACC: 0.5127020785219399
+2023-07-21 18:19:04,414 - right_codes_count:1553	total:1963	Code ACC: 0.7911360163015793	wrong_be_tree_count:20	wrong_total:211	 wrong be tree ACC: 0.0947867298578199
+2023-07-21 18:19:04,414 - right_checker:1553	total:1963	checker ACC: 0.7911360263824463	temp:0	temp1:0	wrong_total:211	
+2023-07-21 18:19:04,416 - save best model to ./output/model_save_name_2/best_model
+2023-07-21 18:20:01,093 - 
+
+2023-07-21 18:20:01,094 - epoch:10,	loss:7855.457160949707	loss1:2424.628858566284
+2023-07-21 18:20:15,288 - right_count:241	total:433	 Answer ACC: 0.5565819861431871
+2023-07-21 18:20:15,288 - right_codes_count:1602	total:1963	Code ACC: 0.8160978094752929	wrong_be_tree_count:43	wrong_total:192	 wrong be tree ACC: 0.22395833333333334
+2023-07-21 18:20:15,288 - right_checker:1602	total:1963	checker ACC: 0.8160978555679321	temp:0	temp1:0	wrong_total:192	
+2023-07-21 18:20:15,292 - save best model to ./output/model_save_name_2/best_model
+2023-07-21 18:21:01,405 - 
+
+2023-07-21 18:21:01,405 - epoch:11,	loss:6834.018714904785	loss1:2165.3918113708496
+2023-07-21 18:21:14,616 - right_count:258	total:433	 Answer ACC: 0.5958429561200924
+2023-07-21 18:21:14,616 - right_codes_count:1638	total:1963	Code ACC: 0.8344370860927153	wrong_be_tree_count:51	wrong_total:175	 wrong be tree ACC: 0.2914285714285714
+2023-07-21 18:21:14,616 - right_checker:1638	total:1963	checker ACC: 0.8344371318817139	temp:0	temp1:0	wrong_total:175	
+2023-07-21 18:21:14,619 - save best model to ./output/model_save_name_2/best_model
+2023-07-21 18:21:58,333 - 
+
+2023-07-21 18:21:58,334 - epoch:12,	loss:6057.9913330078125	loss1:1879.8151607513428
+2023-07-21 18:22:11,662 - right_count:295	total:433	 Answer ACC: 0.6812933025404158
+2023-07-21 18:22:11,663 - right_codes_count:1697	total:1963	Code ACC: 0.8644931227712684	wrong_be_tree_count:70	wrong_total:138	 wrong be tree ACC: 0.5072463768115942
+2023-07-21 18:22:11,664 - right_checker:1697	total:1963	checker ACC: 0.8644931316375732	temp:0	temp1:0	wrong_total:138	
+2023-07-21 18:22:11,667 - save best model to ./output/model_save_name_2/best_model
+2023-07-21 18:22:50,276 - 
+
+2023-07-21 18:22:50,276 - epoch:13,	loss:5166.7277908325195	loss1:1573.4441051483154
+2023-07-21 18:23:02,627 - right_count:319	total:433	 Answer ACC: 0.7367205542725174
+2023-07-21 18:23:02,632 - right_codes_count:1743	total:1963	Code ACC: 0.8879266428935303	wrong_be_tree_count:57	wrong_total:114	 wrong be tree ACC: 0.5
+2023-07-21 18:23:02,633 - right_checker:1743	total:1963	checker ACC: 0.8879266977310181	temp:0	temp1:0	wrong_total:114	
+2023-07-21 18:23:02,635 - save best model to ./output/model_save_name_2/best_model
+2023-07-21 18:23:36,189 - 
+
+2023-07-21 18:23:36,190 - epoch:14,	loss:4468.118446350098	loss1:1293.4126424789429
+2023-07-21 18:23:54,887 - right_count:341	total:433	 Answer ACC: 0.7875288683602771
+2023-07-21 18:23:54,887 - right_codes_count:1755	total:1963	Code ACC: 0.8940397350993378	wrong_be_tree_count:35	wrong_total:92	 wrong be tree ACC: 0.3804347826086957
+2023-07-21 18:23:54,887 - right_checker:1755	total:1963	checker ACC: 0.8940397500991821	temp:0	temp1:0	wrong_total:92	
+2023-07-21 18:23:54,892 - save best model to ./output/model_save_name_2/best_model
+2023-07-21 18:24:41,998 - 
+
+2023-07-21 18:24:41,998 - epoch:15,	loss:3967.859344482422	loss1:1163.1009740829468
+2023-07-21 18:25:00,487 - right_count:338	total:433	 Answer ACC: 0.7806004618937644
+2023-07-21 18:25:00,487 - right_codes_count:1767	total:1963	Code ACC: 0.9001528273051452	wrong_be_tree_count:22	wrong_total:95	 wrong be tree ACC: 0.23157894736842105
+2023-07-21 18:25:00,489 - right_checker:1767	total:1963	checker ACC: 0.900152862071991	temp:0	temp1:0	wrong_total:95	
+2023-07-21 18:25:35,834 - 
+
+2023-07-21 18:25:35,834 - epoch:16,	loss:3510.4761209487915	loss1:1005.063422203064
+2023-07-21 18:25:54,772 - right_count:359	total:433	 Answer ACC: 0.8290993071593533
+2023-07-21 18:25:54,772 - right_codes_count:1782	total:1963	Code ACC: 0.9077941925624045	wrong_be_tree_count:21	wrong_total:74	 wrong be tree ACC: 0.28378378378378377
+2023-07-21 18:25:54,772 - right_checker:1782	total:1963	checker ACC: 0.9077942371368408	temp:0	temp1:0	wrong_total:74	
+2023-07-21 18:25:54,774 - save best model to ./output/model_save_name_2/best_model
+2023-07-21 18:26:31,017 - 
+
+2023-07-21 18:26:31,018 - epoch:17,	loss:3171.9563417434692	loss1:912.1816968917847
+2023-07-21 18:26:44,556 - right_count:349	total:433	 Answer ACC: 0.8060046189376443
+2023-07-21 18:26:44,556 - right_codes_count:1766	total:1963	Code ACC: 0.8996434029546613	wrong_be_tree_count:22	wrong_total:84	 wrong be tree ACC: 0.2619047619047619
+2023-07-21 18:26:44,557 - right_checker:1766	total:1963	checker ACC: 0.8996434211730957	temp:0	temp1:0	wrong_total:84	
+2023-07-21 18:27:16,750 - 
+
+2023-07-21 18:27:16,750 - epoch:18,	loss:2919.78444480896	loss1:852.5710372924805
+2023-07-21 18:27:33,856 - right_count:353	total:433	 Answer ACC: 0.815242494226328
+2023-07-21 18:27:33,856 - right_codes_count:1767	total:1963	Code ACC: 0.9001528273051452	wrong_be_tree_count:25	wrong_total:80	 wrong be tree ACC: 0.3125
+2023-07-21 18:27:33,858 - right_checker:1767	total:1963	checker ACC: 0.900152862071991	temp:0	temp1:0	wrong_total:80	
+2023-07-21 18:28:09,876 - 
+
+2023-07-21 18:28:09,876 - epoch:19,	loss:2799.8149785995483	loss1:826.2314472198486
+2023-07-21 18:28:25,956 - right_count:354	total:433	 Answer ACC: 0.8175519630484989
+2023-07-21 18:28:25,956 - right_codes_count:1775	total:1963	Code ACC: 0.9042282221090168	wrong_be_tree_count:27	wrong_total:79	 wrong be tree ACC: 0.34177215189873417
+2023-07-21 18:28:25,959 - right_checker:1775	total:1963	checker ACC: 0.9042282700538635	temp:0	temp1:0	wrong_total:79	
+2023-07-21 18:29:00,884 - 
+
+2023-07-21 18:29:00,884 - epoch:20,	loss:2467.525957107544	loss1:713.9415998458862
+2023-07-21 18:29:15,333 - right_count:353	total:433	 Answer ACC: 0.815242494226328
+2023-07-21 18:29:15,334 - right_codes_count:1775	total:1963	Code ACC: 0.9042282221090168	wrong_be_tree_count:27	wrong_total:80	 wrong be tree ACC: 0.3375
+2023-07-21 18:29:15,334 - right_checker:1775	total:1963	checker ACC: 0.9042282700538635	temp:0	temp1:0	wrong_total:80	
+2023-07-21 18:29:55,062 - 
+
+2023-07-21 18:29:55,062 - epoch:21,	loss:2409.2685980796814	loss1:709.782717704773
+2023-07-21 18:30:09,317 - right_count:358	total:433	 Answer ACC: 0.8267898383371824
+2023-07-21 18:30:09,317 - right_codes_count:1775	total:1963	Code ACC: 0.9042282221090168	wrong_be_tree_count:26	wrong_total:75	 wrong be tree ACC: 0.3466666666666667
+2023-07-21 18:30:09,318 - right_checker:1775	total:1963	checker ACC: 0.9042282700538635	temp:0	temp1:0	wrong_total:75	
+2023-07-21 18:30:41,351 - 
+
+2023-07-21 18:30:41,351 - epoch:22,	loss:2267.4002170562744	loss1:659.8761196136475
+2023-07-21 18:30:56,909 - right_count:354	total:433	 Answer ACC: 0.8175519630484989
+2023-07-21 18:30:56,909 - right_codes_count:1777	total:1963	Code ACC: 0.9052470708099847	wrong_be_tree_count:26	wrong_total:79	 wrong be tree ACC: 0.3291139240506329
+2023-07-21 18:30:56,910 - right_checker:1777	total:1963	checker ACC: 0.9052470922470093	temp:0	temp1:0	wrong_total:79	
+2023-07-21 18:31:26,116 - 
+
+2023-07-21 18:31:26,116 - epoch:23,	loss:2117.677465438843	loss1:647.3994731903076
+2023-07-21 18:31:43,057 - right_count:346	total:433	 Answer ACC: 0.7990762124711316
+2023-07-21 18:31:43,057 - right_codes_count:1776	total:1963	Code ACC: 0.9047376464595007	wrong_be_tree_count:27	wrong_total:87	 wrong be tree ACC: 0.3103448275862069
+2023-07-21 18:31:43,058 - right_checker:1776	total:1963	checker ACC: 0.904737651348114	temp:0	temp1:0	wrong_total:87	
+2023-07-21 18:32:07,512 - 
+
+2023-07-21 18:32:07,512 - epoch:24,	loss:2006.0379376411438	loss1:629.3776388168335
+2023-07-21 18:32:30,120 - right_count:362	total:433	 Answer ACC: 0.836027713625866
+2023-07-21 18:32:30,120 - right_codes_count:1791	total:1963	Code ACC: 0.9123790117167601	wrong_be_tree_count:21	wrong_total:71	 wrong be tree ACC: 0.29577464788732394
+2023-07-21 18:32:30,122 - right_checker:1791	total:1963	checker ACC: 0.9123790264129639	temp:0	temp1:0	wrong_total:71	
+2023-07-21 18:32:30,126 - save best model to ./output/model_save_name_2/best_model
+2023-07-21 18:33:14,265 - 
+
+2023-07-21 18:33:14,265 - epoch:25,	loss:1984.0255870819092	loss1:637.6954116821289
+2023-07-21 18:33:28,138 - right_count:362	total:433	 Answer ACC: 0.836027713625866
+2023-07-21 18:33:28,138 - right_codes_count:1786	total:1963	Code ACC: 0.9098318899643403	wrong_be_tree_count:20	wrong_total:71	 wrong be tree ACC: 0.28169014084507044
+2023-07-21 18:33:28,138 - right_checker:1786	total:1963	checker ACC: 0.9098319411277771	temp:0	temp1:0	wrong_total:71	
+2023-07-21 18:33:28,141 - save best model to ./output/model_save_name_2/best_model
+2023-07-21 18:34:01,310 - 
+
+2023-07-21 18:34:01,310 - epoch:26,	loss:1908.6519405841827	loss1:603.038046836853
+2023-07-21 18:34:14,480 - right_count:348	total:433	 Answer ACC: 0.8036951501154734
+2023-07-21 18:34:14,481 - right_codes_count:1759	total:1963	Code ACC: 0.8960774325012736	wrong_be_tree_count:30	wrong_total:85	 wrong be tree ACC: 0.35294117647058826
+2023-07-21 18:34:14,481 - right_checker:1759	total:1963	checker ACC: 0.8960774540901184	temp:0	temp1:0	wrong_total:85	
+2023-07-21 18:34:44,433 - 
+
+2023-07-21 18:34:44,433 - epoch:27,	loss:1864.2865362167358	loss1:580.8573389053345
+2023-07-21 18:34:58,321 - right_count:361	total:433	 Answer ACC: 0.8337182448036952
+2023-07-21 18:34:58,321 - right_codes_count:1789	total:1963	Code ACC: 0.9113601630157921	wrong_be_tree_count:23	wrong_total:72	 wrong be tree ACC: 0.3194444444444444
+2023-07-21 18:34:58,321 - right_checker:1789	total:1963	checker ACC: 0.9113602042198181	temp:0	temp1:0	wrong_total:72	
+2023-07-21 18:35:32,238 - 
+
+2023-07-21 18:35:32,238 - epoch:28,	loss:1817.2902507781982	loss1:598.8791666030884
+2023-07-21 18:35:45,405 - right_count:344	total:433	 Answer ACC: 0.7944572748267898
+2023-07-21 18:35:45,405 - right_codes_count:1760	total:1963	Code ACC: 0.8965868568517575	wrong_be_tree_count:37	wrong_total:89	 wrong be tree ACC: 0.4157303370786517
+2023-07-21 18:35:45,406 - right_checker:1760	total:1963	checker ACC: 0.8965868949890137	temp:0	temp1:0	wrong_total:89	
+2023-07-21 18:36:20,611 - 
+
+2023-07-21 18:36:20,611 - epoch:29,	loss:1648.4983406066895	loss1:518.4740924835205
+2023-07-21 18:36:36,175 - right_count:356	total:433	 Answer ACC: 0.8221709006928406
+2023-07-21 18:36:36,175 - right_codes_count:1785	total:1963	Code ACC: 0.9093224656138563	wrong_be_tree_count:26	wrong_total:77	 wrong be tree ACC: 0.33766233766233766
+2023-07-21 18:36:36,176 - right_checker:1785	total:1963	checker ACC: 0.9093225002288818	temp:0	temp1:0	wrong_total:77	
+2023-07-21 18:37:04,369 - 
+
+2023-07-21 18:37:04,369 - epoch:30,	loss:1589.6729192733765	loss1:504.61114978790283
+2023-07-21 18:37:22,077 - right_count:356	total:433	 Answer ACC: 0.8221709006928406
+2023-07-21 18:37:22,077 - right_codes_count:1785	total:1963	Code ACC: 0.9093224656138563	wrong_be_tree_count:27	wrong_total:77	 wrong be tree ACC: 0.35064935064935066
+2023-07-21 18:37:22,078 - right_checker:1785	total:1963	checker ACC: 0.9093225002288818	temp:0	temp1:0	wrong_total:77	
+2023-07-21 18:37:50,532 - 
+
+2023-07-21 18:37:50,532 - epoch:31,	loss:1443.8923966884613	loss1:445.00049018859863
+2023-07-21 18:38:06,876 - right_count:362	total:433	 Answer ACC: 0.836027713625866
+2023-07-21 18:38:06,877 - right_codes_count:1790	total:1963	Code ACC: 0.9118695873662761	wrong_be_tree_count:28	wrong_total:71	 wrong be tree ACC: 0.39436619718309857
+2023-07-21 18:38:06,877 - right_checker:1790	total:1963	checker ACC: 0.9118696451187134	temp:0	temp1:0	wrong_total:71	
+2023-07-21 18:38:06,880 - save best model to ./output/model_save_name_2/best_model
+2023-07-21 18:38:49,652 - 
+
+2023-07-21 18:38:49,652 - epoch:32,	loss:1466.736780166626	loss1:469.95379161834717
+2023-07-21 18:39:03,400 - right_count:361	total:433	 Answer ACC: 0.8337182448036952
+2023-07-21 18:39:03,400 - right_codes_count:1785	total:1963	Code ACC: 0.9093224656138563	wrong_be_tree_count:24	wrong_total:72	 wrong be tree ACC: 0.3333333333333333
+2023-07-21 18:39:03,401 - right_checker:1785	total:1963	checker ACC: 0.9093225002288818	temp:0	temp1:0	wrong_total:72	
+2023-07-21 18:39:34,795 - 
+
+2023-07-21 18:39:34,795 - epoch:33,	loss:1364.6767573356628	loss1:467.1812000274658
+2023-07-21 18:39:50,675 - right_count:352	total:433	 Answer ACC: 0.812933025404157
+2023-07-21 18:39:50,675 - right_codes_count:1782	total:1963	Code ACC: 0.9077941925624045	wrong_be_tree_count:25	wrong_total:81	 wrong be tree ACC: 0.30864197530864196
+2023-07-21 18:39:50,675 - right_checker:1782	total:1963	checker ACC: 0.9077942371368408	temp:0	temp1:0	wrong_total:81	
+2023-07-21 18:40:22,215 - 
+
+2023-07-21 18:40:22,215 - epoch:34,	loss:1260.4215364456177	loss1:413.11571884155273
+2023-07-21 18:40:36,480 - right_count:347	total:433	 Answer ACC: 0.8013856812933026
+2023-07-21 18:40:36,481 - right_codes_count:1772	total:1963	Code ACC: 0.9026999490575649	wrong_be_tree_count:38	wrong_total:86	 wrong be tree ACC: 0.4418604651162791
+2023-07-21 18:40:36,481 - right_checker:1772	total:1963	checker ACC: 0.9027000069618225	temp:0	temp1:0	wrong_total:86	
+2023-07-21 18:41:13,822 - 
+
+2023-07-21 18:41:13,823 - epoch:35,	loss:1212.7686958312988	loss1:392.3213081359863
+2023-07-21 18:41:27,344 - right_count:346	total:433	 Answer ACC: 0.7990762124711316
+2023-07-21 18:41:27,344 - right_codes_count:1761	total:1963	Code ACC: 0.8970962812022415	wrong_be_tree_count:28	wrong_total:87	 wrong be tree ACC: 0.3218390804597701
+2023-07-21 18:41:27,344 - right_checker:1761	total:1963	checker ACC: 0.8970963358879089	temp:0	temp1:0	wrong_total:87	
+2023-07-21 18:42:03,510 - 
+
+2023-07-21 18:42:03,510 - epoch:36,	loss:1294.9260716438293	loss1:432.5238428115845
+2023-07-21 18:42:17,590 - right_count:349	total:433	 Answer ACC: 0.8060046189376443
+2023-07-21 18:42:17,590 - right_codes_count:1778	total:1963	Code ACC: 0.9057564951604686	wrong_be_tree_count:36	wrong_total:84	 wrong be tree ACC: 0.42857142857142855
+2023-07-21 18:42:17,591 - right_checker:1778	total:1963	checker ACC: 0.9057565331459045	temp:0	temp1:0	wrong_total:84	
+2023-07-21 18:42:49,116 - 
+
+2023-07-21 18:42:49,117 - epoch:37,	loss:1073.6139998435974	loss1:361.82283210754395
+2023-07-21 18:43:03,161 - right_count:351	total:433	 Answer ACC: 0.8106235565819861
+2023-07-21 18:43:03,161 - right_codes_count:1784	total:1963	Code ACC: 0.9088130412633724	wrong_be_tree_count:31	wrong_total:82	 wrong be tree ACC: 0.3780487804878049
+2023-07-21 18:43:03,162 - right_checker:1784	total:1963	checker ACC: 0.9088130593299866	temp:0	temp1:0	wrong_total:82	
+2023-07-21 18:43:36,124 - 
+
+2023-07-21 18:43:36,124 - epoch:38,	loss:1119.2098302841187	loss1:371.526891708374
+2023-07-21 18:43:49,330 - right_count:355	total:433	 Answer ACC: 0.8198614318706697
+2023-07-21 18:43:49,330 - right_codes_count:1785	total:1963	Code ACC: 0.9093224656138563	wrong_be_tree_count:31	wrong_total:78	 wrong be tree ACC: 0.3974358974358974
+2023-07-21 18:43:49,332 - right_checker:1785	total:1963	checker ACC: 0.9093225002288818	temp:0	temp1:0	wrong_total:78	
+2023-07-21 18:44:23,380 - 
+
+2023-07-21 18:44:23,380 - epoch:39,	loss:1041.0637335777283	loss1:338.2558250427246
+2023-07-21 18:44:42,169 - right_count:347	total:433	 Answer ACC: 0.8013856812933026
+2023-07-21 18:44:42,169 - right_codes_count:1772	total:1963	Code ACC: 0.9026999490575649	wrong_be_tree_count:38	wrong_total:86	 wrong be tree ACC: 0.4418604651162791
+2023-07-21 18:44:42,171 - right_checker:1772	total:1963	checker ACC: 0.9027000069618225	temp:0	temp1:0	wrong_total:86	
+2023-07-21 18:45:08,813 - 
+
+2023-07-21 18:45:08,814 - epoch:40,	loss:959.1860022544861	loss1:321.6202926635742
+2023-07-21 18:45:27,312 - right_count:354	total:433	 Answer ACC: 0.8175519630484989
+2023-07-21 18:45:27,312 - right_codes_count:1789	total:1963	Code ACC: 0.9113601630157921	wrong_be_tree_count:26	wrong_total:79	 wrong be tree ACC: 0.3291139240506329
+2023-07-21 18:45:27,313 - right_checker:1789	total:1963	checker ACC: 0.9113602042198181	temp:0	temp1:0	wrong_total:79	
+2023-07-21 18:45:53,111 - 
+
+2023-07-21 18:45:53,111 - epoch:41,	loss:922.1231722831726	loss1:300.82587718963623
+2023-07-21 18:46:10,962 - right_count:353	total:433	 Answer ACC: 0.815242494226328
+2023-07-21 18:46:10,963 - right_codes_count:1781	total:1963	Code ACC: 0.9072847682119205	wrong_be_tree_count:33	wrong_total:80	 wrong be tree ACC: 0.4125
+2023-07-21 18:46:10,963 - right_checker:1781	total:1963	checker ACC: 0.9072847962379456	temp:0	temp1:0	wrong_total:80	
+2023-07-21 18:46:31,651 - 
+
+2023-07-21 18:46:31,651 - epoch:42,	loss:910.5041990280151	loss1:307.7573480606079
+2023-07-21 18:46:55,310 - right_count:348	total:433	 Answer ACC: 0.8036951501154734
+2023-07-21 18:46:55,310 - right_codes_count:1782	total:1963	Code ACC: 0.9077941925624045	wrong_be_tree_count:33	wrong_total:85	 wrong be tree ACC: 0.38823529411764707
+2023-07-21 18:46:55,311 - right_checker:1782	total:1963	checker ACC: 0.9077942371368408	temp:0	temp1:0	wrong_total:85	
+2023-07-21 18:47:10,257 - 
+
+2023-07-21 18:47:10,257 - epoch:43,	loss:892.0264186859131	loss1:329.9380588531494
+2023-07-21 18:47:25,671 - right_count:354	total:433	 Answer ACC: 0.8175519630484989
+2023-07-21 18:47:25,671 - right_codes_count:1781	total:1963	Code ACC: 0.9072847682119205	wrong_be_tree_count:24	wrong_total:79	 wrong be tree ACC: 0.3037974683544304
+2023-07-21 18:47:25,672 - right_checker:1781	total:1963	checker ACC: 0.9072847962379456	temp:0	temp1:0	wrong_total:79	
+2023-07-21 18:47:41,260 - 
+
+2023-07-21 18:47:41,260 - epoch:44,	loss:807.0831197500229	loss1:262.00963497161865
+2023-07-21 18:47:53,486 - right_count:350	total:433	 Answer ACC: 0.8083140877598153
+2023-07-21 18:47:53,487 - right_codes_count:1788	total:1963	Code ACC: 0.9108507386653082	wrong_be_tree_count:23	wrong_total:83	 wrong be tree ACC: 0.27710843373493976
+2023-07-21 18:47:53,487 - right_checker:1788	total:1963	checker ACC: 0.9108507633209229	temp:0	temp1:0	wrong_total:83	
+2023-07-21 18:48:34,940 - 
+
+2023-07-21 18:48:34,940 - epoch:45,	loss:840.9811413288116	loss1:299.43958377838135
+2023-07-21 18:48:49,252 - right_count:352	total:433	 Answer ACC: 0.812933025404157
+2023-07-21 18:48:49,253 - right_codes_count:1777	total:1963	Code ACC: 0.9052470708099847	wrong_be_tree_count:27	wrong_total:81	 wrong be tree ACC: 0.3333333333333333
+2023-07-21 18:48:49,253 - right_checker:1777	total:1963	checker ACC: 0.9052470922470093	temp:0	temp1:0	wrong_total:81	
+2023-07-21 18:49:25,642 - 
+
+2023-07-21 18:49:25,642 - epoch:46,	loss:826.5867291688919	loss1:288.34922790527344
+2023-07-21 18:49:39,417 - right_count:351	total:433	 Answer ACC: 0.8106235565819861
+2023-07-21 18:49:39,418 - right_codes_count:1790	total:1963	Code ACC: 0.9118695873662761	wrong_be_tree_count:34	wrong_total:82	 wrong be tree ACC: 0.4146341463414634
+2023-07-21 18:49:39,418 - right_checker:1790	total:1963	checker ACC: 0.9118696451187134	temp:0	temp1:0	wrong_total:82	
+2023-07-21 18:50:13,413 - 
+
+2023-07-21 18:50:13,413 - epoch:47,	loss:885.2497310638428	loss1:255.07816410064697
+2023-07-21 18:50:25,885 - right_count:353	total:433	 Answer ACC: 0.815242494226328
+2023-07-21 18:50:25,885 - right_codes_count:1774	total:1963	Code ACC: 0.9037187977585328	wrong_be_tree_count:35	wrong_total:80	 wrong be tree ACC: 0.4375
+2023-07-21 18:50:25,885 - right_checker:1774	total:1963	checker ACC: 0.9037188291549683	temp:0	temp1:0	wrong_total:80	
+2023-07-21 18:50:51,435 - 
+
+2023-07-21 18:50:51,436 - epoch:48,	loss:760.8414406776428	loss1:273.09999084472656
+2023-07-21 18:51:07,861 - right_count:350	total:433	 Answer ACC: 0.8083140877598153
+2023-07-21 18:51:07,861 - right_codes_count:1782	total:1963	Code ACC: 0.9077941925624045	wrong_be_tree_count:31	wrong_total:83	 wrong be tree ACC: 0.37349397590361444
+2023-07-21 18:51:07,861 - right_checker:1782	total:1963	checker ACC: 0.9077942371368408	temp:0	temp1:0	wrong_total:83	
+2023-07-21 18:51:34,643 - 
+
+2023-07-21 18:51:34,644 - epoch:49,	loss:726.5456961393356	loss1:255.07816314697266
+2023-07-21 18:51:48,239 - right_count:352	total:433	 Answer ACC: 0.812933025404157
+2023-07-21 18:51:48,240 - right_codes_count:1786	total:1963	Code ACC: 0.9098318899643403	wrong_be_tree_count:22	wrong_total:81	 wrong be tree ACC: 0.2716049382716049
+2023-07-21 18:51:48,240 - right_checker:1786	total:1963	checker ACC: 0.9098319411277771	temp:0	temp1:0	wrong_total:81	
+2023-07-21 18:52:10,735 - 
+
+2023-07-21 18:52:10,735 - epoch:50,	loss:758.5106077194214	loss1:242.60151386260986
+2023-07-21 18:52:27,133 - right_count:347	total:433	 Answer ACC: 0.8013856812933026
+2023-07-21 18:52:27,133 - right_codes_count:1777	total:1963	Code ACC: 0.9052470708099847	wrong_be_tree_count:35	wrong_total:86	 wrong be tree ACC: 0.4069767441860465
+2023-07-21 18:52:27,133 - right_checker:1777	total:1963	checker ACC: 0.9052470922470093	temp:0	temp1:0	wrong_total:86	
+2023-07-21 18:52:41,351 - 
+
+2023-07-21 18:52:41,351 - epoch:51,	loss:679.2343943119049	loss1:242.60151290893555
+2023-07-21 18:53:01,423 - right_count:357	total:433	 Answer ACC: 0.8244803695150116
+2023-07-21 18:53:01,423 - right_codes_count:1789	total:1963	Code ACC: 0.9113601630157921	wrong_be_tree_count:29	wrong_total:76	 wrong be tree ACC: 0.3815789473684211
+2023-07-21 18:53:01,424 - right_checker:1789	total:1963	checker ACC: 0.9113602042198181	temp:0	temp1:0	wrong_total:76	
+2023-07-21 18:53:15,330 - 
+
+2023-07-21 18:53:15,331 - epoch:52,	loss:641.2505019307137	loss1:227.35227584838867
+2023-07-21 18:53:34,005 - right_count:353	total:433	 Answer ACC: 0.815242494226328
+2023-07-21 18:53:34,005 - right_codes_count:1790	total:1963	Code ACC: 0.9118695873662761	wrong_be_tree_count:27	wrong_total:80	 wrong be tree ACC: 0.3375
+2023-07-21 18:53:34,006 - right_checker:1790	total:1963	checker ACC: 0.9118696451187134	temp:0	temp1:0	wrong_total:80	
+2023-07-21 18:53:53,333 - 
+
+2023-07-21 18:53:53,334 - epoch:53,	loss:656.0479066371918	loss1:221.80709838867188
+2023-07-21 18:54:10,433 - right_count:343	total:433	 Answer ACC: 0.792147806004619
+2023-07-21 18:54:10,433 - right_codes_count:1776	total:1963	Code ACC: 0.9047376464595007	wrong_be_tree_count:32	wrong_total:90	 wrong be tree ACC: 0.35555555555555557
+2023-07-21 18:54:10,434 - right_checker:1776	total:1963	checker ACC: 0.904737651348114	temp:0	temp1:0	wrong_total:90	
+2023-07-21 18:54:32,318 - 
+
+2023-07-21 18:54:32,318 - epoch:54,	loss:602.3280527293682	loss1:189.9223279953003
+2023-07-21 18:54:49,885 - right_count:353	total:433	 Answer ACC: 0.815242494226328
+2023-07-21 18:54:49,885 - right_codes_count:1786	total:1963	Code ACC: 0.9098318899643403	wrong_be_tree_count:31	wrong_total:80	 wrong be tree ACC: 0.3875
+2023-07-21 18:54:49,886 - right_checker:1786	total:1963	checker ACC: 0.9098319411277771	temp:0	temp1:0	wrong_total:80	
+2023-07-21 18:55:06,276 - 
+
+2023-07-21 18:55:06,276 - epoch:55,	loss:615.6822440624237	loss1:199.6263885498047
+2023-07-21 18:55:26,990 - right_count:356	total:433	 Answer ACC: 0.8221709006928406
+2023-07-21 18:55:26,991 - right_codes_count:1794	total:1963	Code ACC: 0.9139072847682119	wrong_be_tree_count:29	wrong_total:77	 wrong be tree ACC: 0.37662337662337664
+2023-07-21 18:55:26,991 - right_checker:1794	total:1963	checker ACC: 0.9139072895050049	temp:0	temp1:0	wrong_total:77	
+2023-07-21 18:55:40,964 - 
+
+2023-07-21 18:55:40,964 - epoch:56,	loss:597.7391464710236	loss1:203.78527164459229
+2023-07-21 18:55:59,413 - right_count:354	total:433	 Answer ACC: 0.8175519630484989
+2023-07-21 18:55:59,413 - right_codes_count:1790	total:1963	Code ACC: 0.9118695873662761	wrong_be_tree_count:26	wrong_total:79	 wrong be tree ACC: 0.3291139240506329
+2023-07-21 18:55:59,414 - right_checker:1790	total:1963	checker ACC: 0.9118696451187134	temp:0	temp1:0	wrong_total:79	
+2023-07-21 18:56:12,699 - 
+
+2023-07-21 18:56:12,699 - epoch:57,	loss:586.3396200835705	loss1:189.92232704162598
+2023-07-21 18:56:19,534 - right_count:352	total:433	 Answer ACC: 0.812933025404157
+2023-07-21 18:56:19,534 - right_codes_count:1784	total:1963	Code ACC: 0.9088130412633724	wrong_be_tree_count:30	wrong_total:81	 wrong be tree ACC: 0.37037037037037035
+2023-07-21 18:56:19,534 - right_checker:1784	total:1963	checker ACC: 0.9088130593299866	temp:0	temp1:0	wrong_total:81	
+2023-07-21 18:56:47,506 - 
+
+2023-07-21 18:56:47,507 - epoch:58,	loss:596.0458643138409	loss1:219.0345106124878
+2023-07-21 18:56:59,463 - right_count:358	total:433	 Answer ACC: 0.8267898383371824
+2023-07-21 18:56:59,463 - right_codes_count:1794	total:1963	Code ACC: 0.9139072847682119	wrong_be_tree_count:30	wrong_total:75	 wrong be tree ACC: 0.4
+2023-07-21 18:56:59,463 - right_checker:1794	total:1963	checker ACC: 0.9139072895050049	temp:0	temp1:0	wrong_total:75	
+2023-07-21 18:57:29,796 - 
+
+2023-07-21 18:57:29,797 - epoch:59,	loss:571.538752913475	loss1:209.33044910430908
+2023-07-21 18:57:41,876 - right_count:354	total:433	 Answer ACC: 0.8175519630484989
+2023-07-21 18:57:41,876 - right_codes_count:1788	total:1963	Code ACC: 0.9108507386653082	wrong_be_tree_count:28	wrong_total:79	 wrong be tree ACC: 0.35443037974683544
+2023-07-21 18:57:41,877 - right_checker:1788	total:1963	checker ACC: 0.9108507633209229	temp:0	temp1:0	wrong_total:79	
+2023-07-21 18:58:13,195 - 
+
+2023-07-21 18:58:13,195 - epoch:60,	loss:576.8949411511421	loss1:209.33044910430908
+2023-07-21 18:58:27,624 - right_count:354	total:433	 Answer ACC: 0.8175519630484989
+2023-07-21 18:58:27,624 - right_codes_count:1789	total:1963	Code ACC: 0.9113601630157921	wrong_be_tree_count:27	wrong_total:79	 wrong be tree ACC: 0.34177215189873417
+2023-07-21 18:58:27,624 - right_checker:1789	total:1963	checker ACC: 0.9113602042198181	temp:0	temp1:0	wrong_total:79	
+2023-07-21 18:59:02,000 - 
+
+2023-07-21 18:59:02,001 - epoch:61,	loss:568.9002935886383	loss1:187.1497392654419
+2023-07-21 18:59:14,221 - right_count:357	total:433	 Answer ACC: 0.8244803695150116
+2023-07-21 18:59:14,222 - right_codes_count:1794	total:1963	Code ACC: 0.9139072847682119	wrong_be_tree_count:26	wrong_total:76	 wrong be tree ACC: 0.34210526315789475
+2023-07-21 18:59:14,222 - right_checker:1794	total:1963	checker ACC: 0.9139072895050049	temp:0	temp1:0	wrong_total:76	
+2023-07-21 18:59:43,864 - 
+
+2023-07-21 18:59:43,864 - epoch:62,	loss:544.6333087682724	loss1:202.3989772796631
+2023-07-21 18:59:55,968 - right_count:357	total:433	 Answer ACC: 0.8244803695150116
+2023-07-21 18:59:55,968 - right_codes_count:1785	total:1963	Code ACC: 0.9093224656138563	wrong_be_tree_count:29	wrong_total:76	 wrong be tree ACC: 0.3815789473684211
+2023-07-21 18:59:55,968 - right_checker:1785	total:1963	checker ACC: 0.9093225002288818	temp:0	temp1:0	wrong_total:76	
+2023-07-21 19:00:30,694 - 
+
+2023-07-21 19:00:30,694 - epoch:63,	loss:547.7345118820667	loss1:195.4675064086914
+2023-07-21 19:00:42,656 - right_count:358	total:433	 Answer ACC: 0.8267898383371824
+2023-07-21 19:00:42,656 - right_codes_count:1794	total:1963	Code ACC: 0.9139072847682119	wrong_be_tree_count:27	wrong_total:75	 wrong be tree ACC: 0.36
+2023-07-21 19:00:42,656 - right_checker:1794	total:1963	checker ACC: 0.9139072895050049	temp:0	temp1:0	wrong_total:75	
+2023-07-21 19:01:16,697 - 
+
+2023-07-21 19:01:16,698 - epoch:64,	loss:525.7853887081146	loss1:194.0812110900879
+2023-07-21 19:01:28,990 - right_count:350	total:433	 Answer ACC: 0.8083140877598153
+2023-07-21 19:01:28,990 - right_codes_count:1784	total:1963	Code ACC: 0.9088130412633724	wrong_be_tree_count:35	wrong_total:83	 wrong be tree ACC: 0.42168674698795183
+2023-07-21 19:01:28,990 - right_checker:1784	total:1963	checker ACC: 0.9088130593299866	temp:0	temp1:0	wrong_total:83	
+2023-07-21 19:01:58,897 - 
+
+2023-07-21 19:01:58,897 - epoch:65,	loss:541.0095798894763	loss1:198.2400941848755
+2023-07-21 19:02:11,464 - right_count:354	total:433	 Answer ACC: 0.8175519630484989
+2023-07-21 19:02:11,464 - right_codes_count:1788	total:1963	Code ACC: 0.9108507386653082	wrong_be_tree_count:29	wrong_total:79	 wrong be tree ACC: 0.3670886075949367
+2023-07-21 19:02:11,464 - right_checker:1788	total:1963	checker ACC: 0.9108507633209229	temp:0	temp1:0	wrong_total:79	
+2023-07-21 19:02:46,490 - 
+
+2023-07-21 19:02:46,491 - epoch:66,	loss:510.69135624170303	loss1:171.9005012512207
+2023-07-21 19:03:00,642 - right_count:357	total:433	 Answer ACC: 0.8244803695150116
+2023-07-21 19:03:00,642 - right_codes_count:1795	total:1963	Code ACC: 0.9144167091186959	wrong_be_tree_count:27	wrong_total:76	 wrong be tree ACC: 0.35526315789473684
+2023-07-21 19:03:00,644 - right_checker:1795	total:1963	checker ACC: 0.9144167304039001	temp:0	temp1:0	wrong_total:76	
+2023-07-21 19:03:21,703 - 
+
+2023-07-21 19:03:21,703 - epoch:67,	loss:476.9036417044699	loss1:177.4456787109375
+2023-07-21 19:03:44,808 - right_count:351	total:433	 Answer ACC: 0.8106235565819861
+2023-07-21 19:03:44,809 - right_codes_count:1783	total:1963	Code ACC: 0.9083036169128884	wrong_be_tree_count:34	wrong_total:82	 wrong be tree ACC: 0.4146341463414634
+2023-07-21 19:03:44,809 - right_checker:1783	total:1963	checker ACC: 0.9083036184310913	temp:0	temp1:0	wrong_total:82	
+2023-07-21 19:04:02,188 - 
+
+2023-07-21 19:04:02,188 - epoch:68,	loss:507.5385106187314	loss1:176.0593843460083
+2023-07-21 19:04:24,292 - right_count:358	total:433	 Answer ACC: 0.8267898383371824
+2023-07-21 19:04:24,292 - right_codes_count:1785	total:1963	Code ACC: 0.9093224656138563	wrong_be_tree_count:30	wrong_total:75	 wrong be tree ACC: 0.4
+2023-07-21 19:04:24,292 - right_checker:1785	total:1963	checker ACC: 0.9093225002288818	temp:0	temp1:0	wrong_total:75	
+2023-07-21 19:04:40,520 - 
+
+2023-07-21 19:04:40,520 - epoch:69,	loss:469.4495320916176	loss1:170.5142068862915
+2023-07-21 19:04:56,127 - right_count:359	total:433	 Answer ACC: 0.8290993071593533
+2023-07-21 19:04:56,127 - right_codes_count:1789	total:1963	Code ACC: 0.9113601630157921	wrong_be_tree_count:25	wrong_total:74	 wrong be tree ACC: 0.33783783783783783
+2023-07-21 19:04:56,129 - right_checker:1789	total:1963	checker ACC: 0.9113602042198181	temp:0	temp1:0	wrong_total:74	
+2023-07-21 19:05:18,276 - 
+
+2023-07-21 19:05:18,276 - epoch:70,	loss:504.0177049636841	loss1:180.2182674407959
+2023-07-21 19:05:27,448 - right_count:365	total:433	 Answer ACC: 0.8429561200923787
+2023-07-21 19:05:27,448 - right_codes_count:1794	total:1963	Code ACC: 0.9139072847682119	wrong_be_tree_count:23	wrong_total:68	 wrong be tree ACC: 0.3382352941176471
+2023-07-21 19:05:27,448 - right_checker:1794	total:1963	checker ACC: 0.9139072895050049	temp:0	temp1:0	wrong_total:68	
+2023-07-21 19:05:27,450 - save best model to ./output/model_save_name_2/best_model
+2023-07-21 19:05:57,927 - 
+
+2023-07-21 19:05:57,927 - epoch:71,	loss:494.8950589299202	loss1:187.1497392654419
+2023-07-21 19:06:08,127 - right_count:357	total:433	 Answer ACC: 0.8244803695150116
+2023-07-21 19:06:08,127 - right_codes_count:1788	total:1963	Code ACC: 0.9108507386653082	wrong_be_tree_count:30	wrong_total:76	 wrong be tree ACC: 0.39473684210526316
+2023-07-21 19:06:08,128 - right_checker:1788	total:1963	checker ACC: 0.9108507633209229	temp:0	temp1:0	wrong_total:76	
+2023-07-21 19:06:37,842 - 
+
+2023-07-21 19:06:37,842 - epoch:72,	loss:468.38973101973534	loss1:166.3553237915039
+2023-07-21 19:06:51,810 - right_count:355	total:433	 Answer ACC: 0.8198614318706697
+2023-07-21 19:06:51,810 - right_codes_count:1794	total:1963	Code ACC: 0.9139072847682119	wrong_be_tree_count:33	wrong_total:78	 wrong be tree ACC: 0.4230769230769231
+2023-07-21 19:06:51,811 - right_checker:1794	total:1963	checker ACC: 0.9139072895050049	temp:0	temp1:0	wrong_total:78	
+2023-07-21 19:07:27,920 - 
+
+2023-07-21 19:07:27,920 - epoch:73,	loss:465.06615537405014	loss1:169.1279125213623
+2023-07-21 19:07:42,012 - right_count:358	total:433	 Answer ACC: 0.8267898383371824
+2023-07-21 19:07:42,012 - right_codes_count:1788	total:1963	Code ACC: 0.9108507386653082	wrong_be_tree_count:28	wrong_total:75	 wrong be tree ACC: 0.37333333333333335
+2023-07-21 19:07:42,013 - right_checker:1788	total:1963	checker ACC: 0.9108507633209229	temp:0	temp1:0	wrong_total:75	
+2023-07-21 19:08:19,112 - 
+
+2023-07-21 19:08:19,113 - epoch:74,	loss:501.8444646000862	loss1:191.3086223602295
+2023-07-21 19:08:33,414 - right_count:358	total:433	 Answer ACC: 0.8267898383371824
+2023-07-21 19:08:33,414 - right_codes_count:1787	total:1963	Code ACC: 0.9103413143148242	wrong_be_tree_count:28	wrong_total:75	 wrong be tree ACC: 0.37333333333333335
+2023-07-21 19:08:33,416 - right_checker:1787	total:1963	checker ACC: 0.9103413224220276	temp:0	temp1:0	wrong_total:75	
+2023-07-21 19:09:05,275 - 
+
+2023-07-21 19:09:05,275 - epoch:75,	loss:465.8877484202385	loss1:173.2867956161499
+2023-07-21 19:09:19,294 - right_count:354	total:433	 Answer ACC: 0.8175519630484989
+2023-07-21 19:09:19,294 - right_codes_count:1787	total:1963	Code ACC: 0.9103413143148242	wrong_be_tree_count:25	wrong_total:79	 wrong be tree ACC: 0.31645569620253167
+2023-07-21 19:09:19,294 - right_checker:1787	total:1963	checker ACC: 0.9103413224220276	temp:0	temp1:0	wrong_total:79	
+2023-07-21 19:09:51,418 - 
+
+2023-07-21 19:09:51,419 - epoch:76,	loss:446.37151872366667	loss1:163.5827350616455
+2023-07-21 19:10:04,780 - right_count:352	total:433	 Answer ACC: 0.812933025404157
+2023-07-21 19:10:04,781 - right_codes_count:1787	total:1963	Code ACC: 0.9103413143148242	wrong_be_tree_count:28	wrong_total:81	 wrong be tree ACC: 0.345679012345679
+2023-07-21 19:10:04,781 - right_checker:1787	total:1963	checker ACC: 0.9103413224220276	temp:0	temp1:0	wrong_total:81	
+2023-07-21 19:10:35,717 - 
+
+2023-07-21 19:10:35,717 - epoch:77,	loss:439.9629759788513	loss1:170.51420783996582
+2023-07-21 19:10:54,726 - right_count:357	total:433	 Answer ACC: 0.8244803695150116
+2023-07-21 19:10:54,726 - right_codes_count:1782	total:1963	Code ACC: 0.9077941925624045	wrong_be_tree_count:29	wrong_total:76	 wrong be tree ACC: 0.3815789473684211
+2023-07-21 19:10:54,727 - right_checker:1782	total:1963	checker ACC: 0.9077942371368408	temp:0	temp1:0	wrong_total:76	
+2023-07-21 19:11:27,710 - 
+
+2023-07-21 19:11:27,710 - epoch:78,	loss:466.6137785613537	loss1:167.7416181564331
+2023-07-21 19:11:43,427 - right_count:357	total:433	 Answer ACC: 0.8244803695150116
+2023-07-21 19:11:43,428 - right_codes_count:1795	total:1963	Code ACC: 0.9144167091186959	wrong_be_tree_count:26	wrong_total:76	 wrong be tree ACC: 0.34210526315789475
+2023-07-21 19:11:43,428 - right_checker:1795	total:1963	checker ACC: 0.9144167304039001	temp:0	temp1:0	wrong_total:76	
+2023-07-21 19:12:16,066 - 
+
+2023-07-21 19:12:16,066 - epoch:79,	loss:463.18265452980995	loss1:153.8786745071411
+2023-07-21 19:12:30,859 - right_count:352	total:433	 Answer ACC: 0.812933025404157
+2023-07-21 19:12:30,859 - right_codes_count:1786	total:1963	Code ACC: 0.9098318899643403	wrong_be_tree_count:32	wrong_total:81	 wrong be tree ACC: 0.3950617283950617
+2023-07-21 19:12:30,860 - right_checker:1786	total:1963	checker ACC: 0.9098319411277771	temp:0	temp1:0	wrong_total:81	
+2023-07-21 19:13:10,226 - 
+
+2023-07-21 19:13:10,227 - epoch:80,	loss:453.92482890188694	loss1:163.5827350616455
+2023-07-21 19:13:24,150 - right_count:353	total:433	 Answer ACC: 0.815242494226328
+2023-07-21 19:13:24,150 - right_codes_count:1782	total:1963	Code ACC: 0.9077941925624045	wrong_be_tree_count:34	wrong_total:80	 wrong be tree ACC: 0.425
+2023-07-21 19:13:24,150 - right_checker:1782	total:1963	checker ACC: 0.9077942371368408	temp:0	temp1:0	wrong_total:80	
+2023-07-21 19:13:59,860 - 
+
+2023-07-21 19:13:59,860 - epoch:81,	loss:434.63817685842514	loss1:155.2649688720703
+2023-07-21 19:14:14,231 - right_count:352	total:433	 Answer ACC: 0.812933025404157
+2023-07-21 19:14:14,231 - right_codes_count:1782	total:1963	Code ACC: 0.9077941925624045	wrong_be_tree_count:32	wrong_total:81	 wrong be tree ACC: 0.3950617283950617
+2023-07-21 19:14:14,233 - right_checker:1782	total:1963	checker ACC: 0.9077942371368408	temp:0	temp1:0	wrong_total:81	
+2023-07-21 19:14:48,036 - 
+
+2023-07-21 19:14:48,036 - epoch:82,	loss:437.39252921938896	loss1:163.5827350616455
+2023-07-21 19:15:01,853 - right_count:354	total:433	 Answer ACC: 0.8175519630484989
+2023-07-21 19:15:01,853 - right_codes_count:1789	total:1963	Code ACC: 0.9113601630157921	wrong_be_tree_count:33	wrong_total:79	 wrong be tree ACC: 0.4177215189873418
+2023-07-21 19:15:01,853 - right_checker:1789	total:1963	checker ACC: 0.9113602042198181	temp:0	temp1:0	wrong_total:79	
+2023-07-21 19:15:35,948 - 
+
+2023-07-21 19:15:35,948 - epoch:83,	loss:417.77017463743687	loss1:145.56090831756592
+2023-07-21 19:15:49,221 - right_count:359	total:433	 Answer ACC: 0.8290993071593533
+2023-07-21 19:15:49,221 - right_codes_count:1794	total:1963	Code ACC: 0.9139072847682119	wrong_be_tree_count:27	wrong_total:74	 wrong be tree ACC: 0.36486486486486486
+2023-07-21 19:15:49,222 - right_checker:1794	total:1963	checker ACC: 0.9139072895050049	temp:0	temp1:0	wrong_total:74	
+2023-07-21 19:16:20,371 - 
+
+2023-07-21 19:16:20,371 - epoch:84,	loss:438.33610086143017	loss1:149.71979141235352
+2023-07-21 19:16:33,516 - right_count:358	total:433	 Answer ACC: 0.8267898383371824
+2023-07-21 19:16:33,516 - right_codes_count:1796	total:1963	Code ACC: 0.9149261334691798	wrong_be_tree_count:28	wrong_total:75	 wrong be tree ACC: 0.37333333333333335
+2023-07-21 19:16:33,517 - right_checker:1796	total:1963	checker ACC: 0.9149261713027954	temp:0	temp1:0	wrong_total:75	
+2023-07-21 19:17:05,089 - 
+
+2023-07-21 19:17:05,089 - epoch:85,	loss:420.6742874532938	loss1:156.6512622833252
+2023-07-21 19:17:23,561 - right_count:357	total:433	 Answer ACC: 0.8244803695150116
+2023-07-21 19:17:23,561 - right_codes_count:1788	total:1963	Code ACC: 0.9108507386653082	wrong_be_tree_count:31	wrong_total:76	 wrong be tree ACC: 0.40789473684210525
+2023-07-21 19:17:23,562 - right_checker:1788	total:1963	checker ACC: 0.9108507633209229	temp:0	temp1:0	wrong_total:76	
+2023-07-21 19:17:51,246 - 
+
+2023-07-21 19:17:51,246 - epoch:86,	loss:445.9344197511673	loss1:153.8786745071411
+2023-07-21 19:18:07,179 - right_count:357	total:433	 Answer ACC: 0.8244803695150116
+2023-07-21 19:18:07,179 - right_codes_count:1787	total:1963	Code ACC: 0.9103413143148242	wrong_be_tree_count:30	wrong_total:76	 wrong be tree ACC: 0.39473684210526316
+2023-07-21 19:18:07,180 - right_checker:1787	total:1963	checker ACC: 0.9103413224220276	temp:0	temp1:0	wrong_total:76	
+2023-07-21 19:18:38,209 - 
+
+2023-07-21 19:18:38,209 - epoch:87,	loss:412.7219424843788	loss1:156.6512632369995
+2023-07-21 19:18:52,225 - right_count:356	total:433	 Answer ACC: 0.8221709006928406
+2023-07-21 19:18:52,225 - right_codes_count:1791	total:1963	Code ACC: 0.9123790117167601	wrong_be_tree_count:30	wrong_total:77	 wrong be tree ACC: 0.38961038961038963
+2023-07-21 19:18:52,225 - right_checker:1791	total:1963	checker ACC: 0.9123790264129639	temp:0	temp1:0	wrong_total:77	
+2023-07-21 19:19:25,236 - 
+
+2023-07-21 19:19:25,236 - epoch:88,	loss:438.7067150771618	loss1:158.0375576019287
+2023-07-21 19:19:38,743 - right_count:357	total:433	 Answer ACC: 0.8244803695150116
+2023-07-21 19:19:38,743 - right_codes_count:1789	total:1963	Code ACC: 0.9113601630157921	wrong_be_tree_count:30	wrong_total:76	 wrong be tree ACC: 0.39473684210526316
+2023-07-21 19:19:38,745 - right_checker:1789	total:1963	checker ACC: 0.9113602042198181	temp:0	temp1:0	wrong_total:76	
+2023-07-21 19:20:12,093 - 
+
+2023-07-21 19:20:12,093 - epoch:89,	loss:419.9997761249542	loss1:153.8786745071411
+2023-07-21 19:20:25,788 - right_count:358	total:433	 Answer ACC: 0.8267898383371824
+2023-07-21 19:20:25,788 - right_codes_count:1788	total:1963	Code ACC: 0.9108507386653082	wrong_be_tree_count:29	wrong_total:75	 wrong be tree ACC: 0.38666666666666666
+2023-07-21 19:20:25,788 - right_checker:1788	total:1963	checker ACC: 0.9108507633209229	temp:0	temp1:0	wrong_total:75	
+2023-07-21 19:21:01,376 - 
+
+2023-07-21 19:21:01,377 - epoch:90,	loss:418.25938033591956	loss1:151.10608577728271
+2023-07-21 19:21:15,780 - right_count:353	total:433	 Answer ACC: 0.815242494226328
+2023-07-21 19:21:15,780 - right_codes_count:1786	total:1963	Code ACC: 0.9098318899643403	wrong_be_tree_count:33	wrong_total:80	 wrong be tree ACC: 0.4125
+2023-07-21 19:21:15,781 - right_checker:1786	total:1963	checker ACC: 0.9098319411277771	temp:0	temp1:0	wrong_total:80	
+2023-07-21 19:21:47,186 - 
+
+2023-07-21 19:21:47,186 - epoch:91,	loss:396.690376073122	loss1:151.10608577728271
+2023-07-21 19:22:01,873 - right_count:353	total:433	 Answer ACC: 0.815242494226328
+2023-07-21 19:22:01,873 - right_codes_count:1786	total:1963	Code ACC: 0.9098318899643403	wrong_be_tree_count:34	wrong_total:80	 wrong be tree ACC: 0.425
+2023-07-21 19:22:01,874 - right_checker:1786	total:1963	checker ACC: 0.9098319411277771	temp:0	temp1:0	wrong_total:80	
+2023-07-21 19:22:33,576 - 
+
+2023-07-21 19:22:33,576 - epoch:92,	loss:395.35024158656597	loss1:148.33349704742432
+2023-07-21 19:22:48,071 - right_count:352	total:433	 Answer ACC: 0.812933025404157
+2023-07-21 19:22:48,071 - right_codes_count:1785	total:1963	Code ACC: 0.9093224656138563	wrong_be_tree_count:33	wrong_total:81	 wrong be tree ACC: 0.4074074074074074
+2023-07-21 19:22:48,071 - right_checker:1785	total:1963	checker ACC: 0.9093225002288818	temp:0	temp1:0	wrong_total:81	
+2023-07-21 19:23:28,739 - 
+
+2023-07-21 19:23:28,740 - epoch:93,	loss:412.3188033103943	loss1:152.4923801422119
+2023-07-21 19:23:43,024 - right_count:353	total:433	 Answer ACC: 0.815242494226328
+2023-07-21 19:23:43,024 - right_codes_count:1786	total:1963	Code ACC: 0.9098318899643403	wrong_be_tree_count:32	wrong_total:80	 wrong be tree ACC: 0.4
+2023-07-21 19:23:43,024 - right_checker:1786	total:1963	checker ACC: 0.9098319411277771	temp:0	temp1:0	wrong_total:80	
+2023-07-21 19:24:17,721 - 
+
+2023-07-21 19:24:17,721 - epoch:94,	loss:397.600595086813	loss1:144.17461395263672
+2023-07-21 19:24:32,282 - right_count:355	total:433	 Answer ACC: 0.8198614318706697
+2023-07-21 19:24:32,283 - right_codes_count:1785	total:1963	Code ACC: 0.9093224656138563	wrong_be_tree_count:30	wrong_total:78	 wrong be tree ACC: 0.38461538461538464
+2023-07-21 19:24:32,283 - right_checker:1785	total:1963	checker ACC: 0.9093225002288818	temp:0	temp1:0	wrong_total:78	
+2023-07-21 19:25:06,050 - 
+
+2023-07-21 19:25:06,051 - epoch:95,	loss:434.565159201622	loss1:140.01573085784912
+2023-07-21 19:25:20,951 - right_count:354	total:433	 Answer ACC: 0.8175519630484989
+2023-07-21 19:25:20,951 - right_codes_count:1788	total:1963	Code ACC: 0.9108507386653082	wrong_be_tree_count:32	wrong_total:79	 wrong be tree ACC: 0.4050632911392405
+2023-07-21 19:25:20,952 - right_checker:1788	total:1963	checker ACC: 0.9108507633209229	temp:0	temp1:0	wrong_total:79	
+2023-07-21 19:25:54,429 - 
+
+2023-07-21 19:25:54,430 - epoch:96,	loss:411.5930694639683	loss1:145.56090831756592
+2023-07-21 19:26:13,039 - right_count:356	total:433	 Answer ACC: 0.8221709006928406
+2023-07-21 19:26:13,040 - right_codes_count:1786	total:1963	Code ACC: 0.9098318899643403	wrong_be_tree_count:34	wrong_total:77	 wrong be tree ACC: 0.44155844155844154
+2023-07-21 19:26:13,040 - right_checker:1786	total:1963	checker ACC: 0.9098319411277771	temp:0	temp1:0	wrong_total:77	
+2023-07-21 19:26:45,979 - 
+
+2023-07-21 19:26:45,979 - epoch:97,	loss:388.28153942525387	loss1:148.33349704742432
+2023-07-21 19:27:02,331 - right_count:355	total:433	 Answer ACC: 0.8198614318706697
+2023-07-21 19:27:02,331 - right_codes_count:1784	total:1963	Code ACC: 0.9088130412633724	wrong_be_tree_count:28	wrong_total:78	 wrong be tree ACC: 0.358974358974359
+2023-07-21 19:27:02,333 - right_checker:1784	total:1963	checker ACC: 0.9088130593299866	temp:0	temp1:0	wrong_total:78	
+2023-07-21 19:27:36,786 - 
+
+2023-07-21 19:27:36,786 - epoch:98,	loss:387.75690162181854	loss1:145.56090831756592
+2023-07-21 19:27:50,746 - right_count:355	total:433	 Answer ACC: 0.8198614318706697
+2023-07-21 19:27:50,746 - right_codes_count:1785	total:1963	Code ACC: 0.9093224656138563	wrong_be_tree_count:30	wrong_total:78	 wrong be tree ACC: 0.38461538461538464
+2023-07-21 19:27:50,746 - right_checker:1785	total:1963	checker ACC: 0.9093225002288818	temp:0	temp1:0	wrong_total:78	
+2023-07-21 19:28:30,638 - 
+
+2023-07-21 19:28:30,638 - epoch:99,	loss:384.9291947707534	loss1:146.94720268249512
+2023-07-21 19:28:45,246 - right_count:355	total:433	 Answer ACC: 0.8198614318706697
+2023-07-21 19:28:45,246 - right_codes_count:1787	total:1963	Code ACC: 0.9103413143148242	wrong_be_tree_count:30	wrong_total:78	 wrong be tree ACC: 0.38461538461538464
+2023-07-21 19:28:45,246 - right_checker:1787	total:1963	checker ACC: 0.9103413224220276	temp:0	temp1:0	wrong_total:78	
+2023-07-21 19:29:17,778 - 
+
+2023-07-21 19:29:17,778 - epoch:100,	loss:393.6936596184969	loss1:149.71979141235352
+2023-07-21 19:29:31,929 - right_count:355	total:433	 Answer ACC: 0.8198614318706697
+2023-07-21 19:29:31,929 - right_codes_count:1785	total:1963	Code ACC: 0.9093224656138563	wrong_be_tree_count:31	wrong_total:78	 wrong be tree ACC: 0.3974358974358974
+2023-07-21 19:29:31,930 - right_checker:1785	total:1963	checker ACC: 0.9093225002288818	temp:0	temp1:0	wrong_total:78	
+2023-07-21 19:30:04,441 - 
+
+2023-07-21 19:30:04,441 - epoch:101,	loss:396.86572171747684	loss1:144.17461395263672
+2023-07-21 19:30:18,107 - right_count:359	total:433	 Answer ACC: 0.8290993071593533
+2023-07-21 19:30:18,108 - right_codes_count:1788	total:1963	Code ACC: 0.9108507386653082	wrong_be_tree_count:29	wrong_total:74	 wrong be tree ACC: 0.3918918918918919
+2023-07-21 19:30:18,108 - right_checker:1788	total:1963	checker ACC: 0.9108507633209229	temp:0	temp1:0	wrong_total:74	
+2023-07-21 19:30:51,703 - 
+
+2023-07-21 19:30:51,704 - epoch:102,	loss:395.4902175664902	loss1:145.56090831756592
+2023-07-21 19:31:03,357 - right_count:362	total:433	 Answer ACC: 0.836027713625866
+2023-07-21 19:31:03,357 - right_codes_count:1792	total:1963	Code ACC: 0.912888436067244	wrong_be_tree_count:28	wrong_total:71	 wrong be tree ACC: 0.39436619718309857
+2023-07-21 19:31:03,357 - right_checker:1792	total:1963	checker ACC: 0.9128884673118591	temp:0	temp1:0	wrong_total:71	
+2023-07-21 19:31:46,979 - 
+
+2023-07-21 19:31:46,979 - epoch:103,	loss:393.7998678982258	loss1:153.8786745071411
+2023-07-21 19:32:00,114 - right_count:358	total:433	 Answer ACC: 0.8267898383371824
+2023-07-21 19:32:00,115 - right_codes_count:1788	total:1963	Code ACC: 0.9108507386653082	wrong_be_tree_count:30	wrong_total:75	 wrong be tree ACC: 0.4
+2023-07-21 19:32:00,115 - right_checker:1788	total:1963	checker ACC: 0.9108507633209229	temp:0	temp1:0	wrong_total:75	
+2023-07-21 19:32:31,656 - 
+
+2023-07-21 19:32:31,656 - epoch:104,	loss:374.1199088692665	loss1:141.40202522277832
+2023-07-21 19:32:50,377 - right_count:358	total:433	 Answer ACC: 0.8267898383371824
+2023-07-21 19:32:50,377 - right_codes_count:1790	total:1963	Code ACC: 0.9118695873662761	wrong_be_tree_count:29	wrong_total:75	 wrong be tree ACC: 0.38666666666666666
+2023-07-21 19:32:50,378 - right_checker:1790	total:1963	checker ACC: 0.9118696451187134	temp:0	temp1:0	wrong_total:75	
+2023-07-21 19:33:15,503 - 
+
+2023-07-21 19:33:15,503 - epoch:105,	loss:367.12601793184876	loss1:155.2649688720703
+2023-07-21 19:33:33,255 - right_count:358	total:433	 Answer ACC: 0.8267898383371824
+2023-07-21 19:33:33,256 - right_codes_count:1791	total:1963	Code ACC: 0.9123790117167601	wrong_be_tree_count:29	wrong_total:75	 wrong be tree ACC: 0.38666666666666666
+2023-07-21 19:33:33,257 - right_checker:1791	total:1963	checker ACC: 0.9123790264129639	temp:0	temp1:0	wrong_total:75	
+2023-07-21 19:33:59,032 - 
+
+2023-07-21 19:33:59,032 - epoch:106,	loss:382.8796407729387	loss1:148.33349704742432
+2023-07-21 19:34:22,440 - right_count:360	total:433	 Answer ACC: 0.8314087759815243
+2023-07-21 19:34:22,440 - right_codes_count:1789	total:1963	Code ACC: 0.9113601630157921	wrong_be_tree_count:27	wrong_total:73	 wrong be tree ACC: 0.3698630136986301
+2023-07-21 19:34:22,442 - right_checker:1789	total:1963	checker ACC: 0.9113602042198181	temp:0	temp1:0	wrong_total:73	
+2023-07-21 19:34:36,884 - 
+
+2023-07-21 19:34:36,884 - epoch:107,	loss:402.99049504101276	loss1:158.0375576019287
+2023-07-21 19:35:00,327 - right_count:359	total:433	 Answer ACC: 0.8290993071593533
+2023-07-21 19:35:00,327 - right_codes_count:1789	total:1963	Code ACC: 0.9113601630157921	wrong_be_tree_count:28	wrong_total:74	 wrong be tree ACC: 0.3783783783783784
+2023-07-21 19:35:00,328 - right_checker:1789	total:1963	checker ACC: 0.9113602042198181	temp:0	temp1:0	wrong_total:74	
+2023-07-21 19:35:14,054 - 
+
+2023-07-21 19:35:14,054 - epoch:108,	loss:390.5005489885807	loss1:142.78831958770752
+2023-07-21 19:35:37,609 - right_count:360	total:433	 Answer ACC: 0.8314087759815243
+2023-07-21 19:35:37,609 - right_codes_count:1789	total:1963	Code ACC: 0.9113601630157921	wrong_be_tree_count:27	wrong_total:73	 wrong be tree ACC: 0.3698630136986301
+2023-07-21 19:35:37,610 - right_checker:1789	total:1963	checker ACC: 0.9113602042198181	temp:0	temp1:0	wrong_total:73	
+2023-07-21 19:35:52,970 - 
+
+2023-07-21 19:35:52,971 - epoch:109,	loss:375.7029054015875	loss1:140.0157299041748
+2023-07-21 19:36:16,169 - right_count:358	total:433	 Answer ACC: 0.8267898383371824
+2023-07-21 19:36:16,170 - right_codes_count:1787	total:1963	Code ACC: 0.9103413143148242	wrong_be_tree_count:27	wrong_total:75	 wrong be tree ACC: 0.36
+2023-07-21 19:36:16,170 - right_checker:1787	total:1963	checker ACC: 0.9103413224220276	temp:0	temp1:0	wrong_total:75	
+2023-07-21 19:36:35,829 - 
+
+2023-07-21 19:36:35,830 - epoch:110,	loss:368.8294961452484	loss1:149.71979141235352
+2023-07-21 19:36:56,929 - right_count:358	total:433	 Answer ACC: 0.8267898383371824
+2023-07-21 19:36:56,930 - right_codes_count:1786	total:1963	Code ACC: 0.9098318899643403	wrong_be_tree_count:28	wrong_total:75	 wrong be tree ACC: 0.37333333333333335
+2023-07-21 19:36:56,930 - right_checker:1786	total:1963	checker ACC: 0.9098319411277771	temp:0	temp1:0	wrong_total:75	
+2023-07-21 19:37:18,624 - 
+
+2023-07-21 19:37:18,624 - epoch:111,	loss:370.2763389404863	loss1:146.94720268249512
+2023-07-21 19:37:41,918 - right_count:358	total:433	 Answer ACC: 0.8267898383371824
+2023-07-21 19:37:41,919 - right_codes_count:1787	total:1963	Code ACC: 0.9103413143148242	wrong_be_tree_count:27	wrong_total:75	 wrong be tree ACC: 0.36
+2023-07-21 19:37:41,919 - right_checker:1787	total:1963	checker ACC: 0.9103413224220276	temp:0	temp1:0	wrong_total:75	
+2023-07-21 19:37:57,912 - 
+
+2023-07-21 19:37:57,913 - epoch:112,	loss:376.1563756838441	loss1:137.24314212799072
+2023-07-21 19:38:22,941 - right_count:359	total:433	 Answer ACC: 0.8290993071593533
+2023-07-21 19:38:22,941 - right_codes_count:1788	total:1963	Code ACC: 0.9108507386653082	wrong_be_tree_count:28	wrong_total:74	 wrong be tree ACC: 0.3783783783783784
+2023-07-21 19:38:22,943 - right_checker:1788	total:1963	checker ACC: 0.9108507633209229	temp:0	temp1:0	wrong_total:74	
+2023-07-21 19:38:38,259 - 
+
+2023-07-21 19:38:38,259 - epoch:113,	loss:373.69719275832176	loss1:144.17461395263672
+2023-07-21 19:39:02,415 - right_count:359	total:433	 Answer ACC: 0.8290993071593533
+2023-07-21 19:39:02,415 - right_codes_count:1787	total:1963	Code ACC: 0.9103413143148242	wrong_be_tree_count:27	wrong_total:74	 wrong be tree ACC: 0.36486486486486486
+2023-07-21 19:39:02,416 - right_checker:1787	total:1963	checker ACC: 0.9103413224220276	temp:0	temp1:0	wrong_total:74	
+2023-07-21 19:39:23,856 - 
+
+2023-07-21 19:39:23,856 - epoch:114,	loss:373.27667488809675	loss1:149.71979141235352
+2023-07-21 19:39:44,606 - right_count:360	total:433	 Answer ACC: 0.8314087759815243
+2023-07-21 19:39:44,606 - right_codes_count:1788	total:1963	Code ACC: 0.9108507386653082	wrong_be_tree_count:27	wrong_total:73	 wrong be tree ACC: 0.3698630136986301
+2023-07-21 19:39:44,606 - right_checker:1788	total:1963	checker ACC: 0.9108507633209229	temp:0	temp1:0	wrong_total:73	
+2023-07-21 19:40:02,770 - 
+
+2023-07-21 19:40:02,770 - epoch:115,	loss:373.14712952263653	loss1:141.40202522277832
+2023-07-21 19:40:25,340 - right_count:358	total:433	 Answer ACC: 0.8267898383371824
+2023-07-21 19:40:25,340 - right_codes_count:1788	total:1963	Code ACC: 0.9108507386653082	wrong_be_tree_count:30	wrong_total:75	 wrong be tree ACC: 0.4
+2023-07-21 19:40:25,340 - right_checker:1788	total:1963	checker ACC: 0.9108507633209229	temp:0	temp1:0	wrong_total:75	
+2023-07-21 19:40:43,482 - 
+
+2023-07-21 19:40:43,483 - epoch:116,	loss:373.0889721028507	loss1:153.8786745071411
+2023-07-21 19:41:05,837 - right_count:358	total:433	 Answer ACC: 0.8267898383371824
+2023-07-21 19:41:05,837 - right_codes_count:1789	total:1963	Code ACC: 0.9113601630157921	wrong_be_tree_count:30	wrong_total:75	 wrong be tree ACC: 0.4
+2023-07-21 19:41:05,837 - right_checker:1789	total:1963	checker ACC: 0.9113602042198181	temp:0	temp1:0	wrong_total:75	
+2023-07-21 19:41:22,044 - 
+
+2023-07-21 19:41:22,044 - epoch:117,	loss:367.1768307611346	loss1:138.62943649291992
+2023-07-21 19:41:45,463 - right_count:358	total:433	 Answer ACC: 0.8267898383371824
+2023-07-21 19:41:45,463 - right_codes_count:1788	total:1963	Code ACC: 0.9108507386653082	wrong_be_tree_count:29	wrong_total:75	 wrong be tree ACC: 0.38666666666666666
+2023-07-21 19:41:45,463 - right_checker:1788	total:1963	checker ACC: 0.9108507633209229	temp:0	temp1:0	wrong_total:75	
+2023-07-21 19:41:59,901 - 
+
+2023-07-21 19:41:59,901 - epoch:118,	loss:373.9621383994818	loss1:134.470552444458
+2023-07-21 19:42:18,965 - right_count:358	total:433	 Answer ACC: 0.8267898383371824
+2023-07-21 19:42:18,965 - right_codes_count:1789	total:1963	Code ACC: 0.9113601630157921	wrong_be_tree_count:29	wrong_total:75	 wrong be tree ACC: 0.38666666666666666
+2023-07-21 19:42:18,966 - right_checker:1789	total:1963	checker ACC: 0.9113602042198181	temp:0	temp1:0	wrong_total:75	
+2023-07-21 19:42:36,557 - 
+
+2023-07-21 19:42:36,557 - epoch:119,	loss:371.8772449940443	loss1:135.85684776306152
+2023-07-21 19:42:50,126 - right_count:358	total:433	 Answer ACC: 0.8267898383371824
+2023-07-21 19:42:50,126 - right_codes_count:1789	total:1963	Code ACC: 0.9113601630157921	wrong_be_tree_count:29	wrong_total:75	 wrong be tree ACC: 0.38666666666666666
+2023-07-21 19:42:50,126 - right_checker:1789	total:1963	checker ACC: 0.9113602042198181	temp:0	temp1:0	wrong_total:75	
+2023-07-21 19:43:10,584 - 
+
+2023-07-21 19:43:10,585 - epoch:120,	loss:377.4688112139702	loss1:145.56090831756592
+2023-07-21 19:43:23,450 - right_count:358	total:433	 Answer ACC: 0.8267898383371824
+2023-07-21 19:43:23,450 - right_codes_count:1788	total:1963	Code ACC: 0.9108507386653082	wrong_be_tree_count:29	wrong_total:75	 wrong be tree ACC: 0.38666666666666666
+2023-07-21 19:43:23,452 - right_checker:1788	total:1963	checker ACC: 0.9108507633209229	temp:0	temp1:0	wrong_total:75	
+2023-07-21 19:43:44,437 - 
+
+2023-07-21 19:43:44,438 - epoch:121,	loss:374.3707945346832	loss1:141.40202522277832
+2023-07-21 19:43:56,697 - right_count:358	total:433	 Answer ACC: 0.8267898383371824
+2023-07-21 19:43:56,697 - right_codes_count:1788	total:1963	Code ACC: 0.9108507386653082	wrong_be_tree_count:29	wrong_total:75	 wrong be tree ACC: 0.38666666666666666
+2023-07-21 19:43:56,697 - right_checker:1788	total:1963	checker ACC: 0.9108507633209229	temp:0	temp1:0	wrong_total:75	
+2023-07-21 19:44:18,402 - 
+
+2023-07-21 19:44:18,402 - epoch:122,	loss:361.4878914556466	loss1:140.01573085784912
+2023-07-21 19:44:30,263 - right_count:358	total:433	 Answer ACC: 0.8267898383371824
+2023-07-21 19:44:30,263 - right_codes_count:1788	total:1963	Code ACC: 0.9108507386653082	wrong_be_tree_count:29	wrong_total:75	 wrong be tree ACC: 0.38666666666666666
+2023-07-21 19:44:30,263 - right_checker:1788	total:1963	checker ACC: 0.9108507633209229	temp:0	temp1:0	wrong_total:75	
+2023-07-21 19:44:51,369 - 
+
+2023-07-21 19:44:51,369 - epoch:123,	loss:359.9962474149652	loss1:137.24314212799072
+2023-07-21 19:45:03,918 - right_count:358	total:433	 Answer ACC: 0.8267898383371824
+2023-07-21 19:45:03,918 - right_codes_count:1788	total:1963	Code ACC: 0.9108507386653082	wrong_be_tree_count:29	wrong_total:75	 wrong be tree ACC: 0.38666666666666666
+2023-07-21 19:45:03,918 - right_checker:1788	total:1963	checker ACC: 0.9108507633209229	temp:0	temp1:0	wrong_total:75	
+2023-07-21 19:45:26,659 - 
+
+2023-07-21 19:45:26,660 - epoch:124,	loss:361.83587946370244	loss1:135.85684776306152
+2023-07-21 19:45:38,104 - right_count:358	total:433	 Answer ACC: 0.8267898383371824
+2023-07-21 19:45:38,104 - right_codes_count:1788	total:1963	Code ACC: 0.9108507386653082	wrong_be_tree_count:29	wrong_total:75	 wrong be tree ACC: 0.38666666666666666
+2023-07-21 19:45:38,104 - right_checker:1788	total:1963	checker ACC: 0.9108507633209229	temp:0	temp1:0	wrong_total:75	
+2023-07-21 19:46:00,038 - 
+
+2023-07-21 19:46:00,038 - epoch:125,	loss:361.98756124684587	loss1:133.08425903320312
+2023-07-21 19:46:11,913 - right_count:358	total:433	 Answer ACC: 0.8267898383371824
+2023-07-21 19:46:11,913 - right_codes_count:1788	total:1963	Code ACC: 0.9108507386653082	wrong_be_tree_count:29	wrong_total:75	 wrong be tree ACC: 0.38666666666666666
+2023-07-21 19:46:11,913 - right_checker:1788	total:1963	checker ACC: 0.9108507633209229	temp:0	temp1:0	wrong_total:75	
+2023-07-21 19:46:35,097 - 
+
+2023-07-21 19:46:35,098 - epoch:126,	loss:363.4288264513016	loss1:144.17461395263672
+2023-07-21 19:46:46,553 - right_count:358	total:433	 Answer ACC: 0.8267898383371824
+2023-07-21 19:46:46,554 - right_codes_count:1788	total:1963	Code ACC: 0.9108507386653082	wrong_be_tree_count:29	wrong_total:75	 wrong be tree ACC: 0.38666666666666666
+2023-07-21 19:46:46,554 - right_checker:1788	total:1963	checker ACC: 0.9108507633209229	temp:0	temp1:0	wrong_total:75	
+2023-07-21 19:47:09,099 - 
+
+2023-07-21 19:47:09,099 - epoch:127,	loss:374.0620627403259	loss1:152.4923801422119
+2023-07-21 19:47:20,348 - right_count:358	total:433	 Answer ACC: 0.8267898383371824
+2023-07-21 19:47:20,348 - right_codes_count:1788	total:1963	Code ACC: 0.9108507386653082	wrong_be_tree_count:29	wrong_total:75	 wrong be tree ACC: 0.38666666666666666
+2023-07-21 19:47:20,348 - right_checker:1788	total:1963	checker ACC: 0.9108507633209229	temp:0	temp1:0	wrong_total:75	
+2023-07-21 19:47:42,589 - 
+
+2023-07-21 19:47:42,589 - epoch:128,	loss:360.96095504332334	loss1:148.33349704742432
+2023-07-21 19:47:53,775 - right_count:358	total:433	 Answer ACC: 0.8267898383371824
+2023-07-21 19:47:53,776 - right_codes_count:1788	total:1963	Code ACC: 0.9108507386653082	wrong_be_tree_count:29	wrong_total:75	 wrong be tree ACC: 0.38666666666666666
+2023-07-21 19:47:53,776 - right_checker:1788	total:1963	checker ACC: 0.9108507633209229	temp:0	temp1:0	wrong_total:75	
+2023-07-21 19:48:15,544 - 
+
+2023-07-21 19:48:15,545 - epoch:129,	loss:360.275966912508	loss1:142.78831958770752
+2023-07-21 19:48:27,835 - right_count:358	total:433	 Answer ACC: 0.8267898383371824
+2023-07-21 19:48:27,835 - right_codes_count:1788	total:1963	Code ACC: 0.9108507386653082	wrong_be_tree_count:29	wrong_total:75	 wrong be tree ACC: 0.38666666666666666
+2023-07-21 19:48:27,835 - right_checker:1788	total:1963	checker ACC: 0.9108507633209229	temp:0	temp1:0	wrong_total:75	
+2023-07-21 19:48:35,884 - 
+
+
+2023-07-21 19:48:35,884 - final_test
+2023-07-21 19:48:57,106 - right_count:365	total:433	 Answer ACC: 0.8429561200923787
+2023-07-21 19:48:57,106 - right_codes_count:1794	total:1963	Code ACC: 0.9139072847682119	wrong_be_tree_count:23	wrong_total:68	 wrong be tree ACC: 0.3382352941176471
+2023-07-21 19:48:57,107 - right_checker:1794	total:1963	checker ACC: 0.9139072895050049	temp:0	temp1:0	wrong_total:68	

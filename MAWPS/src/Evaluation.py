@@ -294,6 +294,7 @@ def eval_multi_clf_for_test_new(model, test_mwps, device, num_labels, test_dev_m
                          torch.tensor(num_positions).long(),torch.tensor(num_codes_labels).long()]
 
                 model.eval()
+                refiner.eval()
                 with torch.no_grad():
                     batch_data = [i.to(device) for i in batch]
 
@@ -448,6 +449,7 @@ def eval_multi_clf_for_test_new(model, test_mwps, device, num_labels, test_dev_m
         logger.info('right_codes_count:{}\ttotal:{}\tCode ACC: {}\twrong_be_tree_count:{}\twrong_total:{}\t wrong be tree ACC: {}'.format(right_codes_count, all_codes_count, code_acc,wrong_be_tree, wrong_ans_count, wrong_be_tree/wrong_ans_count))
         logger.info('right_checker:{}\ttotal:{}\tchecker ACC: {}\ttemp:{}\ttemp1:{}\twrong_total:{}\t'.format(right_checker,all_codes_count,right_checker/all_codes_count,temp,temp1,all_codes_count-right_codes_count))
     model.train()
+    refiner.train()
     F1.close()
     F.close()
     return ans_acc
@@ -572,6 +574,7 @@ def eval_multi_clf_for_classfier_check(model, test_mwps, device, num_labels, tes
                 batch = [torch.tensor(sen_tokens).long(), torch.tensor(attention_mask).long(), torch.tensor(token_type_id).long(),
                          torch.tensor(num_positions).long(),torch.tensor(num_codes_labels).long()]
                 model.eval()
+                refiner.eval()
                 with torch.no_grad():
                     batch_data = [i.to(device) for i in batch]
 
@@ -661,7 +664,8 @@ def eval_multi_clf_for_classfier_check(model, test_mwps, device, num_labels, tes
         logger.info('right_count:{}\ttotal:{}\t Answer ACC: {}'.format(right_ans_count, len(test_mwps), ans_acc))
         logger.info('right_codes_count:{}\ttotal:{}\tCode ACC: {}\twrong_be_tree_count:{}\twrong_total:{}\t wrong be tree ACC: {}'.format(right_codes_count, all_codes_count, code_acc,wrong_be_tree, wrong_ans_count, wrong_be_tree/wrong_ans_count))
         logger.info('right_checker:{}\ttotal:{}\tchecker ACC: {}\ttemp:{}\ttemp1:{}\twrong_total:{}\t'.format(right_checker,all_codes_count,right_checker/all_codes_count,temp,temp1,len(test_mwps)-right_ans_count ))
-    
+    model.train()
+    refiner.train()
     return ans_acc
 
     # print(right_checker,len(test_mwps),right_checker/len(test_mwps))
