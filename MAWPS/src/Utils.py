@@ -35,7 +35,7 @@ class MWPDatasetLoader(object):
         processed = []
         for d in data:
             problem_id, sentence_list, num_codes_labels, num_positions = d
-            sen_tokens = self.tokenizer.convert_tokens_to_ids(['[CLS]'] + sentence_list + ['[SEP]'])
+            sen_tokens = self.tokenizer.convert_tokens_to_ids(sentence_list)
             x_len = len(sen_tokens)
             token_type_id = [0] * x_len
             for pp in num_positions: #? 对应位置标记上数字，+1是因为多了一个[CLS]
@@ -253,7 +253,7 @@ def process_one_mawps_no_None(raw_mwp: dict, label2id_or_value: dict, max_len: i
                     postions_in_q.append(cindex)
             for position in postions_in_q:
                 noneid = label2id_or_value["None"]
-                num_positions.append(position+1)
+                num_positions.append(position)
                 label_vector = [0] * len(label2id_or_value)
                 
                 label_vector[noneid] += 1
@@ -277,7 +277,7 @@ def process_one_mawps_no_None(raw_mwp: dict, label2id_or_value: dict, max_len: i
                     markid = label2id_or_value[mark]
                     label_vector[markid] += 1
                 num_codes_labels = num_codes_labels + label_vector
-                num_positions.append(position+1)
+                num_positions.append(position)
 
             else:
                 position = postions_in_q[-1]
@@ -288,13 +288,13 @@ def process_one_mawps_no_None(raw_mwp: dict, label2id_or_value: dict, max_len: i
                     label_vector[markid] += 1
                 
                 num_codes_labels = num_codes_labels + label_vector
-                num_positions.append(position+1)
+                num_positions.append(position)
                 
                 #! 对于其他数字，要求其生成None
                 for position in postions_in_q[0:-1]:
                     label_vector = [0] * len(label2id_or_value)
                     noneid = label2id_or_value["None"]
-                    num_positions.append(position+1)
+                    num_positions.append(position)
                     label_vector[noneid] += 1
                     num_codes_labels = num_codes_labels + label_vector
     #! 设置label最大值为1
