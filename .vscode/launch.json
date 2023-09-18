@@ -13,9 +13,10 @@
             "justMyCode": true,
             "cwd": "${fileDirname}",
             "args": [
-                "--model_name","test",
                 "--mode","train",
-                "--gpu_device","1"
+                "--model_name","test",
+                "--batch_size","128",
+                "--gpu_device","6"
             ]
         }
     ]

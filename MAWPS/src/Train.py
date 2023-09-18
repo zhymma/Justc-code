@@ -3,6 +3,7 @@ import json
 import logging
 import math
 import os
+os.environ['CUDA_VISIBLE_DEVICES'] = '6'
 import sys
 import torch
 import random
@@ -13,8 +14,9 @@ from transformers.optimization import AdamW, get_linear_schedule_with_warmup,get
 from src.Utils import process_dataset, MWPDatasetLoader
 from src.Models import *
 from src.Evaluation import *
-
-
+from transformers import T5Config,T5Tokenizer
+from src.model_t5 import *
+from transformers import T5Config,T5Tokenizer,T5ForConditionalGeneration
 def setup_seed(seed):
      torch.manual_seed(seed)
      torch.cuda.manual_seed_all(seed)
@@ -26,7 +28,7 @@ def train(args):
     # devices setting
     #! 设置随机数种子
     setup_seed(args.seed)
-    # os.environ['CUDA_VISIBLE_DEVICES'] = args.gpu_device
+    # # os.environ['CUDA_VISIBLE_DEVICES'] = args.gpu_device    
     args.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
     # directory
@@ -64,8 +66,8 @@ def train(args):
     for inde, label in enumerate(label2id_list):
         label2id_or_value[label] = inde
         id2label_or_value[str(inde)] = label
-    tokenizer = BertTokenizer.from_pretrained(args.pretrain_model_path)
-
+    # tokenizer = BertTokenizer.from_pretrained(args.pretrain_model_path)
+    tokenizer = T5Tokenizer.from_pretrained('t5-large')
     if args.train_type != 'together':
         # train data...
         logger.info("get train data loader...")
@@ -94,8 +96,6 @@ def train(args):
         print('args.train_type == together not yet!!!')
         sys.exit()
 
-    
-
     # model
     logger.info("define model...")
 
@@ -115,14 +115,24 @@ def train(args):
     #     logger.info("{}-{}".format(n, str(p.shape)))
     optimizer_grouped_parameters = [
         {
-            "params": [p for n, p in paras.items() if not any(nd in n for nd in no_decay)],
+            "params": [p for n, p in paras.items() if not any(nd in n for nd in no_decay) and 't5' not in n],
             "weight_decay": 0.01,
         }, {
-            "params": [p for n, p in paras.items() if any(nd in n for nd in no_decay)],
+            "params": [p for n, p in paras.items() if any(nd in n for nd in no_decay) and 't5' not in n],
             "weight_decay": 0.0
         }
     ]
-
+    optimizer_grouped_parameters = [
+        {
+            "params": [p for n, p in paras.items() if (not any(nd in n for nd in no_decay)) and ('t5' not in n)],
+            "weight_decay": 0.01,
+        }, {
+            "params": [p for n, p in paras.items() if (any(nd in n for nd in no_decay)) and ('t5' not in n)],
+            "weight_decay": 0.0
+        }
+    ]
+    # bert_parameters = [p for n, p in paras.items() if 'bert' in n]
+    bert_parameters = [p for n, p in paras.items() if 't5' in n]
     total_steps = int(len(train_data_loader) * args.num_epochs)
 
     if args.warmup < 1:
@@ -130,6 +140,7 @@ def train(args):
     else:
         warmup_steps = int(args.warmup)
     optimizer = AdamW(optimizer_grouped_parameters, lr=args.lr,no_deprecation_warning=True)
+    bert_optimizer = torch.optim.Adam(bert_parameters, lr=args.bert_lr)
     # scheduler = get_linear_schedule_with_warmup(optimizer, num_warmup_steps=warmup_steps,num_training_steps=total_steps)
     # scheduler = torch.optim.lr_scheduler.StepLR(optimizer, step_size=30, gamma=0.5)
     def lr_lambda(step):

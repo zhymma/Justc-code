@@ -9,10 +9,13 @@ from transformers import BertConfig, BertTokenizer, BertModel
 import random
 from torch.nn.functional import mse_loss
 import math
+from src.model_t5 import *
+from transformers import T5Config,T5Tokenizer,T5ForConditionalGeneration
 from torch.nn.functional import log_softmax
 logger = logging.getLogger(__name__)
+
 # Transformer Parameters
-d_model = 768*2  # Embedding Size
+d_model = 1024  # Embedding Size
 d_ff = 1024 # FeedForward dimension
 d_k = d_v = 128  # dimension of K(=Q), V
 n_layers = 6  # number of Encoder of Decoder Layer
@@ -215,9 +218,9 @@ class Batch_Net_CLS(nn.Module):
         self.layer3 = nn.Sequential(nn.Linear(n_hidden_2, out_dim))
 
         # # 对网络的参数进行Xavier初始化
-        # nn.init.xavier_uniform_(self.layer1[0].weight)
-        # nn.init.xavier_uniform_(self.layer2[0].weight)
-        # nn.init.xavier_uniform_(self.layer3[0].weight)
+        nn.init.xavier_uniform_(self.layer1[0].weight)
+        nn.init.xavier_uniform_(self.layer2[0].weight)
+        nn.init.xavier_uniform_(self.layer3[0].weight)
 
     def forward(self, x):
         x = self.layer1(x)
@@ -236,6 +239,7 @@ class MwpBertModel_CLS(torch.nn.Module):
             self.bert = BertModel.from_pretrained(pretrained_model_name_or_path=bert_path_or_config)
         elif isinstance(bert_path_or_config, BertConfig):
             self.bert = BertModel(bert_path_or_config)
+        self.t5 = T5Encoder(T5Config.from_pretrained('t5-large'))
         self.dropout = torch.nn.Dropout(0.1)
         self.d_model = 768
         if multi_fc:
@@ -246,7 +250,9 @@ class MwpBertModel_CLS(torch.nn.Module):
             self.fc = torch.nn.Linear(in_features=self.bert.config.hidden_size * 2, out_features=num_labels, bias=True)
 
 
-        self.tokenizer = BertTokenizer.from_pretrained(bert_path_or_config)
+        # self.tokenizer = BertTokenizer.from_pretrained(bert_path_or_config)
+        self.tokenizer = T5Tokenizer.from_pretrained('t5-large')
+
         #! 28 -> 768/2 -> 768 -> 768*2
         # self.code_emb = torch.nn.Linear(in_features=self.num_labels, out_features=self.d_model*2, bias=True)
         self.code_emb = Batch_Net_CLS(self.num_labels,int(self.d_model/2),self.d_model,self.d_model*2)
@@ -267,9 +273,12 @@ class MwpBertModel_CLS(torch.nn.Module):
 
     def forward(self, input_ids, attention_mask, token_type_ids, num_positions, num_codes_labels):
         
-        bertout = self.bert(input_ids=input_ids, attention_mask=attention_mask, token_type_ids=token_type_ids)
-        token_embeddings = bertout[0]
-        pooler_output = bertout[1]
+        # bertout = self.bert(input_ids=input_ids, attention_mask=attention_mask, token_type_ids=token_type_ids)
+        t5out = self.t5(input_ids = input_ids, attention_mask=attention_mask)
+        # token_embeddings = bertout[0]
+        # pooler_output = bertout[1]
+        token_embeddings = t5out[0]
+        pooler_output = t5out[1]
         #! (batch_size, seq_len, d)
         p_hidden = torch.gather(token_embeddings, 1, num_positions.unsqueeze(-1).expand(-1,-1,self.d_model))
         problem_out = pooler_output.unsqueeze(1).expand(p_hidden.shape)
@@ -512,42 +521,46 @@ class MwpBertModel_CLS_classfier(torch.nn.Module):
         self.get_goal3 = nn.Linear(fc_hidden_size, self.bert.config.hidden_size)
         self.get_goal4 = nn.Linear(fc_hidden_size, self.bert.config.hidden_size)
 
-        self.attn1 = nn.MultiheadAttention(embed_dim=self.bert.config.hidden_size, num_heads=8)
-        self.attn2 = nn.MultiheadAttention(embed_dim=self.bert.config.hidden_size, num_heads=8)
-        self.tokenizer = BertTokenizer.from_pretrained(bert_path_or_config)
+        # self.attn1 = nn.MultiheadAttention(embed_dim=d_model, num_heads=8)
+        # self.attn2 = nn.MultiheadAttention(embed_dim=d_model, num_heads=8)
+        # self.tokenizer = BertTokenizer.from_pretrained(bert_path_or_config)
 
         if fc_path:
             self.load(fc_path)
 
     def forward(self, input_ids, attention_mask, token_type_ids, num_positions, num_codes_labels):
         
-        bertout = self.bert(input_ids=input_ids, attention_mask=attention_mask, token_type_ids=token_type_ids)
-        token_embeddings = bertout[0]
-        pooler_output = bertout[1]
+        # bertout = self.bert(input_ids=input_ids, attention_mask=attention_mask, token_type_ids=token_type_ids)
+        # token_embeddings = bertout[0]
+        # pooler_output = bertout[1]
+        t5out = self.t5(input_ids = input_ids, attention_mask=attention_mask)
+        token_embeddings = t5out[0]
+        pooler_output = t5out[1]
+        
         p_hidden = torch.gather(token_embeddings, 1, num_positions.unsqueeze(-1).expand(-1,-1,self.d_model))
         p_hidden = self.dropout(p_hidden)
         problem_out = pooler_output
         # problem_out = token_embeddings.mean(1)
         problem_out = problem_out.unsqueeze(1).expand(p_hidden.shape)
-        problem_out = self.dropout(problem_out)
-        
+        # problem_out = self.dropout(problem_out)
         
         # context, _ = self.attn1(p_hidden.transpose(0,1), token_embeddings.transpose(0,1), token_embeddings.transpose(0,1),key_padding_mask=attention_mask.float())
         # context = context.transpose(0,1)
         
-        goal1 = torch.tanh(self.get_goal1(torch.cat((p_hidden,problem_out),dim=-1)))
-        goal2 = torch.sigmoid(self.get_goal2(torch.cat((p_hidden,problem_out),dim=-1)))
-        goal = goal1 * goal2
-        goal3 = torch.tanh(self.get_goal3(goal))
-        goal4 = torch.sigmoid(self.get_goal4(goal))
-        goal = goal3 * goal4
+        # goal1 = torch.tanh(self.get_goal1(torch.cat((p_hidden,problem_out),dim=-1)))
+        # goal2 = torch.sigmoid(self.get_goal2(torch.cat((p_hidden,problem_out),dim=-1)))
+        # goal = goal1 * goal2
+        # goal3 = torch.tanh(self.get_goal3(goal))
+        # goal4 = torch.sigmoid(self.get_goal4(goal))
+        # goal = goal3 * goal4
 
-        context, _ = self.attn2(goal.transpose(0,1), token_embeddings.transpose(0,1), token_embeddings.transpose(0,1),key_padding_mask=attention_mask.float())
-        context = context.transpose(0,1)
+        # context, _ = self.attn2(goal.transpose(0,1), token_embeddings.transpose(0,1), token_embeddings.transpose(0,1),key_padding_mask=attention_mask.float())
+        # context = context.transpose(0,1)
 
         #! (batch_size, seq_len, 2*d)
         # decoder_inputs = torch.cat((p_hidden,goal),dim=-1)
-        decoder_inputs = torch.cat((p_hidden,context,goal),dim=-1)
+        # decoder_inputs = torch.cat((p_hidden,context,goal),dim=-1)
+        decoder_inputs = torch.cat((p_hidden,problem_out),dim=-1)
         # decoder_inputs = goal
         batch_size = len(num_positions)
         #! (batch_size, output_len, num_labels)
@@ -576,27 +589,28 @@ class MwpBertModel_CLS_classfier(torch.nn.Module):
 
 
     def save(self, save_dir):
-        self.bert.save_pretrained(save_dir)
-        self.tokenizer.save_pretrained(save_dir)
-        
-        torch.save(self.fc.state_dict(), os.path.join(save_dir, 'fc_weight.bin'))
-        torch.save(self.get_goal1.state_dict(), os.path.join(save_dir, 'get_goal1.bin'))
-        torch.save(self.get_goal2.state_dict(), os.path.join(save_dir, 'get_goal2.bin'))
-        torch.save(self.get_goal3.state_dict(), os.path.join(save_dir, 'get_goal3.bin'))
-        torch.save(self.get_goal4.state_dict(), os.path.join(save_dir, 'get_goal4.bin'))
-        torch.save(self.attn1.state_dict(), os.path.join(save_dir, 'attn1.bin'))
-        torch.save(self.attn2.state_dict(), os.path.join(save_dir, 'attn2.bin'))
+        # self.bert.save_pretrained(save_dir)
+        # self.tokenizer.save_pretrained(save_dir)
+        pass
+        # torch.save(self.fc.state_dict(), os.path.join(save_dir, 'fc_weight.bin'))
+        # torch.save(self.get_goal1.state_dict(), os.path.join(save_dir, 'get_goal1.bin'))
+        # torch.save(self.get_goal2.state_dict(), os.path.join(save_dir, 'get_goal2.bin'))
+        # torch.save(self.get_goal3.state_dict(), os.path.join(save_dir, 'get_goal3.bin'))
+        # torch.save(self.get_goal4.state_dict(), os.path.join(save_dir, 'get_goal4.bin'))
+        # torch.save(self.attn1.state_dict(), os.path.join(save_dir, 'attn1.bin'))
+        # torch.save(self.attn2.state_dict(), os.path.join(save_dir, 'attn2.bin'))
 
     
     def load(self,fc_path):
-        self.bert = BertModel.from_pretrained(fc_path)
-        self.fc.load_state_dict(torch.load(fc_path+'/fc_weight.bin'))
-        self.get_goal1.load_state_dict(torch.load(fc_path+'/get_goal1.bin'))
-        self.get_goal2.load_state_dict(torch.load(fc_path+'/get_goal2.bin'))
-        self.get_goal3.load_state_dict(torch.load(fc_path+'/get_goal3.bin'))
-        self.get_goal4.load_state_dict(torch.load(fc_path+'/get_goal4.bin'))
-        self.attn1.load_state_dict(torch.load(fc_path+'/attn1.bin'))
-        self.attn2.load_state_dict(torch.load(fc_path+'/attn2.bin'))
+        # self.bert = BertModel.from_pretrained(fc_path)
+        # self.fc.load_state_dict(torch.load(fc_path+'/fc_weight.bin'))
+        # self.get_goal1.load_state_dict(torch.load(fc_path+'/get_goal1.bin'))
+        # self.get_goal2.load_state_dict(torch.load(fc_path+'/get_goal2.bin'))
+        # self.get_goal3.load_state_dict(torch.load(fc_path+'/get_goal3.bin'))
+        # self.get_goal4.load_state_dict(torch.load(fc_path+'/get_goal4.bin'))
+        # self.attn1.load_state_dict(torch.load(fc_path+'/attn1.bin'))
+        # self.attn2.load_state_dict(torch.load(fc_path+'/attn2.bin'))
+        pass
 
 class Refiner(nn.Module):
     def __init__(self, num_labels,hidden_size,fc_path=None):
@@ -605,7 +619,7 @@ class Refiner(nn.Module):
         # self.checker = Batch_Net_CLS(self.num_labels, check_hidden_size, int(check_hidden_size / 2), 1)
         self.checker =  nn.Sequential(
                         # nn.Linear(768+self.num_labels*10, 256),
-                        nn.Linear(768*3+self.num_labels, 256),
+                        nn.Linear(d_model*2+self.num_labels, 256),
                         nn.LeakyReLU(),
                         nn.Linear(256, 256),
                         nn.LeakyReLU(),
@@ -615,9 +629,9 @@ class Refiner(nn.Module):
                         # nn.LeakyReLU(),
                         nn.Linear(256, 1)
                     )
-        self.corrector = Batch_Net_CLS(768*2 + self.num_labels, hidden_size, int(hidden_size / 2), self.num_labels)
-        self.ln_code = nn.Linear(self.num_labels, self.num_labels*10)
-        self.ln_phidden = nn.Linear(768*3, 768)
+        # self.corrector = Batch_Net_CLS(d_model*2 + self.num_labels, hidden_size, int(hidden_size / 2), self.num_labels)
+        # self.ln_code = nn.Linear(self.num_labels, self.num_labels*10)
+        # self.ln_phidden = nn.Linear(d_model*2, d_model)
 
         #! 初始化
         nn.init.xavier_uniform_(self.checker[0].weight)
@@ -687,9 +701,7 @@ class Refiner(nn.Module):
         return all_loss,torch.sigmoid(logits),check_labels
 
     def save(self, save_dir):
-        torch.save(self.checker.state_dict(), os.path.join(save_dir, 'checker.bin'))
-        torch.save(self.ln_code.state_dict(), os.path.join(save_dir, 'ln_code.bin'))
-        torch.save(self.ln_phidden.state_dict(), os.path.join(save_dir, 'ln_phidden.bin'))
+        pass
     def load(self,fc_path):
         self.checker.load_state_dict(torch.load(fc_path+'/checker.bin'))
         self.ln_code.load_state_dict(torch.load(fc_path+'/ln_code.bin'))

@@ -27,15 +27,17 @@ parser.add_argument("--test_dev_max_len", default=100, type=int)
 parser.add_argument("--use_new_token_type_id", default=True, type=bool)
 parser.add_argument("--train_loss", default='MSE', type=str, help='MSE or L1 or Huber')
 parser.add_argument("--use_multi_gpu", default=False, type=bool)
-parser.add_argument("--batch_size", default=80, type=int)
+parser.add_argument("--batch_size", default=64, type=int)
 parser.add_argument("--num_epochs", default=130, type=int)
 
 parser.add_argument("--lr", default=2e-5, type=float)#!原本为2e-5
+parser.add_argument("--bert_lr", default=0.000075, type=float)#!原本为0.000075
+
 parser.add_argument("--warmup", default=0.1, type=float)
 
 parser.add_argument("--fc_path", default=None, type=str)
 parser.add_argument("--pretrain_model_path",
-                    default="bert-base-uncased",
+                    default="bert-base-uncased", #"bert-base-uncased"
                     type=str)
 
 parser.add_argument("--train_data_path",
@@ -49,7 +51,7 @@ parser.add_argument("--dev_data_path",
 parser.add_argument("--label2id_path", default='./mawps/codes_mawps.json',
                     type=str)
 
-parser.add_argument("--gpu_device", default="1", type=str)
+parser.add_argument("--gpu_device", default="6", type=str)
 parser.add_argument("--output_dir", default="./output/", type=str)
 parser.add_argument("--model_name", default="model_save_name_0",
                     type=str)
