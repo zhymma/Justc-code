@@ -43,13 +43,11 @@ class MWPDatasetLoader(object):
             processed.append((sen_tokens, x_len, token_type_id, problem_id, num_codes_labels, num_positions))
         return processed
 
-    def get_long_tensor(self, tokens_list, batch_size, mask=None, islabel=False):
+    def get_long_tensor(self, tokens_list, batch_size, mask=None):
         """ Convert list of list of tokens to a padded LongTensor. """
         token_len = max(len(x) for x in tokens_list)
-        if islabel:
-            tokens = torch.LongTensor(batch_size, token_len).fill_(-1) #* 填充<PAD>
-        else:
-            tokens = torch.LongTensor(batch_size, token_len).fill_(0) #* 填充<PAD>
+       
+        tokens = torch.LongTensor(batch_size, token_len).fill_(0) #* 填充<PAD>
         mask_ = torch.LongTensor(batch_size, token_len).fill_(0)
         for i, s in enumerate(tokens_list):
             tokens[i, :len(s)] = torch.LongTensor(s)
@@ -88,9 +86,9 @@ class MWPDatasetLoader(object):
         input_ids, input_mask = self.get_long_tensor(chars, batch_size, mask=True)
         token_type_ids = self.get_long_tensor(batch[2], batch_size)
         num_positions = self.get_long_tensor(batch[5],batch_size)
-        num_codes_labels = self.get_long_tensor(batch[4],batch_size,islabel=True)
+        tgt_ids, tgt_mask = self.get_long_tensor(batch[4],batch_size,mask=True)
         problem_id = torch.LongTensor(batch[3])
-        return (input_ids, input_mask, token_type_ids, problem_id, num_positions, num_codes_labels)
+        return (input_ids, input_mask, token_type_ids, problem_id, num_positions, tgt_ids, tgt_mask)
 
 
 def process_dataset(file, label2id_data_path: str, max_len: int, lower: bool):
@@ -245,61 +243,73 @@ def process_one_mawps_no_None(raw_mwp: dict, label2id_or_value: dict, max_len: i
     num_positions = []
 
     num_codes = raw_mwp['num_codes']
-    for kk, vv in raw_mwp['T_number_map'].items():
-        if kk not in num_codes:
-            postions_in_q = []
-            for cindex, value in enumerate(sentence_list):
+    for kk,vv in raw_mwp['num_codes'].items():
+        for cindex, value in enumerate(sentence_list):
                 if kk == value:
-                    postions_in_q.append(cindex)
-            for position in postions_in_q:
-                noneid = label2id_or_value["None"]
-                num_positions.append(position+1)
-                label_vector = [0] * len(label2id_or_value)
-                
-                label_vector[noneid] += 1
-                num_codes_labels = num_codes_labels + label_vector
-        
+                    postions_in_q = cindex
+        if len(vv) == 1:
+            num_positions.append(postions_in_q+1)
+            num_codes_labels.append(label2id_or_value[vv[0]])
         else:
-            postions_in_q = []
-            for cindex, value in enumerate(sentence_list):
-                if kk == value:
-                    postions_in_q.append(cindex)
+            vv = [label2id_or_value[v] for v in vv]
+            sorted_vv = sorted(vv)
+            for v in sorted_vv:
+                num_positions.append(postions_in_q+1)
+                num_codes_labels.append(v)
+    # for kk, vv in raw_mwp['T_number_map'].items():
 
-            if len(postions_in_q) == 0:
-                print('Can not find num !!! Wrong !!!!!!')
-                sys.exit()
-
-            elif len(postions_in_q) == 1:
-                position = postions_in_q[0]
-                num_marks = num_codes[kk]
-                label_vector = [0] * len(label2id_or_value)
-                for mark in num_marks:
-                    markid = label2id_or_value[mark]
-                    label_vector[markid] += 1
-                num_codes_labels = num_codes_labels + label_vector
-                num_positions.append(position+1)
-
-            else:
-                position = postions_in_q[-1]
-                num_marks = num_codes[kk]
-                label_vector = [0] * len(label2id_or_value)
-                for mark in num_marks:
-                    markid = label2id_or_value[mark]
-                    label_vector[markid] += 1
+    #     if kk not in num_codes:
+    #         postions_in_q = []
+    #         for cindex, value in enumerate(sentence_list):
+    #             if kk == value:
+    #                 postions_in_q.append(cindex)
+    #         for position in postions_in_q:
+    #             noneid = label2id_or_value["None"]
+    #             num_positions.append(position+1)
+    #             label_vector = [0] * len(label2id_or_value)
                 
-                num_codes_labels = num_codes_labels + label_vector
-                num_positions.append(position+1)
+    #             label_vector[noneid] += 1
+    #             num_codes_labels = num_codes_labels + label_vector
+        
+    #     else:
+    #         postions_in_q = []
+    #         for cindex, value in enumerate(sentence_list):
+    #             if kk == value:
+    #                 postions_in_q.append(cindex)
+
+    #         if len(postions_in_q) == 0:
+    #             print('Can not find num !!! Wrong !!!!!!')
+    #             sys.exit()
+
+    #         elif len(postions_in_q) == 1:
+    #             position = postions_in_q[0]
+    #             num_marks = num_codes[kk]
+    #             label_vector = [0] * len(label2id_or_value)
+    #             for mark in num_marks:
+    #                 markid = label2id_or_value[mark]
+    #                 label_vector[markid] += 1
+    #             num_codes_labels = num_codes_labels + label_vector
+    #             num_positions.append(position+1)
+
+    #         else:
+    #             position = postions_in_q[-1]
+    #             num_marks = num_codes[kk]
+    #             label_vector = [0] * len(label2id_or_value)
+    #             for mark in num_marks:
+    #                 markid = label2id_or_value[mark]
+    #                 label_vector[markid] += 1
                 
-                #! 对于其他数字，要求其生成None
-                for position in postions_in_q[0:-1]:
-                    label_vector = [0] * len(label2id_or_value)
-                    noneid = label2id_or_value["None"]
-                    num_positions.append(position+1)
-                    label_vector[noneid] += 1
-                    num_codes_labels = num_codes_labels + label_vector
-    #! 设置label最大值为1
-    num_codes_labels = [min(x, 1) for x in num_codes_labels]
-    # num_codes_labels = max(1,num_codes_labels) 
+    #             num_codes_labels = num_codes_labels + label_vector
+    #             num_positions.append(position+1)
+                
+    #             #! 对于其他数字，要求其生成None
+    #             for position in postions_in_q[0:-1]:
+    #                 label_vector = [0] * len(label2id_or_value)
+    #                 noneid = label2id_or_value["None"]
+    #                 num_positions.append(position+1)
+    #                 label_vector[noneid] += 1
+    #                 num_codes_labels = num_codes_labels + label_vector
+    
     return (problem_id, sentence_list, num_codes_labels, num_positions)
 
 

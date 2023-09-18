@@ -30,12 +30,21 @@ def load_model(model, model_path):
     return model
 
 
-def check_answer_acc(raw_mwp, labels_pos, all_logits, id2label_or_value):
+def check_answer_acc(raw_mwp, num_positions, tgt_ids, codes_outputs, id2label_or_value):
     true_ans = raw_mwp['new_ans']
     T_number_map = raw_mwp['T_number_map']
     T_question = raw_mwp['T_question_2']
 
-    pre_num_codes = get_codes_from_output(labels_pos, all_logits, T_question, id2label_or_value)
+    pre_num_codes = {}
+    T_question_list = T_question.lower().split(' ')
+    for num_position, codes_output in zip(num_positions.squeeze(0).to('cpu').numpy(), codes_outputs.squeeze(0).to('cpu').numpy()):
+        num_char = T_question_list[num_position - 1]
+        if num_char not in pre_num_codes.keys():
+            pre_num_codes[num_char] = []
+        codeee = id2label_or_value[str(codes_output)]
+        if codeee != '<mask>' and codeee != '<pad>':
+            pre_num_codes[num_char].append(codeee)
+
 
     symbol2num = re_construct_expression_from_codes(pre_num_codes)
     final_expression = build_expression_by_grous(symbol2num)

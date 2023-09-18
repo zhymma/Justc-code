@@ -1,7 +1,7 @@
 import argparse
 import json
 import os
-
+os.environ['CUDA_VISIBLE_DEVICES'] = '1'
 from src.Train import train
 
 
@@ -9,6 +9,7 @@ parser = argparse.ArgumentParser()
 parser.add_argument("--log_file", default="output.log", type=str)
 parser.add_argument("--mode", default="test", type=str)
 parser.add_argument("--seed", default=0, type=int)
+parser.add_argument("--iter_num", default=3, type=int)
 
 
 
@@ -25,7 +26,6 @@ parser.add_argument("--train_max_len", default=100, type=int)
 parser.add_argument("--test_dev_max_len", default=100, type=int)
 parser.add_argument("--use_new_token_type_id", default=True, type=bool)
 parser.add_argument("--train_loss", default='MSE', type=str, help='MSE or L1 or Huber')
-
 parser.add_argument("--use_multi_gpu", default=False, type=bool)
 parser.add_argument("--batch_size", default=80, type=int)
 parser.add_argument("--num_epochs", default=130, type=int)

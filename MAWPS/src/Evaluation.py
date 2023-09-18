@@ -678,5 +678,32 @@ def eval_multi_clf_for_classfier_check(model, test_mwps, device, num_labels, tes
     refiner.train()
     return ans_acc
 
-    # print(right_checker,len(test_mwps),right_checker/len(test_mwps))
-    # return right_checker/len(test_mwps)
+def eval_utsc_solver(model, dev_data_loader, test_mwps, device,id2label_or_value,logger=None):
+    
+
+    right_ans_count = 0
+
+    for step, batch in enumerate(dev_data_loader):
+        batch_data = [i.to(device) for i in batch]
+        input_ids, input_mask, token_type_ids, problem_id, num_positions, tgt_ids, tgt_mask = batch_data
+
+        model.eval()
+        with torch.no_grad():
+
+            codes_outputs = model(input_ids=input_ids, input_mask=input_mask, token_type_ids=token_type_ids, num_positions=num_positions, tgt_ids=tgt_ids, tgt_mask=tgt_mask,problem_id=problem_id)
+            if check_answer_acc(test_mwps[step], num_positions, tgt_ids, codes_outputs, id2label_or_value):
+                right_ans_count += 1
+
+
+        
+                    
+
+                    
+
+    ans_acc = right_ans_count / len(test_mwps)
+    if logger is not None:
+        logger.info('right_count:{}\ttotal:{}\t Answer ACC: {}'.format(right_ans_count, len(test_mwps), ans_acc))
+        # logger.info('right_codes_count:{}\ttotal:{}\tCode ACC: {}\twrong_be_tree_count:{}\twrong_total:{}\t wrong be tree ACC: {}'.format(right_codes_count, all_codes_count, code_acc,wrong_be_tree, wrong_ans_count, wrong_be_tree/wrong_ans_count))
+        # logger.info('right_checker:{}\ttotal:{}\tchecker ACC: {}\ttemp:{}\ttemp1:{}\twrong_total:{}\t'.format(right_checker,all_codes_count,right_checker/all_codes_count,temp,temp1,len(test_mwps)-right_ans_count ))
+    model.train()
+    return ans_acc

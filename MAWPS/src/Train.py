@@ -26,7 +26,7 @@ def train(args):
     # devices setting
     #! 设置随机数种子
     setup_seed(args.seed)
-    os.environ['CUDA_VISIBLE_DEVICES'] = args.gpu_device
+    # os.environ['CUDA_VISIBLE_DEVICES'] = args.gpu_device
     args.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
 
     # directory
@@ -82,12 +82,10 @@ def train(args):
         else:
             print('args.train_type wrong!!!')
             sys.exit()
-
         # dev data...
         logger.info("get dev data loader...")
         examplesss_test = process_dataset(file=args.dev_data_path, label2id_data_path=args.label2id_path,
                                           max_len=args.test_dev_max_len, lower=True)
-
         dev_data_loader = MWPDatasetLoader(data=examplesss_test, batch_size=1, shuffle=False,
                                            tokenizer=tokenizer, sort=False)
         with open(args.dev_data_path, 'r', encoding='utf-8')as ffs:
@@ -102,9 +100,7 @@ def train(args):
     logger.info("define model...")
 
 
-    model = MwpBertModel_CLS_classfier(bert_path_or_config=args.pretrain_model_path, num_labels=num_labels,
-                                 fc_path=args.fc_path, multi_fc=args.multi_fc, train_loss=args.train_loss,
-                                 fc_hidden_size=args.fc_hidden_size)
+    model = UTSC_Solver(bert_path=args.pretrain_model_path, num_labels=num_labels, iter_num=args.iter_num,hidden_size=args.fc_hidden_size)
 
 
     model.to(args.device)
@@ -128,7 +124,6 @@ def train(args):
     ]
 
     total_steps = int(len(train_data_loader) * args.num_epochs)
-    steps_per_epoch = len(train_data_loader)
 
     if args.warmup < 1:
         warmup_steps = int(total_steps * args.warmup)
@@ -145,24 +140,6 @@ def train(args):
     # scheduler = torch.optim.lr_scheduler.LambdaLR(optimizer, lr_lambda=lr_lambda)
     scheduler = get_cosine_schedule_with_warmup(optimizer, num_warmup_steps=warmup_steps,num_training_steps=total_steps)
     
-    refiner = Refiner(num_labels = num_labels,hidden_size = args.fc_hidden_size)
-    refiner.to(args.device)
-    refiner.zero_grad()
-    refiner.train()
-    refiner_paras = dict(refiner.named_parameters())
-    optimizer_grouped_parameters = [
-        {
-            "params": [p for n, p in refiner_paras.items() if not any(nd in n for nd in no_decay)],
-            "weight_decay": 0.01,
-        }, 
-        {
-            "params": [p for n, p in refiner_paras.items() if any(nd in n for nd in no_decay)],
-            "weight_decay": 0.0
-        }
-    ]
-    refiner_optimizer = AdamW(optimizer_grouped_parameters, lr=args.lr,no_deprecation_warning=True)
-    refiner_scheduler = get_cosine_schedule_with_warmup(refiner_optimizer, num_warmup_steps=warmup_steps,num_training_steps=total_steps)
-    
     best_acc = -1
     if args.mode == "train":
         #  start training
@@ -170,141 +147,69 @@ def train(args):
         logger.info("\n>>>>>>>>>>>>>>>>>>>start train......")
 
         for epoch in range(args.num_epochs):
-            all_loss = 0
-            all_loss1 = 0
+            all_loss_g = 0
+            all_loss_d = 0
+            loss = 0
             for step, batch in enumerate(train_data_loader, start=1):
                 batch_data = [i.to(args.device) for i in batch]
-                # (input_ids, input_mask, token_type_ids, problem_id, num_positions, num_codes_labels)
-                input_ids, input_mask, token_type_ids, problem_id, num_positions, num_codes_labels = batch_data
+                # (input_ids, input_mask, token_type_ids, problem_id, num_positions, tgt_ids, tgt_mask)
+                input_ids, input_mask, token_type_ids, problem_id, num_positions, tgt_ids, tgt_mask = batch_data
                 
-                loss,outputs,p_hidden = model(input_ids=input_ids, attention_mask=input_mask, token_type_ids=token_type_ids, num_positions=num_positions, num_codes_labels=num_codes_labels)
-                all_loss += loss.item()
-                if epoch >= 8 :
-                    loss1, _ ,_ =refiner(outputs, num_codes_labels,p_hidden) 
-                    all_loss1 += loss1.item()
-                    loss += loss1
+                loss_g, loss_d = model(input_ids=input_ids, input_mask=input_mask, token_type_ids=token_type_ids, num_positions=num_positions, tgt_ids=tgt_ids, tgt_mask=tgt_mask,problem_id=problem_id)
+                all_loss_g += loss_g.item()
+                all_loss_d += loss_d.item()
+                loss = loss_g + loss_d
                 loss.backward()
                 torch.nn.utils.clip_grad_norm_([v for k, v in paras.items()], max_norm=1)
                 optimizer.step()
-                refiner_optimizer.step()
                 scheduler.step()
-                refiner_scheduler.step()
                 model.zero_grad()
-                refiner.zero_grad()
                 
 
 
             # print loss...
             logger.info("\n")
 
-            logger.info("epoch:{},\tloss:{}\tloss1:{}".format(epoch, all_loss,all_loss1))
+            logger.info("epoch:{},\tloss_g:{}\tloss_d:{}".format(epoch, all_loss_g, all_loss_d))
 
-            # acc = eval_multi_clf(
-            #     logger=logger,
-            #     model=model,
-            #     test_mwps=test_mwps,
-            #     device=args.device,
-            #     num_labels = num_labels,
-            #     test_dev_max_len = args.test_dev_max_len,
-            #     label2id_or_value = label2id_or_value,
-            #     id2label_or_value = id2label_or_value,
-            #     tokenizer = tokenizer
-            #     )
-            acc = eval_multi_clf_for_classfier_check(
+            acc = eval_utsc_solver(
             logger=logger,
             model=model,
             test_mwps=test_mwps,
+            dev_data_loader=dev_data_loader,
             device=args.device,
-            num_labels = num_labels,
-            test_dev_max_len = args.test_dev_max_len,
-            label2id_or_value = label2id_or_value,
             id2label_or_value = id2label_or_value,
-            tokenizer = tokenizer,
-            refiner = refiner
             )
 
-            if acc >= best_acc:
-                logger.info('save best model to {}'.format(best_model_dir))
-                best_acc = acc
-                model.save(save_dir=best_model_dir)
-                refiner.save(save_dir=best_model_dir)
-            model.save(save_dir=latest_model_dir)
-            refiner.save(save_dir=latest_model_dir)
+            # if acc >= best_acc:
+            #     logger.info('save best model to {}'.format(best_model_dir))
+            #     best_acc = acc
+            #     model.save(save_dir=best_model_dir)
+            #     refiner.save(save_dir=best_model_dir)
+            # model.save(save_dir=latest_model_dir)
+            # refiner.save(save_dir=latest_model_dir)
             train_data_loader.reset(doshuffle=True)
-        
-        #! 训练refiner
-        # model.load(best_model_dir)
-        # model.to(args.device)
-        # model.eval()
-        # check_acc = -1
-        # for epoch in range(args.num_epochs):
-        #     all_loss = 0
-        #     for step, batch in enumerate(train_data_loader, start=1):
-        #         refiner.train()
-        #         batch_data = [i.to(args.device) for i in batch]
-        #         input_ids, input_mask, token_type_ids, problem_id, num_positions, num_codes_labels = batch_data
-                
-        #         outputs,p_hidden = model(input_ids=input_ids, attention_mask=input_mask, token_type_ids=token_type_ids, num_positions=num_positions, num_codes_labels=num_codes_labels)
-        #         # outputs = alloutputs[0].squeeze(0)
-        #         torch.nn.utils.clip_grad_norm_([v for k, v in refiner_paras.items()], max_norm=1)
-        #         loss, _ ,_ =refiner(outputs, num_codes_labels,p_hidden) 
-
-        #         loss.backward()
-        #         refiner_optimizer.step()
-        #         refiner_scheduler.step()
-        #         refiner.zero_grad()
-        #         # optimizer.zero_grad() = model.zero_grad()
-        #         all_loss += loss.item()
-        #     refiner.eval()
-            
-        #     logger.info("epoch:{},\tloss:{}".format(epoch, all_loss))
-
-            # acc = eval_multi_clf_for_classfier_check(
-            # logger=logger,
-            # model=model,
-            # test_mwps=test_mwps,
-            # device=args.device,
-            # num_labels = num_labels,
-            # test_dev_max_len = args.test_dev_max_len,
-            # label2id_or_value = label2id_or_value,
-            # id2label_or_value = id2label_or_value,
-            # tokenizer = tokenizer,
-            # refiner = refiner
-            # )
-
-        #     if acc > check_acc:
-        #         logger.info('save best refiner model to {}'.format(best_model_dir))
-        #         check_acc = acc
-        #         # model.save(save_dir=best_model_dir)
-        #     if acc > 0.99 :
-        #         break
-                
-        #     # model.save(save_dir=latest_model_dir)
-        #     train_data_loader.reset(doshuffle=True)
-        #     # print loss...
 
         #测试最终结果
-        logger.info("\n\n")
-        logger.info("final_test")
-        model.load(best_model_dir)
-        model.to(args.device)
-        refiner.load(best_model_dir)
-        refiner.to(args.device)
-        acc = eval_multi_clf_for_classfier_check(
-                logger=logger,
-                model=model,
-                test_mwps=test_mwps,
-                device=args.device,
-                num_labels = num_labels,
-                test_dev_max_len = args.test_dev_max_len,
-                label2id_or_value = label2id_or_value,
-                id2label_or_value = id2label_or_value,
-                tokenizer = tokenizer,
-                refiner = refiner
-                )
-        print("final_test")
-        print(f"Answer acc:{acc}")
-        print("\n")
+        # logger.info("\n\n")
+        # logger.info("final_test")
+        # model.load(best_model_dir)
+        # model.to(args.device)
+        # acc = eval_multi_clf_for_classfier_check(
+        #         logger=logger,
+        #         model=model,
+        #         test_mwps=test_mwps,
+        #         device=args.device,
+        #         num_labels = num_labels,
+        #         test_dev_max_len = args.test_dev_max_len,
+        #         label2id_or_value = label2id_or_value,
+        #         id2label_or_value = id2label_or_value,
+        #         tokenizer = tokenizer,
+        #         refiner = refiner
+        #         )
+        # print("final_test")
+        # print(f"Answer acc:{acc}")
+        # print("\n")
 
 
     else:
@@ -312,8 +217,7 @@ def train(args):
 
         model.load(best_model_dir)
         model.to(args.device)
-        refiner.load(best_model_dir)
-        refiner.to(args.device)
+
         logger1 = logging.getLogger()
         logger1.setLevel(logging.INFO)
         console_handler = logging.StreamHandler()
@@ -334,18 +238,17 @@ def train(args):
         #         refiner = refiner
         #         )
 
-        acc = eval_multi_clf_for_test_new(
-                logger=logger1,
-                model=model,
-                test_mwps=test_mwps,
-                device=args.device,
-                num_labels = num_labels,
-                test_dev_max_len = args.test_dev_max_len,
-                label2id_or_value = label2id_or_value,
-                id2label_or_value = id2label_or_value,
-                tokenizer = tokenizer,
-                json_path = args.output_dir ,
-                refiner = refiner
-                )
+        # acc = eval_multi_clf_for_test_new(
+        #         logger=logger1,
+        #         model=model,
+        #         test_mwps=test_mwps,
+        #         device=args.device,
+        #         num_labels = num_labels,
+        #         test_dev_max_len = args.test_dev_max_len,
+        #         label2id_or_value = label2id_or_value,
+        #         id2label_or_value = id2label_or_value,
+        #         tokenizer = tokenizer,
+        #         json_path = args.output_dir 
+        #         )
     
     

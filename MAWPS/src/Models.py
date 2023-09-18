@@ -491,26 +491,21 @@ class Embedding(nn.Module):
         embedded = self.em_dropout(embedded)
         return embedded
     
+# The overall pipeline of UTSC_Solver with problem encoder, iterative inference with self-correction mechanism refines mathematical expressions by alternating between the generator and the discriminator. The input is preprocessed mathematical problem text, and the output is the code representation corresponding to an M-Tree structure, which represents the mathematical expression. Within each iteration, we identify errors in the generated expressions using the discriminator. For correct code, the output is labeled as \textit{right}, and for incorrect code, it is labeled as \textit{wrong}. We then replace these erroneous tokens with \texttt{<mask>} and utilize the generator to regenerate them in a non-autoregressive manner. The iteration stops when it reaches the maximum iteration count or when the discriminator outputs all correct results. The final output is then presented as the result.
+
 class MwpBertModel_CLS_classfier(torch.nn.Module):
     def __init__(self, bert_path_or_config, num_labels, train_loss='MSE', fc_path=None, multi_fc=False,
                  fc_hidden_size: int = 1024):
         super(MwpBertModel_CLS_classfier, self).__init__()
         self.num_labels = num_labels
-
-        if isinstance(bert_path_or_config, str):
-            self.bert = BertModel.from_pretrained(pretrained_model_name_or_path=bert_path_or_config)
-        elif isinstance(bert_path_or_config, BertConfig):
-            self.bert = BertModel(bert_path_or_config)
+        self.bert = BertModel.from_pretrained(pretrained_model_name_or_path=bert_path_or_config)
         self.dropout = torch.nn.Dropout(0.2)
-        
-        self.d_model = 768
+        self.d_model = self.bert.config.hidden_size
 
-        if multi_fc:
-            #! 768*2 -> 2048 -> 1024 -> 28
-            self.fc = Batch_Net_CLS(self.bert.config.hidden_size * 3, fc_hidden_size, int(fc_hidden_size / 2),
+        #! 768*2 -> 2048 -> 1024 -> 28
+        self.fc = Batch_Net_CLS(self.bert.config.hidden_size * 3, fc_hidden_size, int(fc_hidden_size / 2),
                                     num_labels)
-        else:
-            self.fc = torch.nn.Linear(in_features=self.bert.config.hidden_size * 3, out_features=num_labels, bias=True)
+
 
         self.get_goal1 = nn.Linear(self.bert.config.hidden_size * 2, fc_hidden_size)
         self.get_goal2 = nn.Linear(self.bert.config.hidden_size * 2, fc_hidden_size)
@@ -576,7 +571,6 @@ class MwpBertModel_CLS_classfier(torch.nn.Module):
         # 总损失为 BCE 损失、数量损失和位置损失的加权和
         # total_loss = bce_loss + 10*count_loss + 5*position_loss
         total_loss = bce_loss 
-        
         outputs = torch.sigmoid(outputs)
         return total_loss,outputs.detach(),decoder_inputs.detach()
 
@@ -700,3 +694,171 @@ class Refiner(nn.Module):
         self.checker.load_state_dict(torch.load(fc_path+'/checker.bin'))
         self.ln_code.load_state_dict(torch.load(fc_path+'/ln_code.bin'))
         self.ln_phidden.load_state_dict(torch.load(fc_path+'/ln_phidden.bin'))
+
+# The overall pipeline of UTSC_Solver with problem encoder, iterative inference with self-correction mechanism refines mathematical expressions by alternating between the generator and the discriminator. The input is preprocessed mathematical problem text, and the output is the code representation corresponding to an M-Tree structure, which represents the mathematical expression. Within each iteration, we identify errors in the generated expressions using the discriminator. For correct code, the output is labeled as \textit{right}, and for incorrect code, it is labeled as \textit{wrong}. We then replace these erroneous tokens with \texttt{<mask>} and utilize the generator to regenerate them in a non-autoregressive manner. The iteration stops when it reaches the maximum iteration count or when the discriminator outputs all correct results. The final output is then presented as the result.
+
+# geneartor The generator is a decoder based on the transformer architecture\textsuperscript{~\cite{vaswani2017attention}}, utilizing a non-autoregressive framework.
+class Decoder(nn.Module):
+    def __init__(self, vocab_size, d_model, num_heads = 8, num_layers = 6, max_sequence_length = 768):
+        super(Decoder, self).__init__()
+        
+        self.max_sequence_length = max_sequence_length
+        
+        
+        # Positional encoding layer
+        # self.positional_encoding = self.get_positional_encoding(d_model, max_sequence_length)
+        
+        # Transformer decoder layers
+        self.decoder_layers = nn.TransformerDecoderLayer(d_model, num_heads,batch_first=True)
+        
+        # Transformer decoder
+        self.decoder = nn.TransformerDecoder(
+            decoder_layer=self.decoder_layers,
+            num_layers=num_layers
+        )
+        
+        # Linear layer for output
+        self.fc = nn.Linear(d_model, vocab_size)
+        
+    def forward(self, memory, tgt,tgt_key_padding_mask=None, memory_key_padding_mask=None):
+        # Embedding for decoder input
+        
+        # Add positional encoding decoder_input batch_sirst
+        # tgt += self.positional_encoding[:, :tgt.size(1), :]
+        # Transformer decoding with cross-attention to bert_output
+        output = self.decoder(tgt, memory, tgt_key_padding_mask=tgt_key_padding_mask, memory_key_padding_mask=memory_key_padding_mask)
+        
+        # Linear layer to get logits
+        logits = self.fc(output)
+        
+        return logits
+
+    def get_positional_encoding(self, d_model, max_sequence_length):
+        # Create positional encoding
+        positional_encoding = torch.zeros(1, max_sequence_length, d_model)
+        position = torch.arange(0, max_sequence_length, dtype=torch.float32).unsqueeze(0)
+        div_term = torch.exp(torch.arange(0, d_model, 2).float() * (-math.log(10000.0) / d_model))
+        positional_encoding[0, :, 0::2] = torch.sin(position * div_term)
+        positional_encoding[0, :, 1::2] = torch.cos(position * div_term)
+        return positional_encoding
+
+class UTSC_Solver(torch.nn.Module):
+    def __init__(self, bert_path, num_labels, iter_num, hidden_size: int = 1024):
+        super(UTSC_Solver, self).__init__()
+        self.iter_num = iter_num
+        self.num_labels = num_labels
+        self.encoder = BertModel.from_pretrained(pretrained_model_name_or_path=bert_path)
+        self.dropout = torch.nn.Dropout(0.2)
+        self.d_model = self.encoder.config.hidden_size
+        self.hidden_size = hidden_size
+        self.code_emb = Embedding(self.num_labels, self.d_model, dropout=self.dropout.p)
+        self.fusion_fc = nn.Linear(self.d_model * 3, self.d_model)
+        self.geneartor = Decoder(vocab_size=self.num_labels, d_model=self.d_model) 
+        self.discriminator = Decoder(2, d_model=self.d_model) # 二分类器 加上<pad>
+
+
+        self.get_goal1 = nn.Linear(self.d_model * 2, self.hidden_size)
+        self.get_goal2 = nn.Linear(self.d_model * 2, self.hidden_size)
+        self.get_goal3 = nn.Linear(self.hidden_size, self.d_model)
+        self.get_goal4 = nn.Linear(self.hidden_size, self.d_model)
+
+
+    def forward(self, input_ids, input_mask, token_type_ids, num_positions, tgt_ids, tgt_mask, problem_id):
+        bertout = self.encoder(input_ids=input_ids, attention_mask=input_mask, token_type_ids=token_type_ids)
+        problem_embeddings = bertout[0]
+        pooler_output = bertout[1]
+        # 抽取num_positions对应的token
+        p_hidden = torch.gather(problem_embeddings, 1, num_positions.unsqueeze(-1).expand(-1,-1,self.d_model))
+        problem_out = pooler_output.unsqueeze(1).expand(p_hidden.shape)
+        
+        goal1 = torch.tanh(self.get_goal1(torch.cat((p_hidden,problem_out),dim=-1)))
+        goal2 = torch.sigmoid(self.get_goal2(torch.cat((p_hidden,problem_out),dim=-1)))
+        goal = goal1 * goal2
+        goal3 = torch.tanh(self.get_goal3(goal))
+        goal4 = torch.sigmoid(self.get_goal4(goal))
+        goal = goal3 * goal4
+
+        all_loss_g, all_loss_d = 0,0
+        code_g_input = torch.ones((p_hidden.shape[0], p_hidden.shape[1])).cuda()
+        code_g_input = code_g_input.long()
+
+        if self.training:
+            for iter in range(self.iter_num):
+                #! generator
+                codes_embedding = self.code_emb(code_g_input) # 一开始code全为<mask> 
+                decoder_inputs = self.fusion_fc(torch.cat((codes_embedding, p_hidden, goal),dim=-1))
+                code_pred = self.geneartor(tgt=decoder_inputs, memory=problem_embeddings, tgt_key_padding_mask=~(tgt_mask.bool()), memory_key_padding_mask=~(input_mask.bool()))
+
+                index_mask = torch.eq(code_g_input, 1).to(torch.float)
+                index_mask = index_mask.bool()
+                loss_g = nn.functional.cross_entropy(code_pred.transpose(1,2), tgt_ids,ignore_index=0, reduction='none')
+                loss_g = loss_g * index_mask
+                # 求loss_g均值 防止出现除0
+                loss_g = loss_g.sum() / max(1,index_mask.sum())
+                all_loss_g += loss_g
+                code_pred = torch.argmax(code_pred, dim=-1)
+
+                #! discriminator
+                discriminator_label = torch.eq(code_pred, tgt_ids).long()
+                discriminator_label[~(tgt_mask.bool())] = -100
+                decoder_inputs = self.fusion_fc(torch.cat((self.code_emb(code_pred), p_hidden, goal),dim=-1))
+                judgement_pred = self.discriminator(tgt=decoder_inputs, memory=problem_embeddings, tgt_key_padding_mask=~(tgt_mask.bool()), memory_key_padding_mask=~(input_mask.bool()))
+                loss_d = nn.functional.cross_entropy(judgement_pred.transpose(1,2), discriminator_label, ignore_index=-100, reduction='mean')
+                all_loss_d += loss_d
+                judgement_pred = torch.argmax(judgement_pred, dim=-1)
+
+                #! 更新code_g_input 对应judgement_pred为1的位置更新为code_pred，其余位置更新为1
+                new_code_g_input = code_g_input.clone()
+                new_code_g_input[judgement_pred == 1] = code_pred[judgement_pred == 1]
+                new_code_g_input[judgement_pred == 0] = 1
+                code_g_input = new_code_g_input
+            return all_loss_g, all_loss_d
+        else:
+            for iter in range(self.iter_num):
+                #! generator
+                codes_embedding = self.code_emb(code_g_input) # 一开始code全为<mask> 
+                decoder_inputs = self.fusion_fc(torch.cat((codes_embedding, p_hidden, goal),dim=-1))
+                code_pred = self.geneartor(tgt=decoder_inputs, memory=problem_embeddings, tgt_key_padding_mask=~(tgt_mask.bool()), memory_key_padding_mask=~(input_mask.bool()))
+
+                code_pred = torch.argmax(code_pred, dim=-1)
+
+                #! discriminator
+                decoder_inputs = self.fusion_fc(torch.cat((self.code_emb(code_pred), p_hidden, goal),dim=-1))
+                judgement_pred = self.discriminator(tgt=decoder_inputs, memory=problem_embeddings, tgt_key_padding_mask=~(tgt_mask.bool()), memory_key_padding_mask=~(input_mask.bool()))
+                judgement_pred = torch.argmax(judgement_pred, dim=-1)
+
+                #! 更新code_g_input 对应judgement_pred为1的位置更新为code_pred，其余位置更新为1
+                new_code_g_input = code_g_input.clone()
+                new_code_g_input[judgement_pred == 1] = code_pred[judgement_pred == 1]
+                new_code_g_input[judgement_pred == 0] = 1
+                # 如果没有更新，说明已经全部正确
+                if torch.equal(new_code_g_input, code_g_input):
+                    break
+                else:
+                    code_g_input = new_code_g_input
+            return code_g_input
+
+
+    def save(self, save_dir):
+        pass
+        # self.encoder.save_pretrained(save_dir)
+        # self.tokenizer.save_pretrained(save_dir)
+        
+        # torch.save(self.fc.state_dict(), os.path.join(save_dir, 'fc_weight.bin'))
+        # torch.save(self.get_goal1.state_dict(), os.path.join(save_dir, 'get_goal1.bin'))
+        # torch.save(self.get_goal2.state_dict(), os.path.join(save_dir, 'get_goal2.bin'))
+        # torch.save(self.get_goal3.state_dict(), os.path.join(save_dir, 'get_goal3.bin'))
+        # torch.save(self.get_goal4.state_dict(), os.path.join(save_dir, 'get_goal4.bin'))
+        # torch.save(self.attn1.state_dict(), os.path.join(save_dir, 'attn1.bin'))
+        # torch.save(self.attn2.state_dict(), os.path.join(save_dir, 'attn2.bin'))
+
+    
+    def load(self,fc_path):
+        self.bert = BertModel.from_pretrained(fc_path)
+        self.fc.load_state_dict(torch.load(fc_path+'/fc_weight.bin'))
+        self.get_goal1.load_state_dict(torch.load(fc_path+'/get_goal1.bin'))
+        self.get_goal2.load_state_dict(torch.load(fc_path+'/get_goal2.bin'))
+        self.get_goal3.load_state_dict(torch.load(fc_path+'/get_goal3.bin'))
+        self.get_goal4.load_state_dict(torch.load(fc_path+'/get_goal4.bin'))
+        self.attn1.load_state_dict(torch.load(fc_path+'/attn1.bin'))
+        self.attn2.load_state_dict(torch.load(fc_path+'/attn2.bin'))
