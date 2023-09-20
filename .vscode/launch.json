@@ -13,10 +13,9 @@
             "justMyCode": true,
             "cwd": "${fileDirname}",
             "args": [
-                "--mode","train",
+                "--mode","test",
                 "--model_name","test",
-                "--batch_size","128",
-                "--gpu_device","6"
+                "--batch_size","64"
             ]
         }
     ]

@@ -3,7 +3,6 @@ import json
 import logging
 import math
 import os
-os.environ['CUDA_VISIBLE_DEVICES'] = '6'
 import sys
 import torch
 import random
@@ -14,9 +13,8 @@ from transformers.optimization import AdamW, get_linear_schedule_with_warmup,get
 from src.Utils import process_dataset, MWPDatasetLoader
 from src.Models import *
 from src.Evaluation import *
-from transformers import T5Config,T5Tokenizer
-from src.model_t5 import *
-from transformers import T5Config,T5Tokenizer,T5ForConditionalGeneration
+from src.Test_new import *
+
 def setup_seed(seed):
      torch.manual_seed(seed)
      torch.cuda.manual_seed_all(seed)
@@ -25,8 +23,7 @@ def setup_seed(seed):
      torch.backends.cudnn.deterministic = True
 
 def train(args):
-    # devices setting
-    #! 设置随机数种子
+
     setup_seed(args.seed)
     # # os.environ['CUDA_VISIBLE_DEVICES'] = args.gpu_device    
     args.device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
@@ -52,10 +49,7 @@ def train(args):
     console.setLevel(logging.INFO)
     logger.addHandler(handler)
     logger.addHandler(console)
-
-    logger.info("\n\n")
-
-    
+ 
     with open(args.label2id_path, 'r', encoding='utf-8') as f:
         label2id = json.load(f)
     num_labels = len(label2id)
@@ -66,8 +60,9 @@ def train(args):
     for inde, label in enumerate(label2id_list):
         label2id_or_value[label] = inde
         id2label_or_value[str(inde)] = label
-    # tokenizer = BertTokenizer.from_pretrained(args.pretrain_model_path)
-    tokenizer = T5Tokenizer.from_pretrained('t5-large')
+
+    tokenizer = BertTokenizer.from_pretrained(args.pretrain_model_path)
+
     if args.train_type != 'together':
         # train data...
         logger.info("get train data loader...")
@@ -90,6 +85,9 @@ def train(args):
                                           max_len=args.test_dev_max_len, lower=True)
         dev_data_loader = MWPDatasetLoader(data=examplesss_test, batch_size=1, shuffle=False,
                                            tokenizer=tokenizer, sort=False)
+        
+        with open(args.train_data_path, 'r', encoding='utf-8')as ffs:
+            train_mwps = json.load(ffs)
         with open(args.dev_data_path, 'r', encoding='utf-8')as ffs:
             test_mwps = json.load(ffs)
     else:
@@ -100,7 +98,7 @@ def train(args):
     logger.info("define model...")
 
 
-    model = UTSC_Solver(bert_path=args.pretrain_model_path, num_labels=num_labels, iter_num=args.iter_num,hidden_size=args.fc_hidden_size)
+    model = UTSC_Solver(bert_path=args.pretrain_model_path, num_labels=num_labels, iter_num=args.iter_num,num_layers=args.transformer_layes_num,hidden_size=args.fc_hidden_size)
 
 
     model.to(args.device)
@@ -110,45 +108,28 @@ def train(args):
     # optimizer
     no_decay = ["bias", "LayerNorm.weight"]
     paras = dict(model.named_parameters())
+
     # logger.info("===========================train setting parameters=========================")
     # for n, p in paras.items():
     #     logger.info("{}-{}".format(n, str(p.shape)))
-    optimizer_grouped_parameters = [
-        {
-            "params": [p for n, p in paras.items() if not any(nd in n for nd in no_decay) and 't5' not in n],
-            "weight_decay": 0.01,
-        }, {
-            "params": [p for n, p in paras.items() if any(nd in n for nd in no_decay) and 't5' not in n],
-            "weight_decay": 0.0
-        }
-    ]
-    optimizer_grouped_parameters = [
-        {
-            "params": [p for n, p in paras.items() if (not any(nd in n for nd in no_decay)) and ('t5' not in n)],
-            "weight_decay": 0.01,
-        }, {
-            "params": [p for n, p in paras.items() if (any(nd in n for nd in no_decay)) and ('t5' not in n)],
-            "weight_decay": 0.0
-        }
-    ]
-    # bert_parameters = [p for n, p in paras.items() if 'bert' in n]
-    bert_parameters = [p for n, p in paras.items() if 't5' in n]
-    total_steps = int(len(train_data_loader) * args.num_epochs)
 
+
+    optimizer_grouped_parameters = [
+        {
+            "params": [p for n, p in paras.items() if not any(nd in n for nd in no_decay) ],
+            "weight_decay": 0.01,
+        }, {
+            "params": [p for n, p in paras.items() if any(nd in n for nd in no_decay) ],
+            "weight_decay": 0.0
+        }
+    ]
+
+    total_steps = int(len(train_data_loader) * args.num_epochs)
     if args.warmup < 1:
         warmup_steps = int(total_steps * args.warmup)
     else:
         warmup_steps = int(args.warmup)
     optimizer = AdamW(optimizer_grouped_parameters, lr=args.lr,no_deprecation_warning=True)
-    bert_optimizer = torch.optim.Adam(bert_parameters, lr=args.bert_lr)
-    # scheduler = get_linear_schedule_with_warmup(optimizer, num_warmup_steps=warmup_steps,num_training_steps=total_steps)
-    # scheduler = torch.optim.lr_scheduler.StepLR(optimizer, step_size=30, gamma=0.5)
-    def lr_lambda(step):
-        if step < warmup_steps:
-            return (step + 1) / warmup_steps
-        else:
-            return 0.5 * (1 + math.cos((step - warmup_steps) / (total_steps-warmup_steps) * math.pi))
-    # scheduler = torch.optim.lr_scheduler.LambdaLR(optimizer, lr_lambda=lr_lambda)
     scheduler = get_cosine_schedule_with_warmup(optimizer, num_warmup_steps=warmup_steps,num_training_steps=total_steps)
     
     best_acc = -1
@@ -161,12 +142,17 @@ def train(args):
             all_loss_g = 0
             all_loss_d = 0
             loss = 0
+            code_right = torch.zeros(args.iter_num).cuda()
+            code_all = torch.zeros(args.iter_num).cuda()
+            judgement_right = torch.zeros(args.iter_num).cuda()
+            judgement_all = torch.zeros(args.iter_num).cuda()
+
             for step, batch in enumerate(train_data_loader, start=1):
                 batch_data = [i.to(args.device) for i in batch]
                 # (input_ids, input_mask, token_type_ids, problem_id, num_positions, tgt_ids, tgt_mask)
                 input_ids, input_mask, token_type_ids, problem_id, num_positions, tgt_ids, tgt_mask = batch_data
                 
-                loss_g, loss_d = model(input_ids=input_ids, input_mask=input_mask, token_type_ids=token_type_ids, num_positions=num_positions, tgt_ids=tgt_ids, tgt_mask=tgt_mask,problem_id=problem_id)
+                loss_g, loss_d, code_pred_list, judgement_pred_list, discriminator_label_list = model(input_ids=input_ids, input_mask=input_mask, token_type_ids=token_type_ids, num_positions=num_positions, tgt_ids=tgt_ids, tgt_mask=tgt_mask,problem_id=problem_id)
                 all_loss_g += loss_g.item()
                 all_loss_d += loss_d.item()
                 loss = loss_g + loss_d
@@ -175,58 +161,76 @@ def train(args):
                 optimizer.step()
                 scheduler.step()
                 model.zero_grad()
-                
+
+                # ! 评测指标 code_acc judgement_acc 优化下面的for循环
+                tgt_mask_sum = torch.sum(tgt_mask)
+
+                for i in range(args.iter_num):
+                    #Todo 计算ans_acc
+
+                    # 计算discriminator_label_list[i]在tgt_mask的位置的和
+                    code_right[i] += torch.sum((discriminator_label_list[i]) * tgt_mask)
+                    code_all[i] += tgt_mask_sum
+
+                    # 计算judgement_pred_list[i] == discriminator_label_list[i]在tgt_mask的位置的和
+                    judgement_right[i] += torch.sum((judgement_pred_list[i] == discriminator_label_list[i]) * tgt_mask)
+                    judgement_all[i] += tgt_mask_sum
 
 
-            # print loss...
+
+            logger.info("\n")
+            logger.info("epoch:{},\tloss_g:{}\tloss_d:{}".format(epoch, all_loss_g, all_loss_d))
+            logger.info("train_code_acc:{}".format([code_right[i].item() / code_all[i].item() for i in range(args.iter_num)]))
+            logger.info("train_judgement_acc:{}".format([judgement_right[i].item() / judgement_all[i].item() for i in range(args.iter_num)]))
             logger.info("\n")
 
-            logger.info("epoch:{},\tloss_g:{}\tloss_d:{}".format(epoch, all_loss_g, all_loss_d))
-
-            acc = eval_utsc_solver(
+            # acc = eval_utsc_solver(
+            # logger=logger,
+            # model=model,
+            # test_mwps=test_mwps,
+            # dev_data_loader=dev_data_loader,
+            # device=args.device,
+            # id2label_or_value = id2label_or_value,
+            # )
+            acc = eval_utsc_solver_iterations(
             logger=logger,
             model=model,
             test_mwps=test_mwps,
             dev_data_loader=dev_data_loader,
             device=args.device,
+            iter_num = args.iter_num,
             id2label_or_value = id2label_or_value,
             )
 
-            # if acc >= best_acc:
-            #     logger.info('save best model to {}'.format(best_model_dir))
-            #     best_acc = acc
-            #     model.save(save_dir=best_model_dir)
-            #     refiner.save(save_dir=best_model_dir)
-            # model.save(save_dir=latest_model_dir)
-            # refiner.save(save_dir=latest_model_dir)
+            if acc >= best_acc:
+                logger.info('save best model to {}, best acc is:{} '.format(best_model_dir, acc))
+                best_acc = acc
+                # 保存模型
+                torch.save(model.state_dict(), best_model_dir+"/model.pt")
+    
+
             train_data_loader.reset(doshuffle=True)
 
         #测试最终结果
-        # logger.info("\n\n")
-        # logger.info("final_test")
-        # model.load(best_model_dir)
-        # model.to(args.device)
-        # acc = eval_multi_clf_for_classfier_check(
-        #         logger=logger,
-        #         model=model,
-        #         test_mwps=test_mwps,
-        #         device=args.device,
-        #         num_labels = num_labels,
-        #         test_dev_max_len = args.test_dev_max_len,
-        #         label2id_or_value = label2id_or_value,
-        #         id2label_or_value = id2label_or_value,
-        #         tokenizer = tokenizer,
-        #         refiner = refiner
-        #         )
-        # print("final_test")
-        # print(f"Answer acc:{acc}")
-        # print("\n")
+        logger.info("\n\n")
+        logger.info("Final_test")
+        model.load_state_dict(torch.load(best_model_dir+"/model.pt"))
+        model.to(args.device)
+        acc = eval_utsc_solver_iterations(
+            logger=logger,
+            model=model,
+            test_mwps=test_mwps,
+            dev_data_loader=dev_data_loader,
+            device=args.device,
+            iter_num = args.iter_num,
+            id2label_or_value = id2label_or_value,
+            )
 
 
     else:
         #测试最终结果
 
-        model.load(best_model_dir)
+        model.load_state_dict(torch.load(best_model_dir+"/model.pt"))
         model.to(args.device)
 
         logger1 = logging.getLogger()
@@ -234,32 +238,15 @@ def train(args):
         console_handler = logging.StreamHandler()
         console_handler.setLevel(logging.INFO)
         logger1.addHandler(console_handler)
-
-        logger1.info("Test!")
-        # acc = eval_multi_clf_for_classfier_check(
-        #         logger=logger1,
-        #         model=model,
-        #         test_mwps=test_mwps,
-        #         device=args.device,
-        #         num_labels = num_labels,
-        #         test_dev_max_len = args.test_dev_max_len,
-        #         label2id_or_value = label2id_or_value,
-        #         id2label_or_value = id2label_or_value,
-        #         tokenizer = tokenizer,
-        #         refiner = refiner
-        #         )
-
-        # acc = eval_multi_clf_for_test_new(
-        #         logger=logger1,
-        #         model=model,
-        #         test_mwps=test_mwps,
-        #         device=args.device,
-        #         num_labels = num_labels,
-        #         test_dev_max_len = args.test_dev_max_len,
-        #         label2id_or_value = label2id_or_value,
-        #         id2label_or_value = id2label_or_value,
-        #         tokenizer = tokenizer,
-        #         json_path = args.output_dir 
-        #         )
+        logger1.info("\n\nTest mode!\n")
+        acc = eval_utsc_solver_iterations(
+            logger=logger1,
+            model=model,
+            test_mwps=test_mwps,
+            dev_data_loader=dev_data_loader,
+            device=args.device,
+            iter_num = args.iter_num,
+            id2label_or_value = id2label_or_value,
+            )
     
     

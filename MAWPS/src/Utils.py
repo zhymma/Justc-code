@@ -35,7 +35,7 @@ class MWPDatasetLoader(object):
         processed = []
         for d in data:
             problem_id, sentence_list, num_codes_labels, num_positions = d
-            sen_tokens = self.tokenizer.convert_tokens_to_ids(sentence_list)
+            sen_tokens = self.tokenizer.convert_tokens_to_ids(['[CLS]'] + sentence_list + ['[SEP]'])
             x_len = len(sen_tokens)
             token_type_id = [0] * x_len
             for pp in num_positions: #? 对应位置标记上数字，+1是因为多了一个[CLS]
@@ -247,6 +247,7 @@ def process_one_mawps_no_None(raw_mwp: dict, label2id_or_value: dict, max_len: i
         for cindex, value in enumerate(sentence_list):
                 if kk == value:
                     postions_in_q = cindex
+                    break
         if len(vv) == 1:
             num_positions.append(postions_in_q+1)
             num_codes_labels.append(label2id_or_value[vv[0]])

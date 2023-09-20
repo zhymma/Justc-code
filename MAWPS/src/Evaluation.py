@@ -682,28 +682,87 @@ def eval_utsc_solver(model, dev_data_loader, test_mwps, device,id2label_or_value
     
 
     right_ans_count = 0
-
+    right_code_count = 0
+    all_code_count = 0
     for step, batch in enumerate(dev_data_loader):
         batch_data = [i.to(device) for i in batch]
         input_ids, input_mask, token_type_ids, problem_id, num_positions, tgt_ids, tgt_mask = batch_data
 
         model.eval()
         with torch.no_grad():
-
             codes_outputs = model(input_ids=input_ids, input_mask=input_mask, token_type_ids=token_type_ids, num_positions=num_positions, tgt_ids=tgt_ids, tgt_mask=tgt_mask,problem_id=problem_id)
+            # 计算答案是否正确
             if check_answer_acc(test_mwps[step], num_positions, tgt_ids, codes_outputs, id2label_or_value):
                 right_ans_count += 1
-
-
-        
-                    
-
-                    
+            #计算code是否正确，比较
+            is_code_right = torch.eq(codes_outputs, tgt_ids).squeeze(0).long()
+            right_code_count += torch.sum(is_code_right).item()
+            all_code_count += is_code_right.shape[0]
 
     ans_acc = right_ans_count / len(test_mwps)
+    code_acc = right_code_count / all_code_count
+    
     if logger is not None:
         logger.info('right_count:{}\ttotal:{}\t Answer ACC: {}'.format(right_ans_count, len(test_mwps), ans_acc))
-        # logger.info('right_codes_count:{}\ttotal:{}\tCode ACC: {}\twrong_be_tree_count:{}\twrong_total:{}\t wrong be tree ACC: {}'.format(right_codes_count, all_codes_count, code_acc,wrong_be_tree, wrong_ans_count, wrong_be_tree/wrong_ans_count))
-        # logger.info('right_checker:{}\ttotal:{}\tchecker ACC: {}\ttemp:{}\ttemp1:{}\twrong_total:{}\t'.format(right_checker,all_codes_count,right_checker/all_codes_count,temp,temp1,len(test_mwps)-right_ans_count ))
+        logger.info('right_codes_count:{}\ttotal:{}\tCode ACC: {}'.format(right_code_count, all_code_count, code_acc))
+    
     model.train()
     return ans_acc
+
+def eval_utsc_solver_iterations(model, dev_data_loader, test_mwps, device,id2label_or_value, iter_num,logger=None):
+    code_right = torch.zeros(iter_num).cuda()
+    code_all = torch.zeros(iter_num).cuda()
+    judgement_right = torch.zeros(iter_num).cuda()
+    judgement_all = torch.zeros(iter_num).cuda()
+    # answer_right = torch.zeros(iter_num).cuda()
+    # answer_all的值为 len(test_mwps)
+    # answer_all = torch.zeros(iter_num).cuda()
+    # answer_all += len(test_mwps)
+    answer_right = 0
+    answer_all = len(test_mwps)
+    iter_cnt_all = 0
+    for step, batch in enumerate(dev_data_loader):
+        batch_data = [i.to(device) for i in batch]
+        input_ids, input_mask, token_type_ids, problem_id, num_positions, tgt_ids, tgt_mask = batch_data
+
+        model.eval()
+        with torch.no_grad():
+            codes_outputs,code_pred_list, judgement_pred_list, discriminator_label_list, iter_cnt = model(input_ids=input_ids, input_mask=input_mask, token_type_ids=token_type_ids, num_positions=num_positions, tgt_ids=tgt_ids, tgt_mask=tgt_mask,problem_id=problem_id)
+            iter_cnt_all += iter_cnt
+            tgt_mask_sum = torch.sum(tgt_mask)
+            
+
+            is_answer_right = check_answer_acc(test_mwps[step], num_positions, tgt_ids, codes_outputs, id2label_or_value)
+            if is_answer_right:
+                answer_right += 1
+           
+            for iter in range(iter_cnt):
+                # # 计算答案是否正确
+                # is_answer_right = check_answer_acc(test_mwps[step], num_positions, tgt_ids, code_pred_list[iter], id2label_or_value)
+                # if is_answer_right:
+                #     answer_right[iter] += 1
+                #计算code是否正确，比较                
+                code_right_count = torch.sum(discriminator_label_list[iter] * tgt_mask)
+                code_right[iter] += code_right_count
+                code_all[iter] += tgt_mask_sum
+                #计算判断是否正确
+                judgement_right_count = torch.sum(torch.sum((judgement_pred_list[iter] == discriminator_label_list[iter]) * tgt_mask))
+                judgement_right[iter] += judgement_right_count
+                judgement_all[iter] += tgt_mask_sum
+
+            for iter in range(iter_cnt, iter_num):
+                # answer_right[iter] += is_answer_right
+                code_right[iter] += code_right_count
+                code_all[iter] += tgt_mask_sum
+                judgement_right[iter] += judgement_right_count
+                judgement_all[iter] += tgt_mask_sum
+                
+
+    if logger is not None:
+        logger.info("test_answer_acc:{}\titer_cnt_mean:{}".format(answer_right / answer_all, iter_cnt_all/len(test_mwps)))
+        # logger.info("test_answer_acc:{}".format([answer_right[i].item() / answer_all[i].item() for i in range(iter_num)]))
+        logger.info("test_code_acc:{}".format([code_right[i].item() / code_all[i].item() for i in range(iter_num)]))
+        logger.info("test_judgement_acc:{}".format([judgement_right[i].item() / judgement_all[i].item() for i in range(iter_num)]))
+        
+    model.train()
+    return answer_right / answer_all

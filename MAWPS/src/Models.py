@@ -9,8 +9,7 @@ from transformers import BertConfig, BertTokenizer, BertModel
 import random
 from torch.nn.functional import mse_loss
 import math
-from src.model_t5 import *
-from transformers import T5Config,T5Tokenizer,T5ForConditionalGeneration
+
 from torch.nn.functional import log_softmax
 logger = logging.getLogger(__name__)
 
@@ -239,7 +238,7 @@ class MwpBertModel_CLS(torch.nn.Module):
             self.bert = BertModel.from_pretrained(pretrained_model_name_or_path=bert_path_or_config)
         elif isinstance(bert_path_or_config, BertConfig):
             self.bert = BertModel(bert_path_or_config)
-        self.t5 = T5Encoder(T5Config.from_pretrained('t5-large'))
+
         self.dropout = torch.nn.Dropout(0.1)
         self.d_model = 768
         if multi_fc:
@@ -716,9 +715,9 @@ class Decoder(nn.Module):
         
         self.max_sequence_length = max_sequence_length
         
-        
+        self.d_model = d_model
         # Positional encoding layer
-        # self.positional_encoding = self.get_positional_encoding(d_model, max_sequence_length)
+        self.positional_encoding = self.get_positional_encoding(d_model, max_sequence_length)
         
         # Transformer decoder layers
         self.decoder_layers = nn.TransformerDecoderLayer(d_model, num_heads,batch_first=True)
@@ -736,7 +735,8 @@ class Decoder(nn.Module):
         # Embedding for decoder input
         
         # Add positional encoding decoder_input batch_sirst
-        # tgt += self.positional_encoding[:, :tgt.size(1), :]
+        # tgt = tgt  * math.sqrt(self.d_model)
+        # tgt += self.positional_encoding[:, :tgt.size(1), :].to(tgt.device)
         # Transformer decoding with cross-attention to bert_output
         output = self.decoder(tgt, memory, tgt_key_padding_mask=tgt_key_padding_mask, memory_key_padding_mask=memory_key_padding_mask)
         
@@ -745,28 +745,30 @@ class Decoder(nn.Module):
         
         return logits
 
-    def get_positional_encoding(self, d_model, max_sequence_length):
-        # Create positional encoding
-        positional_encoding = torch.zeros(1, max_sequence_length, d_model)
-        position = torch.arange(0, max_sequence_length, dtype=torch.float32).unsqueeze(0)
-        div_term = torch.exp(torch.arange(0, d_model, 2).float() * (-math.log(10000.0) / d_model))
-        positional_encoding[0, :, 0::2] = torch.sin(position * div_term)
-        positional_encoding[0, :, 1::2] = torch.cos(position * div_term)
-        return positional_encoding
+    def get_positional_encoding(self, d_model, max_sequence_length):  
+        # Create positional encoding  
+        positional_encoding = torch.zeros(max_sequence_length, d_model)  
+        row = torch.arange(0, max_sequence_length).reshape(-1,1)
+        col = torch.pow(10000, torch.arange(0, d_model, 2) / d_model)
+        positional_encoding[:, 0::2] = torch.sin(row / col)  
+        positional_encoding[:, 1::2] = torch.cos(row / col)
+
+        return positional_encoding.unsqueeze(0)
 
 class UTSC_Solver(torch.nn.Module):
-    def __init__(self, bert_path, num_labels, iter_num, hidden_size: int = 1024):
+    def __init__(self, bert_path, num_labels, iter_num, num_layers,hidden_size: int = 1024):
         super(UTSC_Solver, self).__init__()
         self.iter_num = iter_num
         self.num_labels = num_labels
         self.encoder = BertModel.from_pretrained(pretrained_model_name_or_path=bert_path)
-        self.dropout = torch.nn.Dropout(0.2)
+        self.dropout = torch.nn.Dropout(0.5)
         self.d_model = self.encoder.config.hidden_size
         self.hidden_size = hidden_size
         self.code_emb = Embedding(self.num_labels, self.d_model, dropout=self.dropout.p)
         self.fusion_fc = nn.Linear(self.d_model * 3, self.d_model)
-        self.geneartor = Decoder(vocab_size=self.num_labels, d_model=self.d_model) 
-        self.discriminator = Decoder(2, d_model=self.d_model) # 二分类器 加上<pad>
+        self.relu_activation = nn.ReLU()
+        self.geneartor = Decoder(vocab_size=self.num_labels,num_layers=num_layers , d_model=self.d_model) 
+        self.discriminator = Decoder(vocab_size=2, num_layers=num_layers,d_model=self.d_model) # 二分类器 加上<pad>
 
 
         self.get_goal1 = nn.Linear(self.d_model * 2, self.hidden_size)
@@ -783,6 +785,10 @@ class UTSC_Solver(torch.nn.Module):
         p_hidden = torch.gather(problem_embeddings, 1, num_positions.unsqueeze(-1).expand(-1,-1,self.d_model))
         problem_out = pooler_output.unsqueeze(1).expand(p_hidden.shape)
         
+        # 添加dropout
+        p_hidden = self.dropout(p_hidden)
+        problem_out = self.dropout(problem_out)
+
         goal1 = torch.tanh(self.get_goal1(torch.cat((p_hidden,problem_out),dim=-1)))
         goal2 = torch.sigmoid(self.get_goal2(torch.cat((p_hidden,problem_out),dim=-1)))
         goal = goal1 * goal2
@@ -793,62 +799,95 @@ class UTSC_Solver(torch.nn.Module):
         all_loss_g, all_loss_d = 0,0
         code_g_input = torch.ones((p_hidden.shape[0], p_hidden.shape[1])).cuda()
         code_g_input = code_g_input.long()
-
+        # (batch_size, seq_len)
+        code_pred_list = []
+        judgement_pred_list = []
+        discriminator_label_list = []
         if self.training:
             for iter in range(self.iter_num):
                 #! generator
                 codes_embedding = self.code_emb(code_g_input) # 一开始code全为<mask> 
-                decoder_inputs = self.fusion_fc(torch.cat((codes_embedding, p_hidden, goal),dim=-1))
+                decoder_inputs = self.fusion_fc(torch.cat((codes_embedding, p_hidden,goal),dim=-1))
+                decoder_inputs = self.relu_activation(decoder_inputs)  # ReLU Activation
+                decoder_inputs = self.dropout(decoder_inputs)  # Dropout
                 code_pred = self.geneartor(tgt=decoder_inputs, memory=problem_embeddings, tgt_key_padding_mask=~(tgt_mask.bool()), memory_key_padding_mask=~(input_mask.bool()))
 
-                index_mask = torch.eq(code_g_input, 1).to(torch.float)
+                index_mask = torch.eq(code_g_input, 1)
                 index_mask = index_mask.bool()
                 loss_g = nn.functional.cross_entropy(code_pred.transpose(1,2), tgt_ids,ignore_index=0, reduction='none')
                 loss_g = loss_g * index_mask
-                # 求loss_g均值 防止出现除0
                 loss_g = loss_g.sum() / max(1,index_mask.sum())
                 all_loss_g += loss_g
                 code_pred = torch.argmax(code_pred, dim=-1)
 
+                #! 更新mask位置的code，并更新code_pred_list
+                if len(code_pred_list) == 0:
+                    code_pred_list.append(code_pred)
+                else:
+                    code_pred_last = code_pred_list[-1]
+                    code_pred[code_g_input != 1] = code_pred_last[code_g_input != 1]
+                    code_pred_list.append(code_pred)
+
                 #! discriminator
                 discriminator_label = torch.eq(code_pred, tgt_ids).long()
                 discriminator_label[~(tgt_mask.bool())] = -100
-                decoder_inputs = self.fusion_fc(torch.cat((self.code_emb(code_pred), p_hidden, goal),dim=-1))
+                discriminator_label_list.append(discriminator_label)
+                decoder_inputs = self.fusion_fc(torch.cat((self.code_emb(code_pred), p_hidden,goal),dim=-1))
+                decoder_inputs = self.relu_activation(decoder_inputs)  # ReLU Activation
+                decoder_inputs = self.dropout(decoder_inputs)  # Dropout
                 judgement_pred = self.discriminator(tgt=decoder_inputs, memory=problem_embeddings, tgt_key_padding_mask=~(tgt_mask.bool()), memory_key_padding_mask=~(input_mask.bool()))
                 loss_d = nn.functional.cross_entropy(judgement_pred.transpose(1,2), discriminator_label, ignore_index=-100, reduction='mean')
                 all_loss_d += loss_d
                 judgement_pred = torch.argmax(judgement_pred, dim=-1)
-
-                #! 更新code_g_input 对应judgement_pred为1的位置更新为code_pred，其余位置更新为1
-                new_code_g_input = code_g_input.clone()
-                new_code_g_input[judgement_pred == 1] = code_pred[judgement_pred == 1]
-                new_code_g_input[judgement_pred == 0] = 1
+                judgement_pred_list.append(judgement_pred)
+                #! 更新code_g_input 对应judgement_pred为1的位置更新为code_pred，错误位置更新为1，使用真实的标签去判断，而不是使用judgement_pred
+                new_code_g_input = code_pred.clone()
+                new_code_g_input[discriminator_label == 0] = 1
+                # new_code_g_input[discriminator_label == 0] = 1
                 code_g_input = new_code_g_input
-            return all_loss_g, all_loss_d
+
+            return all_loss_g, all_loss_d, code_pred_list, judgement_pred_list, discriminator_label_list
+        
         else:
+
             for iter in range(self.iter_num):
                 #! generator
-                codes_embedding = self.code_emb(code_g_input) # 一开始code全为<mask> 
-                decoder_inputs = self.fusion_fc(torch.cat((codes_embedding, p_hidden, goal),dim=-1))
+                codes_embedding = self.code_emb(code_g_input) # 一开始code全为<mask>
+                decoder_inputs = self.fusion_fc(torch.cat((codes_embedding, p_hidden,goal),dim=-1))
+                decoder_inputs = self.relu_activation(decoder_inputs)  # ReLU Activation
+                decoder_inputs = self.dropout(decoder_inputs)  # Dropout
                 code_pred = self.geneartor(tgt=decoder_inputs, memory=problem_embeddings, tgt_key_padding_mask=~(tgt_mask.bool()), memory_key_padding_mask=~(input_mask.bool()))
-
+                
+                #! 更新mask位置的code，并更新code_pred_list
                 code_pred = torch.argmax(code_pred, dim=-1)
+                if len(code_pred_list) == 0:
+                    code_pred_list.append(code_pred)
+                else:
+                    code_pred_last = code_pred_list[-1]
+                    code_pred[code_g_input != 1] = code_pred_last[code_g_input != 1]
+                    code_pred_list.append(code_pred)
 
                 #! discriminator
-                decoder_inputs = self.fusion_fc(torch.cat((self.code_emb(code_pred), p_hidden, goal),dim=-1))
+                discriminator_label = torch.eq(code_pred, tgt_ids).long()
+                discriminator_label[~(tgt_mask.bool())] = -100
+                discriminator_label_list.append(discriminator_label)
+                decoder_inputs = self.fusion_fc(torch.cat((self.code_emb(code_pred), p_hidden,goal),dim=-1))
+                decoder_inputs = self.relu_activation(decoder_inputs)  # ReLU Activation
+                decoder_inputs = self.dropout(decoder_inputs)  # Dropout
                 judgement_pred = self.discriminator(tgt=decoder_inputs, memory=problem_embeddings, tgt_key_padding_mask=~(tgt_mask.bool()), memory_key_padding_mask=~(input_mask.bool()))
                 judgement_pred = torch.argmax(judgement_pred, dim=-1)
+                judgement_pred_list.append(judgement_pred)
 
-                #! 更新code_g_input 对应judgement_pred为1的位置更新为code_pred，其余位置更新为1
-                new_code_g_input = code_g_input.clone()
-                new_code_g_input[judgement_pred == 1] = code_pred[judgement_pred == 1]
-                new_code_g_input[judgement_pred == 0] = 1
-                # 如果没有更新，说明已经全部正确
-                if torch.equal(new_code_g_input, code_g_input):
+                #! 更新code_g_input 对应judgement_pred为0的位置更新为1
+                new_code_g_input = code_pred.clone()
+                new_code_g_input[discriminator_label == 0] = 1
+                # 如果judgement_pred全是1，则不更新
+                if torch.all(discriminator_label == 1):
                     break
                 else:
                     code_g_input = new_code_g_input
-            return code_g_input
+            # return code_pred 
+            return code_pred, code_pred_list, judgement_pred_list, discriminator_label_list, iter+1
 
 
     def save(self, save_dir):
