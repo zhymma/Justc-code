@@ -9,7 +9,7 @@ parser = argparse.ArgumentParser()
 parser.add_argument("--log_file", default="output.log", type=str)
 parser.add_argument("--mode", default="test", type=str)
 parser.add_argument("--seed", default=0, type=int)
-parser.add_argument("--iter_num", default=3, type=int)
+parser.add_argument("--iter_num", default=5, type=int)
 parser.add_argument("--transformer_layes_num", default=2, type=int)
 parser.add_argument("--lr", default=2e-5, type=float)#!原本为2e-5
 parser.add_argument("--batch_size", default=64, type=int)

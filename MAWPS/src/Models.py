@@ -857,15 +857,34 @@ class UTSC_Solver(torch.nn.Module):
                 decoder_inputs = self.relu_activation(decoder_inputs)  # ReLU Activation
                 decoder_inputs = self.dropout(decoder_inputs)  # Dropout
                 code_pred = self.geneartor(tgt=decoder_inputs, memory=problem_embeddings, tgt_key_padding_mask=~(tgt_mask.bool()), memory_key_padding_mask=~(input_mask.bool()))
-                
+                # 将输出转化为概率值
+                code_pred = torch.softmax(code_pred, dim=-1)
                 #! 更新mask位置的code，并更新code_pred_list
-                code_pred = torch.argmax(code_pred, dim=-1)
+                # 将上一轮中code_g_input==1的位置对应的code的code_pred置为0
+
                 if len(code_pred_list) == 0:
+                    code_pred = torch.argmax(code_pred, dim=-1)
                     code_pred_list.append(code_pred)
                 else:
-                    code_pred_last = code_pred_list[-1]
+                    # code_pred_last = code_pred_list[-1]
+                    # code_pred = torch.argmax(code_pred, dim=-1)
+                    # code_pred[code_g_input != 1] = code_pred_last[code_g_input != 1]
+                    
+                    # code_pred_list.append(code_pred)
+
+                    # #! 获得上n轮错误的code的三维下标
+                    wrong_indices =  torch.nonzero(code_g_input == 1).tolist()
+                    wrong_indices = [(i,j) for i,j in wrong_indices]
+          
+                    for i,j in wrong_indices:
+                        for code_pred_last in code_pred_list:
+                            code_pred[(i,j,code_pred_last[(i,j)].item())] = 0
+                    code_pred = torch.argmax(code_pred, dim=-1)
                     code_pred[code_g_input != 1] = code_pred_last[code_g_input != 1]
                     code_pred_list.append(code_pred)
+
+                    
+                    
 
                 #! discriminator
                 discriminator_label = torch.eq(code_pred, tgt_ids).long()
@@ -892,24 +911,8 @@ class UTSC_Solver(torch.nn.Module):
 
     def save(self, save_dir):
         pass
-        # self.encoder.save_pretrained(save_dir)
-        # self.tokenizer.save_pretrained(save_dir)
-        
-        # torch.save(self.fc.state_dict(), os.path.join(save_dir, 'fc_weight.bin'))
-        # torch.save(self.get_goal1.state_dict(), os.path.join(save_dir, 'get_goal1.bin'))
-        # torch.save(self.get_goal2.state_dict(), os.path.join(save_dir, 'get_goal2.bin'))
-        # torch.save(self.get_goal3.state_dict(), os.path.join(save_dir, 'get_goal3.bin'))
-        # torch.save(self.get_goal4.state_dict(), os.path.join(save_dir, 'get_goal4.bin'))
-        # torch.save(self.attn1.state_dict(), os.path.join(save_dir, 'attn1.bin'))
-        # torch.save(self.attn2.state_dict(), os.path.join(save_dir, 'attn2.bin'))
+
 
     
     def load(self,fc_path):
-        self.bert = BertModel.from_pretrained(fc_path)
-        self.fc.load_state_dict(torch.load(fc_path+'/fc_weight.bin'))
-        self.get_goal1.load_state_dict(torch.load(fc_path+'/get_goal1.bin'))
-        self.get_goal2.load_state_dict(torch.load(fc_path+'/get_goal2.bin'))
-        self.get_goal3.load_state_dict(torch.load(fc_path+'/get_goal3.bin'))
-        self.get_goal4.load_state_dict(torch.load(fc_path+'/get_goal4.bin'))
-        self.attn1.load_state_dict(torch.load(fc_path+'/attn1.bin'))
-        self.attn2.load_state_dict(torch.load(fc_path+'/attn2.bin'))
+        pass
