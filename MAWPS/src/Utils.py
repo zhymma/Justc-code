@@ -38,7 +38,7 @@ class MWPDatasetLoader(object):
             sen_tokens = self.tokenizer.convert_tokens_to_ids(['[CLS]'] + sentence_list + ['[SEP]'])
             x_len = len(sen_tokens)
             token_type_id = [0] * x_len
-            for pp in num_positions: #? 对应位置标记上数字，+1是因为多了一个[CLS]
+            for pp in num_positions:  #数值的位置token_type_id为1
                 token_type_id[pp] = 1
             processed.append((sen_tokens, x_len, token_type_id, problem_id, num_codes_labels, num_positions))
         return processed
@@ -227,8 +227,6 @@ def process_one_mawps_for_test(raw_mwp: dict, label2id_or_value: dict, max_len: 
     for label in data_mwp[1]:
         processed.append((sen_tokens, attention_mask, token_type_id, label))
     return processed
-
-
 
 def process_one_mawps_no_None(raw_mwp: dict, label2id_or_value: dict, max_len: int, lower: bool):
     if lower:

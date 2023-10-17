@@ -13,7 +13,7 @@
             "justMyCode": true,
             "cwd": "${fileDirname}",
             "args": [
-                "--mode","test",
+                "--mode","train",
                 "--model_name","test",
                 "--batch_size","64"
             ]

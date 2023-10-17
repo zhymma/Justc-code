@@ -150,6 +150,8 @@ def train(args):
             for step, batch in enumerate(train_data_loader, start=1):
                 batch_data = [i.to(args.device) for i in batch]
                 # (input_ids, input_mask, token_type_ids, problem_id, num_positions, tgt_ids, tgt_mask)
+                # input_mask和tgt_mask前面是1后面是0
+                # token_type_ids的数值为1，其余为0
                 input_ids, input_mask, token_type_ids, problem_id, num_positions, tgt_ids, tgt_mask = batch_data
                 
                 loss_g, loss_d, code_pred_list, judgement_pred_list, discriminator_label_list = model(input_ids=input_ids, input_mask=input_mask, token_type_ids=token_type_ids, num_positions=num_positions, tgt_ids=tgt_ids, tgt_mask=tgt_mask,problem_id=problem_id)
@@ -167,7 +169,6 @@ def train(args):
 
                 for i in range(args.iter_num):
                     #Todo 计算ans_acc
-
                     # 计算discriminator_label_list[i]在tgt_mask的位置的和
                     code_right[i] += torch.sum((discriminator_label_list[i]) * tgt_mask)
                     code_all[i] += tgt_mask_sum
@@ -175,8 +176,6 @@ def train(args):
                     # 计算judgement_pred_list[i] == discriminator_label_list[i]在tgt_mask的位置的和
                     judgement_right[i] += torch.sum((judgement_pred_list[i] == discriminator_label_list[i]) * tgt_mask)
                     judgement_all[i] += tgt_mask_sum
-
-
 
             logger.info("\n")
             logger.info("epoch:{},\tloss_g:{}\tloss_d:{}".format(epoch, all_loss_g, all_loss_d))
