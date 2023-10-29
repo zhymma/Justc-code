@@ -768,7 +768,15 @@ class UTSC_Solver(torch.nn.Module):
         self.fusion_fc = nn.Linear(self.d_model * 3, self.d_model)
         self.relu_activation = nn.ReLU()
         self.geneartor = Decoder(vocab_size=self.num_labels,num_layers=num_layers , d_model=self.d_model) 
-        self.discriminator = Decoder(vocab_size=2, num_layers=num_layers,d_model=self.d_model) # 二分类器 加上<pad>
+        # self.discriminator = Decoder(vocab_size=2, num_layers=num_layers,d_model=self.d_model) # 二分类器 加上<pad>
+        # discriminator为三层的线性网络，和激活函数
+        self.discriminator = nn.Sequential(
+                        nn.Linear(self.d_model, self.hidden_size),
+                        nn.LeakyReLU(),
+                        nn.Linear(self.hidden_size, self.hidden_size),
+                        nn.LeakyReLU(),
+                        nn.Linear(self.hidden_size, 1)
+                    )
 
 
         self.get_goal1 = nn.Linear(self.d_model * 2, self.hidden_size)
@@ -777,7 +785,7 @@ class UTSC_Solver(torch.nn.Module):
         self.get_goal4 = nn.Linear(self.hidden_size, self.d_model)
 
 
-    def forward(self, input_ids, input_mask, token_type_ids, num_positions, tgt_ids, tgt_mask, problem_id):
+    def forward(self, input_ids, input_mask, token_type_ids, num_positions, tgt_ids, tgt_mask, problem_id,train_type=None):
 
         bertout = self.encoder(input_ids=input_ids, attention_mask=input_mask, token_type_ids=token_type_ids)
         problem_embeddings = bertout[0]
@@ -823,6 +831,12 @@ class UTSC_Solver(torch.nn.Module):
                 loss_g = loss_g * index_mask
                 loss_g = loss_g.sum() / max(1,index_mask.sum())
                 all_loss_g += loss_g
+
+                code_pred_embedding = self.code_emb(torch.ones_like(code_pred).long())
+                # code_pred 相乘 code_pred_embedding
+                code_pred_embedding = code_pred.unsqueeze(-1).expand_as(code_pred_embedding) * code_pred_embedding
+                code_pred_embedding = code_pred_embedding.sum(dim = -2)
+                 # (batch_size, d_model)
                 code_pred = torch.argmax(code_pred, dim=-1) # (bacth_size, seq_len)
 
                 #! 更新mask位置的code，并更新code_pred_list
@@ -837,23 +851,33 @@ class UTSC_Solver(torch.nn.Module):
                 discriminator_label = torch.eq(code_pred, tgt_ids).long()
                 discriminator_label[~(tgt_mask.bool())] = -100
                 discriminator_label_list.append(discriminator_label)
-                decoder_inputs = self.fusion_fc(torch.cat((self.code_emb(code_pred), p_hidden,goal),dim=-1))
+                decoder_inputs = self.fusion_fc(torch.cat((code_pred_embedding, p_hidden,goal),dim=-1))
                 decoder_inputs = self.relu_activation(decoder_inputs)  # ReLU Activation
                 decoder_inputs = self.dropout(decoder_inputs)  # Dropout
-                judgement_pred = self.discriminator(tgt=decoder_inputs, memory=problem_embeddings, tgt_key_padding_mask=~(tgt_mask.bool()), memory_key_padding_mask=~(input_mask.bool()))
-                loss_d = nn.functional.cross_entropy(judgement_pred.transpose(1,2), discriminator_label, ignore_index=-100, reduction='mean')
+                # judgement_pred = self.discriminator(tgt=decoder_inputs, memory=problem_embeddings, tgt_key_padding_mask=~(tgt_mask.bool()), memory_key_padding_mask=~(input_mask.bool()))
+                judgement_pred = self.discriminator(decoder_inputs)
+                judgement_pred = judgement_pred.squeeze(-1)
+                # 计算loss_d 使用平均数的差值，而不是使用概率值，注意 ignore_index=-100 loss_critic = -(torch.mean(critic_real) - torch.mean(critic_fake))
+                # loss_d = nn.functional.cross_entropy(judgement_pred.transpose(1,2), discriminator_label, ignore_index=-100, reduction='mean')
+                disc_mask = (discriminator_label != -100).float()
+                loss_d = ((judgement_pred - discriminator_label) ** 2) * disc_mask
+                loss_d = loss_d.sum() / max(1,disc_mask.sum())
                 all_loss_d += loss_d
-                judgement_pred = torch.argmax(judgement_pred, dim=-1)
+                # judgement_pred = torch.argmax(judgement_pred, dim=-1)
+                judgement_pred = (judgement_pred > 0.5).float()
                 judgement_pred_list.append(judgement_pred)
                 #! 更新code_g_input, 对应judgement_pred为0的错误位置更新为<mask>（即1）。使用真实的标签去判断，而不是使用judgement_pred
                 new_code_g_input = code_pred.clone()
-                new_code_g_input[discriminator_label == 0] = 1
+                if train_type == 0:
+                    new_code_g_input[discriminator_label == 0] = 1
+                elif train_type == 1:
+                    new_code_g_input[judgement_pred == 0] = 1
                 code_g_input = new_code_g_input
-
+                
             return all_loss_g, all_loss_d, code_pred_list, judgement_pred_list, discriminator_label_list
         
         else:
-
+            # 推理过程
             for iter in range(self.iter_num):
                 #! generator
                 codes_embedding = self.code_emb(code_g_input) # 一开始code全为<mask>
@@ -862,6 +886,14 @@ class UTSC_Solver(torch.nn.Module):
                 decoder_inputs = self.dropout(decoder_inputs)  # Dropout
                 code_pred = self.geneartor(tgt=decoder_inputs, memory=problem_embeddings, tgt_key_padding_mask=~(tgt_mask.bool()), memory_key_padding_mask=~(input_mask.bool()))
                 code_pred = torch.softmax(code_pred, dim=-1)
+
+
+                code_pred_embedding = self.code_emb(torch.ones_like(code_pred).long())
+                # code_pred 相乘 code_pred_embedding
+                code_pred_embedding = code_pred.unsqueeze(-1).expand_as(code_pred_embedding) * code_pred_embedding
+                code_pred_embedding = code_pred_embedding.sum(dim = -2)
+
+
                 #! 更新mask位置的code，并更新code_pred_list
                 if len(code_pred_list) == 0:
                     code_pred = torch.argmax(code_pred, dim=-1)
@@ -879,6 +911,7 @@ class UTSC_Solver(torch.nn.Module):
                         for code_pred_last in code_pred_list:
                             code_pred[(i,j,code_pred_last[(i,j)].item())] = 0
                     code_pred = torch.argmax(code_pred, dim=-1)
+                    code_pred_last = code_pred_list[-1]
                     code_pred[code_g_input != 1] = code_pred_last[code_g_input != 1]
                     code_pred_list.append(code_pred)
 
@@ -886,16 +919,20 @@ class UTSC_Solver(torch.nn.Module):
                 discriminator_label = torch.eq(code_pred, tgt_ids).long()
                 discriminator_label[~(tgt_mask.bool())] = -100
                 discriminator_label_list.append(discriminator_label)
-                decoder_inputs = self.fusion_fc(torch.cat((self.code_emb(code_pred), p_hidden,goal),dim=-1))
+                decoder_inputs = self.fusion_fc(torch.cat((code_pred_embedding, p_hidden,goal),dim=-1))
                 decoder_inputs = self.relu_activation(decoder_inputs)  # ReLU Activation
                 decoder_inputs = self.dropout(decoder_inputs)  # Dropout
-                judgement_pred = self.discriminator(tgt=decoder_inputs, memory=problem_embeddings, tgt_key_padding_mask=~(tgt_mask.bool()), memory_key_padding_mask=~(input_mask.bool()))
-                judgement_pred = torch.argmax(judgement_pred, dim=-1)
+                # judgement_pred = self.discriminator(tgt=decoder_inputs, memory=problem_embeddings, tgt_key_padding_mask=~(tgt_mask.bool()), memory_key_padding_mask=~(input_mask.bool()))
+                judgement_pred = self.discriminator(decoder_inputs)
+                judgement_pred = judgement_pred.squeeze(-1)
+                # judgement_pred = torch.argmax(judgement_pred, dim=-1)
+                judgement_pred = (judgement_pred > 0.5).float()
                 judgement_pred_list.append(judgement_pred)
 
                 #! 更新code_g_input 对应judgement_pred为0的位置更新为1
                 new_code_g_input = code_pred.clone()
                 new_code_g_input[discriminator_label == 0] = 1
+
                 # 如果judgement_pred全是1，则不更新
                 if torch.all(discriminator_label == 1):
                     break
@@ -903,6 +940,7 @@ class UTSC_Solver(torch.nn.Module):
                     code_g_input = new_code_g_input
             # return code_pred 
             return code_pred, code_pred_list, judgement_pred_list, discriminator_label_list, iter+1
+            # return code_pred_list[0], code_pred_list, judgement_pred_list, discriminator_label_list, iter+1
 
 
     def save(self, save_dir):

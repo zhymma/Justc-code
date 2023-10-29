@@ -709,18 +709,23 @@ def eval_utsc_solver(model, dev_data_loader, test_mwps, device,id2label_or_value
     model.train()
     return ans_acc
 
-def eval_utsc_solver_iterations(model, dev_data_loader, test_mwps, device,id2label_or_value, iter_num,logger=None):
+def eval_utsc_solver_iterations(model, dev_data_loader, test_mwps, device,id2label_or_value, iter_num,logger=None, test_mode = False, json_path = None):
     code_right = torch.zeros(iter_num).cuda()
     code_all = torch.zeros(iter_num).cuda()
     judgement_right = torch.zeros(iter_num).cuda()
     judgement_all = torch.zeros(iter_num).cuda()
-    # answer_right = torch.zeros(iter_num).cuda()
-    # answer_all的值为 len(test_mwps)
-    # answer_all = torch.zeros(iter_num).cuda()
-    # answer_all += len(test_mwps)
-    answer_right = 0
-    answer_all = len(test_mwps)
+    if test_mode:
+        answer_right = torch.zeros(iter_num).cuda()
+        # answer_all的值为 len(test_mwps)
+        answer_all = torch.zeros(iter_num).cuda()
+        answer_all += len(test_mwps)
+    else:
+        answer_right = 0
+        answer_all = len(test_mwps)
     iter_cnt_all = 0
+    false_mwp = []
+    if test_mode:
+        F = open(os.path.join(json_path,"false_test.json"), "w" ,encoding='utf-8')
     for step, batch in enumerate(dev_data_loader):
         batch_data = [i.to(device) for i in batch]
         input_ids, input_mask, token_type_ids, problem_id, num_positions, tgt_ids, tgt_mask = batch_data
@@ -731,16 +736,16 @@ def eval_utsc_solver_iterations(model, dev_data_loader, test_mwps, device,id2lab
             iter_cnt_all += iter_cnt
             tgt_mask_sum = torch.sum(tgt_mask)
             
-
-            is_answer_right = check_answer_acc(test_mwps[step], num_positions, tgt_ids, codes_outputs, id2label_or_value)
-            if is_answer_right:
-                answer_right += 1
-           
+            if not test_mode:
+                is_answer_right = check_answer_acc(test_mwps[step], num_positions, tgt_ids, codes_outputs, id2label_or_value)
+                if is_answer_right:
+                    answer_right += 1
+           # iter_cnt表示该problem的迭代次数
             for iter in range(iter_cnt):
-                # # 计算答案是否正确
-                # is_answer_right = check_answer_acc(test_mwps[step], num_positions, tgt_ids, code_pred_list[iter], id2label_or_value)
-                # if is_answer_right:
-                #     answer_right[iter] += 1
+                if test_mode:
+                    is_answer_right = check_answer_acc(test_mwps[step], num_positions, tgt_ids, code_pred_list[iter], id2label_or_value)
+                    if is_answer_right:
+                        answer_right[iter] += 1
                 #计算code是否正确，比较                
                 code_right_count = torch.sum(discriminator_label_list[iter] * tgt_mask)
                 code_right[iter] += code_right_count
@@ -749,20 +754,29 @@ def eval_utsc_solver_iterations(model, dev_data_loader, test_mwps, device,id2lab
                 judgement_right_count = torch.sum(torch.sum((judgement_pred_list[iter] == discriminator_label_list[iter]) * tgt_mask))
                 judgement_right[iter] += judgement_right_count
                 judgement_all[iter] += tgt_mask_sum
-
+            
             for iter in range(iter_cnt, iter_num):
-                # answer_right[iter] += is_answer_right
+                if test_mode:
+                    answer_right[iter] += is_answer_right
                 code_right[iter] += code_right_count
                 code_all[iter] += tgt_mask_sum
                 judgement_right[iter] += judgement_right_count
                 judgement_all[iter] += tgt_mask_sum
-                
-
+            
+            if test_mode:
+                if not is_answer_right:
+                    false_mwp.append(test_mwps[step])
+    if test_mode:
+        json.dump(false_mwp, F ,ensure_ascii=False,indent=2)
+        F.close()
     if logger is not None:
-        logger.info("test_answer_acc:{}\titer_cnt_mean:{}".format(answer_right / answer_all, iter_cnt_all/len(test_mwps)))
-        # logger.info("test_answer_acc:{}".format([answer_right[i].item() / answer_all[i].item() for i in range(iter_num)]))
+        if test_mode:
+            logger.info("test_answer_acc:{}\titer_cnt_mean:{}".format([answer_right[i].item() / answer_all[i].item() for i in range(iter_num)],iter_cnt_all/len(test_mwps)))
+        else:
+            logger.info("test_answer_acc:{}\titer_cnt_mean:{}".format(answer_right / answer_all, iter_cnt_all/len(test_mwps)))
         logger.info("test_code_acc:{}".format([code_right[i].item() / code_all[i].item() for i in range(iter_num)]))
         logger.info("test_judgement_acc:{}".format([judgement_right[i].item() / judgement_all[i].item() for i in range(iter_num)]))
         
     model.train()
     return answer_right / answer_all
+

@@ -37,6 +37,8 @@ def train(args):
     os.makedirs(latest_model_dir, exist_ok=True)
     log_dir = os.path.join(args.output_dir, "logs")
     os.makedirs(log_dir, exist_ok=True)
+    false_data_dir = os.path.join(args.output_dir, "false_data")
+    os.makedirs(false_data_dir, exist_ok=True)
 
     # logging setting to file and screen
     logger = logging.getLogger(__name__)
@@ -100,6 +102,7 @@ def train(args):
 
     model = UTSC_Solver(bert_path=args.pretrain_model_path, num_labels=num_labels, iter_num=args.iter_num,num_layers=args.transformer_layes_num,hidden_size=args.fc_hidden_size)
 
+    # model.load_state_dict(torch.load("./output/test/best_model/model.pt"))
 
     model.to(args.device)
     model.zero_grad()
@@ -131,7 +134,8 @@ def train(args):
         warmup_steps = int(args.warmup)
     optimizer = AdamW(optimizer_grouped_parameters, lr=args.lr,no_deprecation_warning=True)
     scheduler = get_cosine_schedule_with_warmup(optimizer, num_warmup_steps=warmup_steps,num_training_steps=total_steps)
-    
+    # 推荐RMSProp，SGD也行。Adam不行
+    disc_optimizer = torch.optim.RMSprop(model.discriminator.parameters(), lr=0.0001)
     best_acc = -1
     if args.mode == "train":
         #  start training
@@ -146,6 +150,7 @@ def train(args):
             code_all = torch.zeros(args.iter_num).cuda()
             judgement_right = torch.zeros(args.iter_num).cuda()
             judgement_all = torch.zeros(args.iter_num).cuda()
+            model.train()
 
             for step, batch in enumerate(train_data_loader, start=1):
                 batch_data = [i.to(args.device) for i in batch]
@@ -153,16 +158,39 @@ def train(args):
                 # input_mask和tgt_mask前面是1后面是0
                 # token_type_ids的数值为1，其余为0
                 input_ids, input_mask, token_type_ids, problem_id, num_positions, tgt_ids, tgt_mask = batch_data
-                
-                loss_g, loss_d, code_pred_list, judgement_pred_list, discriminator_label_list = model(input_ids=input_ids, input_mask=input_mask, token_type_ids=token_type_ids, num_positions=num_positions, tgt_ids=tgt_ids, tgt_mask=tgt_mask,problem_id=problem_id)
-                all_loss_g += loss_g.item()
-                all_loss_d += loss_d.item()
-                loss = loss_g + loss_d
-                loss.backward()
-                torch.nn.utils.clip_grad_norm_([v for k, v in paras.items()], max_norm=1)
-                optimizer.step()
-                scheduler.step()
-                model.zero_grad()
+                if epoch < 10: #!单独训练generator
+                    for param in model.discriminator.parameters():
+                        param.requires_grad = False
+                    loss_g, loss_d, code_pred_list, judgement_pred_list, discriminator_label_list = model(input_ids=input_ids, input_mask=input_mask, token_type_ids=token_type_ids, num_positions=num_positions, tgt_ids=tgt_ids, tgt_mask=tgt_mask,problem_id=problem_id,train_type = 0)
+                    all_loss_g += loss_g.item()
+                    all_loss_d += loss_d.item()
+                    
+                    loss = loss_g
+                    # loss = loss_d
+                    loss.backward()
+                    torch.nn.utils.clip_grad_norm_([v for k, v in paras.items()], max_norm=1)
+                    optimizer.step()
+                    scheduler.step()
+                    model.zero_grad()
+
+                else: #!训练discriminator
+                    #便利所有参数，将除了discriminator的所有requires_grad设置为False
+                    for param in model.parameters():
+                        param.requires_grad = False
+                    for param in model.discriminator.parameters():
+                        param.requires_grad = True
+
+                    loss_g, loss_d, code_pred_list, judgement_pred_list, discriminator_label_list = model(input_ids=input_ids, input_mask=input_mask, token_type_ids=token_type_ids, num_positions=num_positions, tgt_ids=tgt_ids, tgt_mask=tgt_mask,problem_id=problem_id,train_type = 0)
+                    all_loss_g += loss_g.item()
+                    all_loss_d += loss_d.item()
+                    # loss = 0.1 * loss_g + loss_d
+                    loss = loss_d
+                    loss.backward()
+                    # torch.nn.utils.clip_grad_norm_([v for k, v in paras.items()], max_norm=1)
+                    # optimizer.step()
+                    # scheduler.step()
+                    disc_optimizer.step()
+                    model.zero_grad()
 
                 # ! 评测指标 code_acc judgement_acc 优化下面的for循环
                 tgt_mask_sum = torch.sum(tgt_mask)
@@ -177,11 +205,10 @@ def train(args):
                     judgement_right[i] += torch.sum((judgement_pred_list[i] == discriminator_label_list[i]) * tgt_mask)
                     judgement_all[i] += tgt_mask_sum
 
-            logger.info("\n")
+            logger.info("---------------------------------------------------------------")
             logger.info("epoch:{},\tloss_g:{}\tloss_d:{}".format(epoch, all_loss_g, all_loss_d))
             logger.info("train_code_acc:{}".format([code_right[i].item() / code_all[i].item() for i in range(args.iter_num)]))
             logger.info("train_judgement_acc:{}".format([judgement_right[i].item() / judgement_all[i].item() for i in range(args.iter_num)]))
-            logger.info("\n")
 
             # acc = eval_utsc_solver(
             # logger=logger,
@@ -205,8 +232,9 @@ def train(args):
                 logger.info('save best model to {}, best acc is:{} '.format(best_model_dir, acc))
                 best_acc = acc
                 # 保存模型
+                model.eval()
                 torch.save(model.state_dict(), best_model_dir+"/model.pt")
-    
+
 
             train_data_loader.reset(doshuffle=True)
 
@@ -246,6 +274,8 @@ def train(args):
             device=args.device,
             iter_num = args.iter_num,
             id2label_or_value = id2label_or_value,
+            test_mode=True,
+            json_path = false_data_dir
             )
     
     
