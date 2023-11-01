@@ -1,6 +1,7 @@
-MAWPS/run_train_mawps_fold_0.py
-MAWPS/run_train_mawps_fold_0.py
-SUMC-Solver-Official/*
+**/output/
 **/best_model/
 **/latest_model/
 **/__pycache__/
+**/SUMC_RNN/
+*.bin
+**/MAWPS copy/

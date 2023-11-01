@@ -158,13 +158,12 @@ def train(args):
                 # input_mask和tgt_mask前面是1后面是0
                 # token_type_ids的数值为1，其余为0
                 input_ids, input_mask, token_type_ids, problem_id, num_positions, tgt_ids, tgt_mask = batch_data
-                if epoch < 10: #!单独训练generator
+                if epoch < 6: #!单独训练generator
                     for param in model.discriminator.parameters():
                         param.requires_grad = False
                     loss_g, loss_d, code_pred_list, judgement_pred_list, discriminator_label_list = model(input_ids=input_ids, input_mask=input_mask, token_type_ids=token_type_ids, num_positions=num_positions, tgt_ids=tgt_ids, tgt_mask=tgt_mask,problem_id=problem_id,train_type = 0)
                     all_loss_g += loss_g.item()
                     all_loss_d += loss_d.item()
-                    
                     loss = loss_g
                     # loss = loss_d
                     loss.backward()

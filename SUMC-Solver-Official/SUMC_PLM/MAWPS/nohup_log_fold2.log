@@ -1,0 +1,2551 @@
+get train data loader...
+total input dataset len: 1730
+  0%|          | 0/1730 [00:00<?, ?it/s]100%|██████████| 1730/1730 [00:00<00:00, 53344.60it/s]
+get dev data loader...
+after process dataset len: 1730
+total passed: 0
+397 batches created
+total input dataset len: 433
+  0%|          | 0/433 [00:00<?, ?it/s]100%|██████████| 433/433 [00:00<00:00, 47842.09it/s]
+define model...
+Some weights of the model checkpoint at bert-base-uncased were not used when initializing BertModel: ['cls.predictions.bias', 'cls.predictions.transform.LayerNorm.weight', 'cls.predictions.transform.dense.bias', 'cls.predictions.decoder.weight', 'cls.predictions.transform.dense.weight', 'cls.seq_relationship.bias', 'cls.predictions.transform.LayerNorm.bias', 'cls.seq_relationship.weight']
+- This IS expected if you are initializing BertModel from the checkpoint of a model trained on another task or with another architecture (e.g. initializing a BertForSequenceClassification model from a BertForPreTraining model).
+- This IS NOT expected if you are initializing BertModel from the checkpoint of a model that you expect to be exactly identical (initializing a BertForSequenceClassification model from a BertForSequenceClassification model).
+define optimizer...
+===========================train setting parameters=========================
+bert.embeddings.word_embeddings.weight-torch.Size([30522, 768])
+bert.embeddings.position_embeddings.weight-torch.Size([512, 768])
+bert.embeddings.token_type_embeddings.weight-torch.Size([2, 768])
+bert.embeddings.LayerNorm.weight-torch.Size([768])
+bert.embeddings.LayerNorm.bias-torch.Size([768])
+bert.encoder.layer.0.attention.self.query.weight-torch.Size([768, 768])
+bert.encoder.layer.0.attention.self.query.bias-torch.Size([768])
+bert.encoder.layer.0.attention.self.key.weight-torch.Size([768, 768])
+bert.encoder.layer.0.attention.self.key.bias-torch.Size([768])
+bert.encoder.layer.0.attention.self.value.weight-torch.Size([768, 768])
+bert.encoder.layer.0.attention.self.value.bias-torch.Size([768])
+bert.encoder.layer.0.attention.output.dense.weight-torch.Size([768, 768])
+bert.encoder.layer.0.attention.output.dense.bias-torch.Size([768])
+bert.encoder.layer.0.attention.output.LayerNorm.weight-torch.Size([768])
+bert.encoder.layer.0.attention.output.LayerNorm.bias-torch.Size([768])
+bert.encoder.layer.0.intermediate.dense.weight-torch.Size([3072, 768])
+bert.encoder.layer.0.intermediate.dense.bias-torch.Size([3072])
+bert.encoder.layer.0.output.dense.weight-torch.Size([768, 3072])
+bert.encoder.layer.0.output.dense.bias-torch.Size([768])
+bert.encoder.layer.0.output.LayerNorm.weight-torch.Size([768])
+bert.encoder.layer.0.output.LayerNorm.bias-torch.Size([768])
+bert.encoder.layer.1.attention.self.query.weight-torch.Size([768, 768])
+bert.encoder.layer.1.attention.self.query.bias-torch.Size([768])
+bert.encoder.layer.1.attention.self.key.weight-torch.Size([768, 768])
+bert.encoder.layer.1.attention.self.key.bias-torch.Size([768])
+bert.encoder.layer.1.attention.self.value.weight-torch.Size([768, 768])
+bert.encoder.layer.1.attention.self.value.bias-torch.Size([768])
+bert.encoder.layer.1.attention.output.dense.weight-torch.Size([768, 768])
+bert.encoder.layer.1.attention.output.dense.bias-torch.Size([768])
+bert.encoder.layer.1.attention.output.LayerNorm.weight-torch.Size([768])
+bert.encoder.layer.1.attention.output.LayerNorm.bias-torch.Size([768])
+bert.encoder.layer.1.intermediate.dense.weight-torch.Size([3072, 768])
+bert.encoder.layer.1.intermediate.dense.bias-torch.Size([3072])
+bert.encoder.layer.1.output.dense.weight-torch.Size([768, 3072])
+bert.encoder.layer.1.output.dense.bias-torch.Size([768])
+bert.encoder.layer.1.output.LayerNorm.weight-torch.Size([768])
+bert.encoder.layer.1.output.LayerNorm.bias-torch.Size([768])
+bert.encoder.layer.2.attention.self.query.weight-torch.Size([768, 768])
+bert.encoder.layer.2.attention.self.query.bias-torch.Size([768])
+bert.encoder.layer.2.attention.self.key.weight-torch.Size([768, 768])
+bert.encoder.layer.2.attention.self.key.bias-torch.Size([768])
+bert.encoder.layer.2.attention.self.value.weight-torch.Size([768, 768])
+bert.encoder.layer.2.attention.self.value.bias-torch.Size([768])
+bert.encoder.layer.2.attention.output.dense.weight-torch.Size([768, 768])
+bert.encoder.layer.2.attention.output.dense.bias-torch.Size([768])
+bert.encoder.layer.2.attention.output.LayerNorm.weight-torch.Size([768])
+bert.encoder.layer.2.attention.output.LayerNorm.bias-torch.Size([768])
+bert.encoder.layer.2.intermediate.dense.weight-torch.Size([3072, 768])
+bert.encoder.layer.2.intermediate.dense.bias-torch.Size([3072])
+bert.encoder.layer.2.output.dense.weight-torch.Size([768, 3072])
+bert.encoder.layer.2.output.dense.bias-torch.Size([768])
+bert.encoder.layer.2.output.LayerNorm.weight-torch.Size([768])
+bert.encoder.layer.2.output.LayerNorm.bias-torch.Size([768])
+bert.encoder.layer.3.attention.self.query.weight-torch.Size([768, 768])
+bert.encoder.layer.3.attention.self.query.bias-torch.Size([768])
+bert.encoder.layer.3.attention.self.key.weight-torch.Size([768, 768])
+bert.encoder.layer.3.attention.self.key.bias-torch.Size([768])
+bert.encoder.layer.3.attention.self.value.weight-torch.Size([768, 768])
+bert.encoder.layer.3.attention.self.value.bias-torch.Size([768])
+bert.encoder.layer.3.attention.output.dense.weight-torch.Size([768, 768])
+bert.encoder.layer.3.attention.output.dense.bias-torch.Size([768])
+bert.encoder.layer.3.attention.output.LayerNorm.weight-torch.Size([768])
+bert.encoder.layer.3.attention.output.LayerNorm.bias-torch.Size([768])
+bert.encoder.layer.3.intermediate.dense.weight-torch.Size([3072, 768])
+bert.encoder.layer.3.intermediate.dense.bias-torch.Size([3072])
+bert.encoder.layer.3.output.dense.weight-torch.Size([768, 3072])
+bert.encoder.layer.3.output.dense.bias-torch.Size([768])
+bert.encoder.layer.3.output.LayerNorm.weight-torch.Size([768])
+bert.encoder.layer.3.output.LayerNorm.bias-torch.Size([768])
+bert.encoder.layer.4.attention.self.query.weight-torch.Size([768, 768])
+bert.encoder.layer.4.attention.self.query.bias-torch.Size([768])
+bert.encoder.layer.4.attention.self.key.weight-torch.Size([768, 768])
+bert.encoder.layer.4.attention.self.key.bias-torch.Size([768])
+bert.encoder.layer.4.attention.self.value.weight-torch.Size([768, 768])
+bert.encoder.layer.4.attention.self.value.bias-torch.Size([768])
+bert.encoder.layer.4.attention.output.dense.weight-torch.Size([768, 768])
+bert.encoder.layer.4.attention.output.dense.bias-torch.Size([768])
+bert.encoder.layer.4.attention.output.LayerNorm.weight-torch.Size([768])
+bert.encoder.layer.4.attention.output.LayerNorm.bias-torch.Size([768])
+bert.encoder.layer.4.intermediate.dense.weight-torch.Size([3072, 768])
+bert.encoder.layer.4.intermediate.dense.bias-torch.Size([3072])
+bert.encoder.layer.4.output.dense.weight-torch.Size([768, 3072])
+bert.encoder.layer.4.output.dense.bias-torch.Size([768])
+bert.encoder.layer.4.output.LayerNorm.weight-torch.Size([768])
+bert.encoder.layer.4.output.LayerNorm.bias-torch.Size([768])
+bert.encoder.layer.5.attention.self.query.weight-torch.Size([768, 768])
+bert.encoder.layer.5.attention.self.query.bias-torch.Size([768])
+bert.encoder.layer.5.attention.self.key.weight-torch.Size([768, 768])
+bert.encoder.layer.5.attention.self.key.bias-torch.Size([768])
+bert.encoder.layer.5.attention.self.value.weight-torch.Size([768, 768])
+bert.encoder.layer.5.attention.self.value.bias-torch.Size([768])
+bert.encoder.layer.5.attention.output.dense.weight-torch.Size([768, 768])
+bert.encoder.layer.5.attention.output.dense.bias-torch.Size([768])
+bert.encoder.layer.5.attention.output.LayerNorm.weight-torch.Size([768])
+bert.encoder.layer.5.attention.output.LayerNorm.bias-torch.Size([768])
+bert.encoder.layer.5.intermediate.dense.weight-torch.Size([3072, 768])
+bert.encoder.layer.5.intermediate.dense.bias-torch.Size([3072])
+bert.encoder.layer.5.output.dense.weight-torch.Size([768, 3072])
+bert.encoder.layer.5.output.dense.bias-torch.Size([768])
+bert.encoder.layer.5.output.LayerNorm.weight-torch.Size([768])
+bert.encoder.layer.5.output.LayerNorm.bias-torch.Size([768])
+bert.encoder.layer.6.attention.self.query.weight-torch.Size([768, 768])
+bert.encoder.layer.6.attention.self.query.bias-torch.Size([768])
+bert.encoder.layer.6.attention.self.key.weight-torch.Size([768, 768])
+bert.encoder.layer.6.attention.self.key.bias-torch.Size([768])
+bert.encoder.layer.6.attention.self.value.weight-torch.Size([768, 768])
+bert.encoder.layer.6.attention.self.value.bias-torch.Size([768])
+bert.encoder.layer.6.attention.output.dense.weight-torch.Size([768, 768])
+bert.encoder.layer.6.attention.output.dense.bias-torch.Size([768])
+bert.encoder.layer.6.attention.output.LayerNorm.weight-torch.Size([768])
+bert.encoder.layer.6.attention.output.LayerNorm.bias-torch.Size([768])
+bert.encoder.layer.6.intermediate.dense.weight-torch.Size([3072, 768])
+bert.encoder.layer.6.intermediate.dense.bias-torch.Size([3072])
+bert.encoder.layer.6.output.dense.weight-torch.Size([768, 3072])
+bert.encoder.layer.6.output.dense.bias-torch.Size([768])
+bert.encoder.layer.6.output.LayerNorm.weight-torch.Size([768])
+bert.encoder.layer.6.output.LayerNorm.bias-torch.Size([768])
+bert.encoder.layer.7.attention.self.query.weight-torch.Size([768, 768])
+bert.encoder.layer.7.attention.self.query.bias-torch.Size([768])
+bert.encoder.layer.7.attention.self.key.weight-torch.Size([768, 768])
+bert.encoder.layer.7.attention.self.key.bias-torch.Size([768])
+bert.encoder.layer.7.attention.self.value.weight-torch.Size([768, 768])
+bert.encoder.layer.7.attention.self.value.bias-torch.Size([768])
+bert.encoder.layer.7.attention.output.dense.weight-torch.Size([768, 768])
+bert.encoder.layer.7.attention.output.dense.bias-torch.Size([768])
+bert.encoder.layer.7.attention.output.LayerNorm.weight-torch.Size([768])
+bert.encoder.layer.7.attention.output.LayerNorm.bias-torch.Size([768])
+bert.encoder.layer.7.intermediate.dense.weight-torch.Size([3072, 768])
+bert.encoder.layer.7.intermediate.dense.bias-torch.Size([3072])
+bert.encoder.layer.7.output.dense.weight-torch.Size([768, 3072])
+bert.encoder.layer.7.output.dense.bias-torch.Size([768])
+bert.encoder.layer.7.output.LayerNorm.weight-torch.Size([768])
+bert.encoder.layer.7.output.LayerNorm.bias-torch.Size([768])
+bert.encoder.layer.8.attention.self.query.weight-torch.Size([768, 768])
+bert.encoder.layer.8.attention.self.query.bias-torch.Size([768])
+bert.encoder.layer.8.attention.self.key.weight-torch.Size([768, 768])
+bert.encoder.layer.8.attention.self.key.bias-torch.Size([768])
+bert.encoder.layer.8.attention.self.value.weight-torch.Size([768, 768])
+bert.encoder.layer.8.attention.self.value.bias-torch.Size([768])
+bert.encoder.layer.8.attention.output.dense.weight-torch.Size([768, 768])
+bert.encoder.layer.8.attention.output.dense.bias-torch.Size([768])
+bert.encoder.layer.8.attention.output.LayerNorm.weight-torch.Size([768])
+bert.encoder.layer.8.attention.output.LayerNorm.bias-torch.Size([768])
+bert.encoder.layer.8.intermediate.dense.weight-torch.Size([3072, 768])
+bert.encoder.layer.8.intermediate.dense.bias-torch.Size([3072])
+bert.encoder.layer.8.output.dense.weight-torch.Size([768, 3072])
+bert.encoder.layer.8.output.dense.bias-torch.Size([768])
+bert.encoder.layer.8.output.LayerNorm.weight-torch.Size([768])
+bert.encoder.layer.8.output.LayerNorm.bias-torch.Size([768])
+bert.encoder.layer.9.attention.self.query.weight-torch.Size([768, 768])
+bert.encoder.layer.9.attention.self.query.bias-torch.Size([768])
+bert.encoder.layer.9.attention.self.key.weight-torch.Size([768, 768])
+bert.encoder.layer.9.attention.self.key.bias-torch.Size([768])
+bert.encoder.layer.9.attention.self.value.weight-torch.Size([768, 768])
+bert.encoder.layer.9.attention.self.value.bias-torch.Size([768])
+bert.encoder.layer.9.attention.output.dense.weight-torch.Size([768, 768])
+bert.encoder.layer.9.attention.output.dense.bias-torch.Size([768])
+bert.encoder.layer.9.attention.output.LayerNorm.weight-torch.Size([768])
+bert.encoder.layer.9.attention.output.LayerNorm.bias-torch.Size([768])
+bert.encoder.layer.9.intermediate.dense.weight-torch.Size([3072, 768])
+bert.encoder.layer.9.intermediate.dense.bias-torch.Size([3072])
+bert.encoder.layer.9.output.dense.weight-torch.Size([768, 3072])
+bert.encoder.layer.9.output.dense.bias-torch.Size([768])
+bert.encoder.layer.9.output.LayerNorm.weight-torch.Size([768])
+bert.encoder.layer.9.output.LayerNorm.bias-torch.Size([768])
+bert.encoder.layer.10.attention.self.query.weight-torch.Size([768, 768])
+bert.encoder.layer.10.attention.self.query.bias-torch.Size([768])
+bert.encoder.layer.10.attention.self.key.weight-torch.Size([768, 768])
+bert.encoder.layer.10.attention.self.key.bias-torch.Size([768])
+bert.encoder.layer.10.attention.self.value.weight-torch.Size([768, 768])
+bert.encoder.layer.10.attention.self.value.bias-torch.Size([768])
+bert.encoder.layer.10.attention.output.dense.weight-torch.Size([768, 768])
+bert.encoder.layer.10.attention.output.dense.bias-torch.Size([768])
+bert.encoder.layer.10.attention.output.LayerNorm.weight-torch.Size([768])
+bert.encoder.layer.10.attention.output.LayerNorm.bias-torch.Size([768])
+bert.encoder.layer.10.intermediate.dense.weight-torch.Size([3072, 768])
+bert.encoder.layer.10.intermediate.dense.bias-torch.Size([3072])
+bert.encoder.layer.10.output.dense.weight-torch.Size([768, 3072])
+bert.encoder.layer.10.output.dense.bias-torch.Size([768])
+bert.encoder.layer.10.output.LayerNorm.weight-torch.Size([768])
+bert.encoder.layer.10.output.LayerNorm.bias-torch.Size([768])
+bert.encoder.layer.11.attention.self.query.weight-torch.Size([768, 768])
+bert.encoder.layer.11.attention.self.query.bias-torch.Size([768])
+bert.encoder.layer.11.attention.self.key.weight-torch.Size([768, 768])
+bert.encoder.layer.11.attention.self.key.bias-torch.Size([768])
+bert.encoder.layer.11.attention.self.value.weight-torch.Size([768, 768])
+bert.encoder.layer.11.attention.self.value.bias-torch.Size([768])
+bert.encoder.layer.11.attention.output.dense.weight-torch.Size([768, 768])
+bert.encoder.layer.11.attention.output.dense.bias-torch.Size([768])
+bert.encoder.layer.11.attention.output.LayerNorm.weight-torch.Size([768])
+bert.encoder.layer.11.attention.output.LayerNorm.bias-torch.Size([768])
+bert.encoder.layer.11.intermediate.dense.weight-torch.Size([3072, 768])
+bert.encoder.layer.11.intermediate.dense.bias-torch.Size([3072])
+bert.encoder.layer.11.output.dense.weight-torch.Size([768, 3072])
+bert.encoder.layer.11.output.dense.bias-torch.Size([768])
+bert.encoder.layer.11.output.LayerNorm.weight-torch.Size([768])
+bert.encoder.layer.11.output.LayerNorm.bias-torch.Size([768])
+bert.pooler.dense.weight-torch.Size([768, 768])
+bert.pooler.dense.bias-torch.Size([768])
+fc.layer1.0.weight-torch.Size([2048, 1536])
+fc.layer1.0.bias-torch.Size([2048])
+fc.layer1.1.weight-torch.Size([2048])
+fc.layer1.1.bias-torch.Size([2048])
+fc.layer2.0.weight-torch.Size([1024, 2048])
+fc.layer2.0.bias-torch.Size([1024])
+fc.layer2.1.weight-torch.Size([1024])
+fc.layer2.1.bias-torch.Size([1024])
+fc.layer3.0.weight-torch.Size([28, 1024])
+fc.layer3.0.bias-torch.Size([28])
+/data/zhyma/miniconda3/lib/python3.8/site-packages/transformers/optimization.py:391: FutureWarning: This implementation of AdamW is deprecated and will be removed in a future version. Use the PyTorch implementation torch.optim.AdamW instead, or set `no_deprecation_warning=True` to disable this warning
+  warnings.warn(
+
+>>>>>>>>>>>>>>>>>>>start train......
+epoch:0,	steps39/397,	loss:0.3468889594078064
+epoch:0,	steps78/397,	loss:0.3008188009262085
+epoch:0,	steps117/397,	loss:0.2701273262500763
+epoch:0,	steps156/397,	loss:0.24080318212509155
+epoch:0,	steps195/397,	loss:0.19934700429439545
+epoch:0,	steps234/397,	loss:0.19273561239242554
+epoch:0,	steps273/397,	loss:0.1873641014099121
+epoch:0,	steps312/397,	loss:0.14628753066062927
+epoch:0,	steps351/397,	loss:0.1346358209848404
+epoch:0,	steps390/397,	loss:0.13405372202396393
+epoch:0,	loss:91.92491486668587
+start evaluate...
+====================dev data set====================
+right: 674	total: 1963	M-tree codes acc: 0.3433520122261844
+save best model to ./output/model_save_name2/best_model
+epoch:1,	steps32/397,	loss:0.12150618433952332
+epoch:1,	steps71/397,	loss:0.11299018561840057
+epoch:1,	steps110/397,	loss:0.08588901162147522
+epoch:1,	steps149/397,	loss:0.08299586921930313
+epoch:1,	steps188/397,	loss:0.08365057408809662
+epoch:1,	steps227/397,	loss:0.06574300676584244
+epoch:1,	steps266/397,	loss:0.06110590696334839
+epoch:1,	steps305/397,	loss:0.052727196365594864
+epoch:1,	steps344/397,	loss:0.05152100697159767
+epoch:1,	steps383/397,	loss:0.04337562993168831
+epoch:1,	loss:32.28173339366913
+start evaluate...
+====================dev data set====================
+right: 867	total: 1963	M-tree codes acc: 0.44167091186958735
+save best model to ./output/model_save_name2/best_model
+epoch:2,	steps25/397,	loss:0.041668836027383804
+epoch:2,	steps64/397,	loss:0.04347706213593483
+epoch:2,	steps103/397,	loss:0.04022271931171417
+epoch:2,	steps142/397,	loss:0.045382969081401825
+epoch:2,	steps181/397,	loss:0.046440478414297104
+epoch:2,	steps220/397,	loss:0.03498082607984543
+epoch:2,	steps259/397,	loss:0.03211323171854019
+epoch:2,	steps298/397,	loss:0.03347286209464073
+epoch:2,	steps337/397,	loss:0.03937246650457382
+epoch:2,	steps376/397,	loss:0.037210915237665176
+epoch:2,	loss:15.35174941830337
+start evaluate...
+====================dev data set====================
+right: 869	total: 1963	M-tree codes acc: 0.44268976057055526
+save best model to ./output/model_save_name2/best_model
+epoch:3,	steps18/397,	loss:0.032761070877313614
+epoch:3,	steps57/397,	loss:0.028361283242702484
+epoch:3,	steps96/397,	loss:0.037003062665462494
+epoch:3,	steps135/397,	loss:0.02444562129676342
+epoch:3,	steps174/397,	loss:0.026841778308153152
+epoch:3,	steps213/397,	loss:0.03605024516582489
+epoch:3,	steps252/397,	loss:0.02821063995361328
+epoch:3,	steps291/397,	loss:0.02701200731098652
+epoch:3,	steps330/397,	loss:0.02582637220621109
+epoch:3,	steps369/397,	loss:0.02551041729748249
+epoch:3,	loss:12.123089119791985
+start evaluate...
+====================dev data set====================
+right: 1026	total: 1963	M-tree codes acc: 0.5226693835965359
+save best model to ./output/model_save_name2/best_model
+epoch:4,	steps11/397,	loss:0.030455630272626877
+epoch:4,	steps50/397,	loss:0.025849727913737297
+epoch:4,	steps89/397,	loss:0.02375202253460884
+epoch:4,	steps128/397,	loss:0.023989271372556686
+epoch:4,	steps167/397,	loss:0.025620032101869583
+epoch:4,	steps206/397,	loss:0.02623550221323967
+epoch:4,	steps245/397,	loss:0.01755850948393345
+epoch:4,	steps284/397,	loss:0.0219025406986475
+epoch:4,	steps323/397,	loss:0.025033049285411835
+epoch:4,	steps362/397,	loss:0.02259598858654499
+epoch:4,	loss:9.789376895874739
+start evaluate...
+====================dev data set====================
+right: 1271	total: 1963	M-tree codes acc: 0.6474783494651044
+save best model to ./output/model_save_name2/best_model
+epoch:5,	steps4/397,	loss:0.022398192435503006
+epoch:5,	steps43/397,	loss:0.026347480714321136
+epoch:5,	steps82/397,	loss:0.01951885223388672
+epoch:5,	steps121/397,	loss:0.02296922542154789
+epoch:5,	steps160/397,	loss:0.018791014328598976
+epoch:5,	steps199/397,	loss:0.027382468804717064
+epoch:5,	steps238/397,	loss:0.031599149107933044
+epoch:5,	steps277/397,	loss:0.02429678477346897
+epoch:5,	steps316/397,	loss:0.02469545789062977
+epoch:5,	steps355/397,	loss:0.01596328243613243
+epoch:5,	steps394/397,	loss:0.016893161460757256
+epoch:5,	loss:8.281860770657659
+start evaluate...
+====================dev data set====================
+right: 1420	total: 1963	M-tree codes acc: 0.7233825776872135
+save best model to ./output/model_save_name2/best_model
+epoch:6,	steps36/397,	loss:0.026460837572813034
+epoch:6,	steps75/397,	loss:0.015825549140572548
+epoch:6,	steps114/397,	loss:0.019809063524007797
+epoch:6,	steps153/397,	loss:0.01890580728650093
+epoch:6,	steps192/397,	loss:0.013603216037154198
+epoch:6,	steps231/397,	loss:0.01811276189982891
+epoch:6,	steps270/397,	loss:0.013133482076227665
+epoch:6,	steps309/397,	loss:0.016799453645944595
+epoch:6,	steps348/397,	loss:0.01990068331360817
+epoch:6,	steps387/397,	loss:0.015634845942258835
+epoch:6,	loss:7.442480792291462
+start evaluate...
+====================dev data set====================
+right: 1554	total: 1963	M-tree codes acc: 0.7916454406520632
+save best model to ./output/model_save_name2/best_model
+epoch:7,	steps29/397,	loss:0.014520011842250824
+epoch:7,	steps68/397,	loss:0.017757374793291092
+epoch:7,	steps107/397,	loss:0.012974901124835014
+epoch:7,	steps146/397,	loss:0.012581606395542622
+epoch:7,	steps185/397,	loss:0.01783107966184616
+epoch:7,	steps224/397,	loss:0.0125488992780447
+epoch:7,	steps263/397,	loss:0.014137111604213715
+epoch:7,	steps302/397,	loss:0.017601190134882927
+epoch:7,	steps341/397,	loss:0.011290806345641613
+epoch:7,	steps380/397,	loss:0.011327826417982578
+epoch:7,	loss:5.994045482482761
+start evaluate...
+====================dev data set====================
+right: 1631	total: 1963	M-tree codes acc: 0.8308711156393276
+save best model to ./output/model_save_name2/best_model
+epoch:8,	steps22/397,	loss:0.01054402720183134
+epoch:8,	steps61/397,	loss:0.014598322100937366
+epoch:8,	steps100/397,	loss:0.01570293679833412
+epoch:8,	steps139/397,	loss:0.014205638319253922
+epoch:8,	steps178/397,	loss:0.012107573449611664
+epoch:8,	steps217/397,	loss:0.008264110423624516
+epoch:8,	steps256/397,	loss:0.011304165236651897
+epoch:8,	steps295/397,	loss:0.011704479344189167
+epoch:8,	steps334/397,	loss:0.009255549870431423
+epoch:8,	steps373/397,	loss:0.014340877532958984
+epoch:8,	loss:4.901017466094345
+start evaluate...
+====================dev data set====================
+right: 1646	total: 1963	M-tree codes acc: 0.8385124808965868
+save best model to ./output/model_save_name2/best_model
+epoch:9,	steps15/397,	loss:0.0060540796257555485
+epoch:9,	steps54/397,	loss:0.012615630403161049
+epoch:9,	steps93/397,	loss:0.010245300829410553
+epoch:9,	steps132/397,	loss:0.011364656500518322
+epoch:9,	steps171/397,	loss:0.011055673472583294
+epoch:9,	steps210/397,	loss:0.008850525133311749
+epoch:9,	steps249/397,	loss:0.011056528426706791
+epoch:9,	steps288/397,	loss:0.006301421672105789
+epoch:9,	steps327/397,	loss:0.020058523863554
+epoch:9,	steps366/397,	loss:0.019299807026982307
+epoch:9,	loss:4.387732453877106
+start evaluate...
+====================dev data set====================
+right: 1713	total: 1963	M-tree codes acc: 0.8726439123790117
+save best model to ./output/model_save_name2/best_model
+epoch:10,	steps8/397,	loss:0.017711009830236435
+epoch:10,	steps47/397,	loss:0.010994563810527325
+epoch:10,	steps86/397,	loss:0.009341588243842125
+epoch:10,	steps125/397,	loss:0.02173173427581787
+epoch:10,	steps164/397,	loss:0.010353857651352882
+epoch:10,	steps203/397,	loss:0.017518959939479828
+epoch:10,	steps242/397,	loss:0.010567406192421913
+epoch:10,	steps281/397,	loss:0.005936820060014725
+epoch:10,	steps320/397,	loss:0.005710335448384285
+epoch:10,	steps359/397,	loss:0.00778163829818368
+epoch:10,	loss:4.15344411181286
+start evaluate...
+====================dev data set====================
+right: 1728	total: 1963	M-tree codes acc: 0.8802852776362711
+save best model to ./output/model_save_name2/best_model
+epoch:11,	steps1/397,	loss:0.007704780902713537
+epoch:11,	steps40/397,	loss:0.009297894313931465
+epoch:11,	steps79/397,	loss:0.010368497110903263
+epoch:11,	steps118/397,	loss:0.005611168686300516
+epoch:11,	steps157/397,	loss:0.007579268887639046
+epoch:11,	steps196/397,	loss:0.004693249706178904
+epoch:11,	steps235/397,	loss:0.008142375387251377
+epoch:11,	steps274/397,	loss:0.0062674060463905334
+epoch:11,	steps313/397,	loss:0.005091027356684208
+epoch:11,	steps352/397,	loss:0.013266649097204208
+epoch:11,	steps391/397,	loss:0.0082262447103858
+epoch:11,	loss:4.146041582338512
+start evaluate...
+====================dev data set====================
+right: 1746	total: 1963	M-tree codes acc: 0.8894549159449822
+save best model to ./output/model_save_name2/best_model
+epoch:12,	steps33/397,	loss:0.004255338571965694
+epoch:12,	steps72/397,	loss:0.006050946190953255
+epoch:12,	steps111/397,	loss:0.005773978773504496
+epoch:12,	steps150/397,	loss:0.012163223698735237
+epoch:12,	steps189/397,	loss:0.00657339533790946
+epoch:12,	steps228/397,	loss:0.007877001538872719
+epoch:12,	steps267/397,	loss:0.007722113747149706
+epoch:12,	steps306/397,	loss:0.010342538356781006
+epoch:12,	steps345/397,	loss:0.0038898817729204893
+epoch:12,	steps384/397,	loss:0.008169925771653652
+epoch:12,	loss:3.5851256703026593
+start evaluate...
+====================dev data set====================
+right: 1762	total: 1963	M-tree codes acc: 0.8976057055527255
+save best model to ./output/model_save_name2/best_model
+epoch:13,	steps26/397,	loss:0.005946012679487467
+epoch:13,	steps65/397,	loss:0.006603300105780363
+epoch:13,	steps104/397,	loss:0.00827745907008648
+epoch:13,	steps143/397,	loss:0.003520496189594269
+epoch:13,	steps182/397,	loss:0.0029597762040793896
+epoch:13,	steps221/397,	loss:0.014115916565060616
+epoch:13,	steps260/397,	loss:0.006846618838608265
+epoch:13,	steps299/397,	loss:0.002283572219312191
+epoch:13,	steps338/397,	loss:0.004517046269029379
+epoch:13,	steps377/397,	loss:0.002092754002660513
+epoch:13,	loss:2.7864698672201484
+start evaluate...
+====================dev data set====================
+right: 1759	total: 1963	M-tree codes acc: 0.8960774325012736
+epoch:14,	steps19/397,	loss:0.006151666399091482
+epoch:14,	steps58/397,	loss:0.007167446427047253
+epoch:14,	steps97/397,	loss:0.003162521868944168
+epoch:14,	steps136/397,	loss:0.01681966707110405
+epoch:14,	steps175/397,	loss:0.0020580142736434937
+epoch:14,	steps214/397,	loss:0.00287679978646338
+epoch:14,	steps253/397,	loss:0.010625820606946945
+epoch:14,	steps292/397,	loss:0.009902563877403736
+epoch:14,	steps331/397,	loss:0.006119755562394857
+epoch:14,	steps370/397,	loss:0.0015785115538164973
+epoch:14,	loss:2.575084939482622
+start evaluate...
+====================dev data set====================
+right: 1758	total: 1963	M-tree codes acc: 0.8955680081507896
+epoch:15,	steps12/397,	loss:0.004817554261535406
+epoch:15,	steps51/397,	loss:0.002575305523350835
+epoch:15,	steps90/397,	loss:0.003181654727086425
+epoch:15,	steps129/397,	loss:0.007078633643686771
+epoch:15,	steps168/397,	loss:0.003141142427921295
+epoch:15,	steps207/397,	loss:0.004126702900975943
+epoch:15,	steps246/397,	loss:0.00393537525087595
+epoch:15,	steps285/397,	loss:0.005588688421994448
+epoch:15,	steps324/397,	loss:0.003698582760989666
+epoch:15,	steps363/397,	loss:0.006312635261565447
+epoch:15,	loss:2.3899678357411176
+start evaluate...
+====================dev data set====================
+right: 1775	total: 1963	M-tree codes acc: 0.9042282221090168
+save best model to ./output/model_save_name2/best_model
+epoch:16,	steps5/397,	loss:0.009240208193659782
+epoch:16,	steps44/397,	loss:0.0024451182689517736
+epoch:16,	steps83/397,	loss:0.003372688079252839
+epoch:16,	steps122/397,	loss:0.005885042250156403
+epoch:16,	steps161/397,	loss:0.003263817634433508
+epoch:16,	steps200/397,	loss:0.009217617101967335
+epoch:16,	steps239/397,	loss:0.009817556478083134
+epoch:16,	steps278/397,	loss:0.010663891211152077
+epoch:16,	steps317/397,	loss:0.004468237515538931
+epoch:16,	steps356/397,	loss:0.00722011411562562
+epoch:16,	steps395/397,	loss:0.005126929841935635
+epoch:16,	loss:2.3020435536745936
+start evaluate...
+====================dev data set====================
+right: 1785	total: 1963	M-tree codes acc: 0.9093224656138563
+save best model to ./output/model_save_name2/best_model
+epoch:17,	steps37/397,	loss:0.0034095963928848505
+epoch:17,	steps76/397,	loss:0.005603316240012646
+epoch:17,	steps115/397,	loss:0.006040685344487429
+epoch:17,	steps154/397,	loss:0.002840797882527113
+epoch:17,	steps193/397,	loss:0.0028147476259618998
+epoch:17,	steps232/397,	loss:0.0019166995771229267
+epoch:17,	steps271/397,	loss:0.004377629607915878
+epoch:17,	steps310/397,	loss:0.005274570547044277
+epoch:17,	steps349/397,	loss:0.012384246103465557
+epoch:17,	steps388/397,	loss:0.005183505825698376
+epoch:17,	loss:2.2558554532006383
+start evaluate...
+====================dev data set====================
+right: 1774	total: 1963	M-tree codes acc: 0.9037187977585328
+epoch:18,	steps30/397,	loss:0.002410406479611993
+epoch:18,	steps69/397,	loss:0.004138068296015263
+epoch:18,	steps108/397,	loss:0.02033635973930359
+epoch:18,	steps147/397,	loss:0.01328083872795105
+epoch:18,	steps186/397,	loss:0.008032762445509434
+epoch:18,	steps225/397,	loss:0.0031472232658416033
+epoch:18,	steps264/397,	loss:0.0047470806166529655
+epoch:18,	steps303/397,	loss:0.010721104219555855
+epoch:18,	steps342/397,	loss:0.006322799250483513
+epoch:18,	steps381/397,	loss:0.0034742457792162895
+epoch:18,	loss:2.1541607652325183
+start evaluate...
+====================dev data set====================
+right: 1786	total: 1963	M-tree codes acc: 0.9098318899643403
+save best model to ./output/model_save_name2/best_model
+epoch:19,	steps23/397,	loss:0.003929021768271923
+epoch:19,	steps62/397,	loss:0.0033688927069306374
+epoch:19,	steps101/397,	loss:0.004383921157568693
+epoch:19,	steps140/397,	loss:0.0035857136826962233
+epoch:19,	steps179/397,	loss:0.003515401855111122
+epoch:19,	steps218/397,	loss:0.0032736638095229864
+epoch:19,	steps257/397,	loss:0.004495683126151562
+epoch:19,	steps296/397,	loss:0.010937985964119434
+epoch:19,	steps335/397,	loss:0.007043506950139999
+epoch:19,	steps374/397,	loss:0.004832238424569368
+epoch:19,	loss:2.203823664865922
+start evaluate...
+====================dev data set====================
+right: 1781	total: 1963	M-tree codes acc: 0.9072847682119205
+epoch:20,	steps16/397,	loss:0.001481772749684751
+epoch:20,	steps55/397,	loss:0.002517996123060584
+epoch:20,	steps94/397,	loss:0.007294429931789637
+epoch:20,	steps133/397,	loss:0.004208107013255358
+epoch:20,	steps172/397,	loss:0.004778512287884951
+epoch:20,	steps211/397,	loss:0.0021758012007921934
+epoch:20,	steps250/397,	loss:0.0034857732243835926
+epoch:20,	steps289/397,	loss:0.005826279986649752
+epoch:20,	steps328/397,	loss:0.005841392558068037
+epoch:20,	steps367/397,	loss:0.005275982432067394
+epoch:20,	loss:1.987226082244888
+start evaluate...
+====================dev data set====================
+right: 1775	total: 1963	M-tree codes acc: 0.9042282221090168
+epoch:21,	steps9/397,	loss:0.0032359054312109947
+epoch:21,	steps48/397,	loss:0.002755702706053853
+epoch:21,	steps87/397,	loss:0.005861314013600349
+epoch:21,	steps126/397,	loss:0.0029260471928864717
+epoch:21,	steps165/397,	loss:0.00832312647253275
+epoch:21,	steps204/397,	loss:0.0017080899560824037
+epoch:21,	steps243/397,	loss:0.009280208498239517
+epoch:21,	steps282/397,	loss:0.005303307436406612
+epoch:21,	steps321/397,	loss:0.004202604293823242
+epoch:21,	steps360/397,	loss:0.002183024538680911
+epoch:21,	loss:1.927618166373577
+start evaluate...
+====================dev data set====================
+right: 1783	total: 1963	M-tree codes acc: 0.9083036169128884
+epoch:22,	steps2/397,	loss:0.002380999503657222
+epoch:22,	steps41/397,	loss:0.0014380743959918618
+epoch:22,	steps80/397,	loss:0.010613245889544487
+epoch:22,	steps119/397,	loss:0.0025989559944719076
+epoch:22,	steps158/397,	loss:0.004786675795912743
+epoch:22,	steps197/397,	loss:0.0027114078402519226
+epoch:22,	steps236/397,	loss:0.008608613163232803
+epoch:22,	steps275/397,	loss:0.0075522782281041145
+epoch:22,	steps314/397,	loss:0.003395865671336651
+epoch:22,	steps353/397,	loss:0.004901211243122816
+epoch:22,	steps392/397,	loss:0.00672922981902957
+epoch:22,	loss:1.78093505470315
+start evaluate...
+====================dev data set====================
+right: 1768	total: 1963	M-tree codes acc: 0.9006622516556292
+epoch:23,	steps34/397,	loss:0.0015147965168580413
+epoch:23,	steps73/397,	loss:0.0057298182509839535
+epoch:23,	steps112/397,	loss:0.005194011144340038
+epoch:23,	steps151/397,	loss:0.005252637900412083
+epoch:23,	steps190/397,	loss:0.001500770216807723
+epoch:23,	steps229/397,	loss:0.003026734571903944
+epoch:23,	steps268/397,	loss:0.003581809112802148
+epoch:23,	steps307/397,	loss:0.009284601546823978
+epoch:23,	steps346/397,	loss:0.006270445883274078
+epoch:23,	steps385/397,	loss:0.0011124304728582501
+epoch:23,	loss:1.7613987530348822
+start evaluate...
+====================dev data set====================
+right: 1773	total: 1963	M-tree codes acc: 0.9032093734080489
+epoch:24,	steps27/397,	loss:0.0031282510608434677
+epoch:24,	steps66/397,	loss:0.003844218561425805
+epoch:24,	steps105/397,	loss:0.004709415603429079
+epoch:24,	steps144/397,	loss:0.006159679498523474
+epoch:24,	steps183/397,	loss:0.0045920126140117645
+epoch:24,	steps222/397,	loss:0.0016223478596657515
+epoch:24,	steps261/397,	loss:0.0010810727253556252
+epoch:24,	steps300/397,	loss:0.0061157881282269955
+epoch:24,	steps339/397,	loss:0.002914594253525138
+epoch:24,	steps378/397,	loss:0.0021072435192763805
+epoch:24,	loss:1.7190962328459136
+start evaluate...
+====================dev data set====================
+right: 1779	total: 1963	M-tree codes acc: 0.9062659195109526
+epoch:25,	steps20/397,	loss:0.0040608667768538
+epoch:25,	steps59/397,	loss:0.0019926633685827255
+epoch:25,	steps98/397,	loss:0.004652334842830896
+epoch:25,	steps137/397,	loss:0.0014390981523320079
+epoch:25,	steps176/397,	loss:0.006251178681850433
+epoch:25,	steps215/397,	loss:0.003914076369255781
+epoch:25,	steps254/397,	loss:0.004825729876756668
+epoch:25,	steps293/397,	loss:0.005735599901527166
+epoch:25,	steps332/397,	loss:0.005046114791184664
+epoch:25,	steps371/397,	loss:0.003989837132394314
+epoch:25,	loss:1.6227913063485175
+start evaluate...
+====================dev data set====================
+right: 1781	total: 1963	M-tree codes acc: 0.9072847682119205
+epoch:26,	steps13/397,	loss:0.0019888405222445726
+epoch:26,	steps52/397,	loss:0.0011656864080578089
+epoch:26,	steps91/397,	loss:0.0014119399711489677
+epoch:26,	steps130/397,	loss:0.0020579190459102392
+epoch:26,	steps169/397,	loss:0.003412483260035515
+epoch:26,	steps208/397,	loss:0.00563945434987545
+epoch:26,	steps247/397,	loss:0.003331565298140049
+epoch:26,	steps286/397,	loss:0.0030493251979351044
+epoch:26,	steps325/397,	loss:0.007591978181153536
+epoch:26,	steps364/397,	loss:0.005689570680260658
+epoch:26,	loss:1.660735480079893
+start evaluate...
+====================dev data set====================
+right: 1780	total: 1963	M-tree codes acc: 0.9067753438614365
+epoch:27,	steps6/397,	loss:0.0047440920025110245
+epoch:27,	steps45/397,	loss:0.006426354870200157
+epoch:27,	steps84/397,	loss:0.0014568718615919352
+epoch:27,	steps123/397,	loss:0.011195619590580463
+epoch:27,	steps162/397,	loss:0.002060682512819767
+epoch:27,	steps201/397,	loss:0.0030736152548342943
+epoch:27,	steps240/397,	loss:0.0029557833913713694
+epoch:27,	steps279/397,	loss:0.0024199995677918196
+epoch:27,	steps318/397,	loss:0.004050756338983774
+epoch:27,	steps357/397,	loss:0.004335632547736168
+epoch:27,	steps396/397,	loss:0.010606016032397747
+epoch:27,	loss:1.6207537794252858
+start evaluate...
+====================dev data set====================
+right: 1770	total: 1963	M-tree codes acc: 0.9016811003565971
+epoch:28,	steps38/397,	loss:0.0008375043980777264
+epoch:28,	steps77/397,	loss:0.00786171481013298
+epoch:28,	steps116/397,	loss:0.004328974522650242
+epoch:28,	steps155/397,	loss:0.005337588954716921
+epoch:28,	steps194/397,	loss:0.006011063698679209
+epoch:28,	steps233/397,	loss:0.003038927214220166
+epoch:28,	steps272/397,	loss:0.0025480373296886683
+epoch:28,	steps311/397,	loss:0.006467041093856096
+epoch:28,	steps350/397,	loss:0.0061601316556334496
+epoch:28,	steps389/397,	loss:0.0014229502994567156
+epoch:28,	loss:1.503572879882995
+start evaluate...
+====================dev data set====================
+right: 1778	total: 1963	M-tree codes acc: 0.9057564951604686
+epoch:29,	steps31/397,	loss:0.002841206965968013
+epoch:29,	steps70/397,	loss:0.001072638318873942
+epoch:29,	steps109/397,	loss:0.0024847984313964844
+epoch:29,	steps148/397,	loss:0.005369721911847591
+epoch:29,	steps187/397,	loss:0.001202171784825623
+epoch:29,	steps226/397,	loss:0.0036069261841475964
+epoch:29,	steps265/397,	loss:0.0005940593546256423
+epoch:29,	steps304/397,	loss:0.004253682214766741
+epoch:29,	steps343/397,	loss:0.014602391980588436
+epoch:29,	steps382/397,	loss:0.0010199156822636724
+epoch:29,	loss:1.4741440722718835
+start evaluate...
+====================dev data set====================
+right: 1775	total: 1963	M-tree codes acc: 0.9042282221090168
+epoch:30,	steps24/397,	loss:0.0017544389702379704
+epoch:30,	steps63/397,	loss:0.005951965693384409
+epoch:30,	steps102/397,	loss:0.004600220359861851
+epoch:30,	steps141/397,	loss:0.011111374944448471
+epoch:30,	steps180/397,	loss:0.0030316186603158712
+epoch:30,	steps219/397,	loss:0.0013705299934372306
+epoch:30,	steps258/397,	loss:0.0037074973806738853
+epoch:30,	steps297/397,	loss:0.007399724330753088
+epoch:30,	steps336/397,	loss:0.004941699560731649
+epoch:30,	steps375/397,	loss:0.008462316356599331
+epoch:30,	loss:1.4637909385492094
+start evaluate...
+====================dev data set====================
+right: 1778	total: 1963	M-tree codes acc: 0.9057564951604686
+epoch:31,	steps17/397,	loss:0.0018511146772652864
+epoch:31,	steps56/397,	loss:0.0015256099868565798
+epoch:31,	steps95/397,	loss:0.004767018370330334
+epoch:31,	steps134/397,	loss:0.00257647642865777
+epoch:31,	steps173/397,	loss:0.005446469411253929
+epoch:31,	steps212/397,	loss:0.0008577685221098363
+epoch:31,	steps251/397,	loss:0.0020436029881238937
+epoch:31,	steps290/397,	loss:0.002011879114434123
+epoch:31,	steps329/397,	loss:0.0027547627687454224
+epoch:31,	steps368/397,	loss:0.002727197716012597
+epoch:31,	loss:1.5359875611029565
+start evaluate...
+====================dev data set====================
+right: 1786	total: 1963	M-tree codes acc: 0.9098318899643403
+epoch:32,	steps10/397,	loss:0.0020636345725506544
+epoch:32,	steps49/397,	loss:0.002323493594303727
+epoch:32,	steps88/397,	loss:0.0034393537789583206
+epoch:32,	steps127/397,	loss:0.0025972549337893724
+epoch:32,	steps166/397,	loss:0.002537477994337678
+epoch:32,	steps205/397,	loss:0.0031361188739538193
+epoch:32,	steps244/397,	loss:0.0023132709320634604
+epoch:32,	steps283/397,	loss:0.0038037309423089027
+epoch:32,	steps322/397,	loss:0.0043739755637943745
+epoch:32,	steps361/397,	loss:0.00258227763697505
+epoch:32,	loss:1.3749645198113285
+start evaluate...
+====================dev data set====================
+right: 1780	total: 1963	M-tree codes acc: 0.9067753438614365
+epoch:33,	steps3/397,	loss:0.0026870970614254475
+epoch:33,	steps42/397,	loss:0.004857483319938183
+epoch:33,	steps81/397,	loss:0.005916140042245388
+epoch:33,	steps120/397,	loss:0.005630710162222385
+epoch:33,	steps159/397,	loss:0.002931769471615553
+epoch:33,	steps198/397,	loss:0.002082227496430278
+epoch:33,	steps237/397,	loss:0.0020932035986334085
+epoch:33,	steps276/397,	loss:0.0014810452703386545
+epoch:33,	steps315/397,	loss:0.004789717961102724
+epoch:33,	steps354/397,	loss:0.002427336759865284
+epoch:33,	steps393/397,	loss:0.0008657949510961771
+epoch:33,	loss:1.3375047061417717
+start evaluate...
+====================dev data set====================
+right: 1776	total: 1963	M-tree codes acc: 0.9047376464595007
+epoch:34,	steps35/397,	loss:0.0019660741090774536
+epoch:34,	steps74/397,	loss:0.004819559399038553
+epoch:34,	steps113/397,	loss:0.00519249914214015
+epoch:34,	steps152/397,	loss:0.0018478708807379007
+epoch:34,	steps191/397,	loss:0.00448800390586257
+epoch:34,	steps230/397,	loss:0.0022729530464857817
+epoch:34,	steps269/397,	loss:0.005687297321856022
+epoch:34,	steps308/397,	loss:0.0005865326966159046
+epoch:34,	steps347/397,	loss:0.0016893181018531322
+epoch:34,	steps386/397,	loss:0.005263491999357939
+epoch:34,	loss:1.3148684772022534
+start evaluate...
+====================dev data set====================
+right: 1792	total: 1963	M-tree codes acc: 0.912888436067244
+save best model to ./output/model_save_name2/best_model
+epoch:35,	steps28/397,	loss:0.0013960129581391811
+epoch:35,	steps67/397,	loss:0.003847242798656225
+epoch:35,	steps106/397,	loss:0.003120965324342251
+epoch:35,	steps145/397,	loss:0.005023651290684938
+epoch:35,	steps184/397,	loss:0.0020169790368527174
+epoch:35,	steps223/397,	loss:0.002461514202877879
+epoch:35,	steps262/397,	loss:0.001251415116712451
+epoch:35,	steps301/397,	loss:0.002161215990781784
+epoch:35,	steps340/397,	loss:0.00346755119971931
+epoch:35,	steps379/397,	loss:0.002249711425974965
+epoch:35,	loss:1.2650456165429205
+start evaluate...
+====================dev data set====================
+right: 1781	total: 1963	M-tree codes acc: 0.9072847682119205
+epoch:36,	steps21/397,	loss:0.0012587362434715033
+epoch:36,	steps60/397,	loss:0.0040109483525156975
+epoch:36,	steps99/397,	loss:0.0013047723332419991
+epoch:36,	steps138/397,	loss:0.0017043865518644452
+epoch:36,	steps177/397,	loss:0.0026481670793145895
+epoch:36,	steps216/397,	loss:0.006796608678996563
+epoch:36,	steps255/397,	loss:0.006102825049310923
+epoch:36,	steps294/397,	loss:0.0017184881726279855
+epoch:36,	steps333/397,	loss:0.0017803069204092026
+epoch:36,	steps372/397,	loss:0.0028740752022713423
+epoch:36,	loss:1.271810966951307
+start evaluate...
+====================dev data set====================
+right: 1778	total: 1963	M-tree codes acc: 0.9057564951604686
+epoch:37,	steps14/397,	loss:0.005127324257045984
+epoch:37,	steps53/397,	loss:0.001681008143350482
+epoch:37,	steps92/397,	loss:0.0014791396679356694
+epoch:37,	steps131/397,	loss:0.00420582527294755
+epoch:37,	steps170/397,	loss:0.002010487485677004
+epoch:37,	steps209/397,	loss:0.0014644346665591002
+epoch:37,	steps248/397,	loss:0.001352681196294725
+epoch:37,	steps287/397,	loss:0.00753321498632431
+epoch:37,	steps326/397,	loss:0.0029435090254992247
+epoch:37,	steps365/397,	loss:0.002444506622850895
+epoch:37,	loss:1.270153527322691
+start evaluate...
+====================dev data set====================
+right: 1790	total: 1963	M-tree codes acc: 0.9118695873662761
+epoch:38,	steps7/397,	loss:0.007891387678682804
+epoch:38,	steps46/397,	loss:0.0008501229458488524
+epoch:38,	steps85/397,	loss:0.0005710160476155579
+epoch:38,	steps124/397,	loss:0.0036639899481087923
+epoch:38,	steps163/397,	loss:0.003136204555630684
+epoch:38,	steps202/397,	loss:0.0011492104968056083
+epoch:38,	steps241/397,	loss:0.00270894099958241
+epoch:38,	steps280/397,	loss:0.0012241994263604283
+epoch:38,	steps319/397,	loss:0.0024755222257226706
+epoch:38,	steps358/397,	loss:0.0012410562485456467
+epoch:38,	steps397/397,	loss:0.01527574472129345
+epoch:38,	loss:1.228183414787054
+start evaluate...
+====================dev data set====================
+right: 1792	total: 1963	M-tree codes acc: 0.912888436067244
+epoch:39,	steps39/397,	loss:0.0019476705929264426
+epoch:39,	steps78/397,	loss:0.0010401890613138676
+epoch:39,	steps117/397,	loss:0.002650701440870762
+epoch:39,	steps156/397,	loss:0.0011894394410774112
+epoch:39,	steps195/397,	loss:0.0021422328427433968
+epoch:39,	steps234/397,	loss:0.006688068155199289
+epoch:39,	steps273/397,	loss:0.0014443640829995275
+epoch:39,	steps312/397,	loss:0.00434052525088191
+epoch:39,	steps351/397,	loss:0.0016765925101935863
+epoch:39,	steps390/397,	loss:0.0017064108978956938
+epoch:39,	loss:1.1752387189480942
+start evaluate...
+====================dev data set====================
+right: 1796	total: 1963	M-tree codes acc: 0.9149261334691798
+save best model to ./output/model_save_name2/best_model
+epoch:40,	steps32/397,	loss:0.008354069665074348
+epoch:40,	steps71/397,	loss:0.004426763392984867
+epoch:40,	steps110/397,	loss:0.002601799089461565
+epoch:40,	steps149/397,	loss:0.004411141388118267
+epoch:40,	steps188/397,	loss:0.0038278410211205482
+epoch:40,	steps227/397,	loss:0.0013691949425265193
+epoch:40,	steps266/397,	loss:0.004764867480844259
+epoch:40,	steps305/397,	loss:0.00326185068115592
+epoch:40,	steps344/397,	loss:0.002403389196842909
+epoch:40,	steps383/397,	loss:0.005983488168567419
+epoch:40,	loss:1.1311257067718543
+start evaluate...
+====================dev data set====================
+right: 1788	total: 1963	M-tree codes acc: 0.9108507386653082
+epoch:41,	steps25/397,	loss:0.003287755884230137
+epoch:41,	steps64/397,	loss:0.0033908423501998186
+epoch:41,	steps103/397,	loss:0.010497581213712692
+epoch:41,	steps142/397,	loss:0.0018550773384049535
+epoch:41,	steps181/397,	loss:0.006084687076508999
+epoch:41,	steps220/397,	loss:0.00175689987372607
+epoch:41,	steps259/397,	loss:0.00152405456174165
+epoch:41,	steps298/397,	loss:0.003913676831871271
+epoch:41,	steps337/397,	loss:0.0016159287188202143
+epoch:41,	steps376/397,	loss:0.0038857515901327133
+epoch:41,	loss:1.1614927114569582
+start evaluate...
+====================dev data set====================
+right: 1788	total: 1963	M-tree codes acc: 0.9108507386653082
+epoch:42,	steps18/397,	loss:0.0008768964326009154
+epoch:42,	steps57/397,	loss:0.0010720492573454976
+epoch:42,	steps96/397,	loss:0.004850899800658226
+epoch:42,	steps135/397,	loss:0.004558093845844269
+epoch:42,	steps174/397,	loss:0.004027172923088074
+epoch:42,	steps213/397,	loss:0.0031055607832968235
+epoch:42,	steps252/397,	loss:0.001997164450585842
+epoch:42,	steps291/397,	loss:0.009853348135948181
+epoch:42,	steps330/397,	loss:0.004313851241022348
+epoch:42,	steps369/397,	loss:0.0028378309216350317
+epoch:42,	loss:1.1394605745445006
+start evaluate...
+====================dev data set====================
+right: 1784	total: 1963	M-tree codes acc: 0.9088130412633724
+epoch:43,	steps11/397,	loss:0.0010713719530031085
+epoch:43,	steps50/397,	loss:0.0037989779375493526
+epoch:43,	steps89/397,	loss:0.0011776955798268318
+epoch:43,	steps128/397,	loss:0.005745808593928814
+epoch:43,	steps167/397,	loss:0.0021425886079669
+epoch:43,	steps206/397,	loss:0.0012997969752177596
+epoch:43,	steps245/397,	loss:0.005413059610873461
+epoch:43,	steps284/397,	loss:0.001459752325899899
+epoch:43,	steps323/397,	loss:0.002611796837300062
+epoch:43,	steps362/397,	loss:0.004347363952547312
+epoch:43,	loss:1.4708039926772472
+start evaluate...
+====================dev data set====================
+right: 1788	total: 1963	M-tree codes acc: 0.9108507386653082
+epoch:44,	steps4/397,	loss:0.005292295012623072
+epoch:44,	steps43/397,	loss:0.002632330171763897
+epoch:44,	steps82/397,	loss:0.0018242595251649618
+epoch:44,	steps121/397,	loss:0.003918139263987541
+epoch:44,	steps160/397,	loss:0.0028168067801743746
+epoch:44,	steps199/397,	loss:0.003658361965790391
+epoch:44,	steps238/397,	loss:0.003764420747756958
+epoch:44,	steps277/397,	loss:0.0012138477759435773
+epoch:44,	steps316/397,	loss:0.006475410889834166
+epoch:44,	steps355/397,	loss:0.0013653015485033393
+epoch:44,	steps394/397,	loss:0.0012760321842506528
+epoch:44,	loss:1.8947259602718987
+start evaluate...
+====================dev data set====================
+right: 1791	total: 1963	M-tree codes acc: 0.9123790117167601
+epoch:45,	steps36/397,	loss:0.0011010871967300773
+epoch:45,	steps75/397,	loss:0.002399727236479521
+epoch:45,	steps114/397,	loss:0.004041370004415512
+epoch:45,	steps153/397,	loss:0.001146406983025372
+epoch:45,	steps192/397,	loss:0.0055229817517101765
+epoch:45,	steps231/397,	loss:0.003144299378618598
+epoch:45,	steps270/397,	loss:0.0046262298710644245
+epoch:45,	steps309/397,	loss:0.0034838179126381874
+epoch:45,	steps348/397,	loss:0.0014977037208154798
+epoch:45,	steps387/397,	loss:0.0033216297160834074
+epoch:45,	loss:1.1613903332035989
+start evaluate...
+====================dev data set====================
+right: 1785	total: 1963	M-tree codes acc: 0.9093224656138563
+epoch:46,	steps29/397,	loss:0.004527751822024584
+epoch:46,	steps68/397,	loss:0.002990198787301779
+epoch:46,	steps107/397,	loss:0.000819354085251689
+epoch:46,	steps146/397,	loss:0.003046834608539939
+epoch:46,	steps185/397,	loss:0.003064461750909686
+epoch:46,	steps224/397,	loss:0.002513075014576316
+epoch:46,	steps263/397,	loss:0.0070970430970191956
+epoch:46,	steps302/397,	loss:0.001595048001036048
+epoch:46,	steps341/397,	loss:0.0036881924606859684
+epoch:46,	steps380/397,	loss:0.006023063790053129
+epoch:46,	loss:1.109735350299161
+start evaluate...
+====================dev data set====================
+right: 1786	total: 1963	M-tree codes acc: 0.9098318899643403
+epoch:47,	steps22/397,	loss:0.0040545896627008915
+epoch:47,	steps61/397,	loss:0.0033408310264348984
+epoch:47,	steps100/397,	loss:0.0014276971342042089
+epoch:47,	steps139/397,	loss:0.0027208609972149134
+epoch:47,	steps178/397,	loss:0.003948884550482035
+epoch:47,	steps217/397,	loss:0.0007149287848733366
+epoch:47,	steps256/397,	loss:0.0031120560597628355
+epoch:47,	steps295/397,	loss:0.0016742335865274072
+epoch:47,	steps334/397,	loss:0.0029398740734905005
+epoch:47,	steps373/397,	loss:0.0025501647032797337
+epoch:47,	loss:1.0942195312818512
+start evaluate...
+====================dev data set====================
+right: 1785	total: 1963	M-tree codes acc: 0.9093224656138563
+epoch:48,	steps15/397,	loss:0.004663809668272734
+epoch:48,	steps54/397,	loss:0.0021119469311088324
+epoch:48,	steps93/397,	loss:0.003191234078258276
+epoch:48,	steps132/397,	loss:0.00204136548563838
+epoch:48,	steps171/397,	loss:0.0024513385724276304
+epoch:48,	steps210/397,	loss:0.0009929712396115065
+epoch:48,	steps249/397,	loss:0.001016272697597742
+epoch:48,	steps288/397,	loss:0.0031974187586456537
+epoch:48,	steps327/397,	loss:0.0016555925831198692
+epoch:48,	steps366/397,	loss:0.002821530681103468
+epoch:48,	loss:1.5972724072344135
+start evaluate...
+====================dev data set====================
+right: 1788	total: 1963	M-tree codes acc: 0.9108507386653082
+epoch:49,	steps8/397,	loss:0.0010078436462208629
+epoch:49,	steps47/397,	loss:0.0014162447769194841
+epoch:49,	steps86/397,	loss:0.0004645091248676181
+epoch:49,	steps125/397,	loss:0.0017947752494364977
+epoch:49,	steps164/397,	loss:0.0009251373121514916
+epoch:49,	steps203/397,	loss:0.0026576812379062176
+epoch:49,	steps242/397,	loss:0.0024817504454404116
+epoch:49,	steps281/397,	loss:0.0011664986377581954
+epoch:49,	steps320/397,	loss:0.0013217859668657184
+epoch:49,	steps359/397,	loss:0.0016403907211497426
+epoch:49,	loss:1.0972499365743715
+start evaluate...
+====================dev data set====================
+right: 1774	total: 1963	M-tree codes acc: 0.9037187977585328
+epoch:50,	steps1/397,	loss:0.0026923140976577997
+epoch:50,	steps40/397,	loss:0.003982233814895153
+epoch:50,	steps79/397,	loss:0.0015621784841641784
+epoch:50,	steps118/397,	loss:0.001760480459779501
+epoch:50,	steps157/397,	loss:0.002280264161527157
+epoch:50,	steps196/397,	loss:0.0010452945716679096
+epoch:50,	steps235/397,	loss:0.0017980679403990507
+epoch:50,	steps274/397,	loss:0.0019746439065784216
+epoch:50,	steps313/397,	loss:0.0007518956554122269
+epoch:50,	steps352/397,	loss:0.0016927793622016907
+epoch:50,	steps391/397,	loss:0.001477921730838716
+epoch:50,	loss:1.1541130205441732
+start evaluate...
+====================dev data set====================
+right: 1790	total: 1963	M-tree codes acc: 0.9118695873662761
+epoch:51,	steps33/397,	loss:0.0023018009960651398
+epoch:51,	steps72/397,	loss:0.0015506218187510967
+epoch:51,	steps111/397,	loss:0.0025966751854866743
+epoch:51,	steps150/397,	loss:0.0020644485484808683
+epoch:51,	steps189/397,	loss:0.00196954351849854
+epoch:51,	steps228/397,	loss:0.00576783437281847
+epoch:51,	steps267/397,	loss:0.0016533478628844023
+epoch:51,	steps306/397,	loss:0.0034359185956418514
+epoch:51,	steps345/397,	loss:0.003102723276242614
+epoch:51,	steps384/397,	loss:0.0014745924854651093
+epoch:51,	loss:1.1823517446173355
+start evaluate...
+====================dev data set====================
+right: 1791	total: 1963	M-tree codes acc: 0.9123790117167601
+epoch:52,	steps26/397,	loss:0.0020818437915295362
+epoch:52,	steps65/397,	loss:0.0017765348311513662
+epoch:52,	steps104/397,	loss:0.004007087089121342
+epoch:52,	steps143/397,	loss:0.0037815088871866465
+epoch:52,	steps182/397,	loss:0.0004323917964939028
+epoch:52,	steps221/397,	loss:0.0035300503950566053
+epoch:52,	steps260/397,	loss:0.005873447749763727
+epoch:52,	steps299/397,	loss:0.0028192049358040094
+epoch:52,	steps338/397,	loss:0.007485892158001661
+epoch:52,	steps377/397,	loss:0.0033744568936526775
+epoch:52,	loss:1.0666694479004946
+start evaluate...
+====================dev data set====================
+right: 1788	total: 1963	M-tree codes acc: 0.9108507386653082
+epoch:53,	steps19/397,	loss:0.0025698202662169933
+epoch:53,	steps58/397,	loss:0.0016314430395141244
+epoch:53,	steps97/397,	loss:0.00771486759185791
+epoch:53,	steps136/397,	loss:0.001516270567663014
+epoch:53,	steps175/397,	loss:0.0008698543533682823
+epoch:53,	steps214/397,	loss:0.009942784905433655
+epoch:53,	steps253/397,	loss:0.0018293359316885471
+epoch:53,	steps292/397,	loss:0.0029134205542504787
+epoch:53,	steps331/397,	loss:0.0013262523571029305
+epoch:53,	steps370/397,	loss:0.0009080056915991008
+epoch:53,	loss:1.040009096643189
+start evaluate...
+====================dev data set====================
+right: 1786	total: 1963	M-tree codes acc: 0.9098318899643403
+epoch:54,	steps12/397,	loss:0.0024827560409903526
+epoch:54,	steps51/397,	loss:0.0027590403333306313
+epoch:54,	steps90/397,	loss:0.0020545138977468014
+epoch:54,	steps129/397,	loss:0.0018735566409304738
+epoch:54,	steps168/397,	loss:0.002616170095279813
+epoch:54,	steps207/397,	loss:0.004324829205870628
+epoch:54,	steps246/397,	loss:0.0029456475749611855
+epoch:54,	steps285/397,	loss:0.0018065751064568758
+epoch:54,	steps324/397,	loss:0.0042539117857813835
+epoch:54,	steps363/397,	loss:0.0020202479790896177
+epoch:54,	loss:2.1180500815971754
+start evaluate...
+====================dev data set====================
+right: 1786	total: 1963	M-tree codes acc: 0.9098318899643403
+epoch:55,	steps5/397,	loss:0.005774407647550106
+epoch:55,	steps44/397,	loss:0.0020059808157384396
+epoch:55,	steps83/397,	loss:0.0024117687717080116
+epoch:55,	steps122/397,	loss:0.0013807438081130385
+epoch:55,	steps161/397,	loss:0.00319303129799664
+epoch:55,	steps200/397,	loss:0.0013950917636975646
+epoch:55,	steps239/397,	loss:0.0019256770610809326
+epoch:55,	steps278/397,	loss:0.001089952071197331
+epoch:55,	steps317/397,	loss:0.0008799699135124683
+epoch:55,	steps356/397,	loss:0.0012892757076770067
+epoch:55,	steps395/397,	loss:0.0016369149088859558
+epoch:55,	loss:1.0227830767689738
+start evaluate...
+====================dev data set====================
+right: 1788	total: 1963	M-tree codes acc: 0.9108507386653082
+epoch:56,	steps37/397,	loss:0.006703303661197424
+epoch:56,	steps76/397,	loss:0.004380820319056511
+epoch:56,	steps115/397,	loss:0.0038669074419885874
+epoch:56,	steps154/397,	loss:0.003258093958720565
+epoch:56,	steps193/397,	loss:0.002699620556086302
+epoch:56,	steps232/397,	loss:0.0050766123458743095
+epoch:56,	steps271/397,	loss:0.001185390166938305
+epoch:56,	steps310/397,	loss:0.001198618789203465
+epoch:56,	steps349/397,	loss:0.0009471441153436899
+epoch:56,	steps388/397,	loss:0.0014292660634964705
+epoch:56,	loss:1.072257521620486
+start evaluate...
+====================dev data set====================
+right: 1781	total: 1963	M-tree codes acc: 0.9072847682119205
+epoch:57,	steps30/397,	loss:0.005965445656329393
+epoch:57,	steps69/397,	loss:0.002725715283304453
+epoch:57,	steps108/397,	loss:0.0022468145471066236
+epoch:57,	steps147/397,	loss:0.0029223160818219185
+epoch:57,	steps186/397,	loss:0.002557789208367467
+epoch:57,	steps225/397,	loss:0.004910368472337723
+epoch:57,	steps264/397,	loss:0.001428799470886588
+epoch:57,	steps303/397,	loss:0.0018403586000204086
+epoch:57,	steps342/397,	loss:0.0005724688526242971
+epoch:57,	steps381/397,	loss:0.0012595660518854856
+epoch:57,	loss:1.0449726670631208
+start evaluate...
+====================dev data set====================
+right: 1792	total: 1963	M-tree codes acc: 0.912888436067244
+epoch:58,	steps23/397,	loss:0.0009648501873016357
+epoch:58,	steps62/397,	loss:0.0016291781794279814
+epoch:58,	steps101/397,	loss:0.0013148406287655234
+epoch:58,	steps140/397,	loss:0.0012282112147659063
+epoch:58,	steps179/397,	loss:0.0008291486301459372
+epoch:58,	steps218/397,	loss:0.00066642917227
+epoch:58,	steps257/397,	loss:0.001946639851666987
+epoch:58,	steps296/397,	loss:0.0025639100931584835
+epoch:58,	steps335/397,	loss:0.0011325905798003078
+epoch:58,	steps374/397,	loss:0.001662812544964254
+epoch:58,	loss:2.011853994685225
+start evaluate...
+====================dev data set====================
+right: 1790	total: 1963	M-tree codes acc: 0.9118695873662761
+epoch:59,	steps16/397,	loss:0.003409851575270295
+epoch:59,	steps55/397,	loss:0.003273493843153119
+epoch:59,	steps94/397,	loss:0.0012332601472735405
+epoch:59,	steps133/397,	loss:0.0009133059065788984
+epoch:59,	steps172/397,	loss:0.003458790248259902
+epoch:59,	steps211/397,	loss:0.0011992983054369688
+epoch:59,	steps250/397,	loss:0.001825661980547011
+epoch:59,	steps289/397,	loss:0.003412018995732069
+epoch:59,	steps328/397,	loss:0.0029443486128002405
+epoch:59,	steps367/397,	loss:0.0008420398226007819
+epoch:59,	loss:1.016048769815825
+start evaluate...
+====================dev data set====================
+right: 1799	total: 1963	M-tree codes acc: 0.9164544065206317
+save best model to ./output/model_save_name2/best_model
+epoch:60,	steps9/397,	loss:0.0015446875477209687
+epoch:60,	steps48/397,	loss:0.0014996276004239917
+epoch:60,	steps87/397,	loss:0.0013751208316534758
+epoch:60,	steps126/397,	loss:0.002669788198545575
+epoch:60,	steps165/397,	loss:0.0009018586133606732
+epoch:60,	steps204/397,	loss:0.0025421190075576305
+epoch:60,	steps243/397,	loss:0.0016268438193947077
+epoch:60,	steps282/397,	loss:0.0029432177543640137
+epoch:60,	steps321/397,	loss:0.0016966576222330332
+epoch:60,	steps360/397,	loss:0.0015934191178530455
+epoch:60,	loss:0.9941822552937083
+start evaluate...
+====================dev data set====================
+right: 1794	total: 1963	M-tree codes acc: 0.9139072847682119
+epoch:61,	steps2/397,	loss:0.0011615166440606117
+epoch:61,	steps41/397,	loss:0.0024088923819363117
+epoch:61,	steps80/397,	loss:0.0005914837820455432
+epoch:61,	steps119/397,	loss:0.003336263122037053
+epoch:61,	steps158/397,	loss:0.0015031278599053621
+epoch:61,	steps197/397,	loss:0.0023342615459114313
+epoch:61,	steps236/397,	loss:0.0021877060644328594
+epoch:61,	steps275/397,	loss:0.0014774426817893982
+epoch:61,	steps314/397,	loss:0.0007073963060975075
+epoch:61,	steps353/397,	loss:0.0029244215693324804
+epoch:61,	steps392/397,	loss:0.001834205468185246
+epoch:61,	loss:0.9961378230073024
+start evaluate...
+====================dev data set====================
+right: 1792	total: 1963	M-tree codes acc: 0.912888436067244
+epoch:62,	steps34/397,	loss:0.0021036386024206877
+epoch:62,	steps73/397,	loss:0.0007544539985246956
+epoch:62,	steps112/397,	loss:0.0029916802886873484
+epoch:62,	steps151/397,	loss:0.00400089705362916
+epoch:62,	steps190/397,	loss:0.0017864314140751958
+epoch:62,	steps229/397,	loss:0.0033622076734900475
+epoch:62,	steps268/397,	loss:0.002727699000388384
+epoch:62,	steps307/397,	loss:0.004052311182022095
+epoch:62,	steps346/397,	loss:0.0013023087522014976
+epoch:62,	steps385/397,	loss:0.0013627238804474473
+epoch:62,	loss:1.7019591318967286
+start evaluate...
+====================dev data set====================
+right: 1790	total: 1963	M-tree codes acc: 0.9118695873662761
+epoch:63,	steps27/397,	loss:0.0006414730451069772
+epoch:63,	steps66/397,	loss:0.0011245980858802795
+epoch:63,	steps105/397,	loss:0.0012670987052842975
+epoch:63,	steps144/397,	loss:0.002268335549160838
+epoch:63,	steps183/397,	loss:0.004207908641546965
+epoch:63,	steps222/397,	loss:0.004541798960417509
+epoch:63,	steps261/397,	loss:0.0011881738901138306
+epoch:63,	steps300/397,	loss:0.004925340414047241
+epoch:63,	steps339/397,	loss:0.0023445801343768835
+epoch:63,	steps378/397,	loss:0.004175033885985613
+epoch:63,	loss:1.002698543277802
+start evaluate...
+====================dev data set====================
+right: 1791	total: 1963	M-tree codes acc: 0.9123790117167601
+epoch:64,	steps20/397,	loss:0.0020039621740579605
+epoch:64,	steps59/397,	loss:0.0013104112586006522
+epoch:64,	steps98/397,	loss:0.0017268735682591796
+epoch:64,	steps137/397,	loss:0.0012719720834866166
+epoch:64,	steps176/397,	loss:0.0018915155669674277
+epoch:64,	steps215/397,	loss:0.0016725719906389713
+epoch:64,	steps254/397,	loss:0.0011040932731702924
+epoch:64,	steps293/397,	loss:0.002181742573156953
+epoch:64,	steps332/397,	loss:0.002685797167941928
+epoch:64,	steps371/397,	loss:0.0014956459635868669
+epoch:64,	loss:1.0005083978467155
+start evaluate...
+====================dev data set====================
+right: 1792	total: 1963	M-tree codes acc: 0.912888436067244
+epoch:65,	steps13/397,	loss:0.0024164014030247927
+epoch:65,	steps52/397,	loss:0.0037768296897411346
+epoch:65,	steps91/397,	loss:0.008344488218426704
+epoch:65,	steps130/397,	loss:0.0014444628031924367
+epoch:65,	steps169/397,	loss:0.0048315320163965225
+epoch:65,	steps208/397,	loss:0.0013794184196740389
+epoch:65,	steps247/397,	loss:0.000935132266022265
+epoch:65,	steps286/397,	loss:0.00209241546690464
+epoch:65,	steps325/397,	loss:0.004018117673695087
+epoch:65,	steps364/397,	loss:0.0042890156619250774
+epoch:65,	loss:0.9576308513933327
+start evaluate...
+====================dev data set====================
+right: 1796	total: 1963	M-tree codes acc: 0.9149261334691798
+epoch:66,	steps6/397,	loss:0.0014093227218836546
+epoch:66,	steps45/397,	loss:0.001379856956191361
+epoch:66,	steps84/397,	loss:0.004649368580430746
+epoch:66,	steps123/397,	loss:0.0008490612381137908
+epoch:66,	steps162/397,	loss:0.0018520138692110777
+epoch:66,	steps201/397,	loss:0.003933641593903303
+epoch:66,	steps240/397,	loss:0.0027572824619710445
+epoch:66,	steps279/397,	loss:0.0022770368959754705
+epoch:66,	steps318/397,	loss:0.002966934349387884
+epoch:66,	steps357/397,	loss:0.0025523740332573652
+epoch:66,	steps396/397,	loss:0.0032464945688843727
+epoch:66,	loss:1.003989310353063
+start evaluate...
+====================dev data set====================
+right: 1792	total: 1963	M-tree codes acc: 0.912888436067244
+epoch:67,	steps38/397,	loss:0.005012803710997105
+epoch:67,	steps77/397,	loss:0.0010923328809440136
+epoch:67,	steps116/397,	loss:0.00174790620803833
+epoch:67,	steps155/397,	loss:0.0030452057253569365
+epoch:67,	steps194/397,	loss:0.0008411970338784158
+epoch:67,	steps233/397,	loss:0.0019291528733447194
+epoch:67,	steps272/397,	loss:0.0050721000880002975
+epoch:67,	steps311/397,	loss:0.0017718420131132007
+epoch:67,	steps350/397,	loss:0.0022165218833833933
+epoch:67,	steps389/397,	loss:0.0016440050676465034
+epoch:67,	loss:1.0580315433908254
+start evaluate...
+====================dev data set====================
+right: 1789	total: 1963	M-tree codes acc: 0.9113601630157921
+epoch:68,	steps31/397,	loss:0.002803211798891425
+epoch:68,	steps70/397,	loss:0.0026637178380042315
+epoch:68,	steps109/397,	loss:0.0025558157358318567
+epoch:68,	steps148/397,	loss:0.002049847273156047
+epoch:68,	steps187/397,	loss:0.0014740151818841696
+epoch:68,	steps226/397,	loss:0.0037863145116716623
+epoch:68,	steps265/397,	loss:0.0014603519812226295
+epoch:68,	steps304/397,	loss:0.002822466194629669
+epoch:68,	steps343/397,	loss:0.0013882579514756799
+epoch:68,	steps382/397,	loss:0.002562736626714468
+epoch:68,	loss:2.8107583134260494
+start evaluate...
+====================dev data set====================
+right: 1789	total: 1963	M-tree codes acc: 0.9113601630157921
+epoch:69,	steps24/397,	loss:0.0012505899649113417
+epoch:69,	steps63/397,	loss:0.0013452732237055898
+epoch:69,	steps102/397,	loss:0.004256267566233873
+epoch:69,	steps141/397,	loss:0.00483531691133976
+epoch:69,	steps180/397,	loss:0.004511913284659386
+epoch:69,	steps219/397,	loss:0.0015231289435178041
+epoch:69,	steps258/397,	loss:0.0018245212268084288
+epoch:69,	steps297/397,	loss:0.0036642474588006735
+epoch:69,	steps336/397,	loss:0.0013345459010452032
+epoch:69,	steps375/397,	loss:0.0014811143046244979
+epoch:69,	loss:1.156786323786946
+start evaluate...
+====================dev data set====================
+right: 1787	total: 1963	M-tree codes acc: 0.9103413143148242
+epoch:70,	steps17/397,	loss:0.001569100422784686
+epoch:70,	steps56/397,	loss:0.0034871320240199566
+epoch:70,	steps95/397,	loss:0.0005038291565142572
+epoch:70,	steps134/397,	loss:0.0007204807479865849
+epoch:70,	steps173/397,	loss:0.0023547369055449963
+epoch:70,	steps212/397,	loss:0.0037629178259521723
+epoch:70,	steps251/397,	loss:0.0013514551101252437
+epoch:70,	steps290/397,	loss:0.0027331446763128042
+epoch:70,	steps329/397,	loss:0.001423301873728633
+epoch:70,	steps368/397,	loss:0.0007103636744432151
+epoch:70,	loss:0.9761095940484665
+start evaluate...
+====================dev data set====================
+right: 1791	total: 1963	M-tree codes acc: 0.9123790117167601
+epoch:71,	steps10/397,	loss:0.0027346869464963675
+epoch:71,	steps49/397,	loss:0.002645548665896058
+epoch:71,	steps88/397,	loss:0.003350990591570735
+epoch:71,	steps127/397,	loss:0.0016349698416888714
+epoch:71,	steps166/397,	loss:0.002849163021892309
+epoch:71,	steps205/397,	loss:0.0026425186078995466
+epoch:71,	steps244/397,	loss:0.002129623666405678
+epoch:71,	steps283/397,	loss:0.0010018519824370742
+epoch:71,	steps322/397,	loss:0.0017518809763714671
+epoch:71,	steps361/397,	loss:0.0007164471899159253
+epoch:71,	loss:1.118402901571244
+start evaluate...
+====================dev data set====================
+right: 1792	total: 1963	M-tree codes acc: 0.912888436067244
+epoch:72,	steps3/397,	loss:0.0037567296531051397
+epoch:72,	steps42/397,	loss:0.0018699944484978914
+epoch:72,	steps81/397,	loss:0.0009505272028036416
+epoch:72,	steps120/397,	loss:0.0022384554613381624
+epoch:72,	steps159/397,	loss:0.0021155178546905518
+epoch:72,	steps198/397,	loss:0.002790173515677452
+epoch:72,	steps237/397,	loss:0.0015112527180463076
+epoch:72,	steps276/397,	loss:0.00074819999281317
+epoch:72,	steps315/397,	loss:0.0008086361922323704
+epoch:72,	steps354/397,	loss:0.0007829784881323576
+epoch:72,	steps393/397,	loss:0.001590866013430059
+epoch:72,	loss:1.192882884934079
+start evaluate...
+====================dev data set====================
+right: 1788	total: 1963	M-tree codes acc: 0.9108507386653082
+epoch:73,	steps35/397,	loss:0.0016144146211445332
+epoch:73,	steps74/397,	loss:0.0015334683703258634
+epoch:73,	steps113/397,	loss:0.0008884248090907931
+epoch:73,	steps152/397,	loss:0.003036555601283908
+epoch:73,	steps191/397,	loss:0.00229563913308084
+epoch:73,	steps230/397,	loss:0.002313140546903014
+epoch:73,	steps269/397,	loss:0.0017934228526428342
+epoch:73,	steps308/397,	loss:0.0019506922690197825
+epoch:73,	steps347/397,	loss:0.0009349767933599651
+epoch:73,	steps386/397,	loss:0.001108353491872549
+epoch:73,	loss:1.7833685751538724
+start evaluate...
+====================dev data set====================
+right: 1796	total: 1963	M-tree codes acc: 0.9149261334691798
+epoch:74,	steps28/397,	loss:0.0006130363908596337
+epoch:74,	steps67/397,	loss:0.0010130180744454265
+epoch:74,	steps106/397,	loss:0.0011019110679626465
+epoch:74,	steps145/397,	loss:0.0036925673484802246
+epoch:74,	steps184/397,	loss:0.0019786932971328497
+epoch:74,	steps223/397,	loss:0.002376594115048647
+epoch:74,	steps262/397,	loss:0.0011272496776655316
+epoch:74,	steps301/397,	loss:0.002979495795443654
+epoch:74,	steps340/397,	loss:0.0014742426574230194
+epoch:74,	steps379/397,	loss:0.0015437027905136347
+epoch:74,	loss:0.9392440179362893
+start evaluate...
+====================dev data set====================
+right: 1796	total: 1963	M-tree codes acc: 0.9149261334691798
+epoch:75,	steps21/397,	loss:0.0036189360544085503
+epoch:75,	steps60/397,	loss:0.003053880063816905
+epoch:75,	steps99/397,	loss:0.0017271627439185977
+epoch:75,	steps138/397,	loss:0.0010688024340197444
+epoch:75,	steps177/397,	loss:0.0025684875436127186
+epoch:75,	steps216/397,	loss:0.00045972614316269755
+epoch:75,	steps255/397,	loss:0.002133382949978113
+epoch:75,	steps294/397,	loss:0.0008282354683615267
+epoch:75,	steps333/397,	loss:0.001696413499303162
+epoch:75,	steps372/397,	loss:0.007516256533563137
+epoch:75,	loss:1.8436075589852408
+start evaluate...
+====================dev data set====================
+right: 1796	total: 1963	M-tree codes acc: 0.9149261334691798
+epoch:76,	steps14/397,	loss:0.004096256103366613
+epoch:76,	steps53/397,	loss:0.003480419982224703
+epoch:76,	steps92/397,	loss:0.0022059089969843626
+epoch:76,	steps131/397,	loss:0.0022597056813538074
+epoch:76,	steps170/397,	loss:0.0005431642639450729
+epoch:76,	steps209/397,	loss:0.0009651741711422801
+epoch:76,	steps248/397,	loss:0.0029281703755259514
+epoch:76,	steps287/397,	loss:0.0017058829544112086
+epoch:76,	steps326/397,	loss:0.005002188496291637
+epoch:76,	steps365/397,	loss:0.002244045026600361
+epoch:76,	loss:0.9990595840790775
+start evaluate...
+====================dev data set====================
+right: 1798	total: 1963	M-tree codes acc: 0.9159449821701477
+epoch:77,	steps7/397,	loss:0.0012563918717205524
+epoch:77,	steps46/397,	loss:0.0016098179621621966
+epoch:77,	steps85/397,	loss:0.0016811785753816366
+epoch:77,	steps124/397,	loss:0.0009707329445518553
+epoch:77,	steps163/397,	loss:0.0010776655981317163
+epoch:77,	steps202/397,	loss:0.0012846033787354827
+epoch:77,	steps241/397,	loss:0.0014881636016070843
+epoch:77,	steps280/397,	loss:0.001401035231538117
+epoch:77,	steps319/397,	loss:0.002787419129163027
+epoch:77,	steps358/397,	loss:0.0015391419874504209
+epoch:77,	steps397/397,	loss:0.22679558396339417
+epoch:77,	loss:1.184995344170602
+start evaluate...
+====================dev data set====================
+right: 1793	total: 1963	M-tree codes acc: 0.913397860417728
+epoch:78,	steps39/397,	loss:0.004010312724858522
+epoch:78,	steps78/397,	loss:0.0014026665594428778
+epoch:78,	steps117/397,	loss:0.002117549069225788
+epoch:78,	steps156/397,	loss:0.0020983461290597916
+epoch:78,	steps195/397,	loss:0.0014701873296871781
+epoch:78,	steps234/397,	loss:0.0007444554357789457
+epoch:78,	steps273/397,	loss:0.004143733065575361
+epoch:78,	steps312/397,	loss:0.0011667677899822593
+epoch:78,	steps351/397,	loss:0.0009684271062724292
+epoch:78,	steps390/397,	loss:0.002479718066751957
+epoch:78,	loss:0.9371187161596026
+start evaluate...
+====================dev data set====================
+right: 1791	total: 1963	M-tree codes acc: 0.9123790117167601
+epoch:79,	steps32/397,	loss:0.001152180484496057
+epoch:79,	steps71/397,	loss:0.004305289592593908
+epoch:79,	steps110/397,	loss:0.0009085340425372124
+epoch:79,	steps149/397,	loss:0.0014302089111879468
+epoch:79,	steps188/397,	loss:0.0017923010746017098
+epoch:79,	steps227/397,	loss:0.0019030828261747956
+epoch:79,	steps266/397,	loss:0.0006699860678054392
+epoch:79,	steps305/397,	loss:0.0025389918591827154
+epoch:79,	steps344/397,	loss:0.001098932814784348
+epoch:79,	steps383/397,	loss:0.0062506855465471745
+epoch:79,	loss:0.9829281579877716
+start evaluate...
+====================dev data set====================
+right: 1793	total: 1963	M-tree codes acc: 0.913397860417728
+epoch:80,	steps25/397,	loss:0.0018514548428356647
+epoch:80,	steps64/397,	loss:0.0017482754774391651
+epoch:80,	steps103/397,	loss:0.0035583253484219313
+epoch:80,	steps142/397,	loss:0.0012892833910882473
+epoch:80,	steps181/397,	loss:0.0022427733056247234
+epoch:80,	steps220/397,	loss:0.0015296358615159988
+epoch:80,	steps259/397,	loss:0.005026804283261299
+epoch:80,	steps298/397,	loss:0.0019182346295565367
+epoch:80,	steps337/397,	loss:0.0018390807090327144
+epoch:80,	steps376/397,	loss:0.001469996408559382
+epoch:80,	loss:1.6908141994499601
+start evaluate...
+====================dev data set====================
+right: 1789	total: 1963	M-tree codes acc: 0.9113601630157921
+epoch:81,	steps18/397,	loss:0.0018069203943014145
+epoch:81,	steps57/397,	loss:0.0009165597730316222
+epoch:81,	steps96/397,	loss:0.0011211731471121311
+epoch:81,	steps135/397,	loss:0.00455580884590745
+epoch:81,	steps174/397,	loss:0.0038742658216506243
+epoch:81,	steps213/397,	loss:0.0020418965723365545
+epoch:81,	steps252/397,	loss:0.002982967533171177
+epoch:81,	steps291/397,	loss:0.0027025602757930756
+epoch:81,	steps330/397,	loss:0.0019475771114230156
+epoch:81,	steps369/397,	loss:0.001953323371708393
+epoch:81,	loss:1.8708053714362904
+start evaluate...
+====================dev data set====================
+right: 1786	total: 1963	M-tree codes acc: 0.9098318899643403
+epoch:82,	steps11/397,	loss:0.005117970518767834
+epoch:82,	steps50/397,	loss:0.0008757549221627414
+epoch:82,	steps89/397,	loss:0.0010932852746918797
+epoch:82,	steps128/397,	loss:0.002190439263358712
+epoch:82,	steps167/397,	loss:0.002021266147494316
+epoch:82,	steps206/397,	loss:0.003535300260409713
+epoch:82,	steps245/397,	loss:0.001250903937034309
+epoch:82,	steps284/397,	loss:0.0011857252102345228
+epoch:82,	steps323/397,	loss:0.004365216009318829
+epoch:82,	steps362/397,	loss:0.0009795768419280648
+epoch:82,	loss:0.9584847941878252
+start evaluate...
+====================dev data set====================
+right: 1791	total: 1963	M-tree codes acc: 0.9123790117167601
+epoch:83,	steps4/397,	loss:0.003829642664641142
+epoch:83,	steps43/397,	loss:0.002242084825411439
+epoch:83,	steps82/397,	loss:0.0017590575153008103
+epoch:83,	steps121/397,	loss:0.0008010845049284399
+epoch:83,	steps160/397,	loss:0.0018902549054473639
+epoch:83,	steps199/397,	loss:0.0017439782386645675
+epoch:83,	steps238/397,	loss:0.0023414159659296274
+epoch:83,	steps277/397,	loss:0.0025221456307917833
+epoch:83,	steps316/397,	loss:0.003915160894393921
+epoch:83,	steps355/397,	loss:0.0007904281956143677
+epoch:83,	steps394/397,	loss:0.004268592223525047
+epoch:83,	loss:0.917837523680646
+start evaluate...
+====================dev data set====================
+right: 1787	total: 1963	M-tree codes acc: 0.9103413143148242
+epoch:84,	steps36/397,	loss:0.004738298710435629
+epoch:84,	steps75/397,	loss:0.0006103471969254315
+epoch:84,	steps114/397,	loss:0.003096363740041852
+epoch:84,	steps153/397,	loss:0.0012993848649784923
+epoch:84,	steps192/397,	loss:0.0013539684005081654
+epoch:84,	steps231/397,	loss:0.002605204237625003
+epoch:84,	steps270/397,	loss:0.0006112050032243133
+epoch:84,	steps309/397,	loss:0.0008250687969848514
+epoch:84,	steps348/397,	loss:0.008759546093642712
+epoch:84,	steps387/397,	loss:0.0006581475608982146
+epoch:84,	loss:0.9248083185520954
+start evaluate...
+====================dev data set====================
+right: 1783	total: 1963	M-tree codes acc: 0.9083036169128884
+epoch:85,	steps29/397,	loss:0.0013744895113632083
+epoch:85,	steps68/397,	loss:0.004313415847718716
+epoch:85,	steps107/397,	loss:0.0012924501206725836
+epoch:85,	steps146/397,	loss:0.0018997980514541268
+epoch:85,	steps185/397,	loss:0.0016084593953564763
+epoch:85,	steps224/397,	loss:0.004604857414960861
+epoch:85,	steps263/397,	loss:0.0012553140986710787
+epoch:85,	steps302/397,	loss:0.005523809231817722
+epoch:85,	steps341/397,	loss:0.0011250267270952463
+epoch:85,	steps380/397,	loss:0.0026553908828645945
+epoch:85,	loss:0.9460971085936762
+start evaluate...
+====================dev data set====================
+right: 1787	total: 1963	M-tree codes acc: 0.9103413143148242
+epoch:86,	steps22/397,	loss:0.0011415189364925027
+epoch:86,	steps61/397,	loss:0.0008266006479971111
+epoch:86,	steps100/397,	loss:0.000792458828072995
+epoch:86,	steps139/397,	loss:0.005689846817404032
+epoch:86,	steps178/397,	loss:0.0008156165713444352
+epoch:86,	steps217/397,	loss:0.003517599543556571
+epoch:86,	steps256/397,	loss:0.00353289395570755
+epoch:86,	steps295/397,	loss:0.004420862067490816
+epoch:86,	steps334/397,	loss:0.0014189427020028234
+epoch:86,	steps373/397,	loss:0.001584857702255249
+epoch:86,	loss:0.9203978776640724
+start evaluate...
+====================dev data set====================
+right: 1789	total: 1963	M-tree codes acc: 0.9113601630157921
+epoch:87,	steps15/397,	loss:0.0006010665092617273
+epoch:87,	steps54/397,	loss:0.0035161557607352734
+epoch:87,	steps93/397,	loss:0.0011788250412791967
+epoch:87,	steps132/397,	loss:0.0011123873991891742
+epoch:87,	steps171/397,	loss:0.0016704536974430084
+epoch:87,	steps210/397,	loss:0.001059527276083827
+epoch:87,	steps249/397,	loss:0.0033703772351145744
+epoch:87,	steps288/397,	loss:0.0024091287050396204
+epoch:87,	steps327/397,	loss:0.005426924675703049
+epoch:87,	steps366/397,	loss:0.0007399000460281968
+epoch:87,	loss:0.9255819563113619
+start evaluate...
+====================dev data set====================
+right: 1791	total: 1963	M-tree codes acc: 0.9123790117167601
+epoch:88,	steps8/397,	loss:0.0074290563352406025
+epoch:88,	steps47/397,	loss:0.0019355850527063012
+epoch:88,	steps86/397,	loss:0.004139987286180258
+epoch:88,	steps125/397,	loss:0.0031969998963177204
+epoch:88,	steps164/397,	loss:0.0008599206921644509
+epoch:88,	steps203/397,	loss:0.002312256721779704
+epoch:88,	steps242/397,	loss:0.0009451093501411378
+epoch:88,	steps281/397,	loss:0.00441150926053524
+epoch:88,	steps320/397,	loss:0.0025637855287641287
+epoch:88,	steps359/397,	loss:0.0028994069434702396
+epoch:88,	loss:0.9225227386632469
+start evaluate...
+====================dev data set====================
+right: 1792	total: 1963	M-tree codes acc: 0.912888436067244
+epoch:89,	steps1/397,	loss:0.0012347915908321738
+epoch:89,	steps40/397,	loss:0.0019982049707323313
+epoch:89,	steps79/397,	loss:0.005090067628771067
+epoch:89,	steps118/397,	loss:0.0015971694374457002
+epoch:89,	steps157/397,	loss:0.005313422065228224
+epoch:89,	steps196/397,	loss:0.004209355916827917
+epoch:89,	steps235/397,	loss:0.0008257316658273339
+epoch:89,	steps274/397,	loss:0.0018583697965368629
+epoch:89,	steps313/397,	loss:0.00223476137034595
+epoch:89,	steps352/397,	loss:0.0010587195865809917
+epoch:89,	steps391/397,	loss:0.0026411577127873898
+epoch:89,	loss:0.9413753914122935
+start evaluate...
+====================dev data set====================
+right: 1790	total: 1963	M-tree codes acc: 0.9118695873662761
+epoch:90,	steps33/397,	loss:0.004917791113257408
+epoch:90,	steps72/397,	loss:0.005026506260037422
+epoch:90,	steps111/397,	loss:0.0036953934468328953
+epoch:90,	steps150/397,	loss:0.0023632661905139685
+epoch:90,	steps189/397,	loss:0.0021422053687274456
+epoch:90,	steps228/397,	loss:0.0007893830188550055
+epoch:90,	steps267/397,	loss:0.0013290172209963202
+epoch:90,	steps306/397,	loss:0.0008777399198152125
+epoch:90,	steps345/397,	loss:0.0021430172491818666
+epoch:90,	steps384/397,	loss:0.002814676146954298
+epoch:90,	loss:1.1044218329479918
+start evaluate...
+====================dev data set====================
+right: 1789	total: 1963	M-tree codes acc: 0.9113601630157921
+epoch:91,	steps26/397,	loss:0.014061958529055119
+epoch:91,	steps65/397,	loss:0.001208948320709169
+epoch:91,	steps104/397,	loss:0.002674176823347807
+epoch:91,	steps143/397,	loss:0.0015898834681138396
+epoch:91,	steps182/397,	loss:0.0020748383831232786
+epoch:91,	steps221/397,	loss:0.003103958209976554
+epoch:91,	steps260/397,	loss:0.003078188979998231
+epoch:91,	steps299/397,	loss:0.008346709422767162
+epoch:91,	steps338/397,	loss:0.0016340009169653058
+epoch:91,	steps377/397,	loss:0.0030427384190261364
+epoch:91,	loss:1.202212509844685
+start evaluate...
+====================dev data set====================
+right: 1792	total: 1963	M-tree codes acc: 0.912888436067244
+epoch:92,	steps19/397,	loss:0.004267849959433079
+epoch:92,	steps58/397,	loss:0.0011232863180339336
+epoch:92,	steps97/397,	loss:0.0005359856295399368
+epoch:92,	steps136/397,	loss:0.002657718723639846
+epoch:92,	steps175/397,	loss:0.0009273358737118542
+epoch:92,	steps214/397,	loss:0.0015014985110610723
+epoch:92,	steps253/397,	loss:0.001718431245535612
+epoch:92,	steps292/397,	loss:0.003186963265761733
+epoch:92,	steps331/397,	loss:0.00158812350127846
+epoch:92,	steps370/397,	loss:0.0017499765381217003
+epoch:92,	loss:0.9053696761257015
+start evaluate...
+====================dev data set====================
+right: 1791	total: 1963	M-tree codes acc: 0.9123790117167601
+epoch:93,	steps12/397,	loss:0.0010013633873313665
+epoch:93,	steps51/397,	loss:0.0022041313350200653
+epoch:93,	steps90/397,	loss:0.0005803873646073043
+epoch:93,	steps129/397,	loss:0.004133296199142933
+epoch:93,	steps168/397,	loss:0.002131415531039238
+epoch:93,	steps207/397,	loss:0.001189784030430019
+epoch:93,	steps246/397,	loss:0.003107235999777913
+epoch:93,	steps285/397,	loss:0.0006600584601983428
+epoch:93,	steps324/397,	loss:0.000931316171772778
+epoch:93,	steps363/397,	loss:0.007775223348289728
+epoch:93,	loss:0.9152894236758584
+start evaluate...
+====================dev data set====================
+right: 1790	total: 1963	M-tree codes acc: 0.9118695873662761
+epoch:94,	steps5/397,	loss:0.0021343387197703123
+epoch:94,	steps44/397,	loss:0.0009219640051014721
+epoch:94,	steps83/397,	loss:0.0019201521063223481
+epoch:94,	steps122/397,	loss:0.002019772306084633
+epoch:94,	steps161/397,	loss:0.0008468290907330811
+epoch:94,	steps200/397,	loss:0.004342404659837484
+epoch:94,	steps239/397,	loss:0.0010426630033180118
+epoch:94,	steps278/397,	loss:0.0024460218846797943
+epoch:94,	steps317/397,	loss:0.0011482149129733443
+epoch:94,	steps356/397,	loss:0.0025919433683156967
+epoch:94,	steps395/397,	loss:0.0015026554465293884
+epoch:94,	loss:0.8972117932571564
+start evaluate...
+====================dev data set====================
+right: 1788	total: 1963	M-tree codes acc: 0.9108507386653082
+epoch:95,	steps37/397,	loss:0.001415370381437242
+epoch:95,	steps76/397,	loss:0.001980086788535118
+epoch:95,	steps115/397,	loss:0.0019119518110528588
+epoch:95,	steps154/397,	loss:0.0036344681866467
+epoch:95,	steps193/397,	loss:0.0006992464768700302
+epoch:95,	steps232/397,	loss:0.0029939378146082163
+epoch:95,	steps271/397,	loss:0.0008817040361464024
+epoch:95,	steps310/397,	loss:0.0022661916445940733
+epoch:95,	steps349/397,	loss:0.0004081262450199574
+epoch:95,	steps388/397,	loss:0.002485395409166813
+epoch:95,	loss:0.943266454472905
+start evaluate...
+====================dev data set====================
+right: 1790	total: 1963	M-tree codes acc: 0.9118695873662761
+epoch:96,	steps30/397,	loss:0.0008720954065211117
+epoch:96,	steps69/397,	loss:0.0008770619169808924
+epoch:96,	steps108/397,	loss:0.0023191883228719234
+epoch:96,	steps147/397,	loss:0.0020451608579605818
+epoch:96,	steps186/397,	loss:0.0024688777048140764
+epoch:96,	steps225/397,	loss:0.0029894120525568724
+epoch:96,	steps264/397,	loss:0.0015862163854762912
+epoch:96,	steps303/397,	loss:0.00424517598003149
+epoch:96,	steps342/397,	loss:0.004050486255437136
+epoch:96,	steps381/397,	loss:0.009052099660038948
+epoch:96,	loss:0.9754432772460859
+start evaluate...
+====================dev data set====================
+right: 1791	total: 1963	M-tree codes acc: 0.9123790117167601
+epoch:97,	steps23/397,	loss:0.003386046504601836
+epoch:97,	steps62/397,	loss:0.002192137995734811
+epoch:97,	steps101/397,	loss:0.0017095967195928097
+epoch:97,	steps140/397,	loss:0.002972738351672888
+epoch:97,	steps179/397,	loss:0.0007305589388124645
+epoch:97,	steps218/397,	loss:0.00359825580380857
+epoch:97,	steps257/397,	loss:0.002082857536152005
+epoch:97,	steps296/397,	loss:0.0022743302397429943
+epoch:97,	steps335/397,	loss:0.0022466399241238832
+epoch:97,	steps374/397,	loss:0.0030699404887855053
+epoch:97,	loss:1.8627985409402754
+start evaluate...
+====================dev data set====================
+right: 1793	total: 1963	M-tree codes acc: 0.913397860417728
+epoch:98,	steps16/397,	loss:0.0008859476074576378
+epoch:98,	steps55/397,	loss:0.002759169787168503
+epoch:98,	steps94/397,	loss:0.0013754359679296613
+epoch:98,	steps133/397,	loss:0.009805683046579361
+epoch:98,	steps172/397,	loss:0.0005658015143126249
+epoch:98,	steps211/397,	loss:0.003117647720500827
+epoch:98,	steps250/397,	loss:0.0011740532936528325
+epoch:98,	steps289/397,	loss:0.0020493718329817057
+epoch:98,	steps328/397,	loss:0.001299385679885745
+epoch:98,	steps367/397,	loss:0.0006720488891005516
+epoch:98,	loss:0.9161857253347989
+start evaluate...
+====================dev data set====================
+right: 1786	total: 1963	M-tree codes acc: 0.9098318899643403
+epoch:99,	steps9/397,	loss:0.0026320358738303185
+epoch:99,	steps48/397,	loss:0.0032851132564246655
+epoch:99,	steps87/397,	loss:0.002535671927034855
+epoch:99,	steps126/397,	loss:0.00168494856916368
+epoch:99,	steps165/397,	loss:0.0024894254747778177
+epoch:99,	steps204/397,	loss:0.0029100372921675444
+epoch:99,	steps243/397,	loss:0.0017390103312209249
+epoch:99,	steps282/397,	loss:0.0015208281110972166
+epoch:99,	steps321/397,	loss:0.0010974070755764842
+epoch:99,	steps360/397,	loss:0.0027816134970635176
+epoch:99,	loss:1.0954100963717792
+start evaluate...
+====================dev data set====================
+right: 1790	total: 1963	M-tree codes acc: 0.9118695873662761
+epoch:100,	steps2/397,	loss:0.0006496793357655406
+epoch:100,	steps41/397,	loss:0.00180567626375705
+epoch:100,	steps80/397,	loss:0.0012949464144185185
+epoch:100,	steps119/397,	loss:0.004876755643635988
+epoch:100,	steps158/397,	loss:0.0018606969388201833
+epoch:100,	steps197/397,	loss:0.0021383685525506735
+epoch:100,	steps236/397,	loss:0.0020678865257650614
+epoch:100,	steps275/397,	loss:0.0017084127757698298
+epoch:100,	steps314/397,	loss:0.0009031367371790111
+epoch:100,	steps353/397,	loss:0.000664730032440275
+epoch:100,	steps392/397,	loss:0.0010832021944224834
+epoch:100,	loss:0.9528625677921809
+start evaluate...
+====================dev data set====================
+right: 1792	total: 1963	M-tree codes acc: 0.912888436067244
+epoch:101,	steps34/397,	loss:0.00097356439800933
+epoch:101,	steps73/397,	loss:0.0005903108394704759
+epoch:101,	steps112/397,	loss:0.0018936200067400932
+epoch:101,	steps151/397,	loss:0.0011262171901762486
+epoch:101,	steps190/397,	loss:0.0021911582443863153
+epoch:101,	steps229/397,	loss:0.0011288054520264268
+epoch:101,	steps268/397,	loss:0.003418915905058384
+epoch:101,	steps307/397,	loss:0.0024735531769692898
+epoch:101,	steps346/397,	loss:0.0026019220240414143
+epoch:101,	steps385/397,	loss:0.0024442137219011784
+epoch:101,	loss:0.9399818248930387
+start evaluate...
+====================dev data set====================
+right: 1791	total: 1963	M-tree codes acc: 0.9123790117167601
+epoch:102,	steps27/397,	loss:0.0005394233157858253
+epoch:102,	steps66/397,	loss:0.0012288918951526284
+epoch:102,	steps105/397,	loss:0.006164474878460169
+epoch:102,	steps144/397,	loss:0.008180813863873482
+epoch:102,	steps183/397,	loss:0.0012682352680712938
+epoch:102,	steps222/397,	loss:0.001340927672572434
+epoch:102,	steps261/397,	loss:0.0021090980153530836
+epoch:102,	steps300/397,	loss:0.0008153312955982983
+epoch:102,	steps339/397,	loss:0.003929127939045429
+epoch:102,	steps378/397,	loss:0.004052736330777407
+epoch:102,	loss:1.0105359471344855
+start evaluate...
+====================dev data set====================
+right: 1792	total: 1963	M-tree codes acc: 0.912888436067244
+epoch:103,	steps20/397,	loss:0.0007131111342459917
+epoch:103,	steps59/397,	loss:0.005386712029576302
+epoch:103,	steps98/397,	loss:0.0017654115799814463
+epoch:103,	steps137/397,	loss:0.0030001401901245117
+epoch:103,	steps176/397,	loss:0.006528516300022602
+epoch:103,	steps215/397,	loss:0.0023670513182878494
+epoch:103,	steps254/397,	loss:0.0009940859163179994
+epoch:103,	steps293/397,	loss:0.002827554941177368
+epoch:103,	steps332/397,	loss:0.0011488273739814758
+epoch:103,	steps371/397,	loss:0.0011523280991241336
+epoch:103,	loss:0.927580219169613
+start evaluate...
+====================dev data set====================
+right: 1792	total: 1963	M-tree codes acc: 0.912888436067244
+epoch:104,	steps13/397,	loss:0.000656422576867044
+epoch:104,	steps52/397,	loss:0.0020010722801089287
+epoch:104,	steps91/397,	loss:0.0015462342416867614
+epoch:104,	steps130/397,	loss:0.0013413558481261134
+epoch:104,	steps169/397,	loss:0.004043820314109325
+epoch:104,	steps208/397,	loss:0.0010383842745795846
+epoch:104,	steps247/397,	loss:0.0021571360994130373
+epoch:104,	steps286/397,	loss:0.004702647216618061
+epoch:104,	steps325/397,	loss:0.0014846314443275332
+epoch:104,	steps364/397,	loss:0.0031692658085376024
+epoch:104,	loss:0.967263934930088
+start evaluate...
+====================dev data set====================
+right: 1787	total: 1963	M-tree codes acc: 0.9103413143148242
+epoch:105,	steps6/397,	loss:0.0017592821968719363
+epoch:105,	steps45/397,	loss:0.0016130275325849652
+epoch:105,	steps84/397,	loss:0.0009160714689642191
+epoch:105,	steps123/397,	loss:0.003877638839185238
+epoch:105,	steps162/397,	loss:0.0013654029462486506
+epoch:105,	steps201/397,	loss:0.0013373716501519084
+epoch:105,	steps240/397,	loss:0.000696226954460144
+epoch:105,	steps279/397,	loss:0.001830290537327528
+epoch:105,	steps318/397,	loss:0.0005666640354320407
+epoch:105,	steps357/397,	loss:0.002379881450906396
+epoch:105,	steps396/397,	loss:0.0008319990010932088
+epoch:105,	loss:1.2783915251784492
+start evaluate...
+====================dev data set====================
+right: 1789	total: 1963	M-tree codes acc: 0.9113601630157921
+epoch:106,	steps38/397,	loss:0.0012725272681564093
+epoch:106,	steps77/397,	loss:0.0012365607544779778
+epoch:106,	steps116/397,	loss:0.0033919494599103928
+epoch:106,	steps155/397,	loss:0.001351987011730671
+epoch:106,	steps194/397,	loss:0.0007568253786303103
+epoch:106,	steps233/397,	loss:0.0015887848567217588
+epoch:106,	steps272/397,	loss:0.0016608643345534801
+epoch:106,	steps311/397,	loss:0.0014399428619071841
+epoch:106,	steps350/397,	loss:0.0010419921018183231
+epoch:106,	steps389/397,	loss:0.0024577174335718155
+epoch:106,	loss:0.8934808812336996
+start evaluate...
+====================dev data set====================
+right: 1791	total: 1963	M-tree codes acc: 0.9123790117167601
+epoch:107,	steps31/397,	loss:0.0007846697117201984
+epoch:107,	steps70/397,	loss:0.0006023172754794359
+epoch:107,	steps109/397,	loss:0.005505116190761328
+epoch:107,	steps148/397,	loss:0.005300551652908325
+epoch:107,	steps187/397,	loss:0.005459973588585854
+epoch:107,	steps226/397,	loss:0.0009848399786278605
+epoch:107,	steps265/397,	loss:0.0009383904398418963
+epoch:107,	steps304/397,	loss:0.004034475889056921
+epoch:107,	steps343/397,	loss:0.0016663451679050922
+epoch:107,	steps382/397,	loss:0.0007774035912007093
+epoch:107,	loss:0.9615031796856783
+start evaluate...
+====================dev data set====================
+right: 1793	total: 1963	M-tree codes acc: 0.913397860417728
+epoch:108,	steps24/397,	loss:0.002225226256996393
+epoch:108,	steps63/397,	loss:0.0005708408425562084
+epoch:108,	steps102/397,	loss:0.001091068726964295
+epoch:108,	steps141/397,	loss:0.0017294978024438024
+epoch:108,	steps180/397,	loss:0.0019371986854821444
+epoch:108,	steps219/397,	loss:0.001081291469745338
+epoch:108,	steps258/397,	loss:0.0017540901899337769
+epoch:108,	steps297/397,	loss:0.0023606522008776665
+epoch:108,	steps336/397,	loss:0.0016709360061213374
+epoch:108,	steps375/397,	loss:0.002213918138295412
+epoch:108,	loss:0.8703079571132548
+start evaluate...
+====================dev data set====================
+right: 1790	total: 1963	M-tree codes acc: 0.9118695873662761
+epoch:109,	steps17/397,	loss:0.0049817427061498165
+epoch:109,	steps56/397,	loss:0.0008512152126058936
+epoch:109,	steps95/397,	loss:0.0011845834087580442
+epoch:109,	steps134/397,	loss:0.0018522102618589997
+epoch:109,	steps173/397,	loss:0.0031334946397691965
+epoch:109,	steps212/397,	loss:0.0016383969923481345
+epoch:109,	steps251/397,	loss:0.0015463002491742373
+epoch:109,	steps290/397,	loss:0.0018090924713760614
+epoch:109,	steps329/397,	loss:0.0021336551290005445
+epoch:109,	steps368/397,	loss:0.003222357714548707
+epoch:109,	loss:0.9006720975157805
+start evaluate...
+====================dev data set====================
+right: 1791	total: 1963	M-tree codes acc: 0.9123790117167601
+epoch:110,	steps10/397,	loss:0.0013601466780528426
+epoch:110,	steps49/397,	loss:0.0025643971748650074
+epoch:110,	steps88/397,	loss:0.0024771373718976974
+epoch:110,	steps127/397,	loss:0.002260409062728286
+epoch:110,	steps166/397,	loss:0.0007183673442341387
+epoch:110,	steps205/397,	loss:0.0014817425981163979
+epoch:110,	steps244/397,	loss:0.0005877790972590446
+epoch:110,	steps283/397,	loss:0.0008874571649357677
+epoch:110,	steps322/397,	loss:0.0011599691351875663
+epoch:110,	steps361/397,	loss:0.0022376342676579952
+epoch:110,	loss:0.9355326800141484
+start evaluate...
+====================dev data set====================
+right: 1794	total: 1963	M-tree codes acc: 0.9139072847682119
+epoch:111,	steps3/397,	loss:0.0007877217140048742
+epoch:111,	steps42/397,	loss:0.0015584053471684456
+epoch:111,	steps81/397,	loss:0.0013207440497353673
+epoch:111,	steps120/397,	loss:0.0015256772749125957
+epoch:111,	steps159/397,	loss:0.001985483802855015
+epoch:111,	steps198/397,	loss:0.001042898977175355
+epoch:111,	steps237/397,	loss:0.002245719777420163
+epoch:111,	steps276/397,	loss:0.0016126154223456979
+epoch:111,	steps315/397,	loss:0.0005183867178857327
+epoch:111,	steps354/397,	loss:0.0007695112726651132
+epoch:111,	steps393/397,	loss:0.002293092431500554
+epoch:111,	loss:0.8458560028375359
+start evaluate...
+====================dev data set====================
+right: 1794	total: 1963	M-tree codes acc: 0.9139072847682119
+epoch:112,	steps35/397,	loss:0.0034305048175156116
+epoch:112,	steps74/397,	loss:0.0006143584032543004
+epoch:112,	steps113/397,	loss:0.0011083316057920456
+epoch:112,	steps152/397,	loss:0.0032623151782900095
+epoch:112,	steps191/397,	loss:0.0010209785541519523
+epoch:112,	steps230/397,	loss:0.0032264902256429195
+epoch:112,	steps269/397,	loss:0.0031186372507363558
+epoch:112,	steps308/397,	loss:0.004144145641475916
+epoch:112,	steps347/397,	loss:0.0010184566490352154
+epoch:112,	steps386/397,	loss:0.0014858177164569497
+epoch:112,	loss:1.0637163284991402
+start evaluate...
+====================dev data set====================
+right: 1797	total: 1963	M-tree codes acc: 0.9154355578196638
+epoch:113,	steps28/397,	loss:0.004354244563728571
+epoch:113,	steps67/397,	loss:0.0005664840573444963
+epoch:113,	steps106/397,	loss:0.004620615858584642
+epoch:113,	steps145/397,	loss:0.001022404176183045
+epoch:113,	steps184/397,	loss:0.003444541245698929
+epoch:113,	steps223/397,	loss:0.0023590039927512407
+epoch:113,	steps262/397,	loss:0.004797307308763266
+epoch:113,	steps301/397,	loss:0.0009381510317325592
+epoch:113,	steps340/397,	loss:0.0033012949861586094
+epoch:113,	steps379/397,	loss:0.0014170501381158829
+epoch:113,	loss:0.9032631909358315
+start evaluate...
+====================dev data set====================
+right: 1792	total: 1963	M-tree codes acc: 0.912888436067244
+epoch:114,	steps21/397,	loss:0.0018414228688925505
+epoch:114,	steps60/397,	loss:0.0002696435258258134
+epoch:114,	steps99/397,	loss:0.001076855231076479
+epoch:114,	steps138/397,	loss:0.0027921325527131557
+epoch:114,	steps177/397,	loss:0.0013487562537193298
+epoch:114,	steps216/397,	loss:0.0031201778911054134
+epoch:114,	steps255/397,	loss:0.0035909716971218586
+epoch:114,	steps294/397,	loss:0.0006005101604387164
+epoch:114,	steps333/397,	loss:0.006574737373739481
+epoch:114,	steps372/397,	loss:0.0010353330289945006
+epoch:114,	loss:1.453872870624764
+start evaluate...
+====================dev data set====================
+right: 1789	total: 1963	M-tree codes acc: 0.9113601630157921
+epoch:115,	steps14/397,	loss:0.0030875985976308584
+epoch:115,	steps53/397,	loss:0.0037051031831651926
+epoch:115,	steps92/397,	loss:0.0010958611965179443
+epoch:115,	steps131/397,	loss:0.0016865800134837627
+epoch:115,	steps170/397,	loss:0.003115053754299879
+epoch:115,	steps209/397,	loss:0.001455029589124024
+epoch:115,	steps248/397,	loss:0.0010685522574931383
+epoch:115,	steps287/397,	loss:0.002626733621582389
+epoch:115,	steps326/397,	loss:0.0021645897068083286
+epoch:115,	steps365/397,	loss:0.0011380515061318874
+epoch:115,	loss:0.951581055909628
+start evaluate...
+====================dev data set====================
+right: 1791	total: 1963	M-tree codes acc: 0.9123790117167601
+epoch:116,	steps7/397,	loss:0.0017063450068235397
+epoch:116,	steps46/397,	loss:0.0030150972306728363
+epoch:116,	steps85/397,	loss:0.0011701368493959308
+epoch:116,	steps124/397,	loss:0.007682488765567541
+epoch:116,	steps163/397,	loss:0.004587831441313028
+epoch:116,	steps202/397,	loss:0.0009334749192930758
+epoch:116,	steps241/397,	loss:0.0010249437764286995
+epoch:116,	steps280/397,	loss:0.001051826518960297
+epoch:116,	steps319/397,	loss:0.0015777177177369595
+epoch:116,	steps358/397,	loss:0.0007320062140934169
+epoch:116,	steps397/397,	loss:0.02371748723089695
+epoch:116,	loss:0.9459843585791532
+start evaluate...
+====================dev data set====================
+right: 1789	total: 1963	M-tree codes acc: 0.9113601630157921
+epoch:117,	steps39/397,	loss:0.0006259441142901778
+epoch:117,	steps78/397,	loss:0.0017536727245897055
+epoch:117,	steps117/397,	loss:0.001229245332069695
+epoch:117,	steps156/397,	loss:0.0005728361429646611
+epoch:117,	steps195/397,	loss:0.0005127766053192317
+epoch:117,	steps234/397,	loss:0.00146431103348732
+epoch:117,	steps273/397,	loss:0.0009024109458550811
+epoch:117,	steps312/397,	loss:0.0009761699475347996
+epoch:117,	steps351/397,	loss:0.0017497430089861155
+epoch:117,	steps390/397,	loss:0.0022047702223062515
+epoch:117,	loss:1.0480889728059992
+start evaluate...
+====================dev data set====================
+right: 1791	total: 1963	M-tree codes acc: 0.9123790117167601
+epoch:118,	steps32/397,	loss:0.002137598115950823
+epoch:118,	steps71/397,	loss:0.0029160010162740946
+epoch:118,	steps110/397,	loss:0.0020689063239842653
+epoch:118,	steps149/397,	loss:0.0007870843401178718
+epoch:118,	steps188/397,	loss:0.004323205910623074
+epoch:118,	steps227/397,	loss:0.0023199336137622595
+epoch:118,	steps266/397,	loss:0.0013777593849226832
+epoch:118,	steps305/397,	loss:0.0008635542471893132
+epoch:118,	steps344/397,	loss:0.0005715209408663213
+epoch:118,	steps383/397,	loss:0.0010605138959363103
+epoch:118,	loss:0.8722252048028167
+start evaluate...
+====================dev data set====================
+right: 1792	total: 1963	M-tree codes acc: 0.912888436067244
+epoch:119,	steps25/397,	loss:0.002423320198431611
+epoch:119,	steps64/397,	loss:0.0029697162099182606
+epoch:119,	steps103/397,	loss:0.0009219380444847047
+epoch:119,	steps142/397,	loss:0.0014580549905076623
+epoch:119,	steps181/397,	loss:0.0022591962479054928
+epoch:119,	steps220/397,	loss:0.0020527609158307314
+epoch:119,	steps259/397,	loss:0.0030419998802244663
+epoch:119,	steps298/397,	loss:0.00174838793464005
+epoch:119,	steps337/397,	loss:0.0022226893343031406
+epoch:119,	steps376/397,	loss:0.0021596988663077354
+epoch:119,	loss:0.871811899007298
+start evaluate...
+====================dev data set====================
+right: 1790	total: 1963	M-tree codes acc: 0.9118695873662761
+after process dataset len: 433
+total passed: 0
+99 batches created
+dev labels.shape: (1963, 28)
+dev all_logits.shape: (1963, 28)
+train_data_loader shuffling......
+train_data_loader shuffling......
+397 batches created
+dev labels.shape: (1963, 28)
+dev all_logits.shape: (1963, 28)
+train_data_loader shuffling......
+train_data_loader shuffling......
+397 batches created
+dev labels.shape: (1963, 28)
+dev all_logits.shape: (1963, 28)
+train_data_loader shuffling......
+train_data_loader shuffling......
+397 batches created
+dev labels.shape: (1963, 28)
+dev all_logits.shape: (1963, 28)
+train_data_loader shuffling......
+train_data_loader shuffling......
+397 batches created
+dev labels.shape: (1963, 28)
+dev all_logits.shape: (1963, 28)
+train_data_loader shuffling......
+train_data_loader shuffling......
+397 batches created
+dev labels.shape: (1963, 28)
+dev all_logits.shape: (1963, 28)
+train_data_loader shuffling......
+train_data_loader shuffling......
+397 batches created
+dev labels.shape: (1963, 28)
+dev all_logits.shape: (1963, 28)
+train_data_loader shuffling......
+train_data_loader shuffling......
+397 batches created
+dev labels.shape: (1963, 28)
+dev all_logits.shape: (1963, 28)
+train_data_loader shuffling......
+train_data_loader shuffling......
+397 batches created
+dev labels.shape: (1963, 28)
+dev all_logits.shape: (1963, 28)
+train_data_loader shuffling......
+train_data_loader shuffling......
+397 batches created
+dev labels.shape: (1963, 28)
+dev all_logits.shape: (1963, 28)
+train_data_loader shuffling......
+train_data_loader shuffling......
+397 batches created
+dev labels.shape: (1963, 28)
+dev all_logits.shape: (1963, 28)
+train_data_loader shuffling......
+train_data_loader shuffling......
+397 batches created
+dev labels.shape: (1963, 28)
+dev all_logits.shape: (1963, 28)
+train_data_loader shuffling......
+train_data_loader shuffling......
+397 batches created
+dev labels.shape: (1963, 28)
+dev all_logits.shape: (1963, 28)
+train_data_loader shuffling......
+train_data_loader shuffling......
+397 batches created
+dev labels.shape: (1963, 28)
+dev all_logits.shape: (1963, 28)
+train_data_loader shuffling......
+train_data_loader shuffling......
+397 batches created
+dev labels.shape: (1963, 28)
+dev all_logits.shape: (1963, 28)
+train_data_loader shuffling......
+train_data_loader shuffling......
+397 batches created
+dev labels.shape: (1963, 28)
+dev all_logits.shape: (1963, 28)
+train_data_loader shuffling......
+train_data_loader shuffling......
+397 batches created
+dev labels.shape: (1963, 28)
+dev all_logits.shape: (1963, 28)
+train_data_loader shuffling......
+train_data_loader shuffling......
+397 batches created
+dev labels.shape: (1963, 28)
+dev all_logits.shape: (1963, 28)
+train_data_loader shuffling......
+train_data_loader shuffling......
+397 batches created
+dev labels.shape: (1963, 28)
+dev all_logits.shape: (1963, 28)
+train_data_loader shuffling......
+train_data_loader shuffling......
+397 batches created
+dev labels.shape: (1963, 28)
+dev all_logits.shape: (1963, 28)
+train_data_loader shuffling......
+train_data_loader shuffling......
+397 batches created
+dev labels.shape: (1963, 28)
+dev all_logits.shape: (1963, 28)
+train_data_loader shuffling......
+train_data_loader shuffling......
+397 batches created
+dev labels.shape: (1963, 28)
+dev all_logits.shape: (1963, 28)
+train_data_loader shuffling......
+train_data_loader shuffling......
+397 batches created
+dev labels.shape: (1963, 28)
+dev all_logits.shape: (1963, 28)
+train_data_loader shuffling......
+train_data_loader shuffling......
+397 batches created
+dev labels.shape: (1963, 28)
+dev all_logits.shape: (1963, 28)
+train_data_loader shuffling......
+train_data_loader shuffling......
+397 batches created
+dev labels.shape: (1963, 28)
+dev all_logits.shape: (1963, 28)
+train_data_loader shuffling......
+train_data_loader shuffling......
+397 batches created
+dev labels.shape: (1963, 28)
+dev all_logits.shape: (1963, 28)
+train_data_loader shuffling......
+train_data_loader shuffling......
+397 batches created
+dev labels.shape: (1963, 28)
+dev all_logits.shape: (1963, 28)
+train_data_loader shuffling......
+train_data_loader shuffling......
+397 batches created
+dev labels.shape: (1963, 28)
+dev all_logits.shape: (1963, 28)
+train_data_loader shuffling......
+train_data_loader shuffling......
+397 batches created
+dev labels.shape: (1963, 28)
+dev all_logits.shape: (1963, 28)
+train_data_loader shuffling......
+train_data_loader shuffling......
+397 batches created
+dev labels.shape: (1963, 28)
+dev all_logits.shape: (1963, 28)
+train_data_loader shuffling......
+train_data_loader shuffling......
+397 batches created
+dev labels.shape: (1963, 28)
+dev all_logits.shape: (1963, 28)
+train_data_loader shuffling......
+train_data_loader shuffling......
+397 batches created
+dev labels.shape: (1963, 28)
+dev all_logits.shape: (1963, 28)
+train_data_loader shuffling......
+train_data_loader shuffling......
+397 batches created
+dev labels.shape: (1963, 28)
+dev all_logits.shape: (1963, 28)
+train_data_loader shuffling......
+train_data_loader shuffling......
+397 batches created
+dev labels.shape: (1963, 28)
+dev all_logits.shape: (1963, 28)
+train_data_loader shuffling......
+train_data_loader shuffling......
+397 batches created
+dev labels.shape: (1963, 28)
+dev all_logits.shape: (1963, 28)
+train_data_loader shuffling......
+train_data_loader shuffling......
+397 batches created
+dev labels.shape: (1963, 28)
+dev all_logits.shape: (1963, 28)
+train_data_loader shuffling......
+train_data_loader shuffling......
+397 batches created
+dev labels.shape: (1963, 28)
+dev all_logits.shape: (1963, 28)
+train_data_loader shuffling......
+train_data_loader shuffling......
+397 batches created
+dev labels.shape: (1963, 28)
+dev all_logits.shape: (1963, 28)
+train_data_loader shuffling......
+train_data_loader shuffling......
+397 batches created
+dev labels.shape: (1963, 28)
+dev all_logits.shape: (1963, 28)
+train_data_loader shuffling......
+train_data_loader shuffling......
+397 batches created
+dev labels.shape: (1963, 28)
+dev all_logits.shape: (1963, 28)
+train_data_loader shuffling......
+train_data_loader shuffling......
+397 batches created
+dev labels.shape: (1963, 28)
+dev all_logits.shape: (1963, 28)
+train_data_loader shuffling......
+train_data_loader shuffling......
+397 batches created
+dev labels.shape: (1963, 28)
+dev all_logits.shape: (1963, 28)
+train_data_loader shuffling......
+train_data_loader shuffling......
+397 batches created
+dev labels.shape: (1963, 28)
+dev all_logits.shape: (1963, 28)
+train_data_loader shuffling......
+train_data_loader shuffling......
+397 batches created
+dev labels.shape: (1963, 28)
+dev all_logits.shape: (1963, 28)
+train_data_loader shuffling......
+train_data_loader shuffling......
+397 batches created
+dev labels.shape: (1963, 28)
+dev all_logits.shape: (1963, 28)
+train_data_loader shuffling......
+train_data_loader shuffling......
+397 batches created
+dev labels.shape: (1963, 28)
+dev all_logits.shape: (1963, 28)
+train_data_loader shuffling......
+train_data_loader shuffling......
+397 batches created
+dev labels.shape: (1963, 28)
+dev all_logits.shape: (1963, 28)
+train_data_loader shuffling......
+train_data_loader shuffling......
+397 batches created
+dev labels.shape: (1963, 28)
+dev all_logits.shape: (1963, 28)
+train_data_loader shuffling......
+train_data_loader shuffling......
+397 batches created
+dev labels.shape: (1963, 28)
+dev all_logits.shape: (1963, 28)
+train_data_loader shuffling......
+train_data_loader shuffling......
+397 batches created
+dev labels.shape: (1963, 28)
+dev all_logits.shape: (1963, 28)
+train_data_loader shuffling......
+train_data_loader shuffling......
+397 batches created
+dev labels.shape: (1963, 28)
+dev all_logits.shape: (1963, 28)
+train_data_loader shuffling......
+train_data_loader shuffling......
+397 batches created
+dev labels.shape: (1963, 28)
+dev all_logits.shape: (1963, 28)
+train_data_loader shuffling......
+train_data_loader shuffling......
+397 batches created
+dev labels.shape: (1963, 28)
+dev all_logits.shape: (1963, 28)
+train_data_loader shuffling......
+train_data_loader shuffling......
+397 batches created
+dev labels.shape: (1963, 28)
+dev all_logits.shape: (1963, 28)
+train_data_loader shuffling......
+train_data_loader shuffling......
+397 batches created
+dev labels.shape: (1963, 28)
+dev all_logits.shape: (1963, 28)
+train_data_loader shuffling......
+train_data_loader shuffling......
+397 batches created
+dev labels.shape: (1963, 28)
+dev all_logits.shape: (1963, 28)
+train_data_loader shuffling......
+train_data_loader shuffling......
+397 batches created
+dev labels.shape: (1963, 28)
+dev all_logits.shape: (1963, 28)
+train_data_loader shuffling......
+train_data_loader shuffling......
+397 batches created
+dev labels.shape: (1963, 28)
+dev all_logits.shape: (1963, 28)
+train_data_loader shuffling......
+train_data_loader shuffling......
+397 batches created
+dev labels.shape: (1963, 28)
+dev all_logits.shape: (1963, 28)
+train_data_loader shuffling......
+train_data_loader shuffling......
+397 batches created
+dev labels.shape: (1963, 28)
+dev all_logits.shape: (1963, 28)
+train_data_loader shuffling......
+train_data_loader shuffling......
+397 batches created
+dev labels.shape: (1963, 28)
+dev all_logits.shape: (1963, 28)
+train_data_loader shuffling......
+train_data_loader shuffling......
+397 batches created
+dev labels.shape: (1963, 28)
+dev all_logits.shape: (1963, 28)
+train_data_loader shuffling......
+train_data_loader shuffling......
+397 batches created
+dev labels.shape: (1963, 28)
+dev all_logits.shape: (1963, 28)
+train_data_loader shuffling......
+train_data_loader shuffling......
+397 batches created
+dev labels.shape: (1963, 28)
+dev all_logits.shape: (1963, 28)
+train_data_loader shuffling......
+train_data_loader shuffling......
+397 batches created
+dev labels.shape: (1963, 28)
+dev all_logits.shape: (1963, 28)
+train_data_loader shuffling......
+train_data_loader shuffling......
+397 batches created
+dev labels.shape: (1963, 28)
+dev all_logits.shape: (1963, 28)
+train_data_loader shuffling......
+train_data_loader shuffling......
+397 batches created
+dev labels.shape: (1963, 28)
+dev all_logits.shape: (1963, 28)
+train_data_loader shuffling......
+train_data_loader shuffling......
+397 batches created
+dev labels.shape: (1963, 28)
+dev all_logits.shape: (1963, 28)
+train_data_loader shuffling......
+train_data_loader shuffling......
+397 batches created
+dev labels.shape: (1963, 28)
+dev all_logits.shape: (1963, 28)
+train_data_loader shuffling......
+train_data_loader shuffling......
+397 batches created
+dev labels.shape: (1963, 28)
+dev all_logits.shape: (1963, 28)
+train_data_loader shuffling......
+train_data_loader shuffling......
+397 batches created
+dev labels.shape: (1963, 28)
+dev all_logits.shape: (1963, 28)
+train_data_loader shuffling......
+train_data_loader shuffling......
+397 batches created
+dev labels.shape: (1963, 28)
+dev all_logits.shape: (1963, 28)
+train_data_loader shuffling......
+train_data_loader shuffling......
+397 batches created
+dev labels.shape: (1963, 28)
+dev all_logits.shape: (1963, 28)
+train_data_loader shuffling......
+train_data_loader shuffling......
+397 batches created
+dev labels.shape: (1963, 28)
+dev all_logits.shape: (1963, 28)
+train_data_loader shuffling......
+train_data_loader shuffling......
+397 batches created
+dev labels.shape: (1963, 28)
+dev all_logits.shape: (1963, 28)
+train_data_loader shuffling......
+train_data_loader shuffling......
+397 batches created
+dev labels.shape: (1963, 28)
+dev all_logits.shape: (1963, 28)
+train_data_loader shuffling......
+train_data_loader shuffling......
+397 batches created
+dev labels.shape: (1963, 28)
+dev all_logits.shape: (1963, 28)
+train_data_loader shuffling......
+train_data_loader shuffling......
+397 batches created
+dev labels.shape: (1963, 28)
+dev all_logits.shape: (1963, 28)
+train_data_loader shuffling......
+train_data_loader shuffling......
+397 batches created
+dev labels.shape: (1963, 28)
+dev all_logits.shape: (1963, 28)
+train_data_loader shuffling......
+train_data_loader shuffling......
+397 batches created
+dev labels.shape: (1963, 28)
+dev all_logits.shape: (1963, 28)
+train_data_loader shuffling......
+train_data_loader shuffling......
+397 batches created
+dev labels.shape: (1963, 28)
+dev all_logits.shape: (1963, 28)
+train_data_loader shuffling......
+train_data_loader shuffling......
+397 batches created
+dev labels.shape: (1963, 28)
+dev all_logits.shape: (1963, 28)
+train_data_loader shuffling......
+train_data_loader shuffling......
+397 batches created
+dev labels.shape: (1963, 28)
+dev all_logits.shape: (1963, 28)
+train_data_loader shuffling......
+train_data_loader shuffling......
+397 batches created
+dev labels.shape: (1963, 28)
+dev all_logits.shape: (1963, 28)
+train_data_loader shuffling......
+train_data_loader shuffling......
+397 batches created
+dev labels.shape: (1963, 28)
+dev all_logits.shape: (1963, 28)
+train_data_loader shuffling......
+train_data_loader shuffling......
+397 batches created
+dev labels.shape: (1963, 28)
+dev all_logits.shape: (1963, 28)
+train_data_loader shuffling......
+train_data_loader shuffling......
+397 batches created
+dev labels.shape: (1963, 28)
+dev all_logits.shape: (1963, 28)
+train_data_loader shuffling......
+train_data_loader shuffling......
+397 batches created
+dev labels.shape: (1963, 28)
+dev all_logits.shape: (1963, 28)
+train_data_loader shuffling......
+train_data_loader shuffling......
+397 batches created
+dev labels.shape: (1963, 28)
+dev all_logits.shape: (1963, 28)
+train_data_loader shuffling......
+train_data_loader shuffling......
+397 batches created
+dev labels.shape: (1963, 28)
+dev all_logits.shape: (1963, 28)
+train_data_loader shuffling......
+train_data_loader shuffling......
+397 batches created
+dev labels.shape: (1963, 28)
+dev all_logits.shape: (1963, 28)
+train_data_loader shuffling......
+train_data_loader shuffling......
+397 batches created
+dev labels.shape: (1963, 28)
+dev all_logits.shape: (1963, 28)
+train_data_loader shuffling......
+train_data_loader shuffling......
+397 batches created
+dev labels.shape: (1963, 28)
+dev all_logits.shape: (1963, 28)
+train_data_loader shuffling......
+train_data_loader shuffling......
+397 batches created
+dev labels.shape: (1963, 28)
+dev all_logits.shape: (1963, 28)
+train_data_loader shuffling......
+train_data_loader shuffling......
+397 batches created
+dev labels.shape: (1963, 28)
+dev all_logits.shape: (1963, 28)
+train_data_loader shuffling......
+train_data_loader shuffling......
+397 batches created
+dev labels.shape: (1963, 28)
+dev all_logits.shape: (1963, 28)
+train_data_loader shuffling......
+train_data_loader shuffling......
+397 batches created
+dev labels.shape: (1963, 28)
+dev all_logits.shape: (1963, 28)
+train_data_loader shuffling......
+train_data_loader shuffling......
+397 batches created
+dev labels.shape: (1963, 28)
+dev all_logits.shape: (1963, 28)
+train_data_loader shuffling......
+train_data_loader shuffling......
+397 batches created
+dev labels.shape: (1963, 28)
+dev all_logits.shape: (1963, 28)
+train_data_loader shuffling......
+train_data_loader shuffling......
+397 batches created
+dev labels.shape: (1963, 28)
+dev all_logits.shape: (1963, 28)
+train_data_loader shuffling......
+train_data_loader shuffling......
+397 batches created
+dev labels.shape: (1963, 28)
+dev all_logits.shape: (1963, 28)
+train_data_loader shuffling......
+train_data_loader shuffling......
+397 batches created
+dev labels.shape: (1963, 28)
+dev all_logits.shape: (1963, 28)
+train_data_loader shuffling......
+train_data_loader shuffling......
+397 batches created
+dev labels.shape: (1963, 28)
+dev all_logits.shape: (1963, 28)
+train_data_loader shuffling......
+train_data_loader shuffling......
+397 batches created
+dev labels.shape: (1963, 28)
+dev all_logits.shape: (1963, 28)
+train_data_loader shuffling......
+train_data_loader shuffling......
+397 batches created
+dev labels.shape: (1963, 28)
+dev all_logits.shape: (1963, 28)
+train_data_loader shuffling......
+train_data_loader shuffling......
+397 batches created
+dev labels.shape: (1963, 28)
+dev all_logits.shape: (1963, 28)
+train_data_loader shuffling......
+train_data_loader shuffling......
+397 batches created
+dev labels.shape: (1963, 28)
+dev all_logits.shape: (1963, 28)
+train_data_loader shuffling......
+train_data_loader shuffling......
+397 batches created
+dev labels.shape: (1963, 28)
+dev all_logits.shape: (1963, 28)
+train_data_loader shuffling......
+train_data_loader shuffling......
+397 batches created
+dev labels.shape: (1963, 28)
+dev all_logits.shape: (1963, 28)
+train_data_loader shuffling......
+train_data_loader shuffling......
+397 batches created
+dev labels.shape: (1963, 28)
+dev all_logits.shape: (1963, 28)
+train_data_loader shuffling......
+train_data_loader shuffling......
+397 batches created
+dev labels.shape: (1963, 28)
+dev all_logits.shape: (1963, 28)
+train_data_loader shuffling......
+train_data_loader shuffling......
+397 batches created
+dev labels.shape: (1963, 28)
+dev all_logits.shape: (1963, 28)
+train_data_loader shuffling......
+train_data_loader shuffling......
+397 batches created
+dev labels.shape: (1963, 28)
+dev all_logits.shape: (1963, 28)
+train_data_loader shuffling......
+train_data_loader shuffling......
+397 batches created
+dev labels.shape: (1963, 28)
+dev all_logits.shape: (1963, 28)
+train_data_loader shuffling......
+train_data_loader shuffling......
+397 batches created
+dev labels.shape: (1963, 28)
+dev all_logits.shape: (1963, 28)
+train_data_loader shuffling......
+train_data_loader shuffling......
+397 batches created
+dev labels.shape: (1963, 28)
+dev all_logits.shape: (1963, 28)
+train_data_loader shuffling......
+train_data_loader shuffling......
+397 batches created
+dev labels.shape: (1963, 28)
+dev all_logits.shape: (1963, 28)
+train_data_loader shuffling......
+train_data_loader shuffling......
+397 batches created
+dev labels.shape: (1963, 28)
+dev all_logits.shape: (1963, 28)
+train_data_loader shuffling......
+train_data_loader shuffling......
+397 batches created
+dev labels.shape: (1963, 28)
+dev all_logits.shape: (1963, 28)
+train_data_loader shuffling......
+train_data_loader shuffling......
+397 batches created
+dev labels.shape: (1963, 28)
+dev all_logits.shape: (1963, 28)
+train_data_loader shuffling......
+train_data_loader shuffling......
+397 batches created
