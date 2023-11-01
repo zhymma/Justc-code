@@ -155,19 +155,14 @@ class MwpBertModel_CLS(torch.nn.Module):
         super(MwpBertModel_CLS, self).__init__()
         self.num_labels = num_labels
 
+        self.dropout = torch.nn.Dropout(0.1)
         if isinstance(bert_path_or_config, str):
             self.bert = BertModel.from_pretrained(pretrained_model_name_or_path=bert_path_or_config)
-            # self.bert1 = BertModel.from_pretrained(pretrained_model_name_or_path=bert_path_or_config)
-        elif isinstance(bert_path_or_config, BertConfig):
-            self.bert = BertModel(bert_path_or_config)
-        self.dropout = torch.nn.Dropout(0.1)
-
         if multi_fc:
             self.fc = Batch_Net_CLS(self.bert.config.hidden_size * 2, fc_hidden_size, int(fc_hidden_size / 2), num_labels)
         else:
             self.fc = torch.nn.Linear(in_features=self.bert.config.hidden_size * 2, out_features=num_labels, bias=True)
-        if fc_path:
-            self.fc.load_state_dict(torch.load(fc_path))
+        
 
         self.tokenizer = BertTokenizer.from_pretrained(bert_path_or_config)
 
@@ -180,8 +175,6 @@ class MwpBertModel_CLS(torch.nn.Module):
         else:
             self.loss_func = torch.nn.SmoothL1Loss()
         
-        
-
         self.code_emb = torch.nn.Linear(in_features=num_labels, out_features=100, bias=True)
         self.num_emb = torch.nn.Linear(in_features=2*self.bert.config.hidden_size, out_features=400, bias=True)
         self.discriminator = self.model = nn.Sequential(
@@ -192,28 +185,46 @@ class MwpBertModel_CLS(torch.nn.Module):
             nn.Linear(128, 1),
             nn.Sigmoid())
         self.bceloss = nn.BCELoss()
-        if disc_path is not None:
-            self.code_emb.load_state_dict(torch.load(disc_path+'/code_emb_weight.bin'))
-            self.num_emb.load_state_dict(torch.load(disc_path+'/num_emb_weight.bin'))
-            self.discriminator.load_state_dict(torch.load(disc_path+'/discriminator_weight.bin'))
+
+        
 
         #! 修改器
         self.code_emb1 = torch.nn.Linear(in_features=num_labels, out_features=128, bias=True)
         self.corrector = Batch_Net_CLS(128 + 768*2, fc_hidden_size, int(fc_hidden_size / 2), num_labels)
+
+        #! 加载模型
+        if fc_path:
+            self.fc.load_state_dict(torch.load(fc_path))
+        
+        if disc_path is not None:
+            self.code_emb.load_state_dict(torch.load(disc_path+'/code_emb_weight.bin'))
+            self.num_emb.load_state_dict(torch.load(disc_path+'/num_emb_weight.bin'))
+            self.discriminator.load_state_dict(torch.load(disc_path+'/discriminator_weight.bin'))
+        
+        if isinstance(bert_path_or_config, str):
+            self.bert1 = BertModel.from_pretrained(pretrained_model_name_or_path=bert_path_or_config) 
         if corrector_path is not None:
             self.code_emb1.load_state_dict(torch.load(corrector_path+'/code_emb1_weight.bin'))
             self.corrector.load_state_dict(torch.load(corrector_path+'/corrector_weight.bin'))
             self.bert1 = BertModel.from_pretrained(pretrained_model_name_or_path=corrector_path)
+        
         #! 设置不可训练
         self.fc.requires_grad_(False)
         self.bert.requires_grad_(False)
-        self.code_emb.requires_grad_(False)
-        self.num_emb.requires_grad_(False)
-        self.discriminator.requires_grad_(False)
+
+        # self.code_emb.requires_grad_(False)
+        # self.num_emb.requires_grad_(False)
+        # self.discriminator.requires_grad_(False)
+
         self.code_emb1.requires_grad_(False)
         self.corrector.requires_grad_(False)
+        self.bert1.requires_grad_(False)
 
     def forward(self, input_ids, attention_mask, token_type_ids, labels, getlogit: bool = False):
+        #! 避免BN层在前向推理时发生变化
+        self.fc.eval()
+
+
         bertout = self.bert(input_ids=input_ids, attention_mask=attention_mask, token_type_ids=token_type_ids)
         token_embeddings, pooler_output = bertout[0], bertout[1]
         token_embeddings = token_embeddings[:, 1:-1, :]
@@ -228,63 +239,64 @@ class MwpBertModel_CLS(torch.nn.Module):
         sen_vectors = self.dropout(sen_vectors)
         logits = self.fc(sen_vectors)
 
-
         #! bert1
-        bertout = self.bert1(input_ids=input_ids, attention_mask=attention_mask, token_type_ids=token_type_ids)
-        token_embeddings, pooler_output = bertout[0], bertout[1]
-        token_embeddings = token_embeddings[:, 1:-1, :]
-        sen_vectors1 = []
-        for idd, lll in enumerate(labels):
-            num_vector = torch.unsqueeze(token_embeddings[idd, lll[0], :], 0)
-            sen_vectors1.append(num_vector)
-        sen_vectors1 = torch.cat(sen_vectors1, 0)
-        # 通过[CLS]包含了问题的语义信息
-        sen_vectors1 = torch.cat([sen_vectors1, pooler_output], 1)
-        sen_vectors1 = self.dropout(sen_vectors1)
+        # bertout = self.bert1(input_ids=input_ids, attention_mask=attention_mask, token_type_ids=token_type_ids)
+        # token_embeddings, pooler_output = bertout[0], bertout[1]
+        # token_embeddings = token_embeddings[:, 1:-1, :]
+        # sen_vectors1 = []
+        # for idd, lll in enumerate(labels):
+        #     num_vector = torch.unsqueeze(token_embeddings[idd, lll[0], :], 0)
+        #     sen_vectors1.append(num_vector)
+        # sen_vectors1 = torch.cat(sen_vectors1, 0)
+        # # 通过[CLS]包含了问题的语义信息
+        # sen_vectors1 = torch.cat([sen_vectors1, pooler_output], 1)
+        # sen_vectors1 = self.dropout(sen_vectors1)
+        
+        
         if self.training:
             #! 训练生成器
             # loss_g = self.loss_func(logits, new_labels)
             # loss_g = loss_g.mean()
             
             #! 训练判别器
-            # # 根据生成器生成的假数据
-            # code_pred = torch.round(logits)
-            # # 判断code_pred与new_labels是否完全一致，注意最后一个维度是28，若最后一个维度完全一样，则为1，否则为0
-            # real_label = torch.eq(code_pred, new_labels).all(dim=-1,keepdim=True).float()
-            # # 制造假数据，对于real_label==1的数据，需要修改code_pred（28维度的向量）为假的结果
-            # for i in range(real_label.shape[0]):
-            #     if real_label[i][0] == 1:
-            #         # 随机打乱顺序
-            #         code_pred[i] = code_pred[i][torch.randperm(code_pred.shape[-1])]
-            # fake_code_emb = self.code_emb(code_pred)
-            # fake_num_emb = self.num_emb(sen_vectors)
-            # fake_emb = torch.cat([fake_code_emb, fake_num_emb], 1)
-            # fake_out = self.discriminator(fake_emb)
-            # fake_label = torch.zeros(fake_out.shape[0], 1).to(fake_out.device)
-            # fake_loss = self.bceloss(fake_out, fake_label) 
-            # # 正例
-            # true_code_emb = self.code_emb(new_labels)
-            # true_num_emb = self.num_emb(sen_vectors)
-            # true_emb = torch.cat([true_code_emb, true_num_emb], 1)
-            # true_out = self.discriminator(true_emb)
-            # true_label = torch.ones(true_out.shape[0], 1).to(true_out.device)
-            # true_loss = self.bceloss(true_out, true_label)
-            # loss_d = true_loss + fake_loss 
+            # 根据生成器生成的假数据
+            code_pred = torch.round(logits)
+            # 判断code_pred与new_labels是否完全一致，注意最后一个维度是28，若最后一个维度完全一样，则为1，否则为0
+            real_label = torch.eq(code_pred, new_labels).all(dim=-1,keepdim=True).float()
+            # 制造假数据，对于real_label==1的数据，需要修改code_pred（28维度的向量）为假的结果
+            for i in range(real_label.shape[0]):
+                if real_label[i][0] == 1:
+                    # 随机打乱顺序
+                    code_pred[i] = code_pred[i][torch.randperm(code_pred.shape[-1])]
+            fake_code_emb = self.code_emb(code_pred)
+            fake_num_emb = self.num_emb(sen_vectors)
+            fake_emb = torch.cat([fake_code_emb, fake_num_emb], 1)
+            fake_out = self.discriminator(fake_emb)
+            fake_label = torch.zeros(fake_out.shape[0], 1).to(fake_out.device)
+            fake_loss = self.bceloss(fake_out, fake_label) 
+            # 正例
+            true_code_emb = self.code_emb(new_labels)
+            true_num_emb = self.num_emb(sen_vectors)
+            true_emb = torch.cat([true_code_emb, true_num_emb], 1)
+            true_out = self.discriminator(true_emb)
+            true_label = torch.ones(true_out.shape[0], 1).to(true_out.device)
+            true_loss = self.bceloss(true_out, true_label)
+            loss_d = true_loss + fake_loss 
 
             #! 训练修改器，将label打乱顺序
-            code_wrong = new_labels.clone()
-            for i in range(code_wrong.shape[0]):
-                code_wrong[i] = code_wrong[i][torch.randperm(code_wrong.shape[-1])]
-            code_wrong_emb = self.code_emb1(code_wrong)
-            corrector_emb = torch.cat([code_wrong_emb, sen_vectors1], 1)
-            corrector_out = self.corrector(corrector_emb)
-            loss_c = self.loss_func(corrector_out, new_labels)
-            loss_c = loss_c.mean()
+            # code_wrong = new_labels.clone()
+            # for i in range(code_wrong.shape[0]):
+            #     code_wrong[i] = code_wrong[i][torch.randperm(code_wrong.shape[-1])]
+            # code_wrong_emb = self.code_emb1(code_wrong)
+            # corrector_emb = torch.cat([code_wrong_emb, sen_vectors1], 1)
+            # corrector_out = self.corrector(corrector_emb)
+            # loss_c = self.loss_func(corrector_out, new_labels)
+            # loss_c = loss_c.mean()
 
             
             loss_g = torch.tensor(0)
-            loss_d = torch.tensor(0)
-
+            # loss_d = torch.tensor(0)
+            loss_c = torch.tensor(0)
             return logits, loss_g , loss_d, loss_c
         
 
@@ -297,23 +309,23 @@ class MwpBertModel_CLS(torch.nn.Module):
 
             discriminator_pred = self.discriminator(torch.cat([self.code_emb(code_pred), self.num_emb(sen_vectors)], 1))
 
-            #! 根据discriminator结果，修改code_pred鉴别为错误的，修正为label
-            # for i in range(discriminator_pred.shape[0]):
-            #     if discriminator_pred[i] < 0.7:
-            #         code_pred[i] = new_labels[i]
+            # corrector_pred = self.corrector(torch.cat([self.code_emb1(code_pred), sen_vectors1], 1))
+            # corrector_pred = corrector_pred.round()
+            corrector_pred = None
 
-            corrector_pred = self.corrector(torch.cat([self.code_emb1(code_pred), sen_vectors1], 1))
-            corrector_pred = corrector_pred.round()
             return code_pred, None, discriminator_pred, real_label, corrector_pred
         
 
     def save(self, save_dir):
+
         # self.bert.save_pretrained(save_dir)
         # self.tokenizer.save_pretrained(save_dir)
         # torch.save(self.fc.state_dict(), os.path.join(save_dir, 'fc_weight.bin'))
-        # torch.save(self.discriminator.state_dict(), os.path.join(save_dir, 'discriminator_weight.bin'))
-        # torch.save(self.code_emb.state_dict(), os.path.join(save_dir, 'code_emb_weight.bin'))
-        # torch.save(self.num_emb.state_dict(), os.path.join(save_dir, 'num_emb_weight.bin'))
+
+        torch.save(self.discriminator.state_dict(), os.path.join(save_dir, 'discriminator_weight.bin'))
+        torch.save(self.code_emb.state_dict(), os.path.join(save_dir, 'code_emb_weight.bin'))
+        torch.save(self.num_emb.state_dict(), os.path.join(save_dir, 'num_emb_weight.bin'))
+
         # torch.save(self.corrector.state_dict(), os.path.join(save_dir, 'corrector_weight.bin'))
         # torch.save(self.code_emb1.state_dict(), os.path.join(save_dir, 'code_emb1_weight.bin'))
         # self.bert1.save_pretrained(save_dir)

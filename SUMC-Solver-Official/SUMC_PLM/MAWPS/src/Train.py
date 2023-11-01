@@ -12,6 +12,7 @@ import numpy as np
 import sys
 import torch
 import random
+import datetime
 from torch.utils.data import DataLoader, RandomSampler, SequentialSampler
 from transformers import BertTokenizer
 from transformers.optimization import AdamW, get_linear_schedule_with_warmup
@@ -27,7 +28,9 @@ def setup_seed(seed):
      np.random.seed(seed)
      random.seed(seed)
      torch.backends.cudnn.deterministic = True
-
+def beijing(sec, what):
+    beijing_time = datetime.datetime.now() + datetime.timedelta(hours=8)
+    return beijing_time.timetuple()
 def train(args):
     # devices setting
     setup_seed(0)
@@ -46,6 +49,7 @@ def train(args):
     # logging setting to file and screen
     logger = logging.getLogger(__name__)
     logger.setLevel(level=logging.INFO)
+    logging.Formatter.converter = beijing
     handler = logging.FileHandler(os.path.join(log_dir, 'log.txt'))
     handler.setLevel(logging.INFO)
     formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
@@ -151,7 +155,8 @@ def train(args):
         logger.info("\n>>>>>>>>>>>>>>>>>>>start evaluate......")
         acc = eval_multi_clf(logger=logger,model=model,dev_data_loader=dev_data_loader,device=args.device)
     else:
-        logger.info("\n>>>>>>>>>>>>>>>>>>>start train......")
+        logger.info(">>>>>>>>>>>>>>>>>>>start train......")
+
         global_steps = 0
         for epoch in range(args.num_epochs):
 
@@ -178,13 +183,11 @@ def train(args):
                 model.zero_grad()
 
 
-
-
+    
                 if global_steps % steps_per_epoch == 0:
                     logger.info("epoch:{},\tloss_g:{},\tloss_d:{},\tloss_c:{}".format(epoch, all_loss_g,all_loss_d,all_loss_c))
-                    logger.info("start evaluate...")
-                    logger.info("=" * 20 + "dev data set" + "=" * 20)
-                    logger.info("\n>>>>>>>>>>>>>>>>>>>start evaluate......")
+                    #! 开始测试！
+                    logger.info(">>>>>>>>>>>>>>>>>>>start evaluate......")
                     acc = eval_multi_clf(
                         logger=logger,
                         model=model,

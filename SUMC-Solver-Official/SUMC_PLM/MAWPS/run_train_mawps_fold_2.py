@@ -4,6 +4,17 @@ import os
 
 
 parser = argparse.ArgumentParser()
+#! 选择设备，保存模型的name，训练or测试
+parser.add_argument("--gpu_device", default="0", type=str)
+
+parser.add_argument("--model_name", default="discriminator2",type=str)
+parser.add_argument("--mode", default="train", type=str)
+
+#! 加载训练好的模型
+parser.add_argument("--fc_path", default="output/model_save_name2/best_model/fc_weight.bin", type=str)
+parser.add_argument("--pretrain_model_path",default="output/model_save_name2/best_model",type=str)# bert-base-uncased
+parser.add_argument("--discriminator_path", default=None, type=str) #output/discriminator2/best_model
+parser.add_argument("--corrector_path", default=None, type=str) 
 
 parser.add_argument("--num_labels", default=28, type=int)
 
@@ -30,10 +41,7 @@ parser.add_argument("--log_steps_per_epoch", default=10, type=int)
 parser.add_argument("--lr", default=2e-5, type=float)
 parser.add_argument("--warmup", default=0.1, type=float)
 
-parser.add_argument("--fc_path", default=None, type=str)
-parser.add_argument("--pretrain_model_path",
-                    default="bert-base-uncased",
-                    type=str)
+
 
 parser.add_argument("--train_data_path",
                     default="./mawps/Fold_2/train_mawps_new_mwpss_fold_2.json",
@@ -46,10 +54,9 @@ parser.add_argument("--dev_data_path",
 parser.add_argument("--label2id_path", default='../../dataset/codes_mawps.json',
                     type=str)
 
-parser.add_argument("--gpu_device", default="3", type=str)
+
 parser.add_argument("--output_dir", default="./output/", type=str)
-parser.add_argument("--model_name", default="test2",
-                    type=str)
+
 
 args = parser.parse_args()
 args_dict = args.__dict__
