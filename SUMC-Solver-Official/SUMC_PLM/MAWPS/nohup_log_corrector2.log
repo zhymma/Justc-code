@@ -1,0 +1,1005 @@
+get train data loader...
+total input dataset len: 2163
+  0%|          | 0/2163 [00:00<?, ?it/s]100%|██████████| 2163/2163 [00:00<00:00, 50958.70it/s]
+get dev data loader...
+after process dataset len: 2163
+total passed: 0
+total input dataset len: 433
+  0%|          | 0/433 [00:00<?, ?it/s]100%|██████████| 433/433 [00:00<00:00, 38157.27it/s]
+define model...
+define optimizer...
+/data/zhyma/miniconda3/lib/python3.8/site-packages/transformers/optimization.py:391: FutureWarning: This implementation of AdamW is deprecated and will be removed in a future version. Use the PyTorch implementation torch.optim.AdamW instead, or set `no_deprecation_warning=True` to disable this warning
+  warnings.warn(
+>>>>>>>>>>>>>>>>>>>start train......
+epoch:0,	loss_g:0,	loss_d:0,	loss_c:86.07706677168608
+>>>>>>>>>>>>>>>>>>>start evaluate......
+code_right: 1799.0	code_total: 1963	M-tree codes acc: 0.9164544065206317
+disc_right:1822,	disc_all:1963,	discriminator acc:0.9281711665817626
+precision:0.9367755532139094,	recall:0.9883268482490273,	F1:0.9618609683527184
+TP:1778.0,TN:44.0,FN:21.0,FP:120.0
+corrector_right: 10.0	corrector_total: 164.0	corrector acc: 0.06097560975609756
+final_code_right: 1788.0	final_code_total: 1963	final_code acc: 0.9108507386653082
+save best model to ./output/corrector2/best_model
+epoch:1,	loss_g:0,	loss_d:0,	loss_c:23.932451851665974
+>>>>>>>>>>>>>>>>>>>start evaluate......
+code_right: 1799.0	code_total: 1963	M-tree codes acc: 0.9164544065206317
+disc_right:1822,	disc_all:1963,	discriminator acc:0.9281711665817626
+precision:0.9367755532139094,	recall:0.9883268482490273,	F1:0.9618609683527184
+TP:1778.0,TN:44.0,FN:21.0,FP:120.0
+corrector_right: 23.0	corrector_total: 164.0	corrector acc: 0.1402439024390244
+final_code_right: 1798.0	final_code_total: 1963	final_code acc: 0.9159449821701477
+save best model to ./output/corrector2/best_model
+epoch:2,	loss_g:0,	loss_d:0,	loss_c:11.673899027518928
+>>>>>>>>>>>>>>>>>>>start evaluate......
+code_right: 1799.0	code_total: 1963	M-tree codes acc: 0.9164544065206317
+disc_right:1822,	disc_all:1963,	discriminator acc:0.9281711665817626
+precision:0.9367755532139094,	recall:0.9883268482490273,	F1:0.9618609683527184
+TP:1778.0,TN:44.0,FN:21.0,FP:120.0
+corrector_right: 46.0	corrector_total: 164.0	corrector acc: 0.2804878048780488
+final_code_right: 1813.0	final_code_total: 1963	final_code acc: 0.9235863474274071
+save best model to ./output/corrector2/best_model
+epoch:3,	loss_g:0,	loss_d:0,	loss_c:7.928686438128352
+>>>>>>>>>>>>>>>>>>>start evaluate......
+code_right: 1799.0	code_total: 1963	M-tree codes acc: 0.9164544065206317
+disc_right:1822,	disc_all:1963,	discriminator acc:0.9281711665817626
+precision:0.9367755532139094,	recall:0.9883268482490273,	F1:0.9618609683527184
+TP:1778.0,TN:44.0,FN:21.0,FP:120.0
+corrector_right: 54.0	corrector_total: 164.0	corrector acc: 0.32926829268292684
+final_code_right: 1814.0	final_code_total: 1963	final_code acc: 0.9240957717778909
+save best model to ./output/corrector2/best_model
+epoch:4,	loss_g:0,	loss_d:0,	loss_c:6.045400629751384
+>>>>>>>>>>>>>>>>>>>start evaluate......
+code_right: 1799.0	code_total: 1963	M-tree codes acc: 0.9164544065206317
+disc_right:1822,	disc_all:1963,	discriminator acc:0.9281711665817626
+precision:0.9367755532139094,	recall:0.9883268482490273,	F1:0.9618609683527184
+TP:1778.0,TN:44.0,FN:21.0,FP:120.0
+corrector_right: 60.0	corrector_total: 164.0	corrector acc: 0.36585365853658536
+final_code_right: 1821.0	final_code_total: 1963	final_code acc: 0.9276617422312786
+save best model to ./output/corrector2/best_model
+epoch:5,	loss_g:0,	loss_d:0,	loss_c:4.711036064196378
+>>>>>>>>>>>>>>>>>>>start evaluate......
+code_right: 1799.0	code_total: 1963	M-tree codes acc: 0.9164544065206317
+disc_right:1822,	disc_all:1963,	discriminator acc:0.9281711665817626
+precision:0.9367755532139094,	recall:0.9883268482490273,	F1:0.9618609683527184
+TP:1778.0,TN:44.0,FN:21.0,FP:120.0
+corrector_right: 77.0	corrector_total: 164.0	corrector acc: 0.4695121951219512
+final_code_right: 1826.0	final_code_total: 1963	final_code acc: 0.9302088639836984
+save best model to ./output/corrector2/best_model
+epoch:6,	loss_g:0,	loss_d:0,	loss_c:3.6126207723282278
+>>>>>>>>>>>>>>>>>>>start evaluate......
+code_right: 1799.0	code_total: 1963	M-tree codes acc: 0.9164544065206317
+disc_right:1822,	disc_all:1963,	discriminator acc:0.9281711665817626
+precision:0.9367755532139094,	recall:0.9883268482490273,	F1:0.9618609683527184
+TP:1778.0,TN:44.0,FN:21.0,FP:120.0
+corrector_right: 83.0	corrector_total: 164.0	corrector acc: 0.5060975609756098
+final_code_right: 1830.0	final_code_total: 1963	final_code acc: 0.9322465613856342
+save best model to ./output/corrector2/best_model
+epoch:7,	loss_g:0,	loss_d:0,	loss_c:2.7602377992589027
+>>>>>>>>>>>>>>>>>>>start evaluate......
+code_right: 1799.0	code_total: 1963	M-tree codes acc: 0.9164544065206317
+disc_right:1822,	disc_all:1963,	discriminator acc:0.9281711665817626
+precision:0.9367755532139094,	recall:0.9883268482490273,	F1:0.9618609683527184
+TP:1778.0,TN:44.0,FN:21.0,FP:120.0
+corrector_right: 94.0	corrector_total: 164.0	corrector acc: 0.573170731707317
+final_code_right: 1833.0	final_code_total: 1963	final_code acc: 0.9337748344370861
+save best model to ./output/corrector2/best_model
+epoch:8,	loss_g:0,	loss_d:0,	loss_c:2.2286147819831967
+>>>>>>>>>>>>>>>>>>>start evaluate......
+code_right: 1799.0	code_total: 1963	M-tree codes acc: 0.9164544065206317
+disc_right:1822,	disc_all:1963,	discriminator acc:0.9281711665817626
+precision:0.9367755532139094,	recall:0.9883268482490273,	F1:0.9618609683527184
+TP:1778.0,TN:44.0,FN:21.0,FP:120.0
+corrector_right: 96.0	corrector_total: 164.0	corrector acc: 0.5853658536585366
+final_code_right: 1834.0	final_code_total: 1963	final_code acc: 0.93428425878757
+save best model to ./output/corrector2/best_model
+epoch:9,	loss_g:0,	loss_d:0,	loss_c:1.8962780273286626
+>>>>>>>>>>>>>>>>>>>start evaluate......
+code_right: 1799.0	code_total: 1963	M-tree codes acc: 0.9164544065206317
+disc_right:1822,	disc_all:1963,	discriminator acc:0.9281711665817626
+precision:0.9367755532139094,	recall:0.9883268482490273,	F1:0.9618609683527184
+TP:1778.0,TN:44.0,FN:21.0,FP:120.0
+corrector_right: 98.0	corrector_total: 164.0	corrector acc: 0.5975609756097561
+final_code_right: 1834.0	final_code_total: 1963	final_code acc: 0.93428425878757
+save best model to ./output/corrector2/best_model
+epoch:10,	loss_g:0,	loss_d:0,	loss_c:1.7424025065847673
+>>>>>>>>>>>>>>>>>>>start evaluate......
+code_right: 1799.0	code_total: 1963	M-tree codes acc: 0.9164544065206317
+disc_right:1822,	disc_all:1963,	discriminator acc:0.9281711665817626
+precision:0.9367755532139094,	recall:0.9883268482490273,	F1:0.9618609683527184
+TP:1778.0,TN:44.0,FN:21.0,FP:120.0
+corrector_right: 102.0	corrector_total: 164.0	corrector acc: 0.6219512195121951
+final_code_right: 1834.0	final_code_total: 1963	final_code acc: 0.93428425878757
+save best model to ./output/corrector2/best_model
+epoch:11,	loss_g:0,	loss_d:0,	loss_c:1.6750389961525798
+>>>>>>>>>>>>>>>>>>>start evaluate......
+code_right: 1799.0	code_total: 1963	M-tree codes acc: 0.9164544065206317
+disc_right:1822,	disc_all:1963,	discriminator acc:0.9281711665817626
+precision:0.9367755532139094,	recall:0.9883268482490273,	F1:0.9618609683527184
+TP:1778.0,TN:44.0,FN:21.0,FP:120.0
+corrector_right: 104.0	corrector_total: 164.0	corrector acc: 0.6341463414634146
+final_code_right: 1837.0	final_code_total: 1963	final_code acc: 0.9358125318390219
+save best model to ./output/corrector2/best_model
+epoch:12,	loss_g:0,	loss_d:0,	loss_c:1.655612067959737
+>>>>>>>>>>>>>>>>>>>start evaluate......
+code_right: 1799.0	code_total: 1963	M-tree codes acc: 0.9164544065206317
+disc_right:1822,	disc_all:1963,	discriminator acc:0.9281711665817626
+precision:0.9367755532139094,	recall:0.9883268482490273,	F1:0.9618609683527184
+TP:1778.0,TN:44.0,FN:21.0,FP:120.0
+corrector_right: 106.0	corrector_total: 164.0	corrector acc: 0.6463414634146342
+final_code_right: 1836.0	final_code_total: 1963	final_code acc: 0.935303107488538
+save best model to ./output/corrector2/best_model
+epoch:13,	loss_g:0,	loss_d:0,	loss_c:1.608843084599357
+>>>>>>>>>>>>>>>>>>>start evaluate......
+code_right: 1799.0	code_total: 1963	M-tree codes acc: 0.9164544065206317
+disc_right:1822,	disc_all:1963,	discriminator acc:0.9281711665817626
+precision:0.9367755532139094,	recall:0.9883268482490273,	F1:0.9618609683527184
+TP:1778.0,TN:44.0,FN:21.0,FP:120.0
+corrector_right: 118.0	corrector_total: 164.0	corrector acc: 0.7195121951219512
+final_code_right: 1841.0	final_code_total: 1963	final_code acc: 0.9378502292409577
+save best model to ./output/corrector2/best_model
+epoch:14,	loss_g:0,	loss_d:0,	loss_c:1.569186418550089
+>>>>>>>>>>>>>>>>>>>start evaluate......
+code_right: 1799.0	code_total: 1963	M-tree codes acc: 0.9164544065206317
+disc_right:1822,	disc_all:1963,	discriminator acc:0.9281711665817626
+precision:0.9367755532139094,	recall:0.9883268482490273,	F1:0.9618609683527184
+TP:1778.0,TN:44.0,FN:21.0,FP:120.0
+corrector_right: 119.0	corrector_total: 164.0	corrector acc: 0.725609756097561
+final_code_right: 1841.0	final_code_total: 1963	final_code acc: 0.9378502292409577
+save best model to ./output/corrector2/best_model
+epoch:15,	loss_g:0,	loss_d:0,	loss_c:1.4897199463448487
+>>>>>>>>>>>>>>>>>>>start evaluate......
+code_right: 1799.0	code_total: 1963	M-tree codes acc: 0.9164544065206317
+disc_right:1822,	disc_all:1963,	discriminator acc:0.9281711665817626
+precision:0.9367755532139094,	recall:0.9883268482490273,	F1:0.9618609683527184
+TP:1778.0,TN:44.0,FN:21.0,FP:120.0
+corrector_right: 122.0	corrector_total: 164.0	corrector acc: 0.7439024390243902
+final_code_right: 1837.0	final_code_total: 1963	final_code acc: 0.9358125318390219
+save best model to ./output/corrector2/best_model
+epoch:16,	loss_g:0,	loss_d:0,	loss_c:1.4483603971311823
+>>>>>>>>>>>>>>>>>>>start evaluate......
+code_right: 1799.0	code_total: 1963	M-tree codes acc: 0.9164544065206317
+disc_right:1822,	disc_all:1963,	discriminator acc:0.9281711665817626
+precision:0.9367755532139094,	recall:0.9883268482490273,	F1:0.9618609683527184
+TP:1778.0,TN:44.0,FN:21.0,FP:120.0
+corrector_right: 122.0	corrector_total: 164.0	corrector acc: 0.7439024390243902
+final_code_right: 1838.0	final_code_total: 1963	final_code acc: 0.9363219561895059
+epoch:17,	loss_g:0,	loss_d:0,	loss_c:1.4212373936315998
+>>>>>>>>>>>>>>>>>>>start evaluate......
+code_right: 1799.0	code_total: 1963	M-tree codes acc: 0.9164544065206317
+disc_right:1822,	disc_all:1963,	discriminator acc:0.9281711665817626
+precision:0.9367755532139094,	recall:0.9883268482490273,	F1:0.9618609683527184
+TP:1778.0,TN:44.0,FN:21.0,FP:120.0
+corrector_right: 123.0	corrector_total: 164.0	corrector acc: 0.75
+final_code_right: 1840.0	final_code_total: 1963	final_code acc: 0.9373408048904738
+save best model to ./output/corrector2/best_model
+epoch:18,	loss_g:0,	loss_d:0,	loss_c:1.391662517999066
+>>>>>>>>>>>>>>>>>>>start evaluate......
+code_right: 1799.0	code_total: 1963	M-tree codes acc: 0.9164544065206317
+disc_right:1822,	disc_all:1963,	discriminator acc:0.9281711665817626
+precision:0.9367755532139094,	recall:0.9883268482490273,	F1:0.9618609683527184
+TP:1778.0,TN:44.0,FN:21.0,FP:120.0
+corrector_right: 123.0	corrector_total: 164.0	corrector acc: 0.75
+final_code_right: 1840.0	final_code_total: 1963	final_code acc: 0.9373408048904738
+epoch:19,	loss_g:0,	loss_d:0,	loss_c:1.3741054671118036
+>>>>>>>>>>>>>>>>>>>start evaluate......
+code_right: 1799.0	code_total: 1963	M-tree codes acc: 0.9164544065206317
+disc_right:1822,	disc_all:1963,	discriminator acc:0.9281711665817626
+precision:0.9367755532139094,	recall:0.9883268482490273,	F1:0.9618609683527184
+TP:1778.0,TN:44.0,FN:21.0,FP:120.0
+corrector_right: 125.0	corrector_total: 164.0	corrector acc: 0.7621951219512195
+final_code_right: 1841.0	final_code_total: 1963	final_code acc: 0.9378502292409577
+save best model to ./output/corrector2/best_model
+epoch:20,	loss_g:0,	loss_d:0,	loss_c:1.3421726638625842
+>>>>>>>>>>>>>>>>>>>start evaluate......
+code_right: 1799.0	code_total: 1963	M-tree codes acc: 0.9164544065206317
+disc_right:1822,	disc_all:1963,	discriminator acc:0.9281711665817626
+precision:0.9367755532139094,	recall:0.9883268482490273,	F1:0.9618609683527184
+TP:1778.0,TN:44.0,FN:21.0,FP:120.0
+corrector_right: 128.0	corrector_total: 164.0	corrector acc: 0.7804878048780488
+final_code_right: 1841.0	final_code_total: 1963	final_code acc: 0.9378502292409577
+save best model to ./output/corrector2/best_model
+epoch:21,	loss_g:0,	loss_d:0,	loss_c:1.4337176241679117
+>>>>>>>>>>>>>>>>>>>start evaluate......
+code_right: 1799.0	code_total: 1963	M-tree codes acc: 0.9164544065206317
+disc_right:1822,	disc_all:1963,	discriminator acc:0.9281711665817626
+precision:0.9367755532139094,	recall:0.9883268482490273,	F1:0.9618609683527184
+TP:1778.0,TN:44.0,FN:21.0,FP:120.0
+corrector_right: 129.0	corrector_total: 164.0	corrector acc: 0.7865853658536586
+final_code_right: 1840.0	final_code_total: 1963	final_code acc: 0.9373408048904738
+save best model to ./output/corrector2/best_model
+epoch:22,	loss_g:0,	loss_d:0,	loss_c:1.877636608609464
+>>>>>>>>>>>>>>>>>>>start evaluate......
+code_right: 1799.0	code_total: 1963	M-tree codes acc: 0.9164544065206317
+disc_right:1822,	disc_all:1963,	discriminator acc:0.9281711665817626
+precision:0.9367755532139094,	recall:0.9883268482490273,	F1:0.9618609683527184
+TP:1778.0,TN:44.0,FN:21.0,FP:120.0
+corrector_right: 135.0	corrector_total: 164.0	corrector acc: 0.823170731707317
+final_code_right: 1841.0	final_code_total: 1963	final_code acc: 0.9378502292409577
+save best model to ./output/corrector2/best_model
+epoch:23,	loss_g:0,	loss_d:0,	loss_c:1.3876744675799273
+>>>>>>>>>>>>>>>>>>>start evaluate......
+code_right: 1799.0	code_total: 1963	M-tree codes acc: 0.9164544065206317
+disc_right:1822,	disc_all:1963,	discriminator acc:0.9281711665817626
+precision:0.9367755532139094,	recall:0.9883268482490273,	F1:0.9618609683527184
+TP:1778.0,TN:44.0,FN:21.0,FP:120.0
+corrector_right: 134.0	corrector_total: 164.0	corrector acc: 0.8170731707317073
+final_code_right: 1840.0	final_code_total: 1963	final_code acc: 0.9373408048904738
+epoch:24,	loss_g:0,	loss_d:0,	loss_c:1.39391275178059
+>>>>>>>>>>>>>>>>>>>start evaluate......
+code_right: 1799.0	code_total: 1963	M-tree codes acc: 0.9164544065206317
+disc_right:1822,	disc_all:1963,	discriminator acc:0.9281711665817626
+precision:0.9367755532139094,	recall:0.9883268482490273,	F1:0.9618609683527184
+TP:1778.0,TN:44.0,FN:21.0,FP:120.0
+corrector_right: 138.0	corrector_total: 164.0	corrector acc: 0.8414634146341463
+final_code_right: 1840.0	final_code_total: 1963	final_code acc: 0.9373408048904738
+save best model to ./output/corrector2/best_model
+epoch:25,	loss_g:0,	loss_d:0,	loss_c:1.3427884121774696
+>>>>>>>>>>>>>>>>>>>start evaluate......
+code_right: 1799.0	code_total: 1963	M-tree codes acc: 0.9164544065206317
+disc_right:1822,	disc_all:1963,	discriminator acc:0.9281711665817626
+precision:0.9367755532139094,	recall:0.9883268482490273,	F1:0.9618609683527184
+TP:1778.0,TN:44.0,FN:21.0,FP:120.0
+corrector_right: 138.0	corrector_total: 164.0	corrector acc: 0.8414634146341463
+final_code_right: 1840.0	final_code_total: 1963	final_code acc: 0.9373408048904738
+epoch:26,	loss_g:0,	loss_d:0,	loss_c:1.312414336600341
+>>>>>>>>>>>>>>>>>>>start evaluate......
+code_right: 1799.0	code_total: 1963	M-tree codes acc: 0.9164544065206317
+disc_right:1822,	disc_all:1963,	discriminator acc:0.9281711665817626
+precision:0.9367755532139094,	recall:0.9883268482490273,	F1:0.9618609683527184
+TP:1778.0,TN:44.0,FN:21.0,FP:120.0
+corrector_right: 140.0	corrector_total: 164.0	corrector acc: 0.8536585365853658
+final_code_right: 1840.0	final_code_total: 1963	final_code acc: 0.9373408048904738
+save best model to ./output/corrector2/best_model
+epoch:27,	loss_g:0,	loss_d:0,	loss_c:1.2666099897178356
+>>>>>>>>>>>>>>>>>>>start evaluate......
+code_right: 1799.0	code_total: 1963	M-tree codes acc: 0.9164544065206317
+disc_right:1822,	disc_all:1963,	discriminator acc:0.9281711665817626
+precision:0.9367755532139094,	recall:0.9883268482490273,	F1:0.9618609683527184
+TP:1778.0,TN:44.0,FN:21.0,FP:120.0
+corrector_right: 142.0	corrector_total: 164.0	corrector acc: 0.8658536585365854
+final_code_right: 1841.0	final_code_total: 1963	final_code acc: 0.9378502292409577
+save best model to ./output/corrector2/best_model
+epoch:28,	loss_g:0,	loss_d:0,	loss_c:1.2691991945903283
+>>>>>>>>>>>>>>>>>>>start evaluate......
+code_right: 1799.0	code_total: 1963	M-tree codes acc: 0.9164544065206317
+disc_right:1822,	disc_all:1963,	discriminator acc:0.9281711665817626
+precision:0.9367755532139094,	recall:0.9883268482490273,	F1:0.9618609683527184
+TP:1778.0,TN:44.0,FN:21.0,FP:120.0
+corrector_right: 141.0	corrector_total: 164.0	corrector acc: 0.8597560975609756
+final_code_right: 1840.0	final_code_total: 1963	final_code acc: 0.9373408048904738
+epoch:29,	loss_g:0,	loss_d:0,	loss_c:1.2502044634602498
+>>>>>>>>>>>>>>>>>>>start evaluate......
+code_right: 1799.0	code_total: 1963	M-tree codes acc: 0.9164544065206317
+disc_right:1822,	disc_all:1963,	discriminator acc:0.9281711665817626
+precision:0.9367755532139094,	recall:0.9883268482490273,	F1:0.9618609683527184
+TP:1778.0,TN:44.0,FN:21.0,FP:120.0
+corrector_right: 143.0	corrector_total: 164.0	corrector acc: 0.8719512195121951
+final_code_right: 1840.0	final_code_total: 1963	final_code acc: 0.9373408048904738
+save best model to ./output/corrector2/best_model
+epoch:30,	loss_g:0,	loss_d:0,	loss_c:1.2556107158889063
+>>>>>>>>>>>>>>>>>>>start evaluate......
+code_right: 1799.0	code_total: 1963	M-tree codes acc: 0.9164544065206317
+disc_right:1822,	disc_all:1963,	discriminator acc:0.9281711665817626
+precision:0.9367755532139094,	recall:0.9883268482490273,	F1:0.9618609683527184
+TP:1778.0,TN:44.0,FN:21.0,FP:120.0
+corrector_right: 148.0	corrector_total: 164.0	corrector acc: 0.9024390243902439
+final_code_right: 1841.0	final_code_total: 1963	final_code acc: 0.9378502292409577
+save best model to ./output/corrector2/best_model
+epoch:31,	loss_g:0,	loss_d:0,	loss_c:1.2537897302245256
+>>>>>>>>>>>>>>>>>>>start evaluate......
+code_right: 1799.0	code_total: 1963	M-tree codes acc: 0.9164544065206317
+disc_right:1822,	disc_all:1963,	discriminator acc:0.9281711665817626
+precision:0.9367755532139094,	recall:0.9883268482490273,	F1:0.9618609683527184
+TP:1778.0,TN:44.0,FN:21.0,FP:120.0
+corrector_right: 146.0	corrector_total: 164.0	corrector acc: 0.8902439024390244
+final_code_right: 1840.0	final_code_total: 1963	final_code acc: 0.9373408048904738
+epoch:32,	loss_g:0,	loss_d:0,	loss_c:1.1921331896155607
+>>>>>>>>>>>>>>>>>>>start evaluate......
+code_right: 1799.0	code_total: 1963	M-tree codes acc: 0.9164544065206317
+disc_right:1822,	disc_all:1963,	discriminator acc:0.9281711665817626
+precision:0.9367755532139094,	recall:0.9883268482490273,	F1:0.9618609683527184
+TP:1778.0,TN:44.0,FN:21.0,FP:120.0
+corrector_right: 147.0	corrector_total: 164.0	corrector acc: 0.8963414634146342
+final_code_right: 1841.0	final_code_total: 1963	final_code acc: 0.9378502292409577
+epoch:33,	loss_g:0,	loss_d:0,	loss_c:1.24864604495815
+>>>>>>>>>>>>>>>>>>>start evaluate......
+code_right: 1799.0	code_total: 1963	M-tree codes acc: 0.9164544065206317
+disc_right:1822,	disc_all:1963,	discriminator acc:0.9281711665817626
+precision:0.9367755532139094,	recall:0.9883268482490273,	F1:0.9618609683527184
+TP:1778.0,TN:44.0,FN:21.0,FP:120.0
+corrector_right: 146.0	corrector_total: 164.0	corrector acc: 0.8902439024390244
+final_code_right: 1841.0	final_code_total: 1963	final_code acc: 0.9378502292409577
+epoch:34,	loss_g:0,	loss_d:0,	loss_c:1.2169740658428054
+>>>>>>>>>>>>>>>>>>>start evaluate......
+code_right: 1799.0	code_total: 1963	M-tree codes acc: 0.9164544065206317
+disc_right:1822,	disc_all:1963,	discriminator acc:0.9281711665817626
+precision:0.9367755532139094,	recall:0.9883268482490273,	F1:0.9618609683527184
+TP:1778.0,TN:44.0,FN:21.0,FP:120.0
+corrector_right: 146.0	corrector_total: 164.0	corrector acc: 0.8902439024390244
+final_code_right: 1841.0	final_code_total: 1963	final_code acc: 0.9378502292409577
+epoch:35,	loss_g:0,	loss_d:0,	loss_c:1.1929821035300847
+>>>>>>>>>>>>>>>>>>>start evaluate......
+code_right: 1799.0	code_total: 1963	M-tree codes acc: 0.9164544065206317
+disc_right:1822,	disc_all:1963,	discriminator acc:0.9281711665817626
+precision:0.9367755532139094,	recall:0.9883268482490273,	F1:0.9618609683527184
+TP:1778.0,TN:44.0,FN:21.0,FP:120.0
+corrector_right: 147.0	corrector_total: 164.0	corrector acc: 0.8963414634146342
+final_code_right: 1841.0	final_code_total: 1963	final_code acc: 0.9378502292409577
+epoch:36,	loss_g:0,	loss_d:0,	loss_c:1.22260410306626
+>>>>>>>>>>>>>>>>>>>start evaluate......
+code_right: 1799.0	code_total: 1963	M-tree codes acc: 0.9164544065206317
+disc_right:1822,	disc_all:1963,	discriminator acc:0.9281711665817626
+precision:0.9367755532139094,	recall:0.9883268482490273,	F1:0.9618609683527184
+TP:1778.0,TN:44.0,FN:21.0,FP:120.0
+corrector_right: 146.0	corrector_total: 164.0	corrector acc: 0.8902439024390244
+final_code_right: 1841.0	final_code_total: 1963	final_code acc: 0.9378502292409577
+epoch:37,	loss_g:0,	loss_d:0,	loss_c:1.17489791821572
+>>>>>>>>>>>>>>>>>>>start evaluate......
+code_right: 1799.0	code_total: 1963	M-tree codes acc: 0.9164544065206317
+disc_right:1822,	disc_all:1963,	discriminator acc:0.9281711665817626
+precision:0.9367755532139094,	recall:0.9883268482490273,	F1:0.9618609683527184
+TP:1778.0,TN:44.0,FN:21.0,FP:120.0
+corrector_right: 145.0	corrector_total: 164.0	corrector acc: 0.8841463414634146
+final_code_right: 1840.0	final_code_total: 1963	final_code acc: 0.9373408048904738
+epoch:38,	loss_g:0,	loss_d:0,	loss_c:1.155806579568889
+>>>>>>>>>>>>>>>>>>>start evaluate......
+code_right: 1799.0	code_total: 1963	M-tree codes acc: 0.9164544065206317
+disc_right:1822,	disc_all:1963,	discriminator acc:0.9281711665817626
+precision:0.9367755532139094,	recall:0.9883268482490273,	F1:0.9618609683527184
+TP:1778.0,TN:44.0,FN:21.0,FP:120.0
+corrector_right: 147.0	corrector_total: 164.0	corrector acc: 0.8963414634146342
+final_code_right: 1841.0	final_code_total: 1963	final_code acc: 0.9378502292409577
+epoch:39,	loss_g:0,	loss_d:0,	loss_c:1.2155417952453718
+>>>>>>>>>>>>>>>>>>>start evaluate......
+code_right: 1799.0	code_total: 1963	M-tree codes acc: 0.9164544065206317
+disc_right:1822,	disc_all:1963,	discriminator acc:0.9281711665817626
+precision:0.9367755532139094,	recall:0.9883268482490273,	F1:0.9618609683527184
+TP:1778.0,TN:44.0,FN:21.0,FP:120.0
+corrector_right: 147.0	corrector_total: 164.0	corrector acc: 0.8963414634146342
+final_code_right: 1839.0	final_code_total: 1963	final_code acc: 0.9368313805399898
+epoch:40,	loss_g:0,	loss_d:0,	loss_c:1.1986138346546795
+>>>>>>>>>>>>>>>>>>>start evaluate......
+code_right: 1799.0	code_total: 1963	M-tree codes acc: 0.9164544065206317
+disc_right:1822,	disc_all:1963,	discriminator acc:0.9281711665817626
+precision:0.9367755532139094,	recall:0.9883268482490273,	F1:0.9618609683527184
+TP:1778.0,TN:44.0,FN:21.0,FP:120.0
+corrector_right: 143.0	corrector_total: 164.0	corrector acc: 0.8719512195121951
+final_code_right: 1838.0	final_code_total: 1963	final_code acc: 0.9363219561895059
+epoch:41,	loss_g:0,	loss_d:0,	loss_c:1.1723306812054943
+>>>>>>>>>>>>>>>>>>>start evaluate......
+code_right: 1799.0	code_total: 1963	M-tree codes acc: 0.9164544065206317
+disc_right:1822,	disc_all:1963,	discriminator acc:0.9281711665817626
+precision:0.9367755532139094,	recall:0.9883268482490273,	F1:0.9618609683527184
+TP:1778.0,TN:44.0,FN:21.0,FP:120.0
+corrector_right: 147.0	corrector_total: 164.0	corrector acc: 0.8963414634146342
+final_code_right: 1841.0	final_code_total: 1963	final_code acc: 0.9378502292409577
+epoch:42,	loss_g:0,	loss_d:0,	loss_c:1.1518724006600678
+>>>>>>>>>>>>>>>>>>>start evaluate......
+code_right: 1799.0	code_total: 1963	M-tree codes acc: 0.9164544065206317
+disc_right:1822,	disc_all:1963,	discriminator acc:0.9281711665817626
+precision:0.9367755532139094,	recall:0.9883268482490273,	F1:0.9618609683527184
+TP:1778.0,TN:44.0,FN:21.0,FP:120.0
+corrector_right: 144.0	corrector_total: 164.0	corrector acc: 0.8780487804878049
+final_code_right: 1839.0	final_code_total: 1963	final_code acc: 0.9368313805399898
+epoch:43,	loss_g:0,	loss_d:0,	loss_c:1.1760412225266919
+>>>>>>>>>>>>>>>>>>>start evaluate......
+code_right: 1799.0	code_total: 1963	M-tree codes acc: 0.9164544065206317
+disc_right:1822,	disc_all:1963,	discriminator acc:0.9281711665817626
+precision:0.9367755532139094,	recall:0.9883268482490273,	F1:0.9618609683527184
+TP:1778.0,TN:44.0,FN:21.0,FP:120.0
+corrector_right: 145.0	corrector_total: 164.0	corrector acc: 0.8841463414634146
+final_code_right: 1841.0	final_code_total: 1963	final_code acc: 0.9378502292409577
+epoch:44,	loss_g:0,	loss_d:0,	loss_c:1.1661684036662336
+>>>>>>>>>>>>>>>>>>>start evaluate......
+code_right: 1799.0	code_total: 1963	M-tree codes acc: 0.9164544065206317
+disc_right:1822,	disc_all:1963,	discriminator acc:0.9281711665817626
+precision:0.9367755532139094,	recall:0.9883268482490273,	F1:0.9618609683527184
+TP:1778.0,TN:44.0,FN:21.0,FP:120.0
+corrector_right: 145.0	corrector_total: 164.0	corrector acc: 0.8841463414634146
+final_code_right: 1841.0	final_code_total: 1963	final_code acc: 0.9378502292409577
+epoch:45,	loss_g:0,	loss_d:0,	loss_c:1.209163325605914
+>>>>>>>>>>>>>>>>>>>start evaluate......
+code_right: 1799.0	code_total: 1963	M-tree codes acc: 0.9164544065206317
+disc_right:1822,	disc_all:1963,	discriminator acc:0.9281711665817626
+precision:0.9367755532139094,	recall:0.9883268482490273,	F1:0.9618609683527184
+TP:1778.0,TN:44.0,FN:21.0,FP:120.0
+corrector_right: 145.0	corrector_total: 164.0	corrector acc: 0.8841463414634146
+final_code_right: 1841.0	final_code_total: 1963	final_code acc: 0.9378502292409577
+epoch:46,	loss_g:0,	loss_d:0,	loss_c:1.1774733040074352
+>>>>>>>>>>>>>>>>>>>start evaluate......
+code_right: 1799.0	code_total: 1963	M-tree codes acc: 0.9164544065206317
+disc_right:1822,	disc_all:1963,	discriminator acc:0.9281711665817626
+precision:0.9367755532139094,	recall:0.9883268482490273,	F1:0.9618609683527184
+TP:1778.0,TN:44.0,FN:21.0,FP:120.0
+corrector_right: 147.0	corrector_total: 164.0	corrector acc: 0.8963414634146342
+final_code_right: 1841.0	final_code_total: 1963	final_code acc: 0.9378502292409577
+epoch:47,	loss_g:0,	loss_d:0,	loss_c:1.1603277238027658
+>>>>>>>>>>>>>>>>>>>start evaluate......
+code_right: 1799.0	code_total: 1963	M-tree codes acc: 0.9164544065206317
+disc_right:1822,	disc_all:1963,	discriminator acc:0.9281711665817626
+precision:0.9367755532139094,	recall:0.9883268482490273,	F1:0.9618609683527184
+TP:1778.0,TN:44.0,FN:21.0,FP:120.0
+corrector_right: 147.0	corrector_total: 164.0	corrector acc: 0.8963414634146342
+final_code_right: 1840.0	final_code_total: 1963	final_code acc: 0.9373408048904738
+epoch:48,	loss_g:0,	loss_d:0,	loss_c:1.1210424516175408
+>>>>>>>>>>>>>>>>>>>start evaluate......
+code_right: 1799.0	code_total: 1963	M-tree codes acc: 0.9164544065206317
+disc_right:1822,	disc_all:1963,	discriminator acc:0.9281711665817626
+precision:0.9367755532139094,	recall:0.9883268482490273,	F1:0.9618609683527184
+TP:1778.0,TN:44.0,FN:21.0,FP:120.0
+corrector_right: 145.0	corrector_total: 164.0	corrector acc: 0.8841463414634146
+final_code_right: 1839.0	final_code_total: 1963	final_code acc: 0.9368313805399898
+epoch:49,	loss_g:0,	loss_d:0,	loss_c:1.1561314043356106
+>>>>>>>>>>>>>>>>>>>start evaluate......
+code_right: 1799.0	code_total: 1963	M-tree codes acc: 0.9164544065206317
+disc_right:1822,	disc_all:1963,	discriminator acc:0.9281711665817626
+precision:0.9367755532139094,	recall:0.9883268482490273,	F1:0.9618609683527184
+TP:1778.0,TN:44.0,FN:21.0,FP:120.0
+corrector_right: 147.0	corrector_total: 164.0	corrector acc: 0.8963414634146342
+final_code_right: 1841.0	final_code_total: 1963	final_code acc: 0.9378502292409577
+epoch:50,	loss_g:0,	loss_d:0,	loss_c:1.1745669450756395
+>>>>>>>>>>>>>>>>>>>start evaluate......
+code_right: 1799.0	code_total: 1963	M-tree codes acc: 0.9164544065206317
+disc_right:1822,	disc_all:1963,	discriminator acc:0.9281711665817626
+precision:0.9367755532139094,	recall:0.9883268482490273,	F1:0.9618609683527184
+TP:1778.0,TN:44.0,FN:21.0,FP:120.0
+corrector_right: 146.0	corrector_total: 164.0	corrector acc: 0.8902439024390244
+final_code_right: 1841.0	final_code_total: 1963	final_code acc: 0.9378502292409577
+epoch:51,	loss_g:0,	loss_d:0,	loss_c:1.1544702529499773
+>>>>>>>>>>>>>>>>>>>start evaluate......
+code_right: 1799.0	code_total: 1963	M-tree codes acc: 0.9164544065206317
+disc_right:1822,	disc_all:1963,	discriminator acc:0.9281711665817626
+precision:0.9367755532139094,	recall:0.9883268482490273,	F1:0.9618609683527184
+TP:1778.0,TN:44.0,FN:21.0,FP:120.0
+corrector_right: 146.0	corrector_total: 164.0	corrector acc: 0.8902439024390244
+final_code_right: 1841.0	final_code_total: 1963	final_code acc: 0.9378502292409577
+epoch:52,	loss_g:0,	loss_d:0,	loss_c:1.135328144475352
+>>>>>>>>>>>>>>>>>>>start evaluate......
+code_right: 1799.0	code_total: 1963	M-tree codes acc: 0.9164544065206317
+disc_right:1822,	disc_all:1963,	discriminator acc:0.9281711665817626
+precision:0.9367755532139094,	recall:0.9883268482490273,	F1:0.9618609683527184
+TP:1778.0,TN:44.0,FN:21.0,FP:120.0
+corrector_right: 147.0	corrector_total: 164.0	corrector acc: 0.8963414634146342
+final_code_right: 1842.0	final_code_total: 1963	final_code acc: 0.9383596535914417
+epoch:53,	loss_g:0,	loss_d:0,	loss_c:1.113832679897314
+>>>>>>>>>>>>>>>>>>>start evaluate......
+code_right: 1799.0	code_total: 1963	M-tree codes acc: 0.9164544065206317
+disc_right:1822,	disc_all:1963,	discriminator acc:0.9281711665817626
+precision:0.9367755532139094,	recall:0.9883268482490273,	F1:0.9618609683527184
+TP:1778.0,TN:44.0,FN:21.0,FP:120.0
+corrector_right: 148.0	corrector_total: 164.0	corrector acc: 0.9024390243902439
+final_code_right: 1842.0	final_code_total: 1963	final_code acc: 0.9383596535914417
+epoch:54,	loss_g:0,	loss_d:0,	loss_c:1.1153899210330565
+>>>>>>>>>>>>>>>>>>>start evaluate......
+code_right: 1799.0	code_total: 1963	M-tree codes acc: 0.9164544065206317
+disc_right:1822,	disc_all:1963,	discriminator acc:0.9281711665817626
+precision:0.9367755532139094,	recall:0.9883268482490273,	F1:0.9618609683527184
+TP:1778.0,TN:44.0,FN:21.0,FP:120.0
+corrector_right: 145.0	corrector_total: 164.0	corrector acc: 0.8841463414634146
+final_code_right: 1841.0	final_code_total: 1963	final_code acc: 0.9378502292409577
+epoch:55,	loss_g:0,	loss_d:0,	loss_c:1.0933282844198402
+>>>>>>>>>>>>>>>>>>>start evaluate......
+code_right: 1799.0	code_total: 1963	M-tree codes acc: 0.9164544065206317
+disc_right:1822,	disc_all:1963,	discriminator acc:0.9281711665817626
+precision:0.9367755532139094,	recall:0.9883268482490273,	F1:0.9618609683527184
+TP:1778.0,TN:44.0,FN:21.0,FP:120.0
+corrector_right: 147.0	corrector_total: 164.0	corrector acc: 0.8963414634146342
+final_code_right: 1841.0	final_code_total: 1963	final_code acc: 0.9378502292409577
+epoch:56,	loss_g:0,	loss_d:0,	loss_c:1.0821062252507545
+>>>>>>>>>>>>>>>>>>>start evaluate......
+code_right: 1799.0	code_total: 1963	M-tree codes acc: 0.9164544065206317
+disc_right:1822,	disc_all:1963,	discriminator acc:0.9281711665817626
+precision:0.9367755532139094,	recall:0.9883268482490273,	F1:0.9618609683527184
+TP:1778.0,TN:44.0,FN:21.0,FP:120.0
+corrector_right: 148.0	corrector_total: 164.0	corrector acc: 0.9024390243902439
+final_code_right: 1841.0	final_code_total: 1963	final_code acc: 0.9378502292409577
+epoch:57,	loss_g:0,	loss_d:0,	loss_c:1.118771151988767
+>>>>>>>>>>>>>>>>>>>start evaluate......
+code_right: 1799.0	code_total: 1963	M-tree codes acc: 0.9164544065206317
+disc_right:1822,	disc_all:1963,	discriminator acc:0.9281711665817626
+precision:0.9367755532139094,	recall:0.9883268482490273,	F1:0.9618609683527184
+TP:1778.0,TN:44.0,FN:21.0,FP:120.0
+corrector_right: 145.0	corrector_total: 164.0	corrector acc: 0.8841463414634146
+final_code_right: 1840.0	final_code_total: 1963	final_code acc: 0.9373408048904738
+epoch:58,	loss_g:0,	loss_d:0,	loss_c:1.1232166266563581
+>>>>>>>>>>>>>>>>>>>start evaluate......
+code_right: 1799.0	code_total: 1963	M-tree codes acc: 0.9164544065206317
+disc_right:1822,	disc_all:1963,	discriminator acc:0.9281711665817626
+precision:0.9367755532139094,	recall:0.9883268482490273,	F1:0.9618609683527184
+TP:1778.0,TN:44.0,FN:21.0,FP:120.0
+corrector_right: 148.0	corrector_total: 164.0	corrector acc: 0.9024390243902439
+final_code_right: 1842.0	final_code_total: 1963	final_code acc: 0.9383596535914417
+epoch:59,	loss_g:0,	loss_d:0,	loss_c:1.1039037772861775
+>>>>>>>>>>>>>>>>>>>start evaluate......
+code_right: 1799.0	code_total: 1963	M-tree codes acc: 0.9164544065206317
+disc_right:1822,	disc_all:1963,	discriminator acc:0.9281711665817626
+precision:0.9367755532139094,	recall:0.9883268482490273,	F1:0.9618609683527184
+TP:1778.0,TN:44.0,FN:21.0,FP:120.0
+corrector_right: 147.0	corrector_total: 164.0	corrector acc: 0.8963414634146342
+final_code_right: 1842.0	final_code_total: 1963	final_code acc: 0.9383596535914417
+epoch:60,	loss_g:0,	loss_d:0,	loss_c:1.074849683092907
+>>>>>>>>>>>>>>>>>>>start evaluate......
+code_right: 1799.0	code_total: 1963	M-tree codes acc: 0.9164544065206317
+disc_right:1822,	disc_all:1963,	discriminator acc:0.9281711665817626
+precision:0.9367755532139094,	recall:0.9883268482490273,	F1:0.9618609683527184
+TP:1778.0,TN:44.0,FN:21.0,FP:120.0
+corrector_right: 149.0	corrector_total: 164.0	corrector acc: 0.9085365853658537
+final_code_right: 1842.0	final_code_total: 1963	final_code acc: 0.9383596535914417
+save best model to ./output/corrector2/best_model
+epoch:61,	loss_g:0,	loss_d:0,	loss_c:1.1350300999183673
+>>>>>>>>>>>>>>>>>>>start evaluate......
+code_right: 1799.0	code_total: 1963	M-tree codes acc: 0.9164544065206317
+disc_right:1822,	disc_all:1963,	discriminator acc:0.9281711665817626
+precision:0.9367755532139094,	recall:0.9883268482490273,	F1:0.9618609683527184
+TP:1778.0,TN:44.0,FN:21.0,FP:120.0
+corrector_right: 149.0	corrector_total: 164.0	corrector acc: 0.9085365853658537
+final_code_right: 1841.0	final_code_total: 1963	final_code acc: 0.9378502292409577
+epoch:62,	loss_g:0,	loss_d:0,	loss_c:1.0960938355710823
+>>>>>>>>>>>>>>>>>>>start evaluate......
+code_right: 1799.0	code_total: 1963	M-tree codes acc: 0.9164544065206317
+disc_right:1822,	disc_all:1963,	discriminator acc:0.9281711665817626
+precision:0.9367755532139094,	recall:0.9883268482490273,	F1:0.9618609683527184
+TP:1778.0,TN:44.0,FN:21.0,FP:120.0
+corrector_right: 150.0	corrector_total: 164.0	corrector acc: 0.9146341463414634
+final_code_right: 1841.0	final_code_total: 1963	final_code acc: 0.9378502292409577
+save best model to ./output/corrector2/best_model
+epoch:63,	loss_g:0,	loss_d:0,	loss_c:1.1169756332819816
+>>>>>>>>>>>>>>>>>>>start evaluate......
+code_right: 1799.0	code_total: 1963	M-tree codes acc: 0.9164544065206317
+disc_right:1822,	disc_all:1963,	discriminator acc:0.9281711665817626
+precision:0.9367755532139094,	recall:0.9883268482490273,	F1:0.9618609683527184
+TP:1778.0,TN:44.0,FN:21.0,FP:120.0
+corrector_right: 150.0	corrector_total: 164.0	corrector acc: 0.9146341463414634
+final_code_right: 1842.0	final_code_total: 1963	final_code acc: 0.9383596535914417
+epoch:64,	loss_g:0,	loss_d:0,	loss_c:1.092255512427073
+>>>>>>>>>>>>>>>>>>>start evaluate......
+code_right: 1799.0	code_total: 1963	M-tree codes acc: 0.9164544065206317
+disc_right:1822,	disc_all:1963,	discriminator acc:0.9281711665817626
+precision:0.9367755532139094,	recall:0.9883268482490273,	F1:0.9618609683527184
+TP:1778.0,TN:44.0,FN:21.0,FP:120.0
+corrector_right: 151.0	corrector_total: 164.0	corrector acc: 0.9207317073170732
+final_code_right: 1842.0	final_code_total: 1963	final_code acc: 0.9383596535914417
+save best model to ./output/corrector2/best_model
+epoch:65,	loss_g:0,	loss_d:0,	loss_c:1.1142031810886692
+>>>>>>>>>>>>>>>>>>>start evaluate......
+code_right: 1799.0	code_total: 1963	M-tree codes acc: 0.9164544065206317
+disc_right:1822,	disc_all:1963,	discriminator acc:0.9281711665817626
+precision:0.9367755532139094,	recall:0.9883268482490273,	F1:0.9618609683527184
+TP:1778.0,TN:44.0,FN:21.0,FP:120.0
+corrector_right: 149.0	corrector_total: 164.0	corrector acc: 0.9085365853658537
+final_code_right: 1840.0	final_code_total: 1963	final_code acc: 0.9373408048904738
+epoch:66,	loss_g:0,	loss_d:0,	loss_c:1.0663095591589808
+>>>>>>>>>>>>>>>>>>>start evaluate......
+code_right: 1799.0	code_total: 1963	M-tree codes acc: 0.9164544065206317
+disc_right:1822,	disc_all:1963,	discriminator acc:0.9281711665817626
+precision:0.9367755532139094,	recall:0.9883268482490273,	F1:0.9618609683527184
+TP:1778.0,TN:44.0,FN:21.0,FP:120.0
+corrector_right: 146.0	corrector_total: 164.0	corrector acc: 0.8902439024390244
+final_code_right: 1841.0	final_code_total: 1963	final_code acc: 0.9378502292409577
+epoch:67,	loss_g:0,	loss_d:0,	loss_c:1.086676401202567
+>>>>>>>>>>>>>>>>>>>start evaluate......
+code_right: 1799.0	code_total: 1963	M-tree codes acc: 0.9164544065206317
+disc_right:1822,	disc_all:1963,	discriminator acc:0.9281711665817626
+precision:0.9367755532139094,	recall:0.9883268482490273,	F1:0.9618609683527184
+TP:1778.0,TN:44.0,FN:21.0,FP:120.0
+corrector_right: 147.0	corrector_total: 164.0	corrector acc: 0.8963414634146342
+final_code_right: 1841.0	final_code_total: 1963	final_code acc: 0.9378502292409577
+epoch:68,	loss_g:0,	loss_d:0,	loss_c:1.0899596761446446
+>>>>>>>>>>>>>>>>>>>start evaluate......
+code_right: 1799.0	code_total: 1963	M-tree codes acc: 0.9164544065206317
+disc_right:1822,	disc_all:1963,	discriminator acc:0.9281711665817626
+precision:0.9367755532139094,	recall:0.9883268482490273,	F1:0.9618609683527184
+TP:1778.0,TN:44.0,FN:21.0,FP:120.0
+corrector_right: 147.0	corrector_total: 164.0	corrector acc: 0.8963414634146342
+final_code_right: 1840.0	final_code_total: 1963	final_code acc: 0.9373408048904738
+epoch:69,	loss_g:0,	loss_d:0,	loss_c:1.2423887486511376
+>>>>>>>>>>>>>>>>>>>start evaluate......
+code_right: 1799.0	code_total: 1963	M-tree codes acc: 0.9164544065206317
+disc_right:1822,	disc_all:1963,	discriminator acc:0.9281711665817626
+precision:0.9367755532139094,	recall:0.9883268482490273,	F1:0.9618609683527184
+TP:1778.0,TN:44.0,FN:21.0,FP:120.0
+corrector_right: 147.0	corrector_total: 164.0	corrector acc: 0.8963414634146342
+final_code_right: 1841.0	final_code_total: 1963	final_code acc: 0.9378502292409577
+epoch:70,	loss_g:0,	loss_d:0,	loss_c:1.141311594765284
+>>>>>>>>>>>>>>>>>>>start evaluate......
+code_right: 1799.0	code_total: 1963	M-tree codes acc: 0.9164544065206317
+disc_right:1822,	disc_all:1963,	discriminator acc:0.9281711665817626
+precision:0.9367755532139094,	recall:0.9883268482490273,	F1:0.9618609683527184
+TP:1778.0,TN:44.0,FN:21.0,FP:120.0
+corrector_right: 149.0	corrector_total: 164.0	corrector acc: 0.9085365853658537
+final_code_right: 1841.0	final_code_total: 1963	final_code acc: 0.9378502292409577
+epoch:71,	loss_g:0,	loss_d:0,	loss_c:1.0932570085860789
+>>>>>>>>>>>>>>>>>>>start evaluate......
+code_right: 1799.0	code_total: 1963	M-tree codes acc: 0.9164544065206317
+disc_right:1822,	disc_all:1963,	discriminator acc:0.9281711665817626
+precision:0.9367755532139094,	recall:0.9883268482490273,	F1:0.9618609683527184
+TP:1778.0,TN:44.0,FN:21.0,FP:120.0
+corrector_right: 149.0	corrector_total: 164.0	corrector acc: 0.9085365853658537
+final_code_right: 1840.0	final_code_total: 1963	final_code acc: 0.9373408048904738
+epoch:72,	loss_g:0,	loss_d:0,	loss_c:1.1044856772059575
+>>>>>>>>>>>>>>>>>>>start evaluate......
+code_right: 1799.0	code_total: 1963	M-tree codes acc: 0.9164544065206317
+disc_right:1822,	disc_all:1963,	discriminator acc:0.9281711665817626
+precision:0.9367755532139094,	recall:0.9883268482490273,	F1:0.9618609683527184
+TP:1778.0,TN:44.0,FN:21.0,FP:120.0
+corrector_right: 149.0	corrector_total: 164.0	corrector acc: 0.9085365853658537
+final_code_right: 1841.0	final_code_total: 1963	final_code acc: 0.9378502292409577
+epoch:73,	loss_g:0,	loss_d:0,	loss_c:1.080392587580718
+>>>>>>>>>>>>>>>>>>>start evaluate......
+code_right: 1799.0	code_total: 1963	M-tree codes acc: 0.9164544065206317
+disc_right:1822,	disc_all:1963,	discriminator acc:0.9281711665817626
+precision:0.9367755532139094,	recall:0.9883268482490273,	F1:0.9618609683527184
+TP:1778.0,TN:44.0,FN:21.0,FP:120.0
+corrector_right: 149.0	corrector_total: 164.0	corrector acc: 0.9085365853658537
+final_code_right: 1841.0	final_code_total: 1963	final_code acc: 0.9378502292409577
+epoch:74,	loss_g:0,	loss_d:0,	loss_c:1.0663496592023876
+>>>>>>>>>>>>>>>>>>>start evaluate......
+code_right: 1799.0	code_total: 1963	M-tree codes acc: 0.9164544065206317
+disc_right:1822,	disc_all:1963,	discriminator acc:0.9281711665817626
+precision:0.9367755532139094,	recall:0.9883268482490273,	F1:0.9618609683527184
+TP:1778.0,TN:44.0,FN:21.0,FP:120.0
+corrector_right: 148.0	corrector_total: 164.0	corrector acc: 0.9024390243902439
+final_code_right: 1841.0	final_code_total: 1963	final_code acc: 0.9378502292409577
+epoch:75,	loss_g:0,	loss_d:0,	loss_c:1.0588637036562432
+>>>>>>>>>>>>>>>>>>>start evaluate......
+code_right: 1799.0	code_total: 1963	M-tree codes acc: 0.9164544065206317
+disc_right:1822,	disc_all:1963,	discriminator acc:0.9281711665817626
+precision:0.9367755532139094,	recall:0.9883268482490273,	F1:0.9618609683527184
+TP:1778.0,TN:44.0,FN:21.0,FP:120.0
+corrector_right: 149.0	corrector_total: 164.0	corrector acc: 0.9085365853658537
+final_code_right: 1841.0	final_code_total: 1963	final_code acc: 0.9378502292409577
+epoch:76,	loss_g:0,	loss_d:0,	loss_c:1.0436950155417435
+>>>>>>>>>>>>>>>>>>>start evaluate......
+code_right: 1799.0	code_total: 1963	M-tree codes acc: 0.9164544065206317
+disc_right:1822,	disc_all:1963,	discriminator acc:0.9281711665817626
+precision:0.9367755532139094,	recall:0.9883268482490273,	F1:0.9618609683527184
+TP:1778.0,TN:44.0,FN:21.0,FP:120.0
+corrector_right: 147.0	corrector_total: 164.0	corrector acc: 0.8963414634146342
+final_code_right: 1841.0	final_code_total: 1963	final_code acc: 0.9378502292409577
+epoch:77,	loss_g:0,	loss_d:0,	loss_c:1.0599443275423255
+>>>>>>>>>>>>>>>>>>>start evaluate......
+code_right: 1799.0	code_total: 1963	M-tree codes acc: 0.9164544065206317
+disc_right:1822,	disc_all:1963,	discriminator acc:0.9281711665817626
+precision:0.9367755532139094,	recall:0.9883268482490273,	F1:0.9618609683527184
+TP:1778.0,TN:44.0,FN:21.0,FP:120.0
+corrector_right: 149.0	corrector_total: 164.0	corrector acc: 0.9085365853658537
+final_code_right: 1842.0	final_code_total: 1963	final_code acc: 0.9383596535914417
+epoch:78,	loss_g:0,	loss_d:0,	loss_c:1.053562999033602
+>>>>>>>>>>>>>>>>>>>start evaluate......
+code_right: 1799.0	code_total: 1963	M-tree codes acc: 0.9164544065206317
+disc_right:1822,	disc_all:1963,	discriminator acc:0.9281711665817626
+precision:0.9367755532139094,	recall:0.9883268482490273,	F1:0.9618609683527184
+TP:1778.0,TN:44.0,FN:21.0,FP:120.0
+corrector_right: 146.0	corrector_total: 164.0	corrector acc: 0.8902439024390244
+final_code_right: 1841.0	final_code_total: 1963	final_code acc: 0.9378502292409577
+epoch:79,	loss_g:0,	loss_d:0,	loss_c:1.066013681149343
+>>>>>>>>>>>>>>>>>>>start evaluate......
+code_right: 1799.0	code_total: 1963	M-tree codes acc: 0.9164544065206317
+disc_right:1822,	disc_all:1963,	discriminator acc:0.9281711665817626
+precision:0.9367755532139094,	recall:0.9883268482490273,	F1:0.9618609683527184
+TP:1778.0,TN:44.0,FN:21.0,FP:120.0
+corrector_right: 150.0	corrector_total: 164.0	corrector acc: 0.9146341463414634
+final_code_right: 1841.0	final_code_total: 1963	final_code acc: 0.9378502292409577
+epoch:80,	loss_g:0,	loss_d:0,	loss_c:1.0789284851925913
+>>>>>>>>>>>>>>>>>>>start evaluate......
+code_right: 1799.0	code_total: 1963	M-tree codes acc: 0.9164544065206317
+disc_right:1822,	disc_all:1963,	discriminator acc:0.9281711665817626
+precision:0.9367755532139094,	recall:0.9883268482490273,	F1:0.9618609683527184
+TP:1778.0,TN:44.0,FN:21.0,FP:120.0
+corrector_right: 147.0	corrector_total: 164.0	corrector acc: 0.8963414634146342
+final_code_right: 1841.0	final_code_total: 1963	final_code acc: 0.9378502292409577
+epoch:81,	loss_g:0,	loss_d:0,	loss_c:1.039275117975194
+>>>>>>>>>>>>>>>>>>>start evaluate......
+code_right: 1799.0	code_total: 1963	M-tree codes acc: 0.9164544065206317
+disc_right:1822,	disc_all:1963,	discriminator acc:0.9281711665817626
+precision:0.9367755532139094,	recall:0.9883268482490273,	F1:0.9618609683527184
+TP:1778.0,TN:44.0,FN:21.0,FP:120.0
+corrector_right: 153.0	corrector_total: 164.0	corrector acc: 0.9329268292682927
+final_code_right: 1841.0	final_code_total: 1963	final_code acc: 0.9378502292409577
+save best model to ./output/corrector2/best_model
+epoch:82,	loss_g:0,	loss_d:0,	loss_c:1.0314877931086812
+>>>>>>>>>>>>>>>>>>>start evaluate......
+code_right: 1799.0	code_total: 1963	M-tree codes acc: 0.9164544065206317
+disc_right:1822,	disc_all:1963,	discriminator acc:0.9281711665817626
+precision:0.9367755532139094,	recall:0.9883268482490273,	F1:0.9618609683527184
+TP:1778.0,TN:44.0,FN:21.0,FP:120.0
+corrector_right: 151.0	corrector_total: 164.0	corrector acc: 0.9207317073170732
+final_code_right: 1841.0	final_code_total: 1963	final_code acc: 0.9378502292409577
+epoch:83,	loss_g:0,	loss_d:0,	loss_c:1.1045694590429775
+>>>>>>>>>>>>>>>>>>>start evaluate......
+code_right: 1799.0	code_total: 1963	M-tree codes acc: 0.9164544065206317
+disc_right:1822,	disc_all:1963,	discriminator acc:0.9281711665817626
+precision:0.9367755532139094,	recall:0.9883268482490273,	F1:0.9618609683527184
+TP:1778.0,TN:44.0,FN:21.0,FP:120.0
+corrector_right: 149.0	corrector_total: 164.0	corrector acc: 0.9085365853658537
+final_code_right: 1841.0	final_code_total: 1963	final_code acc: 0.9378502292409577
+epoch:84,	loss_g:0,	loss_d:0,	loss_c:1.0541043778357562
+>>>>>>>>>>>>>>>>>>>start evaluate......
+code_right: 1799.0	code_total: 1963	M-tree codes acc: 0.9164544065206317
+disc_right:1822,	disc_all:1963,	discriminator acc:0.9281711665817626
+precision:0.9367755532139094,	recall:0.9883268482490273,	F1:0.9618609683527184
+TP:1778.0,TN:44.0,FN:21.0,FP:120.0
+corrector_right: 148.0	corrector_total: 164.0	corrector acc: 0.9024390243902439
+final_code_right: 1841.0	final_code_total: 1963	final_code acc: 0.9378502292409577
+epoch:85,	loss_g:0,	loss_d:0,	loss_c:1.005661218019668
+>>>>>>>>>>>>>>>>>>>start evaluate......
+code_right: 1799.0	code_total: 1963	M-tree codes acc: 0.9164544065206317
+disc_right:1822,	disc_all:1963,	discriminator acc:0.9281711665817626
+precision:0.9367755532139094,	recall:0.9883268482490273,	F1:0.9618609683527184
+TP:1778.0,TN:44.0,FN:21.0,FP:120.0
+corrector_right: 149.0	corrector_total: 164.0	corrector acc: 0.9085365853658537
+final_code_right: 1842.0	final_code_total: 1963	final_code acc: 0.9383596535914417
+epoch:86,	loss_g:0,	loss_d:0,	loss_c:1.0622125561349094
+>>>>>>>>>>>>>>>>>>>start evaluate......
+code_right: 1799.0	code_total: 1963	M-tree codes acc: 0.9164544065206317
+disc_right:1822,	disc_all:1963,	discriminator acc:0.9281711665817626
+precision:0.9367755532139094,	recall:0.9883268482490273,	F1:0.9618609683527184
+TP:1778.0,TN:44.0,FN:21.0,FP:120.0
+corrector_right: 147.0	corrector_total: 164.0	corrector acc: 0.8963414634146342
+final_code_right: 1841.0	final_code_total: 1963	final_code acc: 0.9378502292409577
+epoch:87,	loss_g:0,	loss_d:0,	loss_c:1.0284610457601957
+>>>>>>>>>>>>>>>>>>>start evaluate......
+code_right: 1799.0	code_total: 1963	M-tree codes acc: 0.9164544065206317
+disc_right:1822,	disc_all:1963,	discriminator acc:0.9281711665817626
+precision:0.9367755532139094,	recall:0.9883268482490273,	F1:0.9618609683527184
+TP:1778.0,TN:44.0,FN:21.0,FP:120.0
+corrector_right: 151.0	corrector_total: 164.0	corrector acc: 0.9207317073170732
+final_code_right: 1841.0	final_code_total: 1963	final_code acc: 0.9378502292409577
+epoch:88,	loss_g:0,	loss_d:0,	loss_c:1.084409409755608
+>>>>>>>>>>>>>>>>>>>start evaluate......
+code_right: 1799.0	code_total: 1963	M-tree codes acc: 0.9164544065206317
+disc_right:1822,	disc_all:1963,	discriminator acc:0.9281711665817626
+precision:0.9367755532139094,	recall:0.9883268482490273,	F1:0.9618609683527184
+TP:1778.0,TN:44.0,FN:21.0,FP:120.0
+corrector_right: 149.0	corrector_total: 164.0	corrector acc: 0.9085365853658537
+final_code_right: 1841.0	final_code_total: 1963	final_code acc: 0.9378502292409577
+epoch:89,	loss_g:0,	loss_d:0,	loss_c:1.0238619253213983
+>>>>>>>>>>>>>>>>>>>start evaluate......
+code_right: 1799.0	code_total: 1963	M-tree codes acc: 0.9164544065206317
+disc_right:1822,	disc_all:1963,	discriminator acc:0.9281711665817626
+precision:0.9367755532139094,	recall:0.9883268482490273,	F1:0.9618609683527184
+TP:1778.0,TN:44.0,FN:21.0,FP:120.0
+corrector_right: 150.0	corrector_total: 164.0	corrector acc: 0.9146341463414634
+final_code_right: 1841.0	final_code_total: 1963	final_code acc: 0.9378502292409577
+epoch:90,	loss_g:0,	loss_d:0,	loss_c:1.0840960419445764
+>>>>>>>>>>>>>>>>>>>start evaluate......
+code_right: 1799.0	code_total: 1963	M-tree codes acc: 0.9164544065206317
+disc_right:1822,	disc_all:1963,	discriminator acc:0.9281711665817626
+precision:0.9367755532139094,	recall:0.9883268482490273,	F1:0.9618609683527184
+TP:1778.0,TN:44.0,FN:21.0,FP:120.0
+corrector_right: 151.0	corrector_total: 164.0	corrector acc: 0.9207317073170732
+final_code_right: 1841.0	final_code_total: 1963	final_code acc: 0.9378502292409577
+epoch:91,	loss_g:0,	loss_d:0,	loss_c:1.0608248676289804
+>>>>>>>>>>>>>>>>>>>start evaluate......
+code_right: 1799.0	code_total: 1963	M-tree codes acc: 0.9164544065206317
+disc_right:1822,	disc_all:1963,	discriminator acc:0.9281711665817626
+precision:0.9367755532139094,	recall:0.9883268482490273,	F1:0.9618609683527184
+TP:1778.0,TN:44.0,FN:21.0,FP:120.0
+corrector_right: 150.0	corrector_total: 164.0	corrector acc: 0.9146341463414634
+final_code_right: 1841.0	final_code_total: 1963	final_code acc: 0.9378502292409577
+epoch:92,	loss_g:0,	loss_d:0,	loss_c:1.0490363731514663
+>>>>>>>>>>>>>>>>>>>start evaluate......
+code_right: 1799.0	code_total: 1963	M-tree codes acc: 0.9164544065206317
+disc_right:1822,	disc_all:1963,	discriminator acc:0.9281711665817626
+precision:0.9367755532139094,	recall:0.9883268482490273,	F1:0.9618609683527184
+TP:1778.0,TN:44.0,FN:21.0,FP:120.0
+corrector_right: 149.0	corrector_total: 164.0	corrector acc: 0.9085365853658537
+final_code_right: 1841.0	final_code_total: 1963	final_code acc: 0.9378502292409577
+epoch:93,	loss_g:0,	loss_d:0,	loss_c:1.0401515502599068
+>>>>>>>>>>>>>>>>>>>start evaluate......
+code_right: 1799.0	code_total: 1963	M-tree codes acc: 0.9164544065206317
+disc_right:1822,	disc_all:1963,	discriminator acc:0.9281711665817626
+precision:0.9367755532139094,	recall:0.9883268482490273,	F1:0.9618609683527184
+TP:1778.0,TN:44.0,FN:21.0,FP:120.0
+corrector_right: 150.0	corrector_total: 164.0	corrector acc: 0.9146341463414634
+final_code_right: 1841.0	final_code_total: 1963	final_code acc: 0.9378502292409577
+epoch:94,	loss_g:0,	loss_d:0,	loss_c:1.0307678911776748
+>>>>>>>>>>>>>>>>>>>start evaluate......
+code_right: 1799.0	code_total: 1963	M-tree codes acc: 0.9164544065206317
+disc_right:1822,	disc_all:1963,	discriminator acc:0.9281711665817626
+precision:0.9367755532139094,	recall:0.9883268482490273,	F1:0.9618609683527184
+TP:1778.0,TN:44.0,FN:21.0,FP:120.0
+corrector_right: 149.0	corrector_total: 164.0	corrector acc: 0.9085365853658537
+final_code_right: 1841.0	final_code_total: 1963	final_code acc: 0.9378502292409577
+epoch:95,	loss_g:0,	loss_d:0,	loss_c:1.1167297758365748
+>>>>>>>>>>>>>>>>>>>start evaluate......
+code_right: 1799.0	code_total: 1963	M-tree codes acc: 0.9164544065206317
+disc_right:1822,	disc_all:1963,	discriminator acc:0.9281711665817626
+precision:0.9367755532139094,	recall:0.9883268482490273,	F1:0.9618609683527184
+TP:1778.0,TN:44.0,FN:21.0,FP:120.0
+corrector_right: 148.0	corrector_total: 164.0	corrector acc: 0.9024390243902439
+final_code_right: 1840.0	final_code_total: 1963	final_code acc: 0.9373408048904738
+epoch:96,	loss_g:0,	loss_d:0,	loss_c:1.0532292219722876
+>>>>>>>>>>>>>>>>>>>start evaluate......
+code_right: 1799.0	code_total: 1963	M-tree codes acc: 0.9164544065206317
+disc_right:1822,	disc_all:1963,	discriminator acc:0.9281711665817626
+precision:0.9367755532139094,	recall:0.9883268482490273,	F1:0.9618609683527184
+TP:1778.0,TN:44.0,FN:21.0,FP:120.0
+corrector_right: 148.0	corrector_total: 164.0	corrector acc: 0.9024390243902439
+final_code_right: 1841.0	final_code_total: 1963	final_code acc: 0.9378502292409577
+epoch:97,	loss_g:0,	loss_d:0,	loss_c:1.0665911219548434
+>>>>>>>>>>>>>>>>>>>start evaluate......
+code_right: 1799.0	code_total: 1963	M-tree codes acc: 0.9164544065206317
+disc_right:1822,	disc_all:1963,	discriminator acc:0.9281711665817626
+precision:0.9367755532139094,	recall:0.9883268482490273,	F1:0.9618609683527184
+TP:1778.0,TN:44.0,FN:21.0,FP:120.0
+corrector_right: 150.0	corrector_total: 164.0	corrector acc: 0.9146341463414634
+final_code_right: 1840.0	final_code_total: 1963	final_code acc: 0.9373408048904738
+epoch:98,	loss_g:0,	loss_d:0,	loss_c:1.0643289978324901
+>>>>>>>>>>>>>>>>>>>start evaluate......
+code_right: 1799.0	code_total: 1963	M-tree codes acc: 0.9164544065206317
+disc_right:1822,	disc_all:1963,	discriminator acc:0.9281711665817626
+precision:0.9367755532139094,	recall:0.9883268482490273,	F1:0.9618609683527184
+TP:1778.0,TN:44.0,FN:21.0,FP:120.0
+corrector_right: 153.0	corrector_total: 164.0	corrector acc: 0.9329268292682927
+final_code_right: 1841.0	final_code_total: 1963	final_code acc: 0.9378502292409577
+epoch:99,	loss_g:0,	loss_d:0,	loss_c:1.0641187523142435
+>>>>>>>>>>>>>>>>>>>start evaluate......
+code_right: 1799.0	code_total: 1963	M-tree codes acc: 0.9164544065206317
+disc_right:1822,	disc_all:1963,	discriminator acc:0.9281711665817626
+precision:0.9367755532139094,	recall:0.9883268482490273,	F1:0.9618609683527184
+TP:1778.0,TN:44.0,FN:21.0,FP:120.0
+corrector_right: 152.0	corrector_total: 164.0	corrector acc: 0.926829268292683
+final_code_right: 1841.0	final_code_total: 1963	final_code acc: 0.9378502292409577
+epoch:100,	loss_g:0,	loss_d:0,	loss_c:1.0352449959900696
+>>>>>>>>>>>>>>>>>>>start evaluate......
+code_right: 1799.0	code_total: 1963	M-tree codes acc: 0.9164544065206317
+disc_right:1822,	disc_all:1963,	discriminator acc:0.9281711665817626
+precision:0.9367755532139094,	recall:0.9883268482490273,	F1:0.9618609683527184
+TP:1778.0,TN:44.0,FN:21.0,FP:120.0
+corrector_right: 149.0	corrector_total: 164.0	corrector acc: 0.9085365853658537
+final_code_right: 1841.0	final_code_total: 1963	final_code acc: 0.9378502292409577
+epoch:101,	loss_g:0,	loss_d:0,	loss_c:1.0384792031545658
+>>>>>>>>>>>>>>>>>>>start evaluate......
+code_right: 1799.0	code_total: 1963	M-tree codes acc: 0.9164544065206317
+disc_right:1822,	disc_all:1963,	discriminator acc:0.9281711665817626
+precision:0.9367755532139094,	recall:0.9883268482490273,	F1:0.9618609683527184
+TP:1778.0,TN:44.0,FN:21.0,FP:120.0
+corrector_right: 152.0	corrector_total: 164.0	corrector acc: 0.926829268292683
+final_code_right: 1841.0	final_code_total: 1963	final_code acc: 0.9378502292409577
+epoch:102,	loss_g:0,	loss_d:0,	loss_c:1.0086993910663296
+>>>>>>>>>>>>>>>>>>>start evaluate......
+code_right: 1799.0	code_total: 1963	M-tree codes acc: 0.9164544065206317
+disc_right:1822,	disc_all:1963,	discriminator acc:0.9281711665817626
+precision:0.9367755532139094,	recall:0.9883268482490273,	F1:0.9618609683527184
+TP:1778.0,TN:44.0,FN:21.0,FP:120.0
+corrector_right: 149.0	corrector_total: 164.0	corrector acc: 0.9085365853658537
+final_code_right: 1841.0	final_code_total: 1963	final_code acc: 0.9378502292409577
+epoch:103,	loss_g:0,	loss_d:0,	loss_c:1.0115275556163397
+>>>>>>>>>>>>>>>>>>>start evaluate......
+code_right: 1799.0	code_total: 1963	M-tree codes acc: 0.9164544065206317
+disc_right:1822,	disc_all:1963,	discriminator acc:0.9281711665817626
+precision:0.9367755532139094,	recall:0.9883268482490273,	F1:0.9618609683527184
+TP:1778.0,TN:44.0,FN:21.0,FP:120.0
+corrector_right: 148.0	corrector_total: 164.0	corrector acc: 0.9024390243902439
+final_code_right: 1841.0	final_code_total: 1963	final_code acc: 0.9378502292409577
+epoch:104,	loss_g:0,	loss_d:0,	loss_c:1.0355601991468575
+>>>>>>>>>>>>>>>>>>>start evaluate......
+code_right: 1799.0	code_total: 1963	M-tree codes acc: 0.9164544065206317
+disc_right:1822,	disc_all:1963,	discriminator acc:0.9281711665817626
+precision:0.9367755532139094,	recall:0.9883268482490273,	F1:0.9618609683527184
+TP:1778.0,TN:44.0,FN:21.0,FP:120.0
+corrector_right: 148.0	corrector_total: 164.0	corrector acc: 0.9024390243902439
+final_code_right: 1841.0	final_code_total: 1963	final_code acc: 0.9378502292409577
+epoch:105,	loss_g:0,	loss_d:0,	loss_c:1.0374628366262186
+>>>>>>>>>>>>>>>>>>>start evaluate......
+code_right: 1799.0	code_total: 1963	M-tree codes acc: 0.9164544065206317
+disc_right:1822,	disc_all:1963,	discriminator acc:0.9281711665817626
+precision:0.9367755532139094,	recall:0.9883268482490273,	F1:0.9618609683527184
+TP:1778.0,TN:44.0,FN:21.0,FP:120.0
+corrector_right: 150.0	corrector_total: 164.0	corrector acc: 0.9146341463414634
+final_code_right: 1840.0	final_code_total: 1963	final_code acc: 0.9373408048904738
+epoch:106,	loss_g:0,	loss_d:0,	loss_c:1.0428653148701414
+>>>>>>>>>>>>>>>>>>>start evaluate......
+code_right: 1799.0	code_total: 1963	M-tree codes acc: 0.9164544065206317
+disc_right:1822,	disc_all:1963,	discriminator acc:0.9281711665817626
+precision:0.9367755532139094,	recall:0.9883268482490273,	F1:0.9618609683527184
+TP:1778.0,TN:44.0,FN:21.0,FP:120.0
+corrector_right: 150.0	corrector_total: 164.0	corrector acc: 0.9146341463414634
+final_code_right: 1840.0	final_code_total: 1963	final_code acc: 0.9373408048904738
+epoch:107,	loss_g:0,	loss_d:0,	loss_c:1.0177443567226874
+>>>>>>>>>>>>>>>>>>>start evaluate......
+code_right: 1799.0	code_total: 1963	M-tree codes acc: 0.9164544065206317
+disc_right:1822,	disc_all:1963,	discriminator acc:0.9281711665817626
+precision:0.9367755532139094,	recall:0.9883268482490273,	F1:0.9618609683527184
+TP:1778.0,TN:44.0,FN:21.0,FP:120.0
+corrector_right: 151.0	corrector_total: 164.0	corrector acc: 0.9207317073170732
+final_code_right: 1841.0	final_code_total: 1963	final_code acc: 0.9378502292409577
+epoch:108,	loss_g:0,	loss_d:0,	loss_c:1.0402210206666496
+>>>>>>>>>>>>>>>>>>>start evaluate......
+code_right: 1799.0	code_total: 1963	M-tree codes acc: 0.9164544065206317
+disc_right:1822,	disc_all:1963,	discriminator acc:0.9281711665817626
+precision:0.9367755532139094,	recall:0.9883268482490273,	F1:0.9618609683527184
+TP:1778.0,TN:44.0,FN:21.0,FP:120.0
+corrector_right: 147.0	corrector_total: 164.0	corrector acc: 0.8963414634146342
+final_code_right: 1840.0	final_code_total: 1963	final_code acc: 0.9373408048904738
+epoch:109,	loss_g:0,	loss_d:0,	loss_c:1.050319387752097
+>>>>>>>>>>>>>>>>>>>start evaluate......
+code_right: 1799.0	code_total: 1963	M-tree codes acc: 0.9164544065206317
+disc_right:1822,	disc_all:1963,	discriminator acc:0.9281711665817626
+precision:0.9367755532139094,	recall:0.9883268482490273,	F1:0.9618609683527184
+TP:1778.0,TN:44.0,FN:21.0,FP:120.0
+corrector_right: 150.0	corrector_total: 164.0	corrector acc: 0.9146341463414634
+final_code_right: 1841.0	final_code_total: 1963	final_code acc: 0.9378502292409577
+epoch:110,	loss_g:0,	loss_d:0,	loss_c:1.0242411898216233
+>>>>>>>>>>>>>>>>>>>start evaluate......
+code_right: 1799.0	code_total: 1963	M-tree codes acc: 0.9164544065206317
+disc_right:1822,	disc_all:1963,	discriminator acc:0.9281711665817626
+precision:0.9367755532139094,	recall:0.9883268482490273,	F1:0.9618609683527184
+TP:1778.0,TN:44.0,FN:21.0,FP:120.0
+corrector_right: 150.0	corrector_total: 164.0	corrector acc: 0.9146341463414634
+final_code_right: 1841.0	final_code_total: 1963	final_code acc: 0.9378502292409577
+epoch:111,	loss_g:0,	loss_d:0,	loss_c:1.1957106813788414
+>>>>>>>>>>>>>>>>>>>start evaluate......
+code_right: 1799.0	code_total: 1963	M-tree codes acc: 0.9164544065206317
+disc_right:1822,	disc_all:1963,	discriminator acc:0.9281711665817626
+precision:0.9367755532139094,	recall:0.9883268482490273,	F1:0.9618609683527184
+TP:1778.0,TN:44.0,FN:21.0,FP:120.0
+corrector_right: 151.0	corrector_total: 164.0	corrector acc: 0.9207317073170732
+final_code_right: 1841.0	final_code_total: 1963	final_code acc: 0.9378502292409577
+epoch:112,	loss_g:0,	loss_d:0,	loss_c:1.0463993026642129
+>>>>>>>>>>>>>>>>>>>start evaluate......
+code_right: 1799.0	code_total: 1963	M-tree codes acc: 0.9164544065206317
+disc_right:1822,	disc_all:1963,	discriminator acc:0.9281711665817626
+precision:0.9367755532139094,	recall:0.9883268482490273,	F1:0.9618609683527184
+TP:1778.0,TN:44.0,FN:21.0,FP:120.0
+corrector_right: 150.0	corrector_total: 164.0	corrector acc: 0.9146341463414634
+final_code_right: 1840.0	final_code_total: 1963	final_code acc: 0.9373408048904738
+epoch:113,	loss_g:0,	loss_d:0,	loss_c:1.0045724383089691
+>>>>>>>>>>>>>>>>>>>start evaluate......
+code_right: 1799.0	code_total: 1963	M-tree codes acc: 0.9164544065206317
+disc_right:1822,	disc_all:1963,	discriminator acc:0.9281711665817626
+precision:0.9367755532139094,	recall:0.9883268482490273,	F1:0.9618609683527184
+TP:1778.0,TN:44.0,FN:21.0,FP:120.0
+corrector_right: 149.0	corrector_total: 164.0	corrector acc: 0.9085365853658537
+final_code_right: 1841.0	final_code_total: 1963	final_code acc: 0.9378502292409577
+epoch:114,	loss_g:0,	loss_d:0,	loss_c:1.0577741070301272
+>>>>>>>>>>>>>>>>>>>start evaluate......
+code_right: 1799.0	code_total: 1963	M-tree codes acc: 0.9164544065206317
+disc_right:1822,	disc_all:1963,	discriminator acc:0.9281711665817626
+precision:0.9367755532139094,	recall:0.9883268482490273,	F1:0.9618609683527184
+TP:1778.0,TN:44.0,FN:21.0,FP:120.0
+corrector_right: 149.0	corrector_total: 164.0	corrector acc: 0.9085365853658537
+final_code_right: 1841.0	final_code_total: 1963	final_code acc: 0.9378502292409577
+epoch:115,	loss_g:0,	loss_d:0,	loss_c:1.0337011639785487
+>>>>>>>>>>>>>>>>>>>start evaluate......
+code_right: 1799.0	code_total: 1963	M-tree codes acc: 0.9164544065206317
+disc_right:1822,	disc_all:1963,	discriminator acc:0.9281711665817626
+precision:0.9367755532139094,	recall:0.9883268482490273,	F1:0.9618609683527184
+TP:1778.0,TN:44.0,FN:21.0,FP:120.0
+corrector_right: 148.0	corrector_total: 164.0	corrector acc: 0.9024390243902439
+final_code_right: 1840.0	final_code_total: 1963	final_code acc: 0.9373408048904738
+epoch:116,	loss_g:0,	loss_d:0,	loss_c:1.0265228835924063
+>>>>>>>>>>>>>>>>>>>start evaluate......
+code_right: 1799.0	code_total: 1963	M-tree codes acc: 0.9164544065206317
+disc_right:1822,	disc_all:1963,	discriminator acc:0.9281711665817626
+precision:0.9367755532139094,	recall:0.9883268482490273,	F1:0.9618609683527184
+TP:1778.0,TN:44.0,FN:21.0,FP:120.0
+corrector_right: 151.0	corrector_total: 164.0	corrector acc: 0.9207317073170732
+final_code_right: 1841.0	final_code_total: 1963	final_code acc: 0.9378502292409577
+epoch:117,	loss_g:0,	loss_d:0,	loss_c:0.980302912867046
+>>>>>>>>>>>>>>>>>>>start evaluate......
+code_right: 1799.0	code_total: 1963	M-tree codes acc: 0.9164544065206317
+disc_right:1822,	disc_all:1963,	discriminator acc:0.9281711665817626
+precision:0.9367755532139094,	recall:0.9883268482490273,	F1:0.9618609683527184
+TP:1778.0,TN:44.0,FN:21.0,FP:120.0
+corrector_right: 150.0	corrector_total: 164.0	corrector acc: 0.9146341463414634
+final_code_right: 1841.0	final_code_total: 1963	final_code acc: 0.9378502292409577
+epoch:118,	loss_g:0,	loss_d:0,	loss_c:1.0468415177892894
+>>>>>>>>>>>>>>>>>>>start evaluate......
+code_right: 1799.0	code_total: 1963	M-tree codes acc: 0.9164544065206317
+disc_right:1822,	disc_all:1963,	discriminator acc:0.9281711665817626
+precision:0.9367755532139094,	recall:0.9883268482490273,	F1:0.9618609683527184
+TP:1778.0,TN:44.0,FN:21.0,FP:120.0
+corrector_right: 151.0	corrector_total: 164.0	corrector acc: 0.9207317073170732
+final_code_right: 1841.0	final_code_total: 1963	final_code acc: 0.9378502292409577
+epoch:119,	loss_g:0,	loss_d:0,	loss_c:1.015528765245108
+>>>>>>>>>>>>>>>>>>>start evaluate......
+code_right: 1799.0	code_total: 1963	M-tree codes acc: 0.9164544065206317
+disc_right:1822,	disc_all:1963,	discriminator acc:0.9281711665817626
+precision:0.9367755532139094,	recall:0.9883268482490273,	F1:0.9618609683527184
+TP:1778.0,TN:44.0,FN:21.0,FP:120.0
+corrector_right: 149.0	corrector_total: 164.0	corrector acc: 0.9085365853658537
+final_code_right: 1841.0	final_code_total: 1963	final_code acc: 0.9378502292409577
+after process dataset len: 433
+total passed: 0

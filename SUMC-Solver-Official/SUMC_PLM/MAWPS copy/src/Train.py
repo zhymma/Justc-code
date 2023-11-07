@@ -1,4 +1,10 @@
 # -*- coding: utf-8 -*-
+"""
+@Time : 2021/12/30 18:38
+@Author : WangBin
+@File : Train.py 
+@Software: PyCharm 
+"""
 import json
 import logging
 import os
@@ -6,8 +12,6 @@ import numpy as np
 import sys
 import torch
 import random
-import datetime
-import pytz
 from torch.utils.data import DataLoader, RandomSampler, SequentialSampler
 from transformers import BertTokenizer
 from transformers.optimization import AdamW, get_linear_schedule_with_warmup
@@ -23,9 +27,6 @@ def setup_seed(seed):
      np.random.seed(seed)
      random.seed(seed)
      torch.backends.cudnn.deterministic = True
-
-
-
 
 def train(args):
     # devices setting
@@ -150,8 +151,7 @@ def train(args):
         logger.info("\n>>>>>>>>>>>>>>>>>>>start evaluate......")
         acc = eval_multi_clf(logger=logger,model=model,dev_data_loader=dev_data_loader,device=args.device)
     else:
-        logger.info(">>>>>>>>>>>>>>>>>>>start train......")
-
+        logger.info("\n>>>>>>>>>>>>>>>>>>>start train......")
         global_steps = 0
         for epoch in range(args.num_epochs):
 
@@ -178,11 +178,13 @@ def train(args):
                 model.zero_grad()
 
 
-    
+
+
                 if global_steps % steps_per_epoch == 0:
                     logger.info("epoch:{},\tloss_g:{},\tloss_d:{},\tloss_c:{}".format(epoch, all_loss_g,all_loss_d,all_loss_c))
-                    #! 开始测试！
-                    logger.info(">>>>>>>>>>>>>>>>>>>start evaluate......")
+                    logger.info("start evaluate...")
+                    logger.info("=" * 20 + "dev data set" + "=" * 20)
+                    logger.info("\n>>>>>>>>>>>>>>>>>>>start evaluate......")
                     acc = eval_multi_clf(
                         logger=logger,
                         model=model,

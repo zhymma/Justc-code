@@ -4,4 +4,4 @@
 **/__pycache__/
 **/SUMC_RNN/
 *.bin
-**/MAWPS copy/
+**/MAWPS backup 包含fold0的完整模型参数/

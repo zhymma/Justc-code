@@ -149,10 +149,8 @@ def test_for_mwp_BERT_slover(args, false_file_name: str = None):
                 with torch.no_grad():
                     batch_data = [i.to(args.device) for i in batch]
                     logits, loss_value,discriminator_pred,_,corrector_pred = clf_model(input_ids=batch_data[0], attention_mask=batch_data[1],token_type_ids=batch_data[2], labels=batch_data[3])
-                    
                     discriminator_pred = (discriminator_pred > 0.7).float()
                     logits = (discriminator_pred==0).float() * corrector_pred + (discriminator_pred==1).float() * logits
-                    
                     logits = logits.to("cpu").numpy()
                     new_labels = batch_data[3].to("cpu").numpy()[:, 1:]
                     labels.append(new_labels)

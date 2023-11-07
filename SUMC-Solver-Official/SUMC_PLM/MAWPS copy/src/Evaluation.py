@@ -41,40 +41,36 @@ def eval_multi_clf(model, dev_data_loader, device, logger=None, T=1.0):
             TN += ((1 - discriminator_label) * (1 - discriminator_pred)).sum().item()
 
             
-            if corrector_pred is not None:
-                #! 计算纠错器的准确率，注意这里纠错的是所有的错误，包括鉴别器判定为正确的
-                corrector_label = batch_data[3][:, 1:]
-                correct_mask = (corrector_label == code_pred).all(dim=-1).float()
-                correct_mask = 1 - correct_mask
-                corrector_right += ((corrector_pred==corrector_label).all(dim=-1).float() * correct_mask).sum().item()
-                corrector_all += correct_mask.sum().item()
 
-                #! 计算最后的准确率，生成器通过鉴别器后，鉴定为错误的code，通过纠错器重新生成code
-                final_code_pred = (discriminator_pred==0).float() * corrector_pred + (discriminator_pred==1).float() * code_pred
-                final_code_right += (final_code_pred == code_label).all(dim=-1).float().sum().item()
-                final_code_all += code_label.shape[0]
+            #! 计算纠错器的准确率，注意这里纠错的是所有的错误，包括鉴别器判定为正确的
+            corrector_label = batch_data[3][:, 1:]
+            correct_mask = (corrector_label == code_pred).all(dim=-1).float()
+            correct_mask = 1 - correct_mask
+            corrector_right += ((corrector_pred==corrector_label).all(dim=-1).float() * correct_mask).sum().item()
+            corrector_all += correct_mask.sum().item()
+
+            #! 计算最后的准确率，生成器通过鉴别器后，鉴定为错误的code，通过纠错器重新生成code
+            final_code_pred = (discriminator_pred==0).float() * corrector_pred + (discriminator_pred==1).float() * code_pred
+            final_code_right += (final_code_pred == code_label).all(dim=-1).float().sum().item()
+            final_code_all += code_label.shape[0]
 
 
 
     # discriminator_pred和discriminator_label的形状为(batch_size, 1)，计算P,F1,R
     if logger is not None:
-        #! 生成器的准确率
-        logger.info('code_right: {}\tcode_total: {}\tM-tree codes acc: {}'.format(code_right, code_all, code_right / max(1,code_all)))
+        logger.info('disc_right:{},\tdisc_all:{},\tdiscriminator acc:{}'.format(disc_right,disc_all,disc_right/disc_all))
+        logger.info('precision:{}'.format(TP / (TP + FP )))
+        logger.info('recall:{}'.format(TP / (TP + FN )))
+        logger.info('F1:{}'.format(2 * TP / (2 * TP + FP + FN)))
         
-        #! 鉴别器的准确率
-        logger.info('disc_right:{},\tdisc_all:{},\tdiscriminator acc:{}'.format(disc_right,disc_all,disc_right/max(1,disc_all)))
-        logger.info('precision:{},\trecall:{},\tF1:{}'.format(TP / max(1,(TP + FP )),TP / max(1,(TP + FN )),2 * TP / max(1,(2 * TP + FP + FN))))
+        # 输出TP,TN,FN,FP
         logger.info('TP:{},TN:{},FN:{},FP:{}'.format(TP,TN,FN,FP))
-
-        #! 纠错器的准确率
-        logger.info('corrector_right: {}\tcorrector_total: {}\tcorrector acc: {}'.format(corrector_right, corrector_all, corrector_right / max(1,corrector_all)))
-        
-        #! 最后的准确率
-        logger.info('final_code_right: {}\tfinal_code_total: {}\tfinal_code acc: {}'.format(final_code_right, final_code_all, final_code_right / max(1,final_code_all)))
+        logger.info('code_right: {}\tcode_total: {}\tM-tree codes acc: {}'.format(code_right, code_all, code_right / code_all))
+        logger.info('corrector_right: {}\tcorrector_total: {}\tcorrector acc: {}'.format(corrector_right, corrector_all, corrector_right / corrector_all))
+        logger.info('final_code_right: {}\tfinal_code_total: {}\tfinal_code acc: {}'.format(final_code_right, final_code_all, final_code_right / final_code_all))
 
 
     model.train()
-
     # return count / total_len
     # return disc_right/disc_all
     return corrector_right/corrector_all

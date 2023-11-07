@@ -7,14 +7,14 @@ parser = argparse.ArgumentParser()
 #! 选择设备，保存模型的name，训练or测试
 parser.add_argument("--gpu_device", default="0", type=str)
 
-parser.add_argument("--model_name", default="discriminator2",type=str)
+parser.add_argument("--model_name", default="corrector2",type=str)
 parser.add_argument("--mode", default="train", type=str)
 
 #! 加载训练好的模型
 parser.add_argument("--fc_path", default="output/model_save_name2/best_model/fc_weight.bin", type=str)
 parser.add_argument("--pretrain_model_path",default="output/model_save_name2/best_model",type=str)# bert-base-uncased
-parser.add_argument("--discriminator_path", default=None, type=str) #output/discriminator2/best_model
-parser.add_argument("--corrector_path", default=None, type=str) 
+parser.add_argument("--discriminator_path", default="output/discriminator2/best_model", type=str) #output/discriminator2/best_model
+parser.add_argument("--corrector_path", default="output/corrector1/best_model", type=str) 
 
 parser.add_argument("--num_labels", default=28, type=int)
 
