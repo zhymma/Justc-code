@@ -189,8 +189,8 @@ class MwpBertModel_CLS(torch.nn.Module):
         
 
         #! 修改器
-        self.code_emb1 = torch.nn.Linear(in_features=num_labels, out_features=128, bias=True)
-        self.corrector = Batch_Net_CLS(128 + 768*2, fc_hidden_size, int(fc_hidden_size / 2), num_labels)
+        # self.code_emb1 = torch.nn.Linear(in_features=num_labels, out_features=128, bias=True)
+        self.corrector = Batch_Net_CLS(128 + 768 * 2, fc_hidden_size, int(fc_hidden_size / 2), num_labels)
 
         #! 加载模型
         if fc_path:
@@ -201,12 +201,14 @@ class MwpBertModel_CLS(torch.nn.Module):
             self.num_emb.load_state_dict(torch.load(disc_path+'/num_emb_weight.bin'))
             self.discriminator.load_state_dict(torch.load(disc_path+'/discriminator_weight.bin'))
         
-        if isinstance(bert_path_or_config, str):
-            self.bert1 = BertModel.from_pretrained(pretrained_model_name_or_path=bert_path_or_config) 
+        # if isinstance(bert_path_or_config, str):
+        #     self.bert1 = BertModel.from_pretrained(pretrained_model_name_or_path=bert_path_or_config) 
+        self.bert1 = BertModel.from_pretrained(pretrained_model_name_or_path="bert-base-uncased")
+
         if corrector_path is not None:
             self.code_emb1.load_state_dict(torch.load(corrector_path+'/code_emb1_weight.bin'))
             self.corrector.load_state_dict(torch.load(corrector_path+'/corrector_weight.bin'))
-            self.bert1 = BertModel.from_pretrained(pretrained_model_name_or_path=corrector_path)
+            # self.bert1 = BertModel.from_pretrained(pretrained_model_name_or_path=corrector_path)
         
         #! 设置不可训练
         self.fc.requires_grad_(False)
@@ -284,20 +286,42 @@ class MwpBertModel_CLS(torch.nn.Module):
             # loss_d = true_loss + fake_loss 
 
             #! 训练修改器，将label打乱顺序
-            code_wrong = new_labels.clone()
-            for i in range(code_wrong.shape[0]):
-                code_wrong[i] = code_wrong[i][torch.randperm(code_wrong.shape[-1])]
-            code_wrong_emb = self.code_emb1(code_wrong)
+            # code_wrong = new_labels.clone()
+            # for i in range(code_wrong.shape[0]):
+            #     code_wrong[i] = code_wrong[i][torch.randperm(code_wrong.shape[-1])]
+            # code_wrong_emb = self.code_emb1(code_wrong)
+            # corrector_emb = torch.cat([code_wrong_emb, sen_vectors1], 1)
+            # corrector_out = self.corrector(corrector_emb)
+            # loss_c = self.loss_func(corrector_out, new_labels)
+            # loss_c = loss_c.mean()
+
+            #! 训练修改器，使用错误的code_pred
+            # correcter_logits = self.corrector(sen_vectors1)
+            # loss_c = self.loss_func(correcter_logits, new_labels)
+            # loss_c = loss_c.mean()
+        
+            #! 训练修改器，使用鉴别器错误输出的code_pred
+            code_pred = torch.round(logits)
+            cor_mask = torch.eq(code_pred, new_labels).all(dim=-1,keepdim=True).float()
+            cor_mask = 1 - cor_mask
+            code_wrong_emb = self.code_emb1(code_pred)
             corrector_emb = torch.cat([code_wrong_emb, sen_vectors1], 1)
-            corrector_out = self.corrector(corrector_emb)
-            loss_c = self.loss_func(corrector_out, new_labels)
+            correcter_logits = self.corrector(corrector_emb)
+            loss_c = self.loss_func(correcter_logits, new_labels) * cor_mask * 1
+            loss_c += self.loss_func(correcter_logits, new_labels) * (1-cor_mask) * 1
             loss_c = loss_c.mean()
 
-            
+
+
             loss_g = torch.tensor(0)
             loss_d = torch.tensor(0)
             # loss_c = torch.tensor(0)
-            return logits, loss_g , loss_d, loss_c
+
+
+            correcter_logits = torch.round(correcter_logits)
+            corrector_code_right = ( torch.eq(correcter_logits, new_labels).all(dim=-1,keepdim=True).float() * cor_mask).sum().item()
+            corrector_code_all = cor_mask.sum().item()
+            return logits, loss_g , loss_d, loss_c,corrector_code_right,corrector_code_all
         
 
         else:
@@ -305,11 +329,10 @@ class MwpBertModel_CLS(torch.nn.Module):
 
             code_pred = torch.round(logits)
             real_label = torch.eq(code_pred, new_labels).all(dim=-1,keepdim=True).float()
-
-
             discriminator_pred = self.discriminator(torch.cat([self.code_emb(code_pred), self.num_emb(sen_vectors)], 1))
 
             corrector_pred = self.corrector(torch.cat([self.code_emb1(code_pred), sen_vectors1], 1))
+            # corrector_pred = self.corrector(sen_vectors1)
             corrector_pred = corrector_pred.round()
             # corrector_pred = None
 
@@ -326,9 +349,9 @@ class MwpBertModel_CLS(torch.nn.Module):
         # torch.save(self.code_emb.state_dict(), os.path.join(save_dir, 'code_emb_weight.bin'))
         # torch.save(self.num_emb.state_dict(), os.path.join(save_dir, 'num_emb_weight.bin'))
 
-        torch.save(self.corrector.state_dict(), os.path.join(save_dir, 'corrector_weight.bin'))
-        torch.save(self.code_emb1.state_dict(), os.path.join(save_dir, 'code_emb1_weight.bin'))
-        self.bert1.save_pretrained(save_dir)
+        # torch.save(self.corrector.state_dict(), os.path.join(save_dir, 'corrector_weight.bin'))
+        # torch.save(self.code_emb1.state_dict(), os.path.join(save_dir, 'code_emb1_weight.bin'))
+        # self.bert1.save_pretrained(save_dir)
         pass
 
     def get_sens_vec(self, sens: list):

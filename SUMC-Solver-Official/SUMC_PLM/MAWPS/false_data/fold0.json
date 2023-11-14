@@ -1,0 +1,3762 @@
+[
+  {
+    "id": 474,
+    "original_text": "There school 's baseball team had 31 new players and 4 returning players . If the coach put them into groups with 7 players in each group , how many groups would there be ?",
+    "segmented_text": "There school 's baseball team had 31 new players and 4 returning players . If the coach put them into groups with 7 players in each group , how many groups would there be ?",
+    "equation": "X=((31.0+4.0)/7.0)",
+    "ans": 5.0,
+    "T_question_2": "α 。 β 。 There school 's baseball team had γ new players and δ returning players . If the coach put them into groups with ε players in each group , how many groups would there be ?",
+    "T_equation": "((γ+δ)/ε)",
+    "T_number_map": {
+      "α": "1",
+      "β": "3.14",
+      "γ": "31",
+      "δ": "4",
+      "ε": "7"
+    },
+    "new_ans": "5.0",
+    "num_positions": [
+      0,
+      2,
+      10,
+      14,
+      26
+    ],
+    "T_equation_simplified": "γ/ε+δ/ε",
+    "final_equation": "γ/ε+δ/ε",
+    "num_codes": {
+      "γ": [
+        "0_0_+_*"
+      ],
+      "ε": [
+        "0_1_+_*",
+        "0_1_+_*@"
+      ],
+      "δ": [
+        "0_0_+_*@"
+      ]
+    },
+    "codes_pre_results": [
+      1,
+      1,
+      1,
+      0,
+      1
+    ],
+    "pre_final_expression": "Failed"
+  },
+  {
+    "id": 481,
+    "original_text": "There school 's baseball team had 12 new players and 44 returning players . If the coach put them into groups with 8 players in each group , how many groups would there be ?",
+    "segmented_text": "There school 's baseball team had 12 new players and 44 returning players . If the coach put them into groups with 8 players in each group , how many groups would there be ?",
+    "equation": "X=((12.0+44.0)/8.0)",
+    "ans": 7.0,
+    "T_question_2": "α 。 β 。 There school 's baseball team had γ new players and δ returning players . If the coach put them into groups with ε players in each group , how many groups would there be ?",
+    "T_equation": "((γ+δ)/ε)",
+    "T_number_map": {
+      "α": "1",
+      "β": "3.14",
+      "γ": "12",
+      "δ": "44",
+      "ε": "8"
+    },
+    "new_ans": "7.0",
+    "num_positions": [
+      0,
+      2,
+      10,
+      14,
+      26
+    ],
+    "T_equation_simplified": "γ/ε+δ/ε",
+    "final_equation": "γ/ε+δ/ε",
+    "num_codes": {
+      "γ": [
+        "0_0_+_*"
+      ],
+      "ε": [
+        "0_1_+_*",
+        "0_1_+_*@"
+      ],
+      "δ": [
+        "0_0_+_*@"
+      ]
+    },
+    "codes_pre_results": [
+      1,
+      1,
+      1,
+      0,
+      1
+    ],
+    "pre_final_expression": "Failed"
+  },
+  {
+    "id": 484,
+    "original_text": "Sam had 79 dollars to spend on 9 books . After buying them he had 16 dollars . How much did each book cost ?",
+    "segmented_text": "Sam had 79 dollars to spend on 9 books . After buying them he had 16 dollars . How much did each book cost ?",
+    "equation": "x=(79-16)/9",
+    "ans": 7.0,
+    "T_question_2": "α 。 β 。 Sam had γ dollars to spend on δ books . After buying them he had ε dollars . How much did each book cost ?",
+    "T_equation": "(γ-ε)/δ",
+    "T_number_map": {
+      "α": "1",
+      "β": "3.14",
+      "γ": "79",
+      "δ": "9",
+      "ε": "16"
+    },
+    "new_ans": "7.0",
+    "num_positions": [
+      0,
+      2,
+      6,
+      11,
+      19
+    ],
+    "T_equation_simplified": "γ/δ-ε/δ",
+    "final_equation": "γ/δ-ε/δ",
+    "num_codes": {
+      "γ": [
+        "0_0_+_*"
+      ],
+      "δ": [
+        "0_1_+_*",
+        "0_1_+_*-"
+      ],
+      "ε": [
+        "0_0_+_*-"
+      ]
+    },
+    "codes_pre_results": [
+      1,
+      1,
+      1,
+      0,
+      0
+    ],
+    "pre_final_expression": "γ*1/δ*ε"
+  },
+  {
+    "id": 485,
+    "original_text": "April 's discount flowers was having a sale where each flower was 8 dollars . If Vanessa bought 3 roses and 3 daisies , how much did she spend ?",
+    "segmented_text": "April 's discount flowers was having a sale where each flower was 8 dollars . If Vanessa bought 3 roses and 3 daisies , how much did she spend ?",
+    "equation": "X=(8.0*(3.0+3.0))",
+    "ans": 48.0,
+    "T_question_2": "α 。 β 。 April 's discount flowers was having a sale where each flower was γ dollars . If Vanessa bought δ roses and ε daisies , how much did she spend ?",
+    "T_equation": "(γ*(ε+ε))",
+    "T_number_map": {
+      "α": "1",
+      "β": "3.14",
+      "γ": "8",
+      "δ": "3",
+      "ε": "3"
+    },
+    "new_ans": "48.0",
+    "num_positions": [
+      0,
+      2,
+      16,
+      22,
+      25
+    ],
+    "T_equation_simplified": "2*γ*ε",
+    "final_equation": "(γ*(ε+ε))",
+    "num_codes": {
+      "γ": [
+        "0_0_+_*"
+      ],
+      "ε": [
+        "0_0_+_*_+",
+        "0_0_+_*_+"
+      ]
+    },
+    "codes_pre_results": [
+      1,
+      1,
+      1,
+      0,
+      0
+    ],
+    "pre_final_expression": "Failed"
+  },
+  {
+    "id": 502,
+    "original_text": "Think of a number , 0.5 it and the result is 9 . Find the number .",
+    "segmented_text": "Think of a number , 0.5 it and the result is 9 . Find the number .",
+    "equation": "x=9.0/0.5",
+    "ans": 18.0,
+    "T_question_2": "α 。 β 。 Think of a number , γ it and the result is δ . Find the number .",
+    "T_equation": "δ/γ",
+    "T_number_map": {
+      "α": "1",
+      "β": "3.14",
+      "γ": "0.5",
+      "δ": "9"
+    },
+    "new_ans": "18.0",
+    "num_positions": [
+      0,
+      2,
+      9,
+      15
+    ],
+    "T_equation_simplified": "δ/γ",
+    "final_equation": "δ/γ",
+    "num_codes": {
+      "δ": [
+        "0_0_+_*"
+      ],
+      "γ": [
+        "0_1_+_*"
+      ]
+    },
+    "codes_pre_results": [
+      1,
+      1,
+      0,
+      0
+    ],
+    "pre_final_expression": "(γ+δ)"
+  },
+  {
+    "id": 504,
+    "original_text": "There were 2 friends playing a video game online when 2 more players joined the game . If each player had 8 lives , how many lives did they have total ?",
+    "segmented_text": "There were 2 friends playing a video game online when 2 more players joined the game . If each player had 8 lives , how many lives did they have total ?",
+    "equation": "X=(8.0*(2.0+2.0))",
+    "ans": 32.0,
+    "T_question_2": "α 。 β 。 There were γ friends playing a video game online when δ more players joined the game . If each player had ε lives , how many lives did they have total ?",
+    "T_equation": "(ε*(δ+δ))",
+    "T_number_map": {
+      "α": "1",
+      "β": "3.14",
+      "γ": "2",
+      "δ": "2",
+      "ε": "8"
+    },
+    "new_ans": "32.0",
+    "num_positions": [
+      0,
+      2,
+      6,
+      14,
+      25
+    ],
+    "T_equation_simplified": "2*δ*ε",
+    "final_equation": "(ε*(δ+δ))",
+    "num_codes": {
+      "ε": [
+        "0_0_+_*"
+      ],
+      "δ": [
+        "0_0_+_*_+",
+        "0_0_+_*_+"
+      ]
+    },
+    "codes_pre_results": [
+      1,
+      1,
+      1,
+      0,
+      0
+    ],
+    "pre_final_expression": "Failed"
+  },
+  {
+    "id": 506,
+    "original_text": "Kaleb was collecting cans for recycling . On Saturday he filled 4 bags up and on Sunday he filled 6 more bags . If each bag had 4 cans in it , how many cans did he pick up total ?",
+    "segmented_text": "Kaleb was collecting cans for recycling . On Saturday he filled 4 bags up and on Sunday he filled 6 more bags . If each bag had 4 cans in it , how many cans did he pick up total ?",
+    "equation": "X=(4.0*(4.0+6.0))",
+    "ans": 40.0,
+    "T_question_2": "α 。 β 。 Kaleb was collecting cans for recycling . On Saturday he filled γ bags up and on Sunday he filled δ more bags . If each bag had ε cans in it , how many cans did he pick up total ?",
+    "T_equation": "(ε*(ε+δ))",
+    "T_number_map": {
+      "α": "1",
+      "β": "3.14",
+      "γ": "4",
+      "δ": "6",
+      "ε": "4"
+    },
+    "new_ans": "40.0",
+    "num_positions": [
+      0,
+      2,
+      15,
+      23,
+      31
+    ],
+    "T_equation_simplified": "δ*ε+ε*ε",
+    "final_equation": "δ*ε+ε*ε",
+    "num_codes": {
+      "δ": [
+        "0_0_+_*"
+      ],
+      "ε": [
+        "0_0_+_*",
+        "0_0_+_*@",
+        "0_0_+_*@"
+      ]
+    },
+    "codes_pre_results": [
+      1,
+      1,
+      1,
+      0,
+      0
+    ],
+    "pre_final_expression": "Failed"
+  },
+  {
+    "id": 507,
+    "original_text": "A quiz is worth 40 points . You want a 35 point average for all 5 quizzes . You already took 4 quizzes with scores of 32 , 38 , 36 and 33 . What must your score be on your final quiz to reach your average ?",
+    "segmented_text": "A quiz is worth 40 points . You want a 35 point average for all 5 quizzes . You already took 4 quizzes with scores of 32 , 38 , 36 and 33 . What must your score be on your final quiz to reach your average ?",
+    "equation": "x=35.0*5.0-(((32.0+38.0)+36.0)+33.0)",
+    "ans": 36.0,
+    "T_question_2": "α 。 β 。 A quiz is worth γ points . You want a δ point average for all ε quizzes . You already took ζ quizzes with scores of η , θ , ι and κ . What must your score be on your final quiz to reach your average ?",
+    "T_equation": "δ*ε-(((η+θ)+ι)+κ)",
+    "T_number_map": {
+      "α": "1",
+      "β": "3.14",
+      "γ": "40",
+      "δ": "35",
+      "ε": "5",
+      "ζ": "4",
+      "η": "32",
+      "θ": "38",
+      "ι": "36",
+      "κ": "33"
+    },
+    "new_ans": "36.0",
+    "num_positions": [
+      0,
+      2,
+      8,
+      14,
+      19,
+      25,
+      30,
+      32,
+      34,
+      36
+    ],
+    "T_equation_simplified": "δ*ε-η-θ-ι-κ",
+    "final_equation": "δ*ε-η-θ-ι-κ",
+    "num_codes": {
+      "η": [
+        "1_0_+"
+      ],
+      "θ": [
+        "1_0_+"
+      ],
+      "ι": [
+        "1_0_+"
+      ],
+      "κ": [
+        "1_0_+"
+      ],
+      "δ": [
+        "0_0_+_*"
+      ],
+      "ε": [
+        "0_0_+_*"
+      ]
+    },
+    "codes_pre_results": [
+      1,
+      1,
+      0,
+      0,
+      0,
+      1,
+      0,
+      0,
+      0,
+      0
+    ],
+    "pre_final_expression": "(θ+ι+κ+γ*1/ε)"
+  },
+  {
+    "id": 513,
+    "original_text": "A recipe calls for 2 cups of sugar . You find that you only have 0.3333 cups of sugar left . What fraction of the recipe can you make ?",
+    "segmented_text": "A recipe calls for 2 cups of sugar . You find that you only have 0.3333 cups of sugar left . What fraction of the recipe can you make ?",
+    "equation": "x=0.3333/2.0",
+    "ans": 0.165,
+    "T_question_2": "α 。 β 。 A recipe calls for γ cups of sugar . You find that you only have δ cups of sugar left . What fraction of the recipe can you make ?",
+    "T_equation": "δ/γ",
+    "T_number_map": {
+      "α": "1",
+      "β": "3.14",
+      "γ": "2",
+      "δ": "0.3333"
+    },
+    "new_ans": "0.165",
+    "num_positions": [
+      0,
+      2,
+      8,
+      19
+    ],
+    "T_equation_simplified": "δ/γ",
+    "final_equation": "δ/γ",
+    "num_codes": {
+      "δ": [
+        "0_0_+_*"
+      ],
+      "γ": [
+        "0_1_+_*"
+      ]
+    },
+    "codes_pre_results": [
+      1,
+      1,
+      0,
+      0
+    ],
+    "pre_final_expression": "(γ+(-δ))"
+  },
+  {
+    "id": 515,
+    "original_text": "Mrs. Hilt and her sister drove to a concert 78 miles away . They drove 32 miles and then stopped for gas . Her sister put 28 gallons of gas in the   car . How many miles did they have left to drive ?",
+    "segmented_text": "Mrs. Hilt and her sister drove to a concert 78 miles away . They drove 32 miles and then stopped for gas . Her sister put 28 gallons of gas in the   car . How many miles did they have left to drive ?",
+    "equation": "X=(78.0-32.0)",
+    "ans": 46.0,
+    "T_question_2": "α 。 β 。 Mrs. Hilt and her sister drove to a concert γ miles away . They drove δ miles and then stopped for gas . Her sister put ε gallons of gas in the car . How many miles did they have left to drive ?",
+    "T_equation": "(γ-δ)",
+    "T_number_map": {
+      "α": "1",
+      "β": "3.14",
+      "γ": "78",
+      "δ": "32",
+      "ε": "28"
+    },
+    "new_ans": "46.0",
+    "num_positions": [
+      0,
+      2,
+      13,
+      19,
+      30
+    ],
+    "T_equation_simplified": "γ-δ",
+    "final_equation": "γ-δ",
+    "num_codes": {
+      "γ": [
+        "0_0_+"
+      ],
+      "δ": [
+        "1_0_+"
+      ]
+    },
+    "codes_pre_results": [
+      1,
+      1,
+      1,
+      1,
+      0
+    ],
+    "pre_final_expression": "Failed"
+  },
+  {
+    "id": 517,
+    "original_text": "A study reported that in a random sampling of 100 women over the age of 35 , 8 of the women were married 2 or more times . Based on the study results , how many woman in a group of 5000 women over the age of 35 would likely be married 2 or more times ?",
+    "segmented_text": "A study reported that in a random sampling of 100 women over the age of 35 , 8 of the women were married 2 or more times . Based on the study results , how many woman in a group of 5000 women over the age of 35 would likely be married 2 or more times ?",
+    "equation": "x=(8.0/100.0)*5000.0",
+    "ans": 400.0,
+    "T_question_2": "α 。 β 。 A study reported that in a random sampling of γ women over the age of δ , ε of the women were married ζ or more times . Based on the study results , how many woman in a group of η women over the age of θ would likely be married ι or more times ?",
+    "T_equation": "(ε/γ)*η",
+    "T_number_map": {
+      "α": "1",
+      "β": "3.14",
+      "γ": "100",
+      "δ": "35",
+      "ε": "8",
+      "ζ": "2",
+      "η": "5000",
+      "θ": "35",
+      "ι": "2"
+    },
+    "new_ans": "400.0",
+    "num_positions": [
+      0,
+      2,
+      13,
+      19,
+      21,
+      27,
+      45,
+      51,
+      56
+    ],
+    "T_equation_simplified": "ε*η/γ",
+    "final_equation": "ε*η/γ",
+    "num_codes": {
+      "ε": [
+        "0_0_+_*"
+      ],
+      "η": [
+        "0_0_+_*"
+      ],
+      "γ": [
+        "0_1_+_*"
+      ]
+    },
+    "codes_pre_results": [
+      1,
+      1,
+      0,
+      0,
+      0,
+      0,
+      1,
+      0,
+      0
+    ],
+    "pre_final_expression": "Failed"
+  },
+  {
+    "id": 523,
+    "original_text": "Sunday morning was spent for making wood carvings which can be sold as souvenir for tourists . They were placed in shelves that can contain 8 wood carvings at a time . If 56 wood carvings were displayed , how many shelves were filled with carvings ?",
+    "segmented_text": "Sunday morning was spent for making wood carvings which can be sold as souvenir for tourists . They were placed in shelves that can contain 8 wood carvings at a time . If 56 wood carvings were displayed , how many shelves were filled with carvings ?",
+    "equation": "x=56/8",
+    "ans": 7.0,
+    "T_question_2": "α 。 β 。 Sunday morning was spent for making wood carvings which can be sold as souvenir for tourists . They were placed in shelves that can contain γ wood carvings at a time . If δ wood carvings were displayed , how many shelves were filled with carvings ?",
+    "T_equation": "δ/γ",
+    "T_number_map": {
+      "α": "1",
+      "β": "3.14",
+      "γ": "8",
+      "δ": "56"
+    },
+    "new_ans": "7.0",
+    "num_positions": [
+      0,
+      2,
+      29,
+      37
+    ],
+    "T_equation_simplified": "δ/γ",
+    "final_equation": "δ/γ",
+    "num_codes": {
+      "δ": [
+        "0_0_+_*"
+      ],
+      "γ": [
+        "0_1_+_*"
+      ]
+    },
+    "codes_pre_results": [
+      1,
+      1,
+      0,
+      1
+    ],
+    "pre_final_expression": "Failed"
+  },
+  {
+    "id": 530,
+    "original_text": "A garden has 52 rows and 15 columns of bean plans . How many plants are there in all ?",
+    "segmented_text": "A garden has 52 rows and 15 columns of bean plans . How many plants are there in all ?",
+    "equation": "X=(52.0*15.0)",
+    "ans": 780.0,
+    "T_question_2": "α 。 β 。 A garden has γ rows and δ columns of bean plans . How many plants are there in all ?",
+    "T_equation": "(γ*δ)",
+    "T_number_map": {
+      "α": "1",
+      "β": "3.14",
+      "γ": "52",
+      "δ": "15"
+    },
+    "new_ans": "780.0",
+    "num_positions": [
+      0,
+      2,
+      7,
+      10
+    ],
+    "T_equation_simplified": "γ*δ",
+    "final_equation": "γ*δ",
+    "num_codes": {
+      "γ": [
+        "0_0_+_*"
+      ],
+      "δ": [
+        "0_0_+_*"
+      ]
+    },
+    "codes_pre_results": [
+      1,
+      1,
+      0,
+      0
+    ],
+    "pre_final_expression": "(γ+δ)"
+  },
+  {
+    "id": 536,
+    "original_text": "3 times a number is the same as the difference of 2 twice the number and 7 . Find the number .",
+    "segmented_text": "3 times a number is the same as the difference of 2 twice the number and 7 . Find the number .",
+    "equation": "x=7.0/(2.0-3.0)",
+    "ans": -7.0,
+    "T_question_2": "α 。 β 。 γ times a number is the same as the difference of δ twice the number and ε . Find the number .",
+    "T_equation": "ε/(δ-γ)",
+    "T_number_map": {
+      "α": "1",
+      "β": "3.14",
+      "γ": "3",
+      "δ": "2",
+      "ε": "7"
+    },
+    "new_ans": "-7.0",
+    "num_positions": [
+      0,
+      2,
+      4,
+      15,
+      20
+    ],
+    "T_equation_simplified": "-ε/(γ-δ)",
+    "final_equation": "-ε/(γ-δ)",
+    "num_codes": {
+      "ε": [
+        "0_0_+_*-"
+      ],
+      "γ": [
+        "0_0_+_*-_+/"
+      ],
+      "δ": [
+        "1_0_+_*-_+/"
+      ]
+    },
+    "codes_pre_results": [
+      1,
+      1,
+      0,
+      0,
+      0
+    ],
+    "pre_final_expression": "Failed"
+  },
+  {
+    "id": 538,
+    "original_text": "Steve invests in a circus production . The coast includes an overhead of 81000 dollars , plus production costs of 7000 dollars per performance . A sold - out performance brings in 16000 dollars , Determine the number of sold - out performances , x , needed to break even .",
+    "segmented_text": "Steve invests in a circus production . The coast includes an overhead of 81000 dollars , plus production costs of 7000 dollars per performance . A sold - out performance brings in 16000 dollars , Determine the number of sold - out performances , x , needed to break even .",
+    "equation": "x=81000.0/(16000.0-7000.0)",
+    "ans": 9.0,
+    "T_question_2": "α 。 β 。 Steve invests in a circus production . The coast includes an overhead of γ dollars , plus production costs of δ dollars per performance . A sold - out performance brings in ε dollars , Determine the number of sold - out performances , x , needed to break even .",
+    "T_equation": "γ/(ε-δ)",
+    "T_number_map": {
+      "α": "1",
+      "β": "3.14",
+      "γ": "81000",
+      "δ": "7000",
+      "ε": "16000"
+    },
+    "new_ans": "9.0",
+    "num_positions": [
+      0,
+      2,
+      17,
+      24,
+      36
+    ],
+    "T_equation_simplified": "-γ/(δ-ε)",
+    "final_equation": "-γ/(δ-ε)",
+    "num_codes": {
+      "γ": [
+        "0_0_+_*-"
+      ],
+      "δ": [
+        "0_0_+_*-_+/"
+      ],
+      "ε": [
+        "1_0_+_*-_+/"
+      ]
+    },
+    "codes_pre_results": [
+      1,
+      1,
+      1,
+      0,
+      0
+    ],
+    "pre_final_expression": "((-(γ*1/δ))+1/δ*ε)"
+  },
+  {
+    "id": 548,
+    "original_text": "Edward and his friend were buying trick decks from the magic shop for 9 dollars each . How much did they spend if Edward bought 4 decks and his friend bought 4 decks ?",
+    "segmented_text": "Edward and his friend were buying trick decks from the magic shop for 9 dollars each . How much did they spend if Edward bought 4 decks and his friend bought 4 decks ?",
+    "equation": "X=(9.0*(4.0+4.0))",
+    "ans": 72.0,
+    "T_question_2": "α 。 β 。 Edward and his friend were buying trick decks from the magic shop for γ dollars each . How much did they spend if Edward bought δ decks and his friend bought ε decks ?",
+    "T_equation": "(γ*(ε+ε))",
+    "T_number_map": {
+      "α": "1",
+      "β": "3.14",
+      "γ": "9",
+      "δ": "4",
+      "ε": "4"
+    },
+    "new_ans": "72.0",
+    "num_positions": [
+      0,
+      2,
+      17,
+      29,
+      35
+    ],
+    "T_equation_simplified": "2*γ*ε",
+    "final_equation": "(γ*(ε+ε))",
+    "num_codes": {
+      "γ": [
+        "0_0_+_*"
+      ],
+      "ε": [
+        "0_0_+_*_+",
+        "0_0_+_*_+"
+      ]
+    },
+    "codes_pre_results": [
+      1,
+      1,
+      0,
+      0,
+      0
+    ],
+    "pre_final_expression": "(δ*ε+ε*ε)"
+  },
+  {
+    "id": 553,
+    "original_text": "A group of 4 friends went into a restaurant . The chef already had 9 chicken wings cooked but cooked 7 more for the group . If they each got the same amount how many would each person get ?",
+    "segmented_text": "A group of 4 friends went into a restaurant . The chef already had 9 chicken wings cooked but cooked 7 more for the group . If they each got the same amount how many would each person get ?",
+    "equation": "X=((9.0+7.0)/4.0)",
+    "ans": 4.0,
+    "T_question_2": "α 。 β 。 A group of γ friends went into a restaurant . The chef already had δ chicken wings cooked but cooked ε more for the group . If they each got the same amount how many would each person get ?",
+    "T_equation": "((δ+ε)/γ)",
+    "T_number_map": {
+      "α": "1",
+      "β": "3.14",
+      "γ": "4",
+      "δ": "9",
+      "ε": "7"
+    },
+    "new_ans": "4.0",
+    "num_positions": [
+      0,
+      2,
+      7,
+      18,
+      24
+    ],
+    "T_equation_simplified": "δ/γ+ε/γ",
+    "final_equation": "δ/γ+ε/γ",
+    "num_codes": {
+      "δ": [
+        "0_0_+_*"
+      ],
+      "γ": [
+        "0_1_+_*",
+        "0_1_+_*@"
+      ],
+      "ε": [
+        "0_0_+_*@"
+      ]
+    },
+    "codes_pre_results": [
+      1,
+      1,
+      0,
+      1,
+      1
+    ],
+    "pre_final_expression": "Failed"
+  },
+  {
+    "id": 571,
+    "original_text": "Justin needs 61 paper plates for a birthday party . He already has 26 blue plates and 7 red plates . How many more plates should Justin buy ?",
+    "segmented_text": "Justin needs 61 paper plates for a birthday party . He already has 26 blue plates and 7 red plates . How many more plates should Justin buy ?",
+    "equation": "x=61-(26+7)",
+    "ans": 28.0,
+    "T_question_2": "α 。 β 。 Justin needs γ paper plates for a birthday party . He already has δ blue plates and ε red plates . How many more plates should Justin buy ?",
+    "T_equation": "γ-(δ+ε)",
+    "T_number_map": {
+      "α": "1",
+      "β": "3.14",
+      "γ": "61",
+      "δ": "26",
+      "ε": "7"
+    },
+    "new_ans": "28.0",
+    "num_positions": [
+      0,
+      2,
+      6,
+      17,
+      21
+    ],
+    "T_equation_simplified": "γ-δ-ε",
+    "final_equation": "γ-δ-ε",
+    "num_codes": {
+      "γ": [
+        "0_0_+"
+      ],
+      "δ": [
+        "1_0_+"
+      ],
+      "ε": [
+        "1_0_+"
+      ]
+    },
+    "codes_pre_results": [
+      1,
+      1,
+      1,
+      1,
+      0
+    ],
+    "pre_final_expression": "(γ+(-δ)+ε)"
+  },
+  {
+    "id": 586,
+    "original_text": "Bryan has 50 skittles . Ben has 20 M&M ’s . Who has more ? How many more does he have ?",
+    "segmented_text": "Bryan has 50 skittles . Ben has 20 M&M ’s . Who has more ? How many more does he have ?",
+    "equation": "X=(50.0-20.0)",
+    "ans": 30.0,
+    "T_question_2": "α 。 β 。 Bryan has γ skittles . Ben has δ M&M ’s . Who has more ? How many more does he have ?",
+    "T_equation": "(γ-δ)",
+    "T_number_map": {
+      "α": "1",
+      "β": "3.14",
+      "γ": "50",
+      "δ": "20"
+    },
+    "new_ans": "30.0",
+    "num_positions": [
+      0,
+      2,
+      6,
+      11
+    ],
+    "T_equation_simplified": "γ-δ",
+    "final_equation": "γ-δ",
+    "num_codes": {
+      "γ": [
+        "0_0_+"
+      ],
+      "δ": [
+        "1_0_+"
+      ]
+    },
+    "codes_pre_results": [
+      1,
+      1,
+      1,
+      0
+    ],
+    "pre_final_expression": "(γ+δ)"
+  },
+  {
+    "id": 587,
+    "original_text": "Christina just transferred $ 69 out of her bank account . As a result , the account now has $ 26935 left in it . How much money was in the account before the transfer ?",
+    "segmented_text": "Christina just transferred $ 69 out of her bank account . As a result , the account now has $ 26935 left in it . How much money was in the account before the transfer ?",
+    "equation": "x=69+26935",
+    "ans": 27004.0,
+    "T_question_2": "α 。 β 。 Christina just transferred $ γ out of her bank account . As a result , the account now has $ δ left in it . How much money was in the account before the transfer ?",
+    "T_equation": "γ+δ",
+    "T_number_map": {
+      "α": "1",
+      "β": "3.14",
+      "γ": "69",
+      "δ": "26935"
+    },
+    "new_ans": "27004.0",
+    "num_positions": [
+      0,
+      2,
+      8,
+      24
+    ],
+    "T_equation_simplified": "γ+δ",
+    "final_equation": "γ+δ",
+    "num_codes": {
+      "γ": [
+        "0_0_+"
+      ],
+      "δ": [
+        "0_0_+"
+      ]
+    },
+    "codes_pre_results": [
+      1,
+      1,
+      1,
+      0
+    ],
+    "pre_final_expression": "(γ+(-δ))"
+  },
+  {
+    "id": 589,
+    "original_text": "Marta picked 2 pumpkins . The first pumpkin weighed 4 pounds , and the second pumpkin weighed 8.7 pounds . How much did the 2 pumpkins weigh all together ?",
+    "segmented_text": "Marta picked 2 pumpkins . The first pumpkin weighed 4 pounds , and the second pumpkin weighed 8.7 pounds . How much did the 2 pumpkins weigh all together ?",
+    "equation": "X=4.0+8.7",
+    "ans": "12.7",
+    "T_question_2": "α 。 β 。 Marta picked γ pumpkins . The first pumpkin weighed δ pounds , and the second pumpkin weighed ε pounds . How much did the ζ pumpkins weigh all together ?",
+    "T_equation": "δ+ε",
+    "T_number_map": {
+      "α": "1",
+      "β": "3.14",
+      "γ": "2",
+      "δ": "4",
+      "ε": "8.7",
+      "ζ": "2"
+    },
+    "new_ans": "12.7",
+    "num_positions": [
+      0,
+      2,
+      6,
+      13,
+      21,
+      28
+    ],
+    "T_equation_simplified": "δ+ε",
+    "final_equation": "δ+ε",
+    "num_codes": {
+      "δ": [
+        "0_0_+"
+      ],
+      "ε": [
+        "0_0_+"
+      ]
+    },
+    "codes_pre_results": [
+      1,
+      1,
+      0,
+      1,
+      1,
+      1
+    ],
+    "pre_final_expression": "(γ+δ+ε)"
+  },
+  {
+    "id": 592,
+    "original_text": "A container ship left from Dania Pier and traveled north . An aircraft carrier left 4 hours later traveling at 30 miles per hour in an effort to catch up to the container ship . After traveling for 8 hours the aircraft carrier finally caught up . What was the container ship 's average speed in miles per hour ?",
+    "segmented_text": "A container ship left from Dania Pier and traveled north . An aircraft carrier left 4 hours later traveling at 30 miles per hour in an effort to catch up to the container ship . After traveling for 8 hours the aircraft carrier finally caught up . What was the container ship 's average speed in miles per hour ?",
+    "equation": "x=8.0*30.0/(4.0+8.0)",
+    "ans": 20.0,
+    "T_question_2": "α 。 β 。 A container ship left from Dania Pier and traveled north . An aircraft carrier left γ hours later traveling at δ miles per hour in an effort to catch up to the container ship . After traveling for ε hours the aircraft carrier finally caught up . What was the container ship 's average speed in miles per hour ?",
+    "T_equation": "ε*δ/(γ+ε)",
+    "T_number_map": {
+      "α": "1",
+      "β": "3.14",
+      "γ": "4",
+      "δ": "30",
+      "ε": "8"
+    },
+    "new_ans": "20.0",
+    "num_positions": [
+      0,
+      2,
+      19,
+      24,
+      42
+    ],
+    "T_equation_simplified": "δ*ε/(γ+ε)",
+    "final_equation": "δ*ε/(γ+ε)",
+    "num_codes": {
+      "δ": [
+        "0_0_+_*"
+      ],
+      "ε": [
+        "0_0_+_*",
+        "0_0_+_*_+/"
+      ],
+      "γ": [
+        "0_0_+_*_+/"
+      ]
+    },
+    "codes_pre_results": [
+      1,
+      1,
+      0,
+      0,
+      0
+    ],
+    "pre_final_expression": "Failed"
+  },
+  {
+    "id": 595,
+    "original_text": "Willy has 1400 crayons . Lucy has 290 crayons . How many more crayons does Willy have then Lucy ?",
+    "segmented_text": "Willy has 1400 crayons . Lucy has 290 crayons . How many more crayons does Willy have then Lucy ?",
+    "equation": "x=1400-290",
+    "ans": 1110.0,
+    "T_question_2": "α 。 β 。 Willy has γ crayons . Lucy has δ crayons . How many more crayons does Willy have then Lucy ?",
+    "T_equation": "γ-δ",
+    "T_number_map": {
+      "α": "1",
+      "β": "3.14",
+      "γ": "1400",
+      "δ": "290"
+    },
+    "new_ans": "1110.0",
+    "num_positions": [
+      0,
+      2,
+      6,
+      11
+    ],
+    "T_equation_simplified": "γ-δ",
+    "final_equation": "γ-δ",
+    "num_codes": {
+      "γ": [
+        "0_0_+"
+      ],
+      "δ": [
+        "1_0_+"
+      ]
+    },
+    "codes_pre_results": [
+      1,
+      1,
+      1,
+      0
+    ],
+    "pre_final_expression": "(γ+δ)"
+  },
+  {
+    "id": 596,
+    "original_text": "A pot contains 4 liters of brine at a concentration of 80 grams per liter . How much of the water should be boiled off to increase the concentration to 200 grams per liter ?",
+    "segmented_text": "A pot contains 4 liters of brine at a concentration of 80 grams per liter . How much of the water should be boiled off to increase the concentration to 200 grams per liter ?",
+    "equation": "x=4.0-4.0*80.0/200.0",
+    "ans": 2.4,
+    "T_question_2": "α 。 β 。 A pot contains γ liters of brine at a concentration of δ grams per liter . How much of the water should be boiled off to increase the concentration to ε grams per liter ?",
+    "T_equation": "γ-γ*δ/ε",
+    "T_number_map": {
+      "α": "1",
+      "β": "3.14",
+      "γ": "4",
+      "δ": "80",
+      "ε": "200"
+    },
+    "new_ans": "2.4",
+    "num_positions": [
+      0,
+      2,
+      7,
+      15,
+      34
+    ],
+    "T_equation_simplified": "γ-γ*δ/ε",
+    "final_equation": "γ-γ*δ/ε",
+    "num_codes": {
+      "γ": [
+        "0_0_+",
+        "0_0_+_*-"
+      ],
+      "δ": [
+        "0_0_+_*-"
+      ],
+      "ε": [
+        "0_1_+_*-"
+      ]
+    },
+    "codes_pre_results": [
+      1,
+      1,
+      0,
+      0,
+      0
+    ],
+    "pre_final_expression": "Failed"
+  },
+  {
+    "id": 602,
+    "original_text": "Mrs. Hilt impressed 2436 fans at the basketball game on Friday . If the fans were seated in equal groups on 3 sets of bleachers , how many   fans were on each set ?",
+    "segmented_text": "Mrs. Hilt impressed 2436 fans at the basketball game on Friday . If the fans were seated in equal groups on 3 sets of bleachers , how many   fans were on each set ?",
+    "equation": "X=(2436.0/3.0)",
+    "ans": 812.0,
+    "T_question_2": "α 。 β 。 Mrs. Hilt impressed γ fans at the basketball game on Friday . If the fans were seated in equal groups on δ sets of bleachers , how many fans were on each set ?",
+    "T_equation": "(γ/δ)",
+    "T_number_map": {
+      "α": "1",
+      "β": "3.14",
+      "γ": "2436",
+      "δ": "3"
+    },
+    "new_ans": "812.0",
+    "num_positions": [
+      0,
+      2,
+      7,
+      25
+    ],
+    "T_equation_simplified": "γ/δ",
+    "final_equation": "γ/δ",
+    "num_codes": {
+      "γ": [
+        "0_0_+_*"
+      ],
+      "δ": [
+        "0_1_+_*"
+      ]
+    },
+    "codes_pre_results": [
+      1,
+      1,
+      1,
+      0
+    ],
+    "pre_final_expression": "γ*δ"
+  },
+  {
+    "id": 608,
+    "original_text": "The Sears Tower in Chicago is 1450 feet tall . The John Hancock Center in Chicago is 1127 feet tall . Suppose you are asked to build a small - scale replica of each . If you make the Sears Tower 3 meter tall , what would be the approximate h8 of the John Hancock replica ? Round your answer to the nearest hundredth .",
+    "segmented_text": "The Sears Tower in Chicago is 1450 feet tall . The John Hancock Center in Chicago is 1127 feet tall . Suppose you are asked to build a small - scale replica of each . If you make the Sears Tower 3 meter tall , what would be the approximate h8 of the John Hancock replica ? Round your answer to the nearest hundredth .",
+    "equation": "x=3.0/(1450.0/1127.0)",
+    "ans": 2.33,
+    "T_question_2": "α 。 β 。 The Sears Tower in Chicago is γ feet tall . The John Hancock Center in Chicago is δ feet tall . Suppose you are asked to build a small - scale replica of each . If you make the Sears Tower ε meter tall , what would be the approximate h8 of the John Hancock replica ? Round your answer to the nearest hundredth .",
+    "T_equation": "ε/(γ/δ)",
+    "T_number_map": {
+      "α": "1",
+      "β": "3.14",
+      "γ": "1450",
+      "δ": "1127",
+      "ε": "3"
+    },
+    "new_ans": "2.33",
+    "num_positions": [
+      0,
+      2,
+      10,
+      21,
+      45
+    ],
+    "T_equation_simplified": "δ*ε/γ",
+    "final_equation": "δ*ε/γ",
+    "num_codes": {
+      "δ": [
+        "0_0_+_*"
+      ],
+      "ε": [
+        "0_0_+_*"
+      ],
+      "γ": [
+        "0_1_+_*"
+      ]
+    },
+    "codes_pre_results": [
+      1,
+      1,
+      0,
+      1,
+      1
+    ],
+    "pre_final_expression": "(γ+δ*ε)"
+  },
+  {
+    "id": 612,
+    "original_text": "Tom Quig travelled 270 miles east of St Louis . For most of the trip he travelled 70 miles per hour , but for one period of time he was slowed to 20 miles per hour due to a major accident . If the total time of travel was 6 hours , how many miles did he drive at the reduced speed ?",
+    "segmented_text": "Tom Quig travelled 270 miles east of St Louis . For most of the trip he travelled 70 miles per hour , but for one period of time he was slowed to 20 miles per hour due to a major accident . If the total time of travel was 6 hours , how many miles did he drive at the reduced speed ?",
+    "equation": "x=(6.0*20.0*70.0-20.0*270.0)/(70.0-20.0)",
+    "ans": 60.0,
+    "T_question_2": "α 。 β 。 Tom Quig travelled γ miles east of St Louis . For most of the trip he travelled δ miles per hour , but for one period of time he was slowed to ε miles per hour due to a major accident . If the total time of travel was ζ hours , how many miles did he drive at the reduced speed ?",
+    "T_equation": "(ζ*ε*δ-ε*γ)/(δ-ε)",
+    "T_number_map": {
+      "α": "1",
+      "β": "3.14",
+      "γ": "270",
+      "δ": "70",
+      "ε": "20",
+      "ζ": "6"
+    },
+    "new_ans": "60.0",
+    "num_positions": [
+      0,
+      2,
+      7,
+      21,
+      36,
+      53
+    ],
+    "T_equation_simplified": "-γ*ε/(δ-ε)+δ*ε*ζ/(δ-ε)",
+    "final_equation": "-γ*ε/(δ-ε)+δ*ε*ζ/(δ-ε)",
+    "num_codes": {
+      "γ": [
+        "0_0_+_*-"
+      ],
+      "ε": [
+        "0_0_+_*-",
+        "0_0_+_*",
+        "1_0_+_*-_+/",
+        "1_0_+_*_+/"
+      ],
+      "δ": [
+        "0_0_+_*",
+        "0_0_+_*-_+/",
+        "0_0_+_*_+/"
+      ],
+      "ζ": [
+        "0_0_+_*"
+      ]
+    },
+    "codes_pre_results": [
+      1,
+      1,
+      0,
+      0,
+      0,
+      1
+    ],
+    "pre_final_expression": "γ*ζ*1/(δ+ε)"
+  },
+  {
+    "id": 616,
+    "original_text": "Mrs. Sheridan has 11 cats . Mrs. Garrett has 24 cats . How many more cats does Mrs. Garrett have than Mrs. Sheridan ?",
+    "segmented_text": "Mrs. Sheridan has 11 cats . Mrs. Garrett has 24 cats . How many more cats does Mrs. Garrett have than Mrs. Sheridan ?",
+    "equation": "X=(24.0-11.0)",
+    "ans": 13.0,
+    "T_question_2": "α 。 β 。 Mrs. Sheridan has γ cats . Mrs. Garrett has δ cats . How many more cats does Mrs. Garrett have than Mrs. Sheridan ?",
+    "T_equation": "(δ-γ)",
+    "T_number_map": {
+      "α": "1",
+      "β": "3.14",
+      "γ": "11",
+      "δ": "24"
+    },
+    "new_ans": "13.0",
+    "num_positions": [
+      0,
+      2,
+      7,
+      13
+    ],
+    "T_equation_simplified": "-γ+δ",
+    "final_equation": "-γ+δ",
+    "num_codes": {
+      "γ": [
+        "1_0_+"
+      ],
+      "δ": [
+        "0_0_+"
+      ]
+    },
+    "codes_pre_results": [
+      1,
+      1,
+      0,
+      0
+    ],
+    "pre_final_expression": "(γ+(-δ))"
+  },
+  {
+    "id": 634,
+    "original_text": "9 more than 5 times a number is equal to 3 less than 7 times the number . Find the number .",
+    "segmented_text": "9 more than 5 times a number is equal to 3 less than 7 times the number . Find the number .",
+    "equation": "x=(9.0+3.0)/(7.0-5.0)",
+    "ans": 6.0,
+    "T_question_2": "α 。 β 。 γ more than δ times a number is equal to ε less than ζ times the number . Find the number .",
+    "T_equation": "(γ+ε)/(ζ-δ)",
+    "T_number_map": {
+      "α": "1",
+      "β": "3.14",
+      "γ": "9",
+      "δ": "5",
+      "ε": "3",
+      "ζ": "7"
+    },
+    "new_ans": "6.0",
+    "num_positions": [
+      0,
+      2,
+      4,
+      7,
+      14,
+      17
+    ],
+    "T_equation_simplified": "-γ/(δ-ζ)-ε/(δ-ζ)",
+    "final_equation": "-γ/(δ-ζ)-ε/(δ-ζ)",
+    "num_codes": {
+      "γ": [
+        "0_0_+_*-"
+      ],
+      "ε": [
+        "0_0_+_*-@"
+      ],
+      "δ": [
+        "0_0_+_*-_+/",
+        "0_0_+_*-@_+/"
+      ],
+      "ζ": [
+        "1_0_+_*-_+/",
+        "1_0_+_*-@_+/"
+      ]
+    },
+    "codes_pre_results": [
+      1,
+      1,
+      0,
+      0,
+      0,
+      0
+    ],
+    "pre_final_expression": "(γ*ε*1/(δ+(-ζ))+(-(γ*1/(γ+δ+ε+(-ζ)))))"
+  },
+  {
+    "id": 638,
+    "original_text": "A group of 3 friends went into a restaurant . The chef already had 6 chicken wings cooked but cooked 3 more for the group . If they each got the same amount how many would each person get ?",
+    "segmented_text": "A group of 3 friends went into a restaurant . The chef already had 6 chicken wings cooked but cooked 3 more for the group . If they each got the same amount how many would each person get ?",
+    "equation": "X=((3.0+6.0)/3.0)",
+    "ans": 3.0,
+    "T_question_2": "α 。 β 。 A group of γ friends went into a restaurant . The chef already had δ chicken wings cooked but cooked ε more for the group . If they each got the same amount how many would each person get ?",
+    "T_equation": "((ε+δ)/ε)",
+    "T_number_map": {
+      "α": "1",
+      "β": "3.14",
+      "γ": "3",
+      "δ": "6",
+      "ε": "3"
+    },
+    "new_ans": "3.0",
+    "num_positions": [
+      0,
+      2,
+      7,
+      18,
+      24
+    ],
+    "T_equation_simplified": "δ/ε+α",
+    "final_equation": "δ/ε+α",
+    "num_codes": {
+      "α": [
+        "0_0_+"
+      ],
+      "δ": [
+        "0_0_+_*"
+      ],
+      "ε": [
+        "0_1_+_*"
+      ]
+    },
+    "codes_pre_results": [
+      0,
+      1,
+      1,
+      1,
+      0
+    ],
+    "pre_final_expression": "Failed"
+  },
+  {
+    "id": 639,
+    "original_text": "Mary began walking home from school , heading south at a rate of 4 miles per hour . Sharon left school at the same time heading north at 6 miles per hour . How long will it take for them to be 3 miles apart ?",
+    "segmented_text": "Mary began walking home from school , heading south at a rate of 4 miles per hour . Sharon left school at the same time heading north at 6 miles per hour . How long will it take for them to be 3 miles apart ?",
+    "equation": "x=3.0/(4.0+6.0)",
+    "ans": 0.3,
+    "T_question_2": "α 。 β 。 Mary began walking home from school , heading south at a rate of γ miles per hour . Sharon left school at the same time heading north at δ miles per hour . How long will it take for them to be ε miles apart ?",
+    "T_equation": "ε/(γ+δ)",
+    "T_number_map": {
+      "α": "1",
+      "β": "3.14",
+      "γ": "4",
+      "δ": "6",
+      "ε": "3"
+    },
+    "new_ans": "0.3",
+    "num_positions": [
+      0,
+      2,
+      17,
+      32,
+      46
+    ],
+    "T_equation_simplified": "ε/(γ+δ)",
+    "final_equation": "ε/(γ+δ)",
+    "num_codes": {
+      "ε": [
+        "0_0_+_*"
+      ],
+      "γ": [
+        "0_0_+_*_+/"
+      ],
+      "δ": [
+        "0_0_+_*_+/"
+      ]
+    },
+    "codes_pre_results": [
+      1,
+      1,
+      0,
+      0,
+      1
+    ],
+    "pre_final_expression": "Failed"
+  },
+  {
+    "id": 646,
+    "original_text": "A vase can hold 6 flowers . If you had 7 carnations and 47 roses , how many vases would you need to hold the flowers ?",
+    "segmented_text": "A vase can hold 6 flowers . If you had 7 carnations and 47 roses , how many vases would you need to hold the flowers ?",
+    "equation": "X=((7.0+47.0)/6.0)",
+    "ans": 9.0,
+    "T_question_2": "α 。 β 。 A vase can hold γ flowers . If you had δ carnations and ε roses , how many vases would you need to hold the flowers ?",
+    "T_equation": "((δ+ε)/γ)",
+    "T_number_map": {
+      "α": "1",
+      "β": "3.14",
+      "γ": "6",
+      "δ": "7",
+      "ε": "47"
+    },
+    "new_ans": "9.0",
+    "num_positions": [
+      0,
+      2,
+      8,
+      14,
+      17
+    ],
+    "T_equation_simplified": "δ/γ+ε/γ",
+    "final_equation": "δ/γ+ε/γ",
+    "num_codes": {
+      "δ": [
+        "0_0_+_*"
+      ],
+      "γ": [
+        "0_1_+_*",
+        "0_1_+_*@"
+      ],
+      "ε": [
+        "0_0_+_*@"
+      ]
+    },
+    "codes_pre_results": [
+      1,
+      1,
+      0,
+      1,
+      1
+    ],
+    "pre_final_expression": "Failed"
+  },
+  {
+    "id": 647,
+    "original_text": "2 twice a number decreased by 39 is 5 times the sum of the number and 2 times the number . What is the number ?",
+    "segmented_text": "2 twice a number decreased by 39 is 5 times the sum of the number and 2 times the number . What is the number ?",
+    "equation": "x=39.0/(2-5*(1+2))",
+    "ans": -3.0,
+    "T_question_2": "α 。 β 。 γ twice a number decreased by δ is ε times the sum of the number and ζ times the number . What is the number ?",
+    "T_equation": "δ/(ζ-ε*(α+ζ))",
+    "T_number_map": {
+      "α": "1",
+      "β": "3.14",
+      "γ": "2",
+      "δ": "39",
+      "ε": "5",
+      "ζ": "2"
+    },
+    "new_ans": "-3.0",
+    "num_positions": [
+      0,
+      2,
+      4,
+      10,
+      12,
+      20
+    ],
+    "T_equation_simplified": "-δ/(α*ε+ε*ζ-ζ)",
+    "final_equation": "-δ/(α*ε+ε*ζ-ζ)",
+    "num_codes": {
+      "δ": [
+        "0_0_+_*-"
+      ],
+      "ζ": [
+        "1_0_+_*-_+/",
+        "0_0_+_*-_+/_*@"
+      ],
+      "α": [
+        "0_0_+_*-_+/_*"
+      ],
+      "ε": [
+        "0_0_+_*-_+/_*",
+        "0_0_+_*-_+/_*@"
+      ]
+    },
+    "codes_pre_results": [
+      0,
+      1,
+      0,
+      1,
+      0,
+      0
+    ],
+    "pre_final_expression": "Failed"
+  },
+  {
+    "id": 653,
+    "original_text": "Each CD rack holds 8 CDs . A shelf can hold 4 racks . How many total CDs can fit on the shelf ?",
+    "segmented_text": "Each CD rack holds 8 CDs . A shelf can hold 4 racks . How many total CDs can fit on the shelf ?",
+    "equation": "X=(8.0*4.0)",
+    "ans": 32.0,
+    "T_question_2": "α 。 β 。 Each CD rack holds γ CDs . A shelf can hold δ racks . How many total CDs can fit on the shelf ?",
+    "T_equation": "(γ*δ)",
+    "T_number_map": {
+      "α": "1",
+      "β": "3.14",
+      "γ": "8",
+      "δ": "4"
+    },
+    "new_ans": "32.0",
+    "num_positions": [
+      0,
+      2,
+      8,
+      15
+    ],
+    "T_equation_simplified": "γ*δ",
+    "final_equation": "γ*δ",
+    "num_codes": {
+      "γ": [
+        "0_0_+_*"
+      ],
+      "δ": [
+        "0_0_+_*"
+      ]
+    },
+    "codes_pre_results": [
+      1,
+      1,
+      1,
+      0
+    ],
+    "pre_final_expression": "γ*1/δ"
+  },
+  {
+    "id": 666,
+    "original_text": "Kelly had 56 apples . How many more apples does Kelly need to pick to have 105 apples altogether ?",
+    "segmented_text": "Kelly had 56 apples . How many more apples does Kelly need to pick to have 105 apples altogether ?",
+    "equation": "X=(105.0-56.0)",
+    "ans": 49.0,
+    "T_question_2": "α 。 β 。 Kelly had γ apples . How many more apples does Kelly need to pick to have δ apples altogether ?",
+    "T_equation": "(δ-γ)",
+    "T_number_map": {
+      "α": "1",
+      "β": "3.14",
+      "γ": "56",
+      "δ": "105"
+    },
+    "new_ans": "49.0",
+    "num_positions": [
+      0,
+      2,
+      6,
+      20
+    ],
+    "T_equation_simplified": "-γ+δ",
+    "final_equation": "-γ+δ",
+    "num_codes": {
+      "γ": [
+        "1_0_+"
+      ],
+      "δ": [
+        "0_0_+"
+      ]
+    },
+    "codes_pre_results": [
+      1,
+      1,
+      0,
+      1
+    ],
+    "pre_final_expression": "(γ+δ)"
+  },
+  {
+    "id": 667,
+    "original_text": "Johnny practiced for the track team and ran 3 laps per minute . How many minutes did it take Johnny to run 10 laps ?",
+    "segmented_text": "Johnny practiced for the track team and ran 3 laps per minute . How many minutes did it take Johnny to run 10 laps ?",
+    "equation": "X=(10.0/3.0)",
+    "ans": 3.33333,
+    "T_question_2": "α 。 β 。 Johnny practiced for the track team and ran γ laps per minute . How many minutes did it take Johnny to run δ laps ?",
+    "T_equation": "(δ/γ)",
+    "T_number_map": {
+      "α": "1",
+      "β": "3.14",
+      "γ": "3",
+      "δ": "10"
+    },
+    "new_ans": "3.33333",
+    "num_positions": [
+      0,
+      2,
+      12,
+      26
+    ],
+    "T_equation_simplified": "δ/γ",
+    "final_equation": "δ/γ",
+    "num_codes": {
+      "δ": [
+        "0_0_+_*"
+      ],
+      "γ": [
+        "0_1_+_*"
+      ]
+    },
+    "codes_pre_results": [
+      1,
+      1,
+      0,
+      1
+    ],
+    "pre_final_expression": "γ*δ"
+  },
+  {
+    "id": 680,
+    "original_text": "Betty also bought 140 shiny blue round stones . If 14 pieces of this stone is in each bracelet , how many bracelets of blue shiny round stones will there be ?",
+    "segmented_text": "Betty also bought 140 shiny blue round stones . If 14 pieces of this stone is in each bracelet , how many bracelets of blue shiny round stones will there be ?",
+    "equation": "x=140/14",
+    "ans": 10.0,
+    "T_question_2": "α 。 β 。 Betty also bought γ shiny blue round stones . If δ pieces of this stone is in each bracelet , how many bracelets of blue shiny round stones will there be ?",
+    "T_equation": "γ/δ",
+    "T_number_map": {
+      "α": "1",
+      "β": "3.14",
+      "γ": "140",
+      "δ": "14"
+    },
+    "new_ans": "10.0",
+    "num_positions": [
+      0,
+      2,
+      7,
+      14
+    ],
+    "T_equation_simplified": "γ/δ",
+    "final_equation": "γ/δ",
+    "num_codes": {
+      "γ": [
+        "0_0_+_*"
+      ],
+      "δ": [
+        "0_1_+_*"
+      ]
+    },
+    "codes_pre_results": [
+      1,
+      1,
+      1,
+      0
+    ],
+    "pre_final_expression": "γ*δ"
+  },
+  {
+    "id": 685,
+    "original_text": "The number of gears a machine can make varies directly by how long it operates . If it can make 2088 gears in 8 hours , How many gears can it make in 9 hours ?",
+    "segmented_text": "The number of gears a machine can make varies directly by how long it operates . If it can make 2088 gears in 8 hours , How many gears can it make in 9 hours ?",
+    "equation": "x=(9.0*2088.0)/8.0",
+    "ans": 2349.0,
+    "T_question_2": "α 。 β 。 The number of gears a machine can make varies directly by how long it operates . If it can make γ gears in δ hours , How many gears can it make in ε hours ?",
+    "T_equation": "(ε*γ)/δ",
+    "T_number_map": {
+      "α": "1",
+      "β": "3.14",
+      "γ": "2088",
+      "δ": "8",
+      "ε": "9"
+    },
+    "new_ans": "2349.0",
+    "num_positions": [
+      0,
+      2,
+      24,
+      27,
+      37
+    ],
+    "T_equation_simplified": "γ*ε/δ",
+    "final_equation": "γ*ε/δ",
+    "num_codes": {
+      "γ": [
+        "0_0_+_*"
+      ],
+      "ε": [
+        "0_0_+_*"
+      ],
+      "δ": [
+        "0_1_+_*"
+      ]
+    },
+    "codes_pre_results": [
+      1,
+      1,
+      1,
+      0,
+      0
+    ],
+    "pre_final_expression": "γ*δ*ε*1/(δ+ε)"
+  },
+  {
+    "id": 692,
+    "original_text": "There were 10 students riding on the school bus . At the first stop , 3 students got off of the bus . How many students are left on the bus ?",
+    "segmented_text": "There were 10 students riding on the school bus . At the first stop , 3 students got off of the bus . How many students are left on the bus ?",
+    "equation": "X=(10.0-3.0)",
+    "ans": 7.0,
+    "T_question_2": "α 。 β 。 There were γ students riding on the school bus . At the first stop , δ students got off of the bus . How many students are left on the bus ?",
+    "T_equation": "(γ-δ)",
+    "T_number_map": {
+      "α": "1",
+      "β": "3.14",
+      "γ": "10",
+      "δ": "3"
+    },
+    "new_ans": "7.0",
+    "num_positions": [
+      0,
+      2,
+      6,
+      19
+    ],
+    "T_equation_simplified": "γ-δ",
+    "final_equation": "γ-δ",
+    "num_codes": {
+      "γ": [
+        "0_0_+"
+      ],
+      "δ": [
+        "1_0_+"
+      ]
+    },
+    "codes_pre_results": [
+      1,
+      1,
+      1,
+      0
+    ],
+    "pre_final_expression": "(γ+δ+(-δ))"
+  },
+  {
+    "id": 696,
+    "original_text": "Rescue crews working for Stockton Rescue average 3 calls per shift . After his first 4 shifts , Brian had received 5 , 2 , 1 , and 3 calls , respectively . How many calls will Brian need on his next shift for his average to be 3 ?",
+    "segmented_text": "Rescue crews working for Stockton Rescue average 3 calls per shift . After his first 4 shifts , Brian had received 5 , 2 , 1 , and 3 calls , respectively . How many calls will Brian need on his next shift for his average to be 3 ?",
+    "equation": "x=5.0*3.0-(5.0+2.0+1.0+3.0)",
+    "ans": 4.0,
+    "T_question_2": "α 。 β 。 Rescue crews working for Stockton Rescue average γ calls per shift . After his first δ shifts , Brian had received ε , ζ , η , and θ calls , respectively . How many calls will Brian need on his next shift for his average to be ι ?",
+    "T_equation": "ε*ι-(ε+ζ+η+ι)",
+    "T_number_map": {
+      "α": "1",
+      "β": "3.14",
+      "γ": "3",
+      "δ": "4",
+      "ε": "5",
+      "ζ": "2",
+      "η": "1",
+      "θ": "3",
+      "ι": "3"
+    },
+    "new_ans": "4.0",
+    "num_positions": [
+      0,
+      2,
+      11,
+      19,
+      25,
+      27,
+      29,
+      32,
+      52
+    ],
+    "T_equation_simplified": "ε*ι-ε-ζ-η-ι",
+    "final_equation": "ε*ι-ε-ζ-η-ι",
+    "num_codes": {
+      "ε": [
+        "1_0_+",
+        "0_0_+_*"
+      ],
+      "ζ": [
+        "1_0_+"
+      ],
+      "η": [
+        "1_0_+"
+      ],
+      "ι": [
+        "1_0_+",
+        "0_0_+_*"
+      ]
+    },
+    "codes_pre_results": [
+      1,
+      1,
+      0,
+      1,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    "pre_final_expression": "(ζ+η+θ+γ*ι)"
+  },
+  {
+    "id": 697,
+    "original_text": "On Monday , 375 students went on a trip to the zoo . All 7 buses were filled and 4 students had to travel in cars . How many students were in each bus ?",
+    "segmented_text": "On Monday , 375 students went on a trip to the zoo . All 7 buses were filled and 4 students had to travel in cars . How many students were in each bus ?",
+    "equation": "x=(375-4)/7",
+    "ans": 53.0,
+    "T_question_2": "α 。 β 。 On Monday , γ students went on a trip to the zoo . All δ buses were filled and ε students had to travel in cars . How many students were in each bus ?",
+    "T_equation": "(γ-ε)/δ",
+    "T_number_map": {
+      "α": "1",
+      "β": "3.14",
+      "γ": "375",
+      "δ": "7",
+      "ε": "4"
+    },
+    "new_ans": "53.0",
+    "num_positions": [
+      0,
+      2,
+      7,
+      18,
+      23
+    ],
+    "T_equation_simplified": "γ/δ-ε/δ",
+    "final_equation": "γ/δ-ε/δ",
+    "num_codes": {
+      "γ": [
+        "0_0_+_*"
+      ],
+      "δ": [
+        "0_1_+_*",
+        "0_1_+_*-"
+      ],
+      "ε": [
+        "0_0_+_*-"
+      ]
+    },
+    "codes_pre_results": [
+      1,
+      1,
+      1,
+      0,
+      0
+    ],
+    "pre_final_expression": "γ*1/δ*1/ε"
+  },
+  {
+    "id": 698,
+    "original_text": "A construction company is repaving a damaged road . So far , they have repaved a total of 4938 inches of the road . Today , they repaved 805 inches of the road . How many inches of the road had they repaved before today ?",
+    "segmented_text": "A construction company is repaving a damaged road . So far , they have repaved a total of 4938 inches of the road . Today , they repaved 805 inches of the road . How many inches of the road had they repaved before today ?",
+    "equation": "X=4938.0-805.0",
+    "ans": "4133.0",
+    "T_question_2": "α 。 β 。 A construction company is repaving a damaged road . So far , they have repaved a total of γ inches of the road . Today , they repaved δ inches of the road . How many inches of the road had they repaved before today ?",
+    "T_equation": "γ-δ",
+    "T_number_map": {
+      "α": "1",
+      "β": "3.14",
+      "γ": "4938",
+      "δ": "805"
+    },
+    "new_ans": "4133.0",
+    "num_positions": [
+      0,
+      2,
+      22,
+      32
+    ],
+    "T_equation_simplified": "γ-δ",
+    "final_equation": "γ-δ",
+    "num_codes": {
+      "γ": [
+        "0_0_+"
+      ],
+      "δ": [
+        "1_0_+"
+      ]
+    },
+    "codes_pre_results": [
+      1,
+      1,
+      1,
+      0
+    ],
+    "pre_final_expression": "(γ+δ)"
+  },
+  {
+    "id": 704,
+    "original_text": "2 twice the sum of a number and 11 is 22 less than 3 times the number . Find the number .",
+    "segmented_text": "2 twice the sum of a number and 11 is 22 less than 3 times the number . Find the number .",
+    "equation": "x=(2.0*11.0+22.0)/(3.0-2.0)",
+    "ans": 44.0,
+    "T_question_2": "α 。 β 。 γ twice the sum of a number and δ is ε less than ζ times the number . Find the number .",
+    "T_equation": "(γ*δ+ε)/(ζ-γ)",
+    "T_number_map": {
+      "α": "1",
+      "β": "3.14",
+      "γ": "2",
+      "δ": "11",
+      "ε": "22",
+      "ζ": "3"
+    },
+    "new_ans": "44.0",
+    "num_positions": [
+      0,
+      2,
+      4,
+      12,
+      14,
+      17
+    ],
+    "T_equation_simplified": "-γ*δ/(γ-ζ)-ε/(γ-ζ)",
+    "final_equation": "-γ*δ/(γ-ζ)-ε/(γ-ζ)",
+    "num_codes": {
+      "γ": [
+        "0_0_+_*-",
+        "0_0_+_*-_+/",
+        "0_0_+_*-@_+/"
+      ],
+      "δ": [
+        "0_0_+_*-"
+      ],
+      "ε": [
+        "0_0_+_*-@"
+      ],
+      "ζ": [
+        "1_0_+_*-_+/",
+        "1_0_+_*-@_+/"
+      ]
+    },
+    "codes_pre_results": [
+      1,
+      1,
+      0,
+      1,
+      0,
+      0
+    ],
+    "pre_final_expression": "Failed"
+  },
+  {
+    "id": 707,
+    "original_text": "A new virus is released on the internet .   The administrator of a department 's LAN is given 5 minutes by a manager to estimate the impact . The administrator samples 12 of the PCs connected to the LAN and finds that 7 are infected . Use a proportion to estimate the number of infected PCs if there are a total of 216 PCs connected to the LAN .",
+    "segmented_text": "A new virus is released on the internet .   The administrator of a department 's LAN is given 5 minutes by a manager to estimate the impact . The administrator samples 12 of the PCs connected to the LAN and finds that 7 are infected . Use a proportion to estimate the number of infected PCs if there are a total of 216 PCs connected to the LAN .",
+    "equation": "x=216.0*(7.0/12.0)",
+    "ans": 126.0,
+    "T_question_2": "α 。 β 。 A new virus is released on the internet . The administrator of a department 's LAN is given γ minutes by a manager to estimate the impact . The administrator samples δ of the PCs connected to the LAN and finds that ε are infected . Use a proportion to estimate the number of infected PCs if there are a total of ζ PCs connected to the LAN .",
+    "T_equation": "ζ*(ε/δ)",
+    "T_number_map": {
+      "α": "1",
+      "β": "3.14",
+      "γ": "5",
+      "δ": "12",
+      "ε": "7",
+      "ζ": "216"
+    },
+    "new_ans": "126.0",
+    "num_positions": [
+      0,
+      2,
+      22,
+      35,
+      46,
+      66
+    ],
+    "T_equation_simplified": "ε*ζ/δ",
+    "final_equation": "ε*ζ/δ",
+    "num_codes": {
+      "ε": [
+        "0_0_+_*"
+      ],
+      "ζ": [
+        "0_0_+_*"
+      ],
+      "δ": [
+        "0_1_+_*"
+      ]
+    },
+    "codes_pre_results": [
+      1,
+      1,
+      0,
+      0,
+      0,
+      1
+    ],
+    "pre_final_expression": "((-δ)+(-ε)+γ*ζ)"
+  },
+  {
+    "id": 710,
+    "original_text": "At the carnival , tickets for the rides are 0.75 dollars each , or you can buy an armband for 15 dollars and ride unlimited for one night . At how many rides does the armband cost the same as buying individual tickets ?",
+    "segmented_text": "At the carnival , tickets for the rides are 0.75 dollars each , or you can buy an armband for 15 dollars and ride unlimited for one night . At how many rides does the armband cost the same as buying individual tickets ?",
+    "equation": "x=15.0/0.75",
+    "ans": 20.0,
+    "T_question_2": "α 。 β 。 At the carnival , tickets for the rides are γ dollars each , or you can buy an armband for δ dollars and ride unlimited for one night . At how many rides does the armband cost the same as buying individual tickets ?",
+    "T_equation": "δ/γ",
+    "T_number_map": {
+      "α": "1",
+      "β": "3.14",
+      "γ": "0.75",
+      "δ": "15"
+    },
+    "new_ans": "20.0",
+    "num_positions": [
+      0,
+      2,
+      13,
+      24
+    ],
+    "T_equation_simplified": "δ/γ",
+    "final_equation": "δ/γ",
+    "num_codes": {
+      "δ": [
+        "0_0_+_*"
+      ],
+      "γ": [
+        "0_1_+_*"
+      ]
+    },
+    "codes_pre_results": [
+      1,
+      1,
+      0,
+      0
+    ],
+    "pre_final_expression": "Failed"
+  },
+  {
+    "id": 724,
+    "original_text": "There were 8 friends playing a video game online when 2 more players joined the game . If each player had 6 lives , how many lives did they have total ?",
+    "segmented_text": "There were 8 friends playing a video game online when 2 more players joined the game . If each player had 6 lives , how many lives did they have total ?",
+    "equation": "X=(6.0*(8.0+2.0))",
+    "ans": 60.0,
+    "T_question_2": "α 。 β 。 There were γ friends playing a video game online when δ more players joined the game . If each player had ε lives , how many lives did they have total ?",
+    "T_equation": "(ε*(γ+δ))",
+    "T_number_map": {
+      "α": "1",
+      "β": "3.14",
+      "γ": "8",
+      "δ": "2",
+      "ε": "6"
+    },
+    "new_ans": "60.0",
+    "num_positions": [
+      0,
+      2,
+      6,
+      14,
+      25
+    ],
+    "T_equation_simplified": "γ*ε+δ*ε",
+    "final_equation": "γ*ε+δ*ε",
+    "num_codes": {
+      "γ": [
+        "0_0_+_*"
+      ],
+      "ε": [
+        "0_0_+_*",
+        "0_0_+_*@"
+      ],
+      "δ": [
+        "0_0_+_*@"
+      ]
+    },
+    "codes_pre_results": [
+      1,
+      1,
+      0,
+      0,
+      1
+    ],
+    "pre_final_expression": "Failed"
+  },
+  {
+    "id": 729,
+    "original_text": "Paula 's aunt gave her $ 109 to spend on clothes at the mall . She bought 2 shirts that cost $ 11 each and a pair of pants that cost $ 13 . How much money does Paula have left to buy more clothes ?",
+    "segmented_text": "Paula 's aunt gave her $ 109 to spend on clothes at the mall . She bought 2 shirts that cost $ 11 each and a pair of pants that cost $ 13 . How much money does Paula have left to buy more clothes ?",
+    "equation": "x=109-((2*11)+13)",
+    "ans": 74.0,
+    "T_question_2": "α 。 β 。 Paula 's aunt gave her $ γ to spend on clothes at the mall . She bought δ shirts that cost $ ε each and a pair of pants that cost $ ζ . How much money does Paula have left to buy more clothes ?",
+    "T_equation": "γ-((δ*ε)+ζ)",
+    "T_number_map": {
+      "α": "1",
+      "β": "3.14",
+      "γ": "109",
+      "δ": "2",
+      "ε": "11",
+      "ζ": "13"
+    },
+    "new_ans": "74.0",
+    "num_positions": [
+      0,
+      2,
+      10,
+      21,
+      26,
+      36
+    ],
+    "T_equation_simplified": "γ-δ*ε-ζ",
+    "final_equation": "γ-δ*ε-ζ",
+    "num_codes": {
+      "γ": [
+        "0_0_+"
+      ],
+      "ζ": [
+        "1_0_+"
+      ],
+      "δ": [
+        "0_0_+_*-"
+      ],
+      "ε": [
+        "0_0_+_*-"
+      ]
+    },
+    "codes_pre_results": [
+      1,
+      1,
+      1,
+      0,
+      0,
+      0
+    ],
+    "pre_final_expression": "Failed"
+  },
+  {
+    "id": 730,
+    "original_text": "There school 's baseball team had 4 new players and 6 returning players . If the coach put them into groups with 5 players in each group , how many groups would there be ?",
+    "segmented_text": "There school 's baseball team had 4 new players and 6 returning players . If the coach put them into groups with 5 players in each group , how many groups would there be ?",
+    "equation": "X=((4.0+6.0)/5.0)",
+    "ans": 2.0,
+    "T_question_2": "α 。 β 。 There school 's baseball team had γ new players and δ returning players . If the coach put them into groups with ε players in each group , how many groups would there be ?",
+    "T_equation": "((γ+δ)/ε)",
+    "T_number_map": {
+      "α": "1",
+      "β": "3.14",
+      "γ": "4",
+      "δ": "6",
+      "ε": "5"
+    },
+    "new_ans": "2.0",
+    "num_positions": [
+      0,
+      2,
+      10,
+      14,
+      26
+    ],
+    "T_equation_simplified": "γ/ε+δ/ε",
+    "final_equation": "γ/ε+δ/ε",
+    "num_codes": {
+      "γ": [
+        "0_0_+_*"
+      ],
+      "ε": [
+        "0_1_+_*",
+        "0_1_+_*@"
+      ],
+      "δ": [
+        "0_0_+_*@"
+      ]
+    },
+    "codes_pre_results": [
+      1,
+      1,
+      1,
+      0,
+      1
+    ],
+    "pre_final_expression": "Failed"
+  },
+  {
+    "id": 731,
+    "original_text": "Connie has 323 marbles . Juan has 175 more marbles than Connie . How many marbles does Juan have ?",
+    "segmented_text": "Connie has 323 marbles . Juan has 175 more marbles than Connie . How many marbles does Juan have ?",
+    "equation": "x=323+175",
+    "ans": 498.0,
+    "T_question_2": "α 。 β 。 Connie has γ marbles . Juan has δ more marbles than Connie . How many marbles does Juan have ?",
+    "T_equation": "γ+δ",
+    "T_number_map": {
+      "α": "1",
+      "β": "3.14",
+      "γ": "323",
+      "δ": "175"
+    },
+    "new_ans": "498.0",
+    "num_positions": [
+      0,
+      2,
+      6,
+      11
+    ],
+    "T_equation_simplified": "γ+δ",
+    "final_equation": "γ+δ",
+    "num_codes": {
+      "γ": [
+        "0_0_+"
+      ],
+      "δ": [
+        "0_0_+"
+      ]
+    },
+    "codes_pre_results": [
+      1,
+      1,
+      1,
+      0
+    ],
+    "pre_final_expression": "(γ+(-δ))"
+  },
+  {
+    "id": 741,
+    "original_text": "The difference of 3 times a number and 5 is 40 . Find the number .",
+    "segmented_text": "The difference of 3 times a number and 5 is 40 . Find the number .",
+    "equation": "x=(5.0+40.0)/3.0",
+    "ans": 15.0,
+    "T_question_2": "α 。 β 。 The difference of γ times a number and δ is ε . Find the number .",
+    "T_equation": "(δ+ε)/γ",
+    "T_number_map": {
+      "α": "1",
+      "β": "3.14",
+      "γ": "3",
+      "δ": "5",
+      "ε": "40"
+    },
+    "new_ans": "15.0",
+    "num_positions": [
+      0,
+      2,
+      7,
+      12,
+      14
+    ],
+    "T_equation_simplified": "δ/γ+ε/γ",
+    "final_equation": "δ/γ+ε/γ",
+    "num_codes": {
+      "δ": [
+        "0_0_+_*"
+      ],
+      "γ": [
+        "0_1_+_*",
+        "0_1_+_*@"
+      ],
+      "ε": [
+        "0_0_+_*@"
+      ]
+    },
+    "codes_pre_results": [
+      1,
+      1,
+      0,
+      0,
+      0
+    ],
+    "pre_final_expression": "(1/γ*ε+(-(1/γ*δ)))"
+  },
+  {
+    "id": 746,
+    "original_text": "Sue ’s mother made 75 cookies . She put the cookies in bags , with 3 cookies in each bag . How many bags could she fill up ?",
+    "segmented_text": "Sue ’s mother made 75 cookies . She put the cookies in bags , with 3 cookies in each bag . How many bags could she fill up ?",
+    "equation": "X=(75.0/3.0)",
+    "ans": 25.0,
+    "T_question_2": "α 。 β 。 Sue ’s mother made γ cookies . She put the cookies in bags , with δ cookies in each bag . How many bags could she fill up ?",
+    "T_equation": "(γ/δ)",
+    "T_number_map": {
+      "α": "1",
+      "β": "3.14",
+      "γ": "75",
+      "δ": "3"
+    },
+    "new_ans": "25.0",
+    "num_positions": [
+      0,
+      2,
+      8,
+      19
+    ],
+    "T_equation_simplified": "γ/δ",
+    "final_equation": "γ/δ",
+    "num_codes": {
+      "γ": [
+        "0_0_+_*"
+      ],
+      "δ": [
+        "0_1_+_*"
+      ]
+    },
+    "codes_pre_results": [
+      1,
+      1,
+      1,
+      0
+    ],
+    "pre_final_expression": "γ*δ"
+  },
+  {
+    "id": 748,
+    "original_text": "There school 's baseball team had 2 new players and 6 returning players . If the coach put them into groups with 4 players in each group , how many groups would there be ?",
+    "segmented_text": "There school 's baseball team had 2 new players and 6 returning players . If the coach put them into groups with 4 players in each group , how many groups would there be ?",
+    "equation": "X=((2.0+6.0)/4.0)",
+    "ans": 2.0,
+    "T_question_2": "α 。 β 。 There school 's baseball team had γ new players and δ returning players . If the coach put them into groups with ε players in each group , how many groups would there be ?",
+    "T_equation": "((γ+δ)/ε)",
+    "T_number_map": {
+      "α": "1",
+      "β": "3.14",
+      "γ": "2",
+      "δ": "6",
+      "ε": "4"
+    },
+    "new_ans": "2.0",
+    "num_positions": [
+      0,
+      2,
+      10,
+      14,
+      26
+    ],
+    "T_equation_simplified": "γ/ε+δ/ε",
+    "final_equation": "γ/ε+δ/ε",
+    "num_codes": {
+      "γ": [
+        "0_0_+_*"
+      ],
+      "ε": [
+        "0_1_+_*",
+        "0_1_+_*@"
+      ],
+      "δ": [
+        "0_0_+_*@"
+      ]
+    },
+    "codes_pre_results": [
+      1,
+      1,
+      1,
+      0,
+      1
+    ],
+    "pre_final_expression": "Failed"
+  },
+  {
+    "id": 754,
+    "original_text": "A certain number is 11 less than 3 times the next number . Find the Number .",
+    "segmented_text": "A certain number is 11 less than 3 times the next number . Find the Number .",
+    "equation": "x=(11.0-3.0)/(3.0-1.0)",
+    "ans": 4.0,
+    "T_question_2": "α 。 β 。 A certain number is γ less than δ times the next number . Find the Number .",
+    "T_equation": "(γ-δ)/(δ-α)",
+    "T_number_map": {
+      "α": "1",
+      "β": "3.14",
+      "γ": "11",
+      "δ": "3"
+    },
+    "new_ans": "4.0",
+    "num_positions": [
+      0,
+      2,
+      8,
+      11
+    ],
+    "T_equation_simplified": "-γ/(α-δ)+δ/(α-δ)",
+    "final_equation": "-γ/(α-δ)+δ/(α-δ)",
+    "num_codes": {
+      "γ": [
+        "0_0_+_*-"
+      ],
+      "δ": [
+        "0_0_+_*",
+        "1_0_+_*-_+/",
+        "1_0_+_*_+/"
+      ],
+      "α": [
+        "0_0_+_*-_+/",
+        "0_0_+_*_+/"
+      ]
+    },
+    "codes_pre_results": [
+      0,
+      1,
+      0,
+      0
+    ],
+    "pre_final_expression": "Failed"
+  },
+  {
+    "id": 760,
+    "original_text": "If the product of 5 and a number is increased by 4 , the result is 19 . What is the number ?",
+    "segmented_text": "If the product of 5 and a number is increased by 4 , the result is 19 . What is the number ?",
+    "equation": "x=(19.0-4.0)/5.0",
+    "ans": 3.0,
+    "T_question_2": "α 。 β 。 If the product of γ and a number is increased by δ , the result is ε . What is the number ?",
+    "T_equation": "(ε-δ)/γ",
+    "T_number_map": {
+      "α": "1",
+      "β": "3.14",
+      "γ": "5",
+      "δ": "4",
+      "ε": "19"
+    },
+    "new_ans": "3.0",
+    "num_positions": [
+      0,
+      2,
+      8,
+      15,
+      20
+    ],
+    "T_equation_simplified": "-δ/γ+ε/γ",
+    "final_equation": "-δ/γ+ε/γ",
+    "num_codes": {
+      "δ": [
+        "0_0_+_*-"
+      ],
+      "γ": [
+        "0_1_+_*-",
+        "0_1_+_*"
+      ],
+      "ε": [
+        "0_0_+_*"
+      ]
+    },
+    "codes_pre_results": [
+      1,
+      1,
+      0,
+      0,
+      1
+    ],
+    "pre_final_expression": "Failed"
+  },
+  {
+    "id": 781,
+    "original_text": "Paul was collecting cans for recycling . On Saturday he filled 6 bags up and on Sunday he filled 3 more bags . If each bag had 8 cans in it , how many cans did he pick up total ?",
+    "segmented_text": "Paul was collecting cans for recycling . On Saturday he filled 6 bags up and on Sunday he filled 3 more bags . If each bag had 8 cans in it , how many cans did he pick up total ?",
+    "equation": "X=(8.0*(6.0+3.0))",
+    "ans": 72.0,
+    "T_question_2": "α 。 β 。 Paul was collecting cans for recycling . On Saturday he filled γ bags up and on Sunday he filled δ more bags . If each bag had ε cans in it , how many cans did he pick up total ?",
+    "T_equation": "(ε*(γ+δ))",
+    "T_number_map": {
+      "α": "1",
+      "β": "3.14",
+      "γ": "6",
+      "δ": "3",
+      "ε": "8"
+    },
+    "new_ans": "72.0",
+    "num_positions": [
+      0,
+      2,
+      15,
+      23,
+      31
+    ],
+    "T_equation_simplified": "γ*ε+δ*ε",
+    "final_equation": "γ*ε+δ*ε",
+    "num_codes": {
+      "γ": [
+        "0_0_+_*"
+      ],
+      "ε": [
+        "0_0_+_*",
+        "0_0_+_*@"
+      ],
+      "δ": [
+        "0_0_+_*@"
+      ]
+    },
+    "codes_pre_results": [
+      1,
+      1,
+      0,
+      0,
+      1
+    ],
+    "pre_final_expression": "Failed"
+  },
+  {
+    "id": 792,
+    "original_text": "Gloria has 2 pencils . Lisa has 99 pencils . If Lisa gives all of her pencils to Gloria , how many pencils will Gloria have ?",
+    "segmented_text": "Gloria has 2 pencils . Lisa has 99 pencils . If Lisa gives all of her pencils to Gloria , how many pencils will Gloria have ?",
+    "equation": "X=(2.0+99.0)",
+    "ans": 101.0,
+    "T_question_2": "α 。 β 。 Gloria has γ pencils . Lisa has δ pencils . If Lisa gives all of her pencils to Gloria , how many pencils will Gloria have ?",
+    "T_equation": "(γ+δ)",
+    "T_number_map": {
+      "α": "1",
+      "β": "3.14",
+      "γ": "2",
+      "δ": "99"
+    },
+    "new_ans": "101.0",
+    "num_positions": [
+      0,
+      2,
+      6,
+      11
+    ],
+    "T_equation_simplified": "γ+δ",
+    "final_equation": "γ+δ",
+    "num_codes": {
+      "γ": [
+        "0_0_+"
+      ],
+      "δ": [
+        "0_0_+"
+      ]
+    },
+    "codes_pre_results": [
+      1,
+      1,
+      0,
+      1
+    ],
+    "pre_final_expression": "δ"
+  },
+  {
+    "id": 794,
+    "original_text": "A recipe calls for 0.6667 cup of diced green pepper . Give the number of cups of diced green pepper that should be used to make 0.5 of this recipe .",
+    "segmented_text": "A recipe calls for 0.6667 cup of diced green pepper . Give the number of cups of diced green pepper that should be used to make 0.5 of this recipe .",
+    "equation": "x=0.6667*0.5",
+    "ans": 0.3333,
+    "T_question_2": "α 。 β 。 A recipe calls for γ cup of diced green pepper . Give the number of cups of diced green pepper that should be used to make δ of this recipe .",
+    "T_equation": "γ*δ",
+    "T_number_map": {
+      "α": "1",
+      "β": "3.14",
+      "γ": "0.6667",
+      "δ": "0.5"
+    },
+    "new_ans": "0.3333",
+    "num_positions": [
+      0,
+      2,
+      8,
+      30
+    ],
+    "T_equation_simplified": "γ*δ",
+    "final_equation": "γ*δ",
+    "num_codes": {
+      "γ": [
+        "0_0_+_*"
+      ],
+      "δ": [
+        "0_0_+_*"
+      ]
+    },
+    "codes_pre_results": [
+      1,
+      1,
+      0,
+      0
+    ],
+    "pre_final_expression": "Failed"
+  },
+  {
+    "id": 806,
+    "original_text": "If books came from all the 4 continents that Bryan had been into and he collected 122 books per continent , how many books does he have from all 4 continents combined ?",
+    "segmented_text": "If books came from all the 4 continents that Bryan had been into and he collected 122 books per continent , how many books does he have from all 4 continents combined ?",
+    "equation": "x=4*122",
+    "ans": 488.0,
+    "T_question_2": "α 。 β 。 If books came from all the γ continents that Bryan had been into and he collected δ books per continent , how many books does he have from all ε continents combined ?",
+    "T_equation": "ε*δ",
+    "T_number_map": {
+      "α": "1",
+      "β": "3.14",
+      "γ": "4",
+      "δ": "122",
+      "ε": "4"
+    },
+    "new_ans": "488.0",
+    "num_positions": [
+      0,
+      2,
+      10,
+      20,
+      33
+    ],
+    "T_equation_simplified": "ε*δ",
+    "final_equation": "ε*δ",
+    "num_codes": {
+      "ε": [
+        "0_0_+_*"
+      ],
+      "δ": [
+        "0_0_+_*"
+      ]
+    },
+    "codes_pre_results": [
+      1,
+      1,
+      0,
+      1,
+      0
+    ],
+    "pre_final_expression": "γ*δ*1/ε"
+  },
+  {
+    "id": 811,
+    "original_text": "Kendra made punch for her friend 's birthday party . She used 0.25 of a gallon of grape juice , 0.375 of a gallon of cranberry juice , and 0.125 of a gallon of club soda . How many gallons of punch did Kendra make ?",
+    "segmented_text": "Kendra made punch for her friend 's birthday party . She used 0.25 of a gallon of grape juice , 0.375 of a gallon of cranberry juice , and 0.125 of a gallon of club soda . How many gallons of punch did Kendra make ?",
+    "equation": "x=0.25+0.375+0.125",
+    "ans": 0.75,
+    "T_question_2": "α 。 β 。 Kendra made punch for her friend 's birthday party . She used γ of a gallon of grape juice , δ of a gallon of cranberry juice , and ε of a gallon of club soda . How many gallons of punch did Kendra make ?",
+    "T_equation": "γ+δ+ε",
+    "T_number_map": {
+      "α": "1",
+      "β": "3.14",
+      "γ": "0.25",
+      "δ": "0.375",
+      "ε": "0.125"
+    },
+    "new_ans": "0.75",
+    "num_positions": [
+      0,
+      2,
+      16,
+      24,
+      33
+    ],
+    "T_equation_simplified": "γ+δ+ε",
+    "final_equation": "γ+δ+ε",
+    "num_codes": {
+      "γ": [
+        "0_0_+"
+      ],
+      "δ": [
+        "0_0_+"
+      ],
+      "ε": [
+        "0_0_+"
+      ]
+    },
+    "codes_pre_results": [
+      1,
+      1,
+      0,
+      0,
+      1
+    ],
+    "pre_final_expression": "(δ+δ+ε)"
+  },
+  {
+    "id": 812,
+    "original_text": "If 0.5 of 8 pets are cats . How many are cats ?",
+    "segmented_text": "If 0.5 of 8 pets are cats . How many are cats ?",
+    "equation": "x=0.5*8.0",
+    "ans": 4.0,
+    "T_question_2": "α 。 β 。 If γ of δ pets are cats . How many are cats ?",
+    "T_equation": "γ*δ",
+    "T_number_map": {
+      "α": "1",
+      "β": "3.14",
+      "γ": "0.5",
+      "δ": "8"
+    },
+    "new_ans": "4.0",
+    "num_positions": [
+      0,
+      2,
+      5,
+      7
+    ],
+    "T_equation_simplified": "γ*δ",
+    "final_equation": "γ*δ",
+    "num_codes": {
+      "γ": [
+        "0_0_+_*"
+      ],
+      "δ": [
+        "0_0_+_*"
+      ]
+    },
+    "codes_pre_results": [
+      1,
+      1,
+      0,
+      0
+    ],
+    "pre_final_expression": "1/γ*1/δ"
+  },
+  {
+    "id": 816,
+    "original_text": "Connie has 39 marbles . Juan has 25 more marbles than Connie . How many marbles does Juan have ?",
+    "segmented_text": "Connie has 39 marbles . Juan has 25 more marbles than Connie . How many marbles does Juan have ?",
+    "equation": "X=(39.0+25.0)",
+    "ans": 64.0,
+    "T_question_2": "α 。 β 。 Connie has γ marbles . Juan has δ more marbles than Connie . How many marbles does Juan have ?",
+    "T_equation": "(γ+δ)",
+    "T_number_map": {
+      "α": "1",
+      "β": "3.14",
+      "γ": "39",
+      "δ": "25"
+    },
+    "new_ans": "64.0",
+    "num_positions": [
+      0,
+      2,
+      6,
+      11
+    ],
+    "T_equation_simplified": "γ+δ",
+    "final_equation": "γ+δ",
+    "num_codes": {
+      "γ": [
+        "0_0_+"
+      ],
+      "δ": [
+        "0_0_+"
+      ]
+    },
+    "codes_pre_results": [
+      1,
+      1,
+      1,
+      0
+    ],
+    "pre_final_expression": "(γ+(-δ))"
+  },
+  {
+    "id": 818,
+    "original_text": "256 students are going to the zoo . They have to be divided into groups so that each teacher has one group . There are 8 teachers . How many   students will be in each group ?",
+    "segmented_text": "256 students are going to the zoo . They have to be divided into groups so that each teacher has one group . There are 8 teachers . How many   students will be in each group ?",
+    "equation": "X=(256.0/8.0)",
+    "ans": 32.0,
+    "T_question_2": "α 。 β 。 γ students are going to the zoo . They have to be divided into groups so that each teacher has one group . There are δ teachers . How many students will be in each group ?",
+    "T_equation": "(γ/δ)",
+    "T_number_map": {
+      "α": "1",
+      "β": "3.14",
+      "γ": "256",
+      "δ": "8"
+    },
+    "new_ans": "32.0",
+    "num_positions": [
+      0,
+      2,
+      4,
+      29
+    ],
+    "T_equation_simplified": "γ/δ",
+    "final_equation": "γ/δ",
+    "num_codes": {
+      "γ": [
+        "0_0_+_*"
+      ],
+      "δ": [
+        "0_1_+_*"
+      ]
+    },
+    "codes_pre_results": [
+      1,
+      1,
+      1,
+      0
+    ],
+    "pre_final_expression": "γ*δ"
+  },
+  {
+    "id": 819,
+    "original_text": "On Saturday , Sara spent $ 10.62 each on 2 tickets to a movie theater . Sara also rented a movie for $ 1.59 , and bought a movie for $ 13.95 . How much money in total did Sara spend on movies ?",
+    "segmented_text": "On Saturday , Sara spent $ 10.62 each on 2 tickets to a movie theater . Sara also rented a movie for $ 1.59 , and bought a movie for $ 13.95 . How much money in total did Sara spend on movies ?",
+    "equation": "x=(2*10.62)+1.59+13.95",
+    "ans": 36.78,
+    "T_question_2": "α 。 β 。 On Saturday , Sara spent $ γ each on δ tickets to a movie theater . Sara also rented a movie for $ ε , and bought a movie for $ ζ . How much money in total did Sara spend on movies ?",
+    "T_equation": "(δ*γ)+ε+ζ",
+    "T_number_map": {
+      "α": "1",
+      "β": "3.14",
+      "γ": "10.62",
+      "δ": "2",
+      "ε": "1.59",
+      "ζ": "13.95"
+    },
+    "new_ans": "36.78",
+    "num_positions": [
+      0,
+      2,
+      10,
+      13,
+      27,
+      35
+    ],
+    "T_equation_simplified": "γ*δ+ε+ζ",
+    "final_equation": "γ*δ+ε+ζ",
+    "num_codes": {
+      "ε": [
+        "0_0_+"
+      ],
+      "ζ": [
+        "0_0_+"
+      ],
+      "γ": [
+        "0_0_+_*"
+      ],
+      "δ": [
+        "0_0_+_*"
+      ]
+    },
+    "codes_pre_results": [
+      1,
+      1,
+      0,
+      0,
+      0,
+      0
+    ],
+    "pre_final_expression": "((-ε)+(-ζ)+(-(γ*δ)))"
+  },
+  {
+    "id": 832,
+    "original_text": "Kendra made punch for her friend 's birthday party . She used 0.25 gallon of grape juice , 0.375 gallon of cranberry juice , and 0.125 gallon of club soda . How many gallons of punch did Kendra make ?",
+    "segmented_text": "Kendra made punch for her friend 's birthday party . She used 0.25 gallon of grape juice , 0.375 gallon of cranberry juice , and 0.125 gallon of club soda . How many gallons of punch did Kendra make ?",
+    "equation": "X=0.25+0.375+0.125",
+    "ans": "0.75",
+    "T_question_2": "α 。 β 。 Kendra made punch for her friend 's birthday party . She used γ gallon of grape juice , δ gallon of cranberry juice , and ε gallon of club soda . How many gallons of punch did Kendra make ?",
+    "T_equation": "γ+δ+ε",
+    "T_number_map": {
+      "α": "1",
+      "β": "3.14",
+      "γ": "0.25",
+      "δ": "0.375",
+      "ε": "0.125"
+    },
+    "new_ans": "0.75",
+    "num_positions": [
+      0,
+      2,
+      16,
+      22,
+      29
+    ],
+    "T_equation_simplified": "γ+δ+ε",
+    "final_equation": "γ+δ+ε",
+    "num_codes": {
+      "γ": [
+        "0_0_+"
+      ],
+      "δ": [
+        "0_0_+"
+      ],
+      "ε": [
+        "0_0_+"
+      ]
+    },
+    "codes_pre_results": [
+      1,
+      1,
+      0,
+      0,
+      1
+    ],
+    "pre_final_expression": "(δ+δ+ε)"
+  },
+  {
+    "id": 833,
+    "original_text": "Isabella ’s hair is 18 inches long . By the end of the year her hair is 24 inches long . How much hair did she grow ?",
+    "segmented_text": "Isabella ’s hair is 18 inches long . By the end of the year her hair is 24 inches long . How much hair did she grow ?",
+    "equation": "X=(24.0-18.0)",
+    "ans": 6.0,
+    "T_question_2": "α 。 β 。 Isa bella ’s hair is γ inches long . By the end of the year her hair is δ inches long . How much hair did she grow ?",
+    "T_equation": "(δ-γ)",
+    "T_number_map": {
+      "α": "1",
+      "β": "3.14",
+      "γ": "18",
+      "δ": "24"
+    },
+    "new_ans": "6.0",
+    "num_positions": [
+      0,
+      2,
+      9,
+      22
+    ],
+    "T_equation_simplified": "-γ+δ",
+    "final_equation": "-γ+δ",
+    "num_codes": {
+      "γ": [
+        "1_0_+"
+      ],
+      "δ": [
+        "0_0_+"
+      ]
+    },
+    "codes_pre_results": [
+      1,
+      1,
+      0,
+      0
+    ],
+    "pre_final_expression": "(γ+(-δ))"
+  },
+  {
+    "id": 834,
+    "original_text": "7 less than 4 times a number equals 13 . What is the number ?",
+    "segmented_text": "7 less than 4 times a number equals 13 . What is the number ?",
+    "equation": "x=(13.0+7.0)/4.0",
+    "ans": 5.0,
+    "T_question_2": "α 。 β 。 γ less than δ times a number equals ε . What is the number ?",
+    "T_equation": "(ε+γ)/δ",
+    "T_number_map": {
+      "α": "1",
+      "β": "3.14",
+      "γ": "7",
+      "δ": "4",
+      "ε": "13"
+    },
+    "new_ans": "5.0",
+    "num_positions": [
+      0,
+      2,
+      4,
+      7,
+      12
+    ],
+    "T_equation_simplified": "γ/δ+ε/δ",
+    "final_equation": "γ/δ+ε/δ",
+    "num_codes": {
+      "γ": [
+        "0_0_+_*"
+      ],
+      "δ": [
+        "0_1_+_*",
+        "0_1_+_*@"
+      ],
+      "ε": [
+        "0_0_+_*@"
+      ]
+    },
+    "codes_pre_results": [
+      1,
+      1,
+      1,
+      1,
+      0
+    ],
+    "pre_final_expression": "(γ*1/δ*1/ε+1/δ*1/ε)"
+  },
+  {
+    "id": 848,
+    "original_text": "1 cell phone plan costs 49.95 dollars per month . The first 2500 minutes of use are free . Each minute thereafter costs 0.25 dollars . For a bill of 112.45 dollars , how many minutes over 2500 was the cell phone in use ?",
+    "segmented_text": "1 cell phone plan costs 49.95 dollars per month . The first 2500 minutes of use are free . Each minute thereafter costs 0.25 dollars . For a bill of 112.45 dollars , how many minutes over 2500 was the cell phone in use ?",
+    "equation": "x=(112.45-49.95)/0.25",
+    "ans": 250.0,
+    "T_question_2": "α 。 β 。 γ cell phone plan costs δ dollars per month . The first ε minutes of use are free . Each minute thereafter costs ζ dollars . For a bill of η dollars , how many minutes over θ was the cell phone in use ?",
+    "T_equation": "(η-δ)/ζ",
+    "T_number_map": {
+      "α": "1",
+      "β": "3.14",
+      "γ": "1",
+      "δ": "49.95",
+      "ε": "2500",
+      "ζ": "0.25",
+      "η": "112.45",
+      "θ": "2500"
+    },
+    "new_ans": "250.0",
+    "num_positions": [
+      0,
+      2,
+      4,
+      9,
+      16,
+      27,
+      34,
+      41
+    ],
+    "T_equation_simplified": "-δ/ζ+η/ζ",
+    "final_equation": "-δ/ζ+η/ζ",
+    "num_codes": {
+      "δ": [
+        "0_0_+_*-"
+      ],
+      "ζ": [
+        "0_1_+_*-",
+        "0_1_+_*"
+      ],
+      "η": [
+        "0_0_+_*"
+      ]
+    },
+    "codes_pre_results": [
+      1,
+      1,
+      1,
+      1,
+      0,
+      0,
+      1,
+      0
+    ],
+    "pre_final_expression": "((-(δ*ε))+ε*η)"
+  },
+  {
+    "id": 849,
+    "original_text": "If Heather bicycled 40 kilometers at 8 kilometers per hour , how long was Heather bicycling ?",
+    "segmented_text": "If Heather bicycled 40 kilometers at 8 kilometers per hour , how long was Heather bicycling ?",
+    "equation": "X=(40.0/8.0)",
+    "ans": 5.0,
+    "T_question_2": "α 。 β 。 If Heather bicycled γ kilometers at δ kilometers per hour , how long was Heather bicycling ?",
+    "T_equation": "(γ/δ)",
+    "T_number_map": {
+      "α": "1",
+      "β": "3.14",
+      "γ": "40",
+      "δ": "8"
+    },
+    "new_ans": "5.0",
+    "num_positions": [
+      0,
+      2,
+      7,
+      10
+    ],
+    "T_equation_simplified": "γ/δ",
+    "final_equation": "γ/δ",
+    "num_codes": {
+      "γ": [
+        "0_0_+_*"
+      ],
+      "δ": [
+        "0_1_+_*"
+      ]
+    },
+    "codes_pre_results": [
+      1,
+      1,
+      0,
+      0
+    ],
+    "pre_final_expression": "(γ+(-δ))"
+  },
+  {
+    "id": 853,
+    "original_text": "There are 40 boys and some girls on the playground . There are 117 children altogether . How many girls are on the playground ?",
+    "segmented_text": "There are 40 boys and some girls on the playground . There are 117 children altogether . How many girls are on the playground ?",
+    "equation": "X=(117.0-40.0)",
+    "ans": 77.0,
+    "T_question_2": "α 。 β 。 There are γ boys and some girls on the playground . There are δ children altogether . How many girls are on the playground ?",
+    "T_equation": "(δ-γ)",
+    "T_number_map": {
+      "α": "1",
+      "β": "3.14",
+      "γ": "40",
+      "δ": "117"
+    },
+    "new_ans": "77.0",
+    "num_positions": [
+      0,
+      2,
+      6,
+      17
+    ],
+    "T_equation_simplified": "-γ+δ",
+    "final_equation": "-γ+δ",
+    "num_codes": {
+      "γ": [
+        "1_0_+"
+      ],
+      "δ": [
+        "0_0_+"
+      ]
+    },
+    "codes_pre_results": [
+      1,
+      1,
+      0,
+      1
+    ],
+    "pre_final_expression": "(γ+δ)"
+  },
+  {
+    "id": 868,
+    "original_text": "Last year , egg producers in Douglas County produced 1416 eggs . This year , those same farms produced 4636 eggs . How many more eggs did the farms produce this year ?",
+    "segmented_text": "Last year , egg producers in Douglas County produced 1416 eggs . This year , those same farms produced 4636 eggs . How many more eggs did the farms produce this year ?",
+    "equation": "X=4636.0-1416.0",
+    "ans": "3220.0",
+    "T_question_2": "α 。 β 。 Last year , egg producers in Douglas County produced γ eggs . This year , those same farms produced δ eggs . How many more eggs did the farms produce this year ?",
+    "T_equation": "δ-γ",
+    "T_number_map": {
+      "α": "1",
+      "β": "3.14",
+      "γ": "1416",
+      "δ": "4636"
+    },
+    "new_ans": "3220.0",
+    "num_positions": [
+      0,
+      2,
+      13,
+      23
+    ],
+    "T_equation_simplified": "δ-γ",
+    "final_equation": "δ-γ",
+    "num_codes": {
+      "δ": [
+        "0_0_+"
+      ],
+      "γ": [
+        "1_0_+"
+      ]
+    },
+    "codes_pre_results": [
+      1,
+      1,
+      0,
+      1
+    ],
+    "pre_final_expression": "(γ+δ)"
+  },
+  {
+    "id": 873,
+    "original_text": "if 4 shirts and 5 jerseys cost 370 dollars , calculate the cost of each shirt given that the cost of a single jersey is 30 dollars .",
+    "segmented_text": "if 4 shirts and 5 jerseys cost 370 dollars , calculate the cost of each shirt given that the cost of a single jersey is 30 dollars .",
+    "equation": "x=(370.0-5.0*30.0)/4.0",
+    "ans": 55.0,
+    "T_question_2": "α 。 β 。 if γ shirts and δ jerseys cost ε dollars , calculate the cost of each shirt given that the cost of a single jersey is ζ dollars .",
+    "T_equation": "(ε-δ*ζ)/γ",
+    "T_number_map": {
+      "α": "1",
+      "β": "3.14",
+      "γ": "4",
+      "δ": "5",
+      "ε": "370",
+      "ζ": "30"
+    },
+    "new_ans": "55.0",
+    "num_positions": [
+      0,
+      2,
+      5,
+      8,
+      11,
+      29
+    ],
+    "T_equation_simplified": "-δ*ζ/γ+ε/γ",
+    "final_equation": "-δ*ζ/γ+ε/γ",
+    "num_codes": {
+      "δ": [
+        "0_0_+_*-"
+      ],
+      "ζ": [
+        "0_0_+_*-"
+      ],
+      "γ": [
+        "0_1_+_*-",
+        "0_1_+_*"
+      ],
+      "ε": [
+        "0_0_+_*"
+      ]
+    },
+    "codes_pre_results": [
+      1,
+      1,
+      0,
+      0,
+      1,
+      0
+    ],
+    "pre_final_expression": "Failed"
+  },
+  {
+    "id": 878,
+    "original_text": "Grace has 16 jellybeans in her pocket . She has 8 red ones , 4 green ones , and 4 blue ones . What is the minimum number of jellybeans she must take out of her pocket to ensure that she has one of each color ?",
+    "segmented_text": "Grace has 16 jellybeans in her pocket . She has 8 red ones , 4 green ones , and 4 blue ones . What is the minimum number of jellybeans she must take out of her pocket to ensure that she has one of each color ?",
+    "equation": "x=(8.0+4.0)+1.0",
+    "ans": 13.0,
+    "T_question_2": "α 。 β 。 Grace has γ jellybeans in her pocket . She has δ red ones , ε green ones , and ζ blue ones . What is the minimum number of jellybeans she must take out of her pocket to ensure that she has one of each color ?",
+    "T_equation": "(δ+ζ)+α",
+    "T_number_map": {
+      "α": "1",
+      "β": "3.14",
+      "γ": "16",
+      "δ": "8",
+      "ε": "4",
+      "ζ": "4"
+    },
+    "new_ans": "13.0",
+    "num_positions": [
+      0,
+      2,
+      6,
+      14,
+      18,
+      23
+    ],
+    "T_equation_simplified": "α+δ+ζ",
+    "final_equation": "α+δ+ζ",
+    "num_codes": {
+      "α": [
+        "0_0_+"
+      ],
+      "δ": [
+        "0_0_+"
+      ],
+      "ζ": [
+        "0_0_+"
+      ]
+    },
+    "codes_pre_results": [
+      0,
+      1,
+      1,
+      0,
+      0,
+      1
+    ],
+    "pre_final_expression": "(ε+ζ)"
+  },
+  {
+    "id": 881,
+    "original_text": "While playing a trivia game , George answered 6 questions correct in the first half and 4 questions correct in the second half . If each question was worth 3 points , what was his final score ?",
+    "segmented_text": "While playing a trivia game , George answered 6 questions correct in the first half and 4 questions correct in the second half . If each question was worth 3 points , what was his final score ?",
+    "equation": "X=(3.0*(6.0+4.0))",
+    "ans": 30.0,
+    "T_question_2": "α 。 β 。 While playing a trivia game , George answered γ questions correct in the first half and δ questions correct in the second half . If each question was worth ε points , what was his final score ?",
+    "T_equation": "(ε*(γ+δ))",
+    "T_number_map": {
+      "α": "1",
+      "β": "3.14",
+      "γ": "6",
+      "δ": "4",
+      "ε": "3"
+    },
+    "new_ans": "30.0",
+    "num_positions": [
+      0,
+      2,
+      12,
+      20,
+      33
+    ],
+    "T_equation_simplified": "γ*ε+δ*ε",
+    "final_equation": "γ*ε+δ*ε",
+    "num_codes": {
+      "γ": [
+        "0_0_+_*"
+      ],
+      "ε": [
+        "0_0_+_*",
+        "0_0_+_*@"
+      ],
+      "δ": [
+        "0_0_+_*@"
+      ]
+    },
+    "codes_pre_results": [
+      1,
+      1,
+      0,
+      0,
+      0
+    ],
+    "pre_final_expression": "(δ*ε+ε*ε)"
+  },
+  {
+    "id": 888,
+    "original_text": "She counted her crayons and found out that she has 80 crayons which she will place in crayon boxes . Every box can contain 8 crayons . How many boxes does she need ?",
+    "segmented_text": "She counted her crayons and found out that she has 80 crayons which she will place in crayon boxes . Every box can contain 8 crayons . How many boxes does she need ?",
+    "equation": "x=80/8",
+    "ans": 10.0,
+    "T_question_2": "α 。 β 。 She counted her crayons and found out that she has γ crayons which she will place in crayon boxes . Every box can contain δ crayons . How many boxes does she need ?",
+    "T_equation": "γ/δ",
+    "T_number_map": {
+      "α": "1",
+      "β": "3.14",
+      "γ": "80",
+      "δ": "8"
+    },
+    "new_ans": "10.0",
+    "num_positions": [
+      0,
+      2,
+      14,
+      28
+    ],
+    "T_equation_simplified": "γ/δ",
+    "final_equation": "γ/δ",
+    "num_codes": {
+      "γ": [
+        "0_0_+_*"
+      ],
+      "δ": [
+        "0_1_+_*"
+      ]
+    },
+    "codes_pre_results": [
+      1,
+      1,
+      1,
+      0
+    ],
+    "pre_final_expression": "γ*δ"
+  },
+  {
+    "id": 890,
+    "original_text": "Jason had to submit 5 animation projects as per his syllabus in the final semesters . He scored 82 , 85 , 78 , and 88 points out of 100 in 4 projects . What should be his score in the fifth project so that the average of his projects is at least 85 ?",
+    "segmented_text": "Jason had to submit 5 animation projects as per his syllabus in the final semesters . He scored 82 , 85 , 78 , and 88 points out of 100 in 4 projects . What should be his score in the fifth project so that the average of his projects is at least 85 ?",
+    "equation": "x=85.0*5.0-(82.0+85.0+78.0+88.0)",
+    "ans": 92.0,
+    "T_question_2": "α 。 β 。 Jason had to submit γ animation projects as per his sylla bus in the final semesters . He scored δ , ε , ζ , and η points out of θ in ι projects . What should be his score in the fifth project so that the average of his projects is at least κ ?",
+    "T_equation": "κ*γ-(δ+κ+ζ+η)",
+    "T_number_map": {
+      "α": "1",
+      "β": "3.14",
+      "γ": "5",
+      "δ": "82",
+      "ε": "85",
+      "ζ": "78",
+      "η": "88",
+      "θ": "100",
+      "ι": "4",
+      "κ": "85"
+    },
+    "new_ans": "92.0",
+    "num_positions": [
+      0,
+      2,
+      8,
+      23,
+      25,
+      27,
+      30,
+      34,
+      36,
+      58
+    ],
+    "T_equation_simplified": "γ*κ-δ-ζ-η-κ",
+    "final_equation": "γ*κ-δ-ζ-η-κ",
+    "num_codes": {
+      "δ": [
+        "1_0_+"
+      ],
+      "ζ": [
+        "1_0_+"
+      ],
+      "η": [
+        "1_0_+"
+      ],
+      "κ": [
+        "1_0_+",
+        "0_0_+_*"
+      ],
+      "γ": [
+        "0_0_+_*"
+      ]
+    },
+    "codes_pre_results": [
+      1,
+      1,
+      1,
+      0,
+      0,
+      0,
+      0,
+      0,
+      1,
+      0
+    ],
+    "pre_final_expression": "(ε+ζ+η+γ*κ)"
+  },
+  {
+    "id": 894,
+    "original_text": "Wild and Crazy Productions wants to purchase a new CD producing machine . It 's cost is 5000.00 dollars . If their labor and other unit costs are 5.00 dollars per CD and they can sell the CD for 10.00 dollars each , how many must they manufacture before they pay for their new machine ?",
+    "segmented_text": "Wild and Crazy Productions wants to purchase a new CD producing machine . It 's cost is 5000.00 dollars . If their labor and other unit costs are 5.00 dollars per CD and they can sell the CD for 10.00 dollars each , how many must they manufacture before they pay for their new machine ?",
+    "equation": "x=5000.0/(10.0-5.0)",
+    "ans": 1000.0,
+    "T_question_2": "α 。 β 。 Wild and Crazy Productions wants to purchase a new CD producing machine . It 's cost is γ dollars . If their la bor and other unit costs are δ dollars per CD and they can sell the CD for ε dollars each , how many must they manufacture before they pay for their new machine ?",
+    "T_equation": "γ/(ε-δ)",
+    "T_number_map": {
+      "α": "1",
+      "β": "3.14",
+      "γ": "5000",
+      "δ": "5",
+      "ε": "10"
+    },
+    "new_ans": "1000.0",
+    "num_positions": [
+      0,
+      2,
+      21,
+      33,
+      44
+    ],
+    "T_equation_simplified": "-γ/(δ-ε)",
+    "final_equation": "-γ/(δ-ε)",
+    "num_codes": {
+      "γ": [
+        "0_0_+_*-"
+      ],
+      "δ": [
+        "0_0_+_*-_+/"
+      ],
+      "ε": [
+        "1_0_+_*-_+/"
+      ]
+    },
+    "codes_pre_results": [
+      1,
+      1,
+      1,
+      0,
+      0
+    ],
+    "pre_final_expression": "Failed"
+  },
+  {
+    "id": 897,
+    "original_text": "April 's discount flowers was having a sale where each flower was 6 dollars . If Maria bought 7 roses and 3 daisies , how much did she spend ?",
+    "segmented_text": "April 's discount flowers was having a sale where each flower was 6 dollars . If Maria bought 7 roses and 3 daisies , how much did she spend ?",
+    "equation": "X=(6.0*(7.0+3.0))",
+    "ans": 60.0,
+    "T_question_2": "α 。 β 。 April 's discount flowers was having a sale where each flower was γ dollars . If Maria bought δ roses and ε daisies , how much did she spend ?",
+    "T_equation": "(γ*(δ+ε))",
+    "T_number_map": {
+      "α": "1",
+      "β": "3.14",
+      "γ": "6",
+      "δ": "7",
+      "ε": "3"
+    },
+    "new_ans": "60.0",
+    "num_positions": [
+      0,
+      2,
+      16,
+      22,
+      25
+    ],
+    "T_equation_simplified": "γ*δ+γ*ε",
+    "final_equation": "γ*δ+γ*ε",
+    "num_codes": {
+      "γ": [
+        "0_0_+_*",
+        "0_0_+_*@"
+      ],
+      "δ": [
+        "0_0_+_*"
+      ],
+      "ε": [
+        "0_0_+_*@"
+      ]
+    },
+    "codes_pre_results": [
+      1,
+      1,
+      0,
+      0,
+      1
+    ],
+    "pre_final_expression": "Failed"
+  },
+  {
+    "id": 898,
+    "original_text": "When 18 is subtracted from 4 times a certain number , the result is the original number . What is the number ?",
+    "segmented_text": "When 18 is subtracted from 4 times a certain number , the result is the original number . What is the number ?",
+    "equation": "x=18.0/(4.0-1.0)",
+    "ans": 6.0,
+    "T_question_2": "α 。 β 。 When γ is subtracted from δ times a certain number , the result is the original number . What is the number ?",
+    "T_equation": "γ/(δ-α)",
+    "T_number_map": {
+      "α": "1",
+      "β": "3.14",
+      "γ": "18",
+      "δ": "4"
+    },
+    "new_ans": "6.0",
+    "num_positions": [
+      0,
+      2,
+      5,
+      9
+    ],
+    "T_equation_simplified": "-γ/(α-δ)",
+    "final_equation": "-γ/(α-δ)",
+    "num_codes": {
+      "γ": [
+        "0_0_+_*-"
+      ],
+      "α": [
+        "0_0_+_*-_+/"
+      ],
+      "δ": [
+        "1_0_+_*-_+/"
+      ]
+    },
+    "codes_pre_results": [
+      0,
+      1,
+      0,
+      0
+    ],
+    "pre_final_expression": "Failed"
+  },
+  {
+    "id": 907,
+    "original_text": "A vase can hold 5 flowers . If you had 6 carnations and 19 roses , how many vases would you need to hold the flowers ?",
+    "segmented_text": "A vase can hold 5 flowers . If you had 6 carnations and 19 roses , how many vases would you need to hold the flowers ?",
+    "equation": "X=((6.0+19.0)/5.0)",
+    "ans": 5.0,
+    "T_question_2": "α 。 β 。 A vase can hold γ flowers . If you had δ carnations and ε roses , how many vases would you need to hold the flowers ?",
+    "T_equation": "((δ+ε)/γ)",
+    "T_number_map": {
+      "α": "1",
+      "β": "3.14",
+      "γ": "5",
+      "δ": "6",
+      "ε": "19"
+    },
+    "new_ans": "5.0",
+    "num_positions": [
+      0,
+      2,
+      8,
+      14,
+      17
+    ],
+    "T_equation_simplified": "δ/γ+ε/γ",
+    "final_equation": "δ/γ+ε/γ",
+    "num_codes": {
+      "δ": [
+        "0_0_+_*"
+      ],
+      "γ": [
+        "0_1_+_*",
+        "0_1_+_*@"
+      ],
+      "ε": [
+        "0_0_+_*@"
+      ]
+    },
+    "codes_pre_results": [
+      1,
+      1,
+      0,
+      1,
+      1
+    ],
+    "pre_final_expression": "Failed"
+  },
+  {
+    "id": 915,
+    "original_text": "A restaurant made 9 hamburgers and 4 hot dogs to serve during lunch . Only 3 hamburgers were actually served . How many hamburgers were over ?",
+    "segmented_text": "A restaurant made 9 hamburgers and 4 hot dogs to serve during lunch . Only 3 hamburgers were actually served . How many hamburgers were over ?",
+    "equation": "X=9-3",
+    "ans": "6",
+    "T_question_2": "α 。 β 。 A restaurant made γ hamburgers and δ hot dogs to serve during lunch . Only ε hamburgers were actually served . How many hamburgers were over ?",
+    "T_equation": "γ-ε",
+    "T_number_map": {
+      "α": "1",
+      "β": "3.14",
+      "γ": "9",
+      "δ": "4",
+      "ε": "3"
+    },
+    "new_ans": "6",
+    "num_positions": [
+      0,
+      2,
+      7,
+      10,
+      19
+    ],
+    "T_equation_simplified": "γ-ε",
+    "final_equation": "γ-ε",
+    "num_codes": {
+      "γ": [
+        "0_0_+"
+      ],
+      "ε": [
+        "1_0_+"
+      ]
+    },
+    "codes_pre_results": [
+      1,
+      1,
+      1,
+      0,
+      1
+    ],
+    "pre_final_expression": "(γ+δ+(-ε))"
+  },
+  {
+    "id": 932,
+    "original_text": "There were 2 friends playing a video game online when 2 more players joined the game . If each player had 3 lives , how many lives did they have total ?",
+    "segmented_text": "There were 2 friends playing a video game online when 2 more players joined the game . If each player had 3 lives , how many lives did they have total ?",
+    "equation": "X=(3.0*(2.0+2.0))",
+    "ans": 12.0,
+    "T_question_2": "α 。 β 。 There were γ friends playing a video game online when δ more players joined the game . If each player had ε lives , how many lives did they have total ?",
+    "T_equation": "(ε*(δ+δ))",
+    "T_number_map": {
+      "α": "1",
+      "β": "3.14",
+      "γ": "2",
+      "δ": "2",
+      "ε": "3"
+    },
+    "new_ans": "12.0",
+    "num_positions": [
+      0,
+      2,
+      6,
+      14,
+      25
+    ],
+    "T_equation_simplified": "2*δ*ε",
+    "final_equation": "(ε*(δ+δ))",
+    "num_codes": {
+      "ε": [
+        "0_0_+_*"
+      ],
+      "δ": [
+        "0_0_+_*_+",
+        "0_0_+_*_+"
+      ]
+    },
+    "codes_pre_results": [
+      1,
+      1,
+      1,
+      0,
+      0
+    ],
+    "pre_final_expression": "Failed"
+  },
+  {
+    "id": 938,
+    "original_text": "Kristi jogged for 0.6 of an hour , swam for 0.5 of an hour , and rode her bicycle for 0.75 of an hour . How long did she exercise ?",
+    "segmented_text": "Kristi jogged for 0.6 of an hour , swam for 0.5 of an hour , and rode her bicycle for 0.75 of an hour . How long did she exercise ?",
+    "equation": "x=(0.6+0.5)+0.75",
+    "ans": 1.85,
+    "T_question_2": "α 。 β 。 Kristi jogged for γ of an hour , swam for δ of an hour , and rode her bicycle for ε of an hour . How long did she exercise ?",
+    "T_equation": "(γ+δ)+ε",
+    "T_number_map": {
+      "α": "1",
+      "β": "3.14",
+      "γ": "0.6",
+      "δ": "0.5",
+      "ε": "0.75"
+    },
+    "new_ans": "1.85",
+    "num_positions": [
+      0,
+      2,
+      7,
+      14,
+      24
+    ],
+    "T_equation_simplified": "γ+δ+ε",
+    "final_equation": "γ+δ+ε",
+    "num_codes": {
+      "γ": [
+        "0_0_+"
+      ],
+      "δ": [
+        "0_0_+"
+      ],
+      "ε": [
+        "0_0_+"
+      ]
+    },
+    "codes_pre_results": [
+      1,
+      1,
+      1,
+      1,
+      0
+    ],
+    "pre_final_expression": "(γ+δ+(-ε))"
+  },
+  {
+    "id": 940,
+    "original_text": "A vase can hold 5 flowers . If you had 6 carnations and 19 roses , how many vases would you need to hold the flowers ?",
+    "segmented_text": "A vase can hold 5 flowers . If you had 6 carnations and 19 roses , how many vases would you need to hold the flowers ?",
+    "equation": "X=((6.0+19.0)/5.0)",
+    "ans": 5.0,
+    "T_question_2": "α 。 β 。 A vase can hold γ flowers . If you had δ carnations and ε roses , how many vases would you need to hold the flowers ?",
+    "T_equation": "((δ+ε)/γ)",
+    "T_number_map": {
+      "α": "1",
+      "β": "3.14",
+      "γ": "5",
+      "δ": "6",
+      "ε": "19"
+    },
+    "new_ans": "5.0",
+    "num_positions": [
+      0,
+      2,
+      8,
+      14,
+      17
+    ],
+    "T_equation_simplified": "δ/γ+ε/γ",
+    "final_equation": "δ/γ+ε/γ",
+    "num_codes": {
+      "δ": [
+        "0_0_+_*"
+      ],
+      "γ": [
+        "0_1_+_*",
+        "0_1_+_*@"
+      ],
+      "ε": [
+        "0_0_+_*@"
+      ]
+    },
+    "codes_pre_results": [
+      1,
+      1,
+      0,
+      1,
+      1
+    ],
+    "pre_final_expression": "Failed"
+  },
+  {
+    "id": 946,
+    "original_text": "You make candles and sell them for 15 dollars each . The material to make up to 20 candles costs 20 dollars . How many candles must you sell to have a profit of 85 dollars ?",
+    "segmented_text": "You make candles and sell them for 15 dollars each . The material to make up to 20 candles costs 20 dollars . How many candles must you sell to have a profit of 85 dollars ?",
+    "equation": "x=(85.0+20.0)/15.0",
+    "ans": 7.0,
+    "T_question_2": "α 。 β 。 You make candles and sell them for γ dollars each . The material to make up to δ candles costs ε dollars . How many candles must you sell to have a profit of ζ dollars ?",
+    "T_equation": "(ζ+ε)/γ",
+    "T_number_map": {
+      "α": "1",
+      "β": "3.14",
+      "γ": "15",
+      "δ": "20",
+      "ε": "20",
+      "ζ": "85"
+    },
+    "new_ans": "7.0",
+    "num_positions": [
+      0,
+      2,
+      11,
+      21,
+      24,
+      38
+    ],
+    "T_equation_simplified": "ε/γ+ζ/γ",
+    "final_equation": "ε/γ+ζ/γ",
+    "num_codes": {
+      "ε": [
+        "0_0_+_*"
+      ],
+      "γ": [
+        "0_1_+_*",
+        "0_1_+_*@"
+      ],
+      "ζ": [
+        "0_0_+_*@"
+      ]
+    },
+    "codes_pre_results": [
+      1,
+      1,
+      0,
+      0,
+      1,
+      0
+    ],
+    "pre_final_expression": "((-(γ*δ))+ε*ζ)"
+  }
+]

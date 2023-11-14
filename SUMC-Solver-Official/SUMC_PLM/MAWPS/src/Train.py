@@ -110,8 +110,6 @@ def train(args):
         model = MwpBertModel_CLS(bert_path_or_config=args.pretrain_model_path, num_labels=args.num_labels,
                                  fc_path=args.fc_path, multi_fc=args.multi_fc, train_loss=args.train_loss,
                                  fc_hidden_size=args.fc_hidden_size,disc_path = args.discriminator_path,corrector_path = args.corrector_path)
-
-
     model.to(args.device)
     model.zero_grad()
     model.train()
@@ -156,12 +154,12 @@ def train(args):
         for epoch in range(args.num_epochs):
 
             all_loss_g, all_loss_d, all_loss_c = 0,0,0
-
+            tarin_code_right,train_code_all = 0,0
             for step, batch in enumerate(train_data_loader, start=1):
                 global_steps += 1
                 batch_data = [i.to(args.device) for i in batch]
 
-                logits, loss_g, loss_d, loss_c = model(input_ids=batch_data[0], attention_mask=batch_data[1], token_type_ids=batch_data[2],
+                logits, loss_g, loss_d, loss_c ,corrector_code_right,corrector_code_all= model(input_ids=batch_data[0], attention_mask=batch_data[1], token_type_ids=batch_data[2],
                                     labels=batch_data[3])
                 
                 all_loss_g += loss_g.item()
@@ -177,10 +175,13 @@ def train(args):
                 scheduler.step()
                 model.zero_grad()
 
-
+                #! 评价训练的corrector准确率
+                tarin_code_right += corrector_code_right
+                train_code_all += corrector_code_all
     
                 if global_steps % steps_per_epoch == 0:
                     logger.info("epoch:{},\tloss_g:{},\tloss_d:{},\tloss_c:{}".format(epoch, all_loss_g,all_loss_d,all_loss_c))
+                    logger.info("tarin_code_right :{}, train_code_all :{}, training corrector acc:{}".format(tarin_code_right,train_code_all,tarin_code_right / train_code_all))
                     #! 开始测试！
                     logger.info(">>>>>>>>>>>>>>>>>>>start evaluate......")
                     acc = eval_multi_clf(

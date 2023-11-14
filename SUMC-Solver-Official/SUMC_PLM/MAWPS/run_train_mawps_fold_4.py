@@ -14,7 +14,7 @@ parser.add_argument("--mode", default="train", type=str)
 parser.add_argument("--fc_path", default="output/model_save_name4/best_model/fc_weight.bin", type=str)
 parser.add_argument("--pretrain_model_path",default="output/model_save_name4/best_model",type=str)# bert-base-uncased
 parser.add_argument("--discriminator_path", default="output/discriminator4/best_model", type=str) #output/discriminator4/best_model
-parser.add_argument("--corrector_path", default="output/corrector1/best_model", type=str) 
+parser.add_argument("--corrector_path", default=None, type=str)# "output/corrector1/best_model" 
 
 parser.add_argument("--num_labels", default=28, type=int)
 

@@ -7,9 +7,9 @@ import os
 parser = argparse.ArgumentParser()
 
 #! 选择设备，保存模型的name，训练or测试
-parser.add_argument("--gpu_device", default="0", type=str)
+parser.add_argument("--gpu_device", default="4", type=str)
 
-parser.add_argument("--model_name", default="test", type=str) # model_save_name0
+parser.add_argument("--model_name", default="corrector0", type=str) # model_save_name0
 parser.add_argument("--mode", default="train", type=str) # train or test
 
 #! 加载训练好的模型

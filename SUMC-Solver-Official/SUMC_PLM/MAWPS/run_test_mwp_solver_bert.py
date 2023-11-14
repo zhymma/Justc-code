@@ -3,7 +3,7 @@ import os
 from src.Test_new import test_for_mwp_BERT_slover
 
 parser = argparse.ArgumentParser()
-parser.add_argument("--gpu_device", default="2", type=str)
+parser.add_argument("--gpu_device", default="6", type=str)
 
 parser.add_argument("--pretrain_model_path_for_test", default="output/model_save_name1/best_model", type=str)
 parser.add_argument("--discriminator_path", default="output/discriminator1/best_model", type=str) # output/discriminator0/best_model
@@ -34,4 +34,4 @@ if __name__ == "__main__":
     print(args.test_data_path)
     print(args.pretrain_model_path_for_test)
 
-    test_for_mwp_BERT_slover(args)
+    test_for_mwp_BERT_slover(args,"fold0.json")

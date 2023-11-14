@@ -14,7 +14,7 @@ parser.add_argument("--mode", default="train", type=str)
 parser.add_argument("--fc_path", default="output/model_save_name3/best_model/fc_weight.bin", type=str)
 parser.add_argument("--pretrain_model_path",default="output/model_save_name3/best_model",type=str)# bert-base-uncased
 parser.add_argument("--discriminator_path", default="output/discriminator3/best_model", type=str) #output/discriminator3/best_model
-parser.add_argument("--corrector_path", default="output/corrector1/best_model", type=str) 
+parser.add_argument("--corrector_path", default=None, type=str)#"output/corrector1/best_model" 
 
 parser.add_argument("--num_labels", default=28, type=int)
 
@@ -38,7 +38,7 @@ parser.add_argument("--use_multi_gpu", default=False, type=bool)
 parser.add_argument("--batch_size", default=20, type=int)
 parser.add_argument("--num_epochs", default=120, type=int)
 parser.add_argument("--log_steps_per_epoch", default=10, type=int)
-parser.add_argument("--lr", default=2e-5, type=float)
+parser.add_argument("--lr", default=1e-5, type=float)
 parser.add_argument("--warmup", default=0.1, type=float)
 
 

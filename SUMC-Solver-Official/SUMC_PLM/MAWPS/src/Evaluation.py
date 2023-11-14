@@ -9,6 +9,7 @@ def eval_multi_clf(model, dev_data_loader, device, logger=None, T=1.0):
     code_right,code_all = 0,0
     TP,TN,FN,FP =0,0 ,0,0
     corrector_right,corrector_all = 0,0
+    correct_all_pred_right,correct_all_pred_all = 0,0
     final_code_right,final_code_all = 0,0
 
     with torch.no_grad():
@@ -42,7 +43,12 @@ def eval_multi_clf(model, dev_data_loader, device, logger=None, T=1.0):
 
             
             if corrector_pred is not None:
-                #! 计算纠错器的准确率，注意这里纠错的是所有的错误，包括鉴别器判定为正确的
+                #! 计算纠错器对于多有code的准确率，注意这里纠错的是所有的pred_code
+                corrector_label = batch_data[3][:, 1:]
+                correct_all_pred_right += ((corrector_pred==corrector_label).all(dim=-1).float()).sum().item()
+                correct_all_pred_all += code_label.shape[0]
+
+                #! 计算纠错器的准确率，注意这里纠错的仅是所有的错误，不包括鉴别器判定为正确的
                 corrector_label = batch_data[3][:, 1:]
                 correct_mask = (corrector_label == code_pred).all(dim=-1).float()
                 correct_mask = 1 - correct_mask
@@ -65,6 +71,10 @@ def eval_multi_clf(model, dev_data_loader, device, logger=None, T=1.0):
         logger.info('disc_right:{},\tdisc_all:{},\tdiscriminator acc:{}'.format(disc_right,disc_all,disc_right/max(1,disc_all)))
         logger.info('precision:{},\trecall:{},\tF1:{}'.format(TP / max(1,(TP + FP )),TP / max(1,(TP + FN )),2 * TP / max(1,(2 * TP + FP + FN))))
         logger.info('TP:{},TN:{},FN:{},FP:{}'.format(TP,TN,FN,FP))
+        
+        #!纠错器对于所有code_pred的准确率
+        logger.info('correct_all_pred_right: {}\tcorrector_all_pred_total: {}\tcorrector_all_pred acc: {}'.format(correct_all_pred_right, correct_all_pred_all, correct_all_pred_right / max(1,correct_all_pred_all)))
+
 
         #! 纠错器的准确率
         logger.info('corrector_right: {}\tcorrector_total: {}\tcorrector acc: {}'.format(corrector_right, corrector_all, corrector_right / max(1,corrector_all)))

@@ -66,6 +66,9 @@ def check_codes_acc(raw_mwp, labels, all_logits):
             right_wrong_vector.append(0)
 
     raw_mwp['codes_pre_results'] = right_wrong_vector
+    
+    all_logits = np.round(all_logits)
+
     if count == total_len:
         return True
     else:
